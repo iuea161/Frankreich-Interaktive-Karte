@@ -4,19 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Frankreich unter der Lupe</title>
-    <meta name="description" content="Frankreich unter der Lupe: Ein Blick hinter Raum, Menschen und Klischees – von Naturraum über Bevölkerung bis zur Kultur und interaktiven Karte.">
+    <title>Frankreich</title>
+    <meta name="description" content="Frankreich: Ein Blick hinter Raum, Menschen und Klischees – von Naturraum über Bevölkerung bis zur Kultur und interaktiven Karte. Von Oskar, Emil und Karl.">
 
     <style>
         :root {
             --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
             --bg-primary: #F5F5F7;
             --bg-secondary: #FFFFFF;
+            --bg-elevated: #FFFFFF;
             --text-primary: #1D1D1F;
-            --text-secondary: #86868B;
+            --text-secondary: #6E6E73;
+            --text-tertiary: #86868B;
             --accent-blue: #0071E3;
             --accent-blue-hover: #0077ED;
+            --accent-green: #34C759;
+            --accent-purple: #AF52DE;
+            --border-color: #E5E5EA;
+            --border-subtle: #F0F0F2;
             --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         /* RESET */
@@ -37,10 +47,9 @@
 
         /* HERO SECTION */
         .hero-scroll-container {
-            height: 300vh;
-            /* Smooth scroll length */
+            height: 280vh;
             position: relative;
-            background: #0B0B0E;
+            background: #000000;
         }
 
         .hero-sticky {
@@ -55,17 +64,16 @@
             text-align: center;
         }
 
-        /* Hero Background Photo (Real, Freely Licensed France Landscape) */
         .hero-fallback-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/hero_france.jpg');
+            background-image: url("images/hero_france.jpg");
             background-size: cover;
-            background-position: center 35%;
-            opacity: 0.48;
+            background-position: center 40%;
+            opacity: 0.38;
             z-index: 0;
             transform: scale(1.02);
             transition: transform 0.1s ease-out;
@@ -77,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(11, 11, 14, 0.4) 0%, rgba(11, 11, 14, 0.85) 100%);
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.88) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -87,20 +95,20 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 220px;
+            height: 200px;
             background: linear-gradient(to bottom, transparent, var(--bg-primary));
             z-index: 5;
             pointer-events: none;
         }
 
-        /* FRANCE SILHOUETTE VECTOR SCROLL ANIMATION */
+        /* ACCURATE FRANCE SILHOUETTE VECTOR ANIMATION */
         .france-scroll-stage {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: min(82vw, 500px);
-            height: min(82vw, 500px);
+            width: min(84vw, 520px);
+            height: min(84vw, 520px);
             z-index: 3;
             pointer-events: none;
         }
@@ -108,39 +116,40 @@
         .france-silhouette-svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.7));
+            filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.8));
         }
 
         .france-path-ghost {
-            fill: rgba(255, 255, 255, 0.03);
-            stroke: rgba(255, 255, 255, 0.16);
+            fill: rgba(255, 255, 255, 0.04);
+            stroke: rgba(255, 255, 255, 0.18);
             stroke-width: 1.5;
             stroke-dasharray: 4 6;
         }
 
         .france-path-draw {
             fill: none;
-            stroke: url(#franceTricoloreGrad);
-            stroke-width: 3.5;
+            stroke: #FFFFFF;
+            stroke-width: 3.2;
             stroke-linecap: round;
             stroke-linejoin: round;
-            filter: drop-shadow(0 0 10px rgba(77, 124, 255, 0.7));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
             transition: stroke-dashoffset 0.08s linear;
         }
 
+        /* FIXED PARIS PIN (ONLY WHITE, STAYS FIRMLY AT PARIS) */
         .france-pin-marker {
-            transition: transform 0.12s linear;
+            pointer-events: none;
         }
 
         .pin-dot {
-            fill: #FF3B30;
-            stroke: #FFFFFF;
-            stroke-width: 2;
+            fill: #FFFFFF;
+            stroke: rgba(0, 0, 0, 0.5);
+            stroke-width: 1.5;
         }
 
         .pin-pulse {
-            fill: rgba(255, 59, 48, 0.35);
-            animation: pinPulse 2s infinite ease-out;
+            fill: rgba(255, 255, 255, 0.35);
+            animation: pinPulseWhite 2s infinite ease-out;
         }
 
         .pin-label {
@@ -149,16 +158,15 @@
             fill: #FFFFFF;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
             font-family: var(--system-font);
         }
 
-        @keyframes pinPulse {
+        @keyframes pinPulseWhite {
             0% {
                 r: 4;
-                opacity: 0.9;
+                opacity: 0.95;
             }
-
             100% {
                 r: 16;
                 opacity: 0;
@@ -167,31 +175,32 @@
 
         .hero-content {
             z-index: 10;
-            max-width: 920px;
+            max-width: 900px;
             padding: 20px;
-            color: #F5F5F7;
-            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            color: #FFFFFF;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
             pointer-events: none;
         }
 
         .hero-title {
-            font-size: 76px;
-            line-height: 1.05;
+            font-size: 88px;
+            line-height: 1.0;
             font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
         }
 
         .hero-subtitle {
-            font-size: 26px;
+            font-size: 24px;
             line-height: 1.35;
             font-weight: 500;
-            color: #E5E5EA;
+            color: rgba(255, 255, 255, 0.88);
+            letter-spacing: -0.01em;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 36px;
             z-index: 20;
             color: white;
             display: flex;
@@ -218,25 +227,18 @@
         }
 
         @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
+            0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
             }
-
             40% {
                 transform: translateY(-8px);
             }
-
             60% {
                 transform: translateY(-4px);
             }
         }
 
-        /* CONTENT */
+        /* CONTENT SECTIONS */
         main {
             position: relative;
             z-index: 20;
@@ -246,33 +248,33 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 110px 40px;
+            padding: 100px 40px;
         }
 
         .section-title {
-            font-size: 52px;
-            line-height: 1.08;
+            font-size: 48px;
+            line-height: 1.1;
             font-weight: 600;
             letter-spacing: -0.015em;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
         .body-text {
-            font-size: 20px;
-            line-height: 1.5;
+            font-size: 19px;
+            line-height: 1.55;
             color: #48484A;
         }
 
         /* LEITFRAGE BOX */
         .leitfrage-box {
             max-width: 860px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 50px auto;
             background: #FFFFFF;
             border-left: 4px solid var(--accent-blue);
             border-radius: 18px;
-            padding: 26px 32px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            padding: 24px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             text-align: left;
         }
 
@@ -293,7 +295,7 @@
             color: #1D1D1F;
         }
 
-        /* 3 CARDS GRID */
+        /* 3 CARDS GRID (CLICKABLE) */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -301,19 +303,24 @@
             margin-top: 20px;
         }
 
-        .card {
+        .card-clickable {
             background: #FFFFFF;
             border-radius: 28px;
             padding: 28px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic);
+            text-decoration: none;
+            color: inherit;
             display: flex;
             flex-direction: column;
+            border: 1px solid transparent;
+            transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic), border-color 0.3s;
+            cursor: pointer;
         }
 
-        .card:hover {
-            transform: translateY(-4px) scale(1.015);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+        .card-clickable:hover {
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 113, 227, 0.2);
         }
 
         .card-image-wrap {
@@ -333,47 +340,273 @@
             transition: transform 0.4s var(--ease-out-cubic);
         }
 
-        .card:hover .card-image {
+        .card-clickable:hover .card-image {
             transform: scale(1.05);
         }
 
-        .card h3 {
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-size: 12px;
+        .card-large-title {
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            line-height: 1.15;
         }
 
-        .card h4 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 14px;
-            color: #1D1D1F;
-            line-height: 1.25;
-        }
-
-        .card .body-text {
+        .card-clickable .body-text {
             font-size: 16px;
             line-height: 1.55;
             color: #48484A;
             flex-grow: 1;
+            margin-bottom: 20px;
         }
 
-        .card-author {
-            margin-top: 22px;
-            padding-top: 14px;
+        .card-footer-info {
+            padding-top: 16px;
             border-top: 1px solid #F0F0F2;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .author-label {
+        .card-author-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-arrow-cta {
             font-size: 13px;
             font-weight: 600;
+            color: var(--accent-blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* DEEPDIVE SECTIONS FOR BEREICH A, B, E */
+        .deepdive-section {
+            padding-top: 70px;
+            padding-bottom: 80px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .deepdive-header {
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .deepdive-title-group {
+            max-width: 800px;
+        }
+
+        .deepdive-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .deepdive-title {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            line-height: 1.15;
+            color: #1D1D1F;
+            margin-bottom: 8px;
+        }
+
+        .deepdive-author-badge {
+            font-size: 14px;
+            font-weight: 600;
             color: var(--text-secondary);
-            letter-spacing: 0.02em;
+        }
+
+        .jump-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 8px 14px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .jump-back-link:hover {
+            background: #F5F5F7;
+            transform: translateY(-1px);
+        }
+
+        /* DEEPDIVE CONTENT PANELS */
+        .deepdive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .deepdive-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .deepdive-card-full {
+            grid-column: span 2;
+        }
+
+        .deepdive-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 14px;
+            color: #1D1D1F;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deepdive-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #48484A;
+            margin-bottom: 12px;
+        }
+
+        .deepdive-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* STEREOTYPEN-CHECK BOX (Klischee / Belegbar / Ausgeblendet) */
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .check-box {
+            padding: 16px;
+            border-radius: 14px;
+            background: #F5F5F7;
+        }
+
+        .check-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .badge-klischee {
+            background: rgba(255, 59, 48, 0.12);
+            color: #D70015;
+        }
+
+        .badge-belegbar {
+            background: rgba(52, 199, 89, 0.14);
+            color: #248A3D;
+        }
+
+        .badge-ausgeblendet {
+            background: rgba(0, 113, 227, 0.12);
+            color: #0071E3;
+        }
+
+        .check-text {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #333336;
+        }
+
+        /* STATS CHIPS / NUMBERS */
+        .stats-chip-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .stat-chip {
+            background: #F5F5F7;
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-chip-num {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-chip-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            line-height: 1.35;
+        }
+
+        /* MAP LINK CTA BANNER INSIDE DEEPDIVE */
+        .map-jump-cta {
+            background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
+            border-radius: 20px;
+            padding: 22px 28px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .map-jump-cta-text h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .map-jump-cta-text p {
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 0;
+        }
+
+        .map-jump-cta-btn {
+            background: var(--accent-blue);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .map-jump-cta-btn:hover {
+            background: var(--accent-blue-hover);
+            transform: scale(1.03);
         }
 
         /* MAP SECTION */
@@ -385,7 +618,7 @@
         }
 
         .map-preview-container {
-            max-width: 940px;
+            max-width: 960px;
             margin: 0 auto;
             position: relative;
             cursor: pointer;
@@ -514,7 +747,7 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #4D7CFF;
+            color: #FFFFFF;
         }
 
         .sources-list a {
@@ -540,7 +773,7 @@
         /* REVEAL ANIMATIONS */
         .reveal {
             opacity: 0;
-            transform: scale(0.96) translateY(36px);
+            transform: scale(0.97) translateY(32px);
             transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-out-cubic);
         }
 
@@ -552,7 +785,7 @@
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .hero-title {
-                font-size: 50px;
+                font-size: 60px;
             }
 
             .hero-subtitle {
@@ -560,19 +793,32 @@
             }
 
             .section-title {
-                font-size: 38px;
+                font-size: 36px;
             }
 
-            .cards-grid {
+            .cards-grid,
+            .deepdive-grid,
+            .check-grid,
+            .stats-chip-row {
                 grid-template-columns: 1fr;
             }
 
+            .deepdive-card-full {
+                grid-column: span 1;
+            }
+
             .container {
-                padding: 80px 24px;
+                padding: 70px 20px;
             }
 
             .device-frame {
                 border-width: 8px;
+            }
+
+            .map-jump-cta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
             }
         }
 
@@ -601,7 +847,7 @@
                 transition: none !important;
             }
 
-            .card:hover {
+            .card-clickable:hover {
                 transform: none !important;
             }
         }
@@ -610,34 +856,25 @@
 
 <body>
 
-    <!-- HERO SECTION WITH FRANCE VECTOR SCROLL ANIMATION -->
+    <!-- HERO SECTION WITH ACCURATE FRANCE VECTOR SCROLL ANIMATION -->
     <section class="hero-scroll-container">
         <div class="hero-sticky">
             <div class="hero-fallback-bg" id="heroBg"></div>
             <div class="hero-overlay"></div>
 
-            <!-- FRANCE SILHOUETTE VECTOR STAGE -->
+            <!-- DETAILED FRANCE SILHOUETTE VECTOR STAGE -->
             <div class="france-scroll-stage">
-                <svg class="france-silhouette-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-label="Silhouette von Frankreich">
-                    <defs>
-                        <!-- Tricolore Gradient for France drawing stroke -->
-                        <linearGradient id="franceTricoloreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#4D7CFF" />
-                            <stop offset="48%" stop-color="#FFFFFF" />
-                            <stop offset="100%" stop-color="#FF453A" />
-                        </linearGradient>
-                    </defs>
+                <svg class="france-silhouette-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Detailgetreue Silhouette von Frankreich">
+                    <!-- Ghost Outline (Faint white background contour) -->
+                    <path class="france-path-ghost" d="M 341.4,169.8 L 337.6,170.2 L 338.1,171.7 L 334.9,175.6 L 338.4,174.8 L 339.5,176.3 L 336.5,178.1 L 336.8,179.7 L 330.3,185.9 L 330.7,187.1 L 323.2,191.7 L 324.0,193.2 L 323.2,196.1 L 323.7,197.6 L 314.8,205.1 L 316.0,206.3 L 313.6,211.2 L 316.3,213.1 L 314.6,216.2 L 315.1,217.5 L 311.2,218.9 L 311.8,220.1 L 310.8,222.0 L 315.5,221.7 L 319.6,218.5 L 320.0,217.3 L 318.1,216.5 L 319.9,213.1 L 322.1,214.1 L 325.3,211.7 L 332.9,212.1 L 332.1,213.7 L 334.5,216.4 L 332.7,221.8 L 335.4,222.4 L 334.8,225.3 L 336.4,224.7 L 339.2,230.0 L 336.5,232.9 L 333.3,233.3 L 333.0,237.5 L 338.0,240.8 L 338.0,246.0 L 342.9,249.8 L 340.9,252.7 L 341.6,255.4 L 340.1,257.1 L 337.1,257.2 L 335.2,260.0 L 332.0,259.1 L 328.3,261.2 L 329.5,264.4 L 331.4,264.6 L 331.5,268.8 L 338.6,271.9 L 338.0,273.2 L 340.0,277.3 L 337.1,277.4 L 337.2,279.6 L 334.2,283.1 L 336.7,286.9 L 335.2,287.2 L 335.1,289.5 L 338.2,294.3 L 342.9,295.6 L 347.4,298.8 L 355.9,296.6 L 355.4,298.3 L 356.7,300.9 L 355.1,304.2 L 351.0,308.1 L 351.8,311.5 L 346.8,314.2 L 346.7,315.6 L 346.2,314.4 L 342.1,316.4 L 341.6,320.6 L 340.5,319.6 L 337.1,320.7 L 336.0,324.2 L 334.3,325.7 L 331.4,325.4 L 330.6,328.1 L 327.1,330.8 L 330.1,331.2 L 328.8,334.9 L 326.6,334.1 L 321.9,335.8 L 321.4,338.0 L 317.1,336.9 L 315.8,340.3 L 314.3,340.0 L 315.3,339.5 L 314.9,338.1 L 309.8,336.6 L 308.8,337.3 L 310.5,338.7 L 307.4,339.4 L 306.5,338.7 L 306.9,336.9 L 303.9,335.9 L 303.7,334.5 L 301.6,335.2 L 299.8,333.2 L 294.7,333.2 L 295.5,330.1 L 294.0,327.6 L 287.1,329.0 L 285.0,325.1 L 283.0,325.9 L 282.2,324.0 L 282.6,325.7 L 281.2,325.2 L 282.4,326.5 L 281.3,327.0 L 283.6,326.9 L 282.0,328.7 L 276.9,328.1 L 274.3,327.1 L 275.2,325.7 L 274.2,324.3 L 264.5,323.5 L 262.9,322.5 L 262.9,320.5 L 259.9,320.3 L 250.4,326.7 L 246.9,331.0 L 244.2,330.3 L 241.1,332.1 L 236.4,337.9 L 234.7,342.9 L 234.2,352.6 L 234.9,358.7 L 237.2,359.8 L 238.1,362.8 L 235.8,363.2 L 234.6,361.3 L 232.2,361.1 L 225.0,364.0 L 225.1,366.4 L 221.4,366.7 L 214.2,362.7 L 207.9,366.2 L 205.8,362.1 L 200.4,360.6 L 200.5,358.5 L 201.9,357.5 L 200.3,357.0 L 200.6,355.9 L 194.2,354.5 L 192.8,356.4 L 190.7,352.0 L 185.7,352.4 L 183.4,349.4 L 179.4,349.4 L 173.7,346.6 L 172.1,349.6 L 172.7,353.2 L 166.3,353.1 L 164.6,351.8 L 162.9,353.8 L 159.8,351.3 L 154.8,353.3 L 152.4,352.0 L 151.0,349.0 L 147.0,347.1 L 144.9,349.0 L 142.0,347.9 L 140.4,349.7 L 136.1,345.3 L 135.6,342.6 L 130.6,343.1 L 125.4,341.0 L 121.0,338.7 L 122.1,336.8 L 120.1,337.7 L 119.9,340.3 L 117.6,339.6 L 116.8,338.0 L 119.1,334.1 L 119.0,331.5 L 115.1,330.1 L 113.2,331.7 L 112.8,329.7 L 110.1,330.1 L 108.5,326.9 L 113.3,324.9 L 117.4,316.7 L 121.1,296.7 L 122.4,282.4 L 124.1,278.1 L 129.0,278.6 L 124.7,273.7 L 122.3,279.2 L 125.0,247.0 L 126.7,243.7 L 129.4,243.0 L 122.9,238.3 L 122.8,235.4 L 125.6,234.6 L 124.7,232.6 L 126.1,232.4 L 127.2,230.3 L 126.5,229.2 L 127.4,229.0 L 125.9,227.0 L 127.5,227.3 L 127.6,225.8 L 125.8,222.3 L 122.8,221.1 L 126.1,216.0 L 123.8,215.1 L 123.7,216.9 L 121.4,214.7 L 121.4,216.1 L 120.1,214.0 L 116.9,214.0 L 115.7,211.7 L 107.9,208.3 L 106.7,203.9 L 99.3,195.9 L 98.9,193.2 L 103.5,187.9 L 100.3,184.6 L 96.5,183.9 L 98.6,182.7 L 98.6,178.8 L 95.2,180.1 L 93.2,178.4 L 88.7,177.9 L 89.9,176.5 L 88.4,174.7 L 91.7,173.2 L 89.9,170.2 L 92.0,170.1 L 89.0,168.9 L 86.5,169.8 L 88.4,168.0 L 87.2,168.8 L 87.1,167.4 L 86.6,168.8 L 85.5,168.3 L 86.8,169.0 L 85.4,170.3 L 81.7,170.5 L 79.1,167.8 L 83.8,168.4 L 85.0,164.7 L 84.2,166.5 L 82.3,164.4 L 82.5,165.3 L 80.5,165.3 L 79.7,167.1 L 77.5,163.9 L 78.8,167.8 L 76.2,166.4 L 76.4,167.4 L 74.4,167.5 L 73.6,166.2 L 73.5,169.1 L 74.8,171.1 L 73.4,170.9 L 73.2,166.9 L 71.4,164.5 L 74.2,161.6 L 72.9,161.6 L 73.4,160.5 L 71.6,160.6 L 72.6,162.2 L 71.2,162.5 L 71.3,164.4 L 67.5,162.8 L 69.6,162.7 L 67.3,161.9 L 69.6,158.7 L 67.9,160.8 L 66.7,157.5 L 67.6,161.1 L 65.1,162.5 L 63.1,159.8 L 62.7,156.1 L 62.8,160.0 L 59.1,159.4 L 58.0,158.4 L 60.1,157.4 L 57.8,158.4 L 57.3,156.7 L 57.5,158.6 L 54.5,158.9 L 53.3,157.2 L 53.9,156.3 L 51.4,154.4 L 51.4,156.5 L 48.2,156.1 L 47.0,154.4 L 48.7,153.3 L 47.7,151.5 L 47.9,153.3 L 46.2,154.4 L 47.8,156.2 L 45.1,156.0 L 46.6,157.3 L 46.0,158.5 L 41.0,158.6 L 41.7,157.0 L 40.8,153.9 L 36.8,150.5 L 38.0,149.4 L 36.0,150.9 L 31.4,149.4 L 39.9,146.8 L 42.8,147.5 L 43.6,145.0 L 42.5,143.1 L 38.7,141.8 L 36.3,144.5 L 35.8,142.1 L 36.6,141.4 L 34.3,140.2 L 35.9,140.2 L 35.6,138.7 L 36.8,137.9 L 36.8,140.1 L 37.7,139.1 L 37.6,140.2 L 43.7,139.6 L 43.8,141.1 L 47.8,141.6 L 47.7,142.6 L 48.2,141.2 L 43.5,140.3 L 45.9,139.7 L 42.1,139.0 L 43.9,137.3 L 38.8,138.5 L 43.7,134.0 L 32.1,138.4 L 30.6,138.3 L 31.3,137.0 L 30.2,137.2 L 30.9,136.5 L 30.0,135.1 L 32.0,132.8 L 30.9,132.9 L 30.5,131.1 L 32.4,129.2 L 37.6,130.1 L 34.8,128.9 L 35.1,127.8 L 38.3,129.1 L 35.9,127.7 L 36.6,126.7 L 40.4,126.7 L 39.4,126.0 L 42.2,125.1 L 43.0,126.8 L 47.4,124.4 L 49.3,125.4 L 49.4,124.1 L 51.5,123.2 L 51.9,127.5 L 52.5,128.1 L 52.8,125.2 L 54.6,127.8 L 55.6,127.0 L 54.3,125.3 L 55.4,123.6 L 60.1,124.4 L 59.7,125.8 L 61.9,125.2 L 62.5,122.5 L 61.6,121.3 L 63.7,119.0 L 66.5,120.4 L 71.0,117.8 L 71.1,121.1 L 72.1,118.8 L 74.9,117.3 L 73.7,122.0 L 75.0,119.7 L 76.6,119.7 L 75.7,121.0 L 78.8,122.2 L 78.3,123.5 L 81.4,126.0 L 81.5,128.2 L 84.3,129.8 L 85.2,132.2 L 85.2,130.7 L 86.5,130.9 L 90.6,127.2 L 90.3,126.3 L 92.1,126.8 L 94.7,124.7 L 95.5,125.6 L 94.2,127.3 L 96.5,126.3 L 97.4,129.1 L 97.9,127.7 L 98.4,129.0 L 99.8,127.9 L 99.1,126.7 L 101.8,126.6 L 103.7,130.2 L 103.0,132.2 L 104.3,131.1 L 103.3,128.7 L 104.2,128.9 L 102.6,128.1 L 102.3,126.1 L 104.6,124.2 L 107.0,123.8 L 106.4,126.6 L 109.1,128.0 L 119.9,126.9 L 118.7,125.9 L 119.3,124.6 L 117.5,126.0 L 114.2,122.6 L 114.1,119.6 L 113.1,119.1 L 114.6,115.4 L 114.7,116.8 L 114.6,111.8 L 115.9,112.1 L 114.5,111.4 L 114.1,112.8 L 113.5,111.4 L 113.9,107.8 L 113.1,104.5 L 114.3,104.4 L 113.1,103.8 L 112.8,104.8 L 110.5,100.4 L 111.5,100.2 L 108.0,98.7 L 106.0,92.8 L 107.0,89.2 L 104.4,87.1 L 104.5,85.2 L 113.0,88.3 L 116.8,86.3 L 122.2,86.3 L 123.1,89.7 L 121.1,92.2 L 125.6,99.3 L 130.5,97.8 L 149.3,102.1 L 152.9,101.5 L 158.6,97.5 L 164.1,96.3 L 158.4,95.2 L 157.0,93.4 L 160.6,85.6 L 170.5,80.4 L 186.4,76.0 L 192.9,70.9 L 195.7,66.5 L 199.1,67.9 L 195.4,64.1 L 195.8,61.0 L 198.1,61.3 L 195.8,59.6 L 196.6,54.4 L 198.5,55.4 L 196.4,53.0 L 196.0,47.2 L 197.1,47.3 L 197.1,45.5 L 196.5,41.6 L 201.7,38.4 L 210.6,37.0 L 211.4,35.4 L 212.1,36.4 L 211.9,35.0 L 221.7,33.3 L 224.0,38.7 L 222.9,39.7 L 223.1,42.4 L 226.4,43.9 L 228.1,47.1 L 231.1,48.4 L 232.3,46.1 L 237.5,44.7 L 238.9,47.6 L 240.4,48.0 L 239.8,49.7 L 241.1,54.7 L 243.4,56.0 L 245.9,54.4 L 247.1,54.8 L 246.6,56.2 L 249.4,55.8 L 250.9,57.4 L 250.7,60.7 L 252.1,63.2 L 253.1,61.4 L 257.1,62.3 L 260.3,61.1 L 263.2,65.0 L 263.9,63.7 L 265.1,64.3 L 263.0,69.6 L 264.8,69.6 L 265.7,72.0 L 263.2,74.0 L 264.8,76.4 L 271.3,77.1 L 277.8,74.9 L 277.8,71.5 L 281.2,68.3 L 283.1,69.5 L 281.1,72.2 L 281.6,73.2 L 280.3,75.9 L 282.9,78.2 L 281.9,82.6 L 285.7,82.3 L 290.1,86.4 L 292.9,86.3 L 294.5,87.9 L 293.9,89.5 L 297.0,90.1 L 297.9,93.8 L 305.9,91.4 L 313.0,95.8 L 318.2,93.2 L 326.1,96.4 L 327.6,98.9 L 326.7,99.6 L 329.4,102.2 L 331.2,106.6 L 333.7,107.1 L 334.4,106.0 L 333.8,104.7 L 336.1,104.3 L 338.9,105.6 L 339.4,108.5 L 340.6,106.9 L 345.7,108.4 L 349.6,105.8 L 354.6,110.8 L 362.4,110.6 L 370.0,113.8 L 366.5,120.2 L 363.4,122.1 L 359.9,126.5 L 357.2,135.7 L 357.5,138.4 L 353.1,146.3 L 352.9,149.6 L 354.3,152.0 L 352.6,155.5 L 352.3,161.2 L 351.4,162.4 L 353.3,167.1 L 351.1,168.4 L 351.9,168.9 L 350.7,170.6 L 349.3,170.1 L 349.9,171.1 L 348.1,172.6 L 344.4,173.0 L 342.5,172.1 L 343.3,170.2 L 341.4,169.8 Z" />
 
-                    <!-- Ghost Silhouette (Dashed guide outline) -->
-                    <path class="france-path-ghost" d="M 168,16 C 172.5,15.7 178.3,25.7 185,30 C 191.7,34.3 200.2,38.0 208,42 C 215.8,46.0 224.7,49.7 232,54 C 239.3,58.3 244.8,62.0 252,68 C 259.2,74.0 269.0,82.3 275,90 C 281.0,97.7 286.5,105.3 288,114 C 289.5,122.7 286.3,134.3 284,142 C 281.7,149.7 277.3,154.0 274,160 C 270.7,166.0 263.7,171.0 264,178 C 264.3,185.0 272.3,194.7 276,202 C 279.7,209.3 286.3,213.7 286,222 C 285.7,230.3 275.0,243.3 274,252 C 273.0,260.7 279.7,268.3 280,274 C 280.3,279.7 280.7,283.3 276,286 C 271.3,288.7 260.3,290.3 252,290 C 243.7,289.7 235.0,284.7 226,284 C 217.0,283.3 207.0,284.3 198,286 C 189.0,287.7 180.0,291.3 172,294 C 164.0,296.7 156.7,300.3 150,302 C 143.3,303.7 140.0,304.0 132,304 C 124.0,304.0 112.0,303.3 102,302 C 92.0,300.7 80.0,299.3 72,296 C 64.0,292.7 56.7,288.3 54,282 C 51.3,275.7 53.7,267.3 56,258 C 58.3,248.7 67.0,236.3 68,226 C 69.0,215.7 64.7,205.7 62,196 C 59.3,186.3 56.7,176.0 52,168 C 47.3,160.0 39.7,153.7 34,148 C 28.3,142.3 22.3,139.0 18,134 C 13.7,129.0 10.0,123.0 8,118 C 6.0,113.0 4.3,108.3 6,104 C 7.7,99.7 11.0,95.0 18,92 C 25.0,89.0 38.7,85.7 48,86 C 57.3,86.3 67.3,98.0 74,94 C 80.7,90.0 83.3,68.0 88,62 C 92.7,56.0 96.0,55.7 102,58 C 108.0,60.3 117.0,77.0 124,76 C 131.0,75.0 138.3,59.3 144,52 C 149.7,44.7 154.0,38.0 158,32 C 162.0,26.0 166.3,18.7 168,16 Z" />
+                    <!-- Animated Drawing Contour (Pure white stroke, drawn on scroll) -->
+                    <path id="franceDrawPath" class="france-path-draw" d="M 341.4,169.8 L 337.6,170.2 L 338.1,171.7 L 334.9,175.6 L 338.4,174.8 L 339.5,176.3 L 336.5,178.1 L 336.8,179.7 L 330.3,185.9 L 330.7,187.1 L 323.2,191.7 L 324.0,193.2 L 323.2,196.1 L 323.7,197.6 L 314.8,205.1 L 316.0,206.3 L 313.6,211.2 L 316.3,213.1 L 314.6,216.2 L 315.1,217.5 L 311.2,218.9 L 311.8,220.1 L 310.8,222.0 L 315.5,221.7 L 319.6,218.5 L 320.0,217.3 L 318.1,216.5 L 319.9,213.1 L 322.1,214.1 L 325.3,211.7 L 332.9,212.1 L 332.1,213.7 L 334.5,216.4 L 332.7,221.8 L 335.4,222.4 L 334.8,225.3 L 336.4,224.7 L 339.2,230.0 L 336.5,232.9 L 333.3,233.3 L 333.0,237.5 L 338.0,240.8 L 338.0,246.0 L 342.9,249.8 L 340.9,252.7 L 341.6,255.4 L 340.1,257.1 L 337.1,257.2 L 335.2,260.0 L 332.0,259.1 L 328.3,261.2 L 329.5,264.4 L 331.4,264.6 L 331.5,268.8 L 338.6,271.9 L 338.0,273.2 L 340.0,277.3 L 337.1,277.4 L 337.2,279.6 L 334.2,283.1 L 336.7,286.9 L 335.2,287.2 L 335.1,289.5 L 338.2,294.3 L 342.9,295.6 L 347.4,298.8 L 355.9,296.6 L 355.4,298.3 L 356.7,300.9 L 355.1,304.2 L 351.0,308.1 L 351.8,311.5 L 346.8,314.2 L 346.7,315.6 L 346.2,314.4 L 342.1,316.4 L 341.6,320.6 L 340.5,319.6 L 337.1,320.7 L 336.0,324.2 L 334.3,325.7 L 331.4,325.4 L 330.6,328.1 L 327.1,330.8 L 330.1,331.2 L 328.8,334.9 L 326.6,334.1 L 321.9,335.8 L 321.4,338.0 L 317.1,336.9 L 315.8,340.3 L 314.3,340.0 L 315.3,339.5 L 314.9,338.1 L 309.8,336.6 L 308.8,337.3 L 310.5,338.7 L 307.4,339.4 L 306.5,338.7 L 306.9,336.9 L 303.9,335.9 L 303.7,334.5 L 301.6,335.2 L 299.8,333.2 L 294.7,333.2 L 295.5,330.1 L 294.0,327.6 L 287.1,329.0 L 285.0,325.1 L 283.0,325.9 L 282.2,324.0 L 282.6,325.7 L 281.2,325.2 L 282.4,326.5 L 281.3,327.0 L 283.6,326.9 L 282.0,328.7 L 276.9,328.1 L 274.3,327.1 L 275.2,325.7 L 274.2,324.3 L 264.5,323.5 L 262.9,322.5 L 262.9,320.5 L 259.9,320.3 L 250.4,326.7 L 246.9,331.0 L 244.2,330.3 L 241.1,332.1 L 236.4,337.9 L 234.7,342.9 L 234.2,352.6 L 234.9,358.7 L 237.2,359.8 L 238.1,362.8 L 235.8,363.2 L 234.6,361.3 L 232.2,361.1 L 225.0,364.0 L 225.1,366.4 L 221.4,366.7 L 214.2,362.7 L 207.9,366.2 L 205.8,362.1 L 200.4,360.6 L 200.5,358.5 L 201.9,357.5 L 200.3,357.0 L 200.6,355.9 L 194.2,354.5 L 192.8,356.4 L 190.7,352.0 L 185.7,352.4 L 183.4,349.4 L 179.4,349.4 L 173.7,346.6 L 172.1,349.6 L 172.7,353.2 L 166.3,353.1 L 164.6,351.8 L 162.9,353.8 L 159.8,351.3 L 154.8,353.3 L 152.4,352.0 L 151.0,349.0 L 147.0,347.1 L 144.9,349.0 L 142.0,347.9 L 140.4,349.7 L 136.1,345.3 L 135.6,342.6 L 130.6,343.1 L 125.4,341.0 L 121.0,338.7 L 122.1,336.8 L 120.1,337.7 L 119.9,340.3 L 117.6,339.6 L 116.8,338.0 L 119.1,334.1 L 119.0,331.5 L 115.1,330.1 L 113.2,331.7 L 112.8,329.7 L 110.1,330.1 L 108.5,326.9 L 113.3,324.9 L 117.4,316.7 L 121.1,296.7 L 122.4,282.4 L 124.1,278.1 L 129.0,278.6 L 124.7,273.7 L 122.3,279.2 L 125.0,247.0 L 126.7,243.7 L 129.4,243.0 L 122.9,238.3 L 122.8,235.4 L 125.6,234.6 L 124.7,232.6 L 126.1,232.4 L 127.2,230.3 L 126.5,229.2 L 127.4,229.0 L 125.9,227.0 L 127.5,227.3 L 127.6,225.8 L 125.8,222.3 L 122.8,221.1 L 126.1,216.0 L 123.8,215.1 L 123.7,216.9 L 121.4,214.7 L 121.4,216.1 L 120.1,214.0 L 116.9,214.0 L 115.7,211.7 L 107.9,208.3 L 106.7,203.9 L 99.3,195.9 L 98.9,193.2 L 103.5,187.9 L 100.3,184.6 L 96.5,183.9 L 98.6,182.7 L 98.6,178.8 L 95.2,180.1 L 93.2,178.4 L 88.7,177.9 L 89.9,176.5 L 88.4,174.7 L 91.7,173.2 L 89.9,170.2 L 92.0,170.1 L 89.0,168.9 L 86.5,169.8 L 88.4,168.0 L 87.2,168.8 L 87.1,167.4 L 86.6,168.8 L 85.5,168.3 L 86.8,169.0 L 85.4,170.3 L 81.7,170.5 L 79.1,167.8 L 83.8,168.4 L 85.0,164.7 L 84.2,166.5 L 82.3,164.4 L 82.5,165.3 L 80.5,165.3 L 79.7,167.1 L 77.5,163.9 L 78.8,167.8 L 76.2,166.4 L 76.4,167.4 L 74.4,167.5 L 73.6,166.2 L 73.5,169.1 L 74.8,171.1 L 73.4,170.9 L 73.2,166.9 L 71.4,164.5 L 74.2,161.6 L 72.9,161.6 L 73.4,160.5 L 71.6,160.6 L 72.6,162.2 L 71.2,162.5 L 71.3,164.4 L 67.5,162.8 L 69.6,162.7 L 67.3,161.9 L 69.6,158.7 L 67.9,160.8 L 66.7,157.5 L 67.6,161.1 L 65.1,162.5 L 63.1,159.8 L 62.7,156.1 L 62.8,160.0 L 59.1,159.4 L 58.0,158.4 L 60.1,157.4 L 57.8,158.4 L 57.3,156.7 L 57.5,158.6 L 54.5,158.9 L 53.3,157.2 L 53.9,156.3 L 51.4,154.4 L 51.4,156.5 L 48.2,156.1 L 47.0,154.4 L 48.7,153.3 L 47.7,151.5 L 47.9,153.3 L 46.2,154.4 L 47.8,156.2 L 45.1,156.0 L 46.6,157.3 L 46.0,158.5 L 41.0,158.6 L 41.7,157.0 L 40.8,153.9 L 36.8,150.5 L 38.0,149.4 L 36.0,150.9 L 31.4,149.4 L 39.9,146.8 L 42.8,147.5 L 43.6,145.0 L 42.5,143.1 L 38.7,141.8 L 36.3,144.5 L 35.8,142.1 L 36.6,141.4 L 34.3,140.2 L 35.9,140.2 L 35.6,138.7 L 36.8,137.9 L 36.8,140.1 L 37.7,139.1 L 37.6,140.2 L 43.7,139.6 L 43.8,141.1 L 47.8,141.6 L 47.7,142.6 L 48.2,141.2 L 43.5,140.3 L 45.9,139.7 L 42.1,139.0 L 43.9,137.3 L 38.8,138.5 L 43.7,134.0 L 32.1,138.4 L 30.6,138.3 L 31.3,137.0 L 30.2,137.2 L 30.9,136.5 L 30.0,135.1 L 32.0,132.8 L 30.9,132.9 L 30.5,131.1 L 32.4,129.2 L 37.6,130.1 L 34.8,128.9 L 35.1,127.8 L 38.3,129.1 L 35.9,127.7 L 36.6,126.7 L 40.4,126.7 L 39.4,126.0 L 42.2,125.1 L 43.0,126.8 L 47.4,124.4 L 49.3,125.4 L 49.4,124.1 L 51.5,123.2 L 51.9,127.5 L 52.5,128.1 L 52.8,125.2 L 54.6,127.8 L 55.6,127.0 L 54.3,125.3 L 55.4,123.6 L 60.1,124.4 L 59.7,125.8 L 61.9,125.2 L 62.5,122.5 L 61.6,121.3 L 63.7,119.0 L 66.5,120.4 L 71.0,117.8 L 71.1,121.1 L 72.1,118.8 L 74.9,117.3 L 73.7,122.0 L 75.0,119.7 L 76.6,119.7 L 75.7,121.0 L 78.8,122.2 L 78.3,123.5 L 81.4,126.0 L 81.5,128.2 L 84.3,129.8 L 85.2,132.2 L 85.2,130.7 L 86.5,130.9 L 90.6,127.2 L 90.3,126.3 L 92.1,126.8 L 94.7,124.7 L 95.5,125.6 L 94.2,127.3 L 96.5,126.3 L 97.4,129.1 L 97.9,127.7 L 98.4,129.0 L 99.8,127.9 L 99.1,126.7 L 101.8,126.6 L 103.7,130.2 L 103.0,132.2 L 104.3,131.1 L 103.3,128.7 L 104.2,128.9 L 102.6,128.1 L 102.3,126.1 L 104.6,124.2 L 107.0,123.8 L 106.4,126.6 L 109.1,128.0 L 119.9,126.9 L 118.7,125.9 L 119.3,124.6 L 117.5,126.0 L 114.2,122.6 L 114.1,119.6 L 113.1,119.1 L 114.6,115.4 L 114.7,116.8 L 114.6,111.8 L 115.9,112.1 L 114.5,111.4 L 114.1,112.8 L 113.5,111.4 L 113.9,107.8 L 113.1,104.5 L 114.3,104.4 L 113.1,103.8 L 112.8,104.8 L 110.5,100.4 L 111.5,100.2 L 108.0,98.7 L 106.0,92.8 L 107.0,89.2 L 104.4,87.1 L 104.5,85.2 L 113.0,88.3 L 116.8,86.3 L 122.2,86.3 L 123.1,89.7 L 121.1,92.2 L 125.6,99.3 L 130.5,97.8 L 149.3,102.1 L 152.9,101.5 L 158.6,97.5 L 164.1,96.3 L 158.4,95.2 L 157.0,93.4 L 160.6,85.6 L 170.5,80.4 L 186.4,76.0 L 192.9,70.9 L 195.7,66.5 L 199.1,67.9 L 195.4,64.1 L 195.8,61.0 L 198.1,61.3 L 195.8,59.6 L 196.6,54.4 L 198.5,55.4 L 196.4,53.0 L 196.0,47.2 L 197.1,47.3 L 197.1,45.5 L 196.5,41.6 L 201.7,38.4 L 210.6,37.0 L 211.4,35.4 L 212.1,36.4 L 211.9,35.0 L 221.7,33.3 L 224.0,38.7 L 222.9,39.7 L 223.1,42.4 L 226.4,43.9 L 228.1,47.1 L 231.1,48.4 L 232.3,46.1 L 237.5,44.7 L 238.9,47.6 L 240.4,48.0 L 239.8,49.7 L 241.1,54.7 L 243.4,56.0 L 245.9,54.4 L 247.1,54.8 L 246.6,56.2 L 249.4,55.8 L 250.9,57.4 L 250.7,60.7 L 252.1,63.2 L 253.1,61.4 L 257.1,62.3 L 260.3,61.1 L 263.2,65.0 L 263.9,63.7 L 265.1,64.3 L 263.0,69.6 L 264.8,69.6 L 265.7,72.0 L 263.2,74.0 L 264.8,76.4 L 271.3,77.1 L 277.8,74.9 L 277.8,71.5 L 281.2,68.3 L 283.1,69.5 L 281.1,72.2 L 281.6,73.2 L 280.3,75.9 L 282.9,78.2 L 281.9,82.6 L 285.7,82.3 L 290.1,86.4 L 292.9,86.3 L 294.5,87.9 L 293.9,89.5 L 297.0,90.1 L 297.9,93.8 L 305.9,91.4 L 313.0,95.8 L 318.2,93.2 L 326.1,96.4 L 327.6,98.9 L 326.7,99.6 L 329.4,102.2 L 331.2,106.6 L 333.7,107.1 L 334.4,106.0 L 333.8,104.7 L 336.1,104.3 L 338.9,105.6 L 339.4,108.5 L 340.6,106.9 L 345.7,108.4 L 349.6,105.8 L 354.6,110.8 L 362.4,110.6 L 370.0,113.8 L 366.5,120.2 L 363.4,122.1 L 359.9,126.5 L 357.2,135.7 L 357.5,138.4 L 353.1,146.3 L 352.9,149.6 L 354.3,152.0 L 352.6,155.5 L 352.3,161.2 L 351.4,162.4 L 353.3,167.1 L 351.1,168.4 L 351.9,168.9 L 350.7,170.6 L 349.3,170.1 L 349.9,171.1 L 348.1,172.6 L 344.4,173.0 L 342.5,172.1 L 343.3,170.2 L 341.4,169.8 Z" />
 
-                    <!-- Animated Drawing Contour (Stroke Dashoffset controlled by Scroll) -->
-                    <path id="franceDrawPath" class="france-path-draw" d="M 168,16 C 172.5,15.7 178.3,25.7 185,30 C 191.7,34.3 200.2,38.0 208,42 C 215.8,46.0 224.7,49.7 232,54 C 239.3,58.3 244.8,62.0 252,68 C 259.2,74.0 269.0,82.3 275,90 C 281.0,97.7 286.5,105.3 288,114 C 289.5,122.7 286.3,134.3 284,142 C 281.7,149.7 277.3,154.0 274,160 C 270.7,166.0 263.7,171.0 264,178 C 264.3,185.0 272.3,194.7 276,202 C 279.7,209.3 286.3,213.7 286,222 C 285.7,230.3 275.0,243.3 274,252 C 273.0,260.7 279.7,268.3 280,274 C 280.3,279.7 280.7,283.3 276,286 C 271.3,288.7 260.3,290.3 252,290 C 243.7,289.7 235.0,284.7 226,284 C 217.0,283.3 207.0,284.3 198,286 C 189.0,287.7 180.0,291.3 172,294 C 164.0,296.7 156.7,300.3 150,302 C 143.3,303.7 140.0,304.0 132,304 C 124.0,304.0 112.0,303.3 102,302 C 92.0,300.7 80.0,299.3 72,296 C 64.0,292.7 56.7,288.3 54,282 C 51.3,275.7 53.7,267.3 56,258 C 58.3,248.7 67.0,236.3 68,226 C 69.0,215.7 64.7,205.7 62,196 C 59.3,186.3 56.7,176.0 52,168 C 47.3,160.0 39.7,153.7 34,148 C 28.3,142.3 22.3,139.0 18,134 C 13.7,129.0 10.0,123.0 8,118 C 6.0,113.0 4.3,108.3 6,104 C 7.7,99.7 11.0,95.0 18,92 C 25.0,89.0 38.7,85.7 48,86 C 57.3,86.3 67.3,98.0 74,94 C 80.7,90.0 83.3,68.0 88,62 C 92.7,56.0 96.0,55.7 102,58 C 108.0,60.3 117.0,77.0 124,76 C 131.0,75.0 138.3,59.3 144,52 C 149.7,44.7 154.0,38.0 158,32 C 162.0,26.0 166.3,18.7 168,16 Z" />
-
-                    <!-- Paris Location Pin traveling southwards upon scrolling -->
-                    <g id="francePin" class="france-pin-marker" transform="translate(165, 78)">
-                        <circle class="pin-pulse" r="8" />
-                        <circle class="pin-dot" r="4.5" />
+                    <!-- FIXED PARIS PIN (Pure white, stays firmly at Paris at x=216.6, y=118.3) -->
+                    <g id="francePin" class="france-pin-marker" transform="translate(216.6, 118.3)">
+                        <circle class="pin-pulse" r="7" />
+                        <circle class="pin-dot" r="4" />
                         <text class="pin-label" x="8" y="4">Paris</text>
                     </g>
                 </svg>
@@ -646,11 +883,8 @@
             <div class="hero-transition-mask"></div>
 
             <div class="hero-content reveal active">
-                <h1 class="hero-title">Frankreich unter der Lupe</h1>
-                <p class="hero-subtitle">
-                    Ein Land, das jeder zu kennen glaubt.<br>
-                    Ein Blick hinter Raum, Menschen und Klischees.
-                </p>
+                <h1 class="hero-title">Frankreich</h1>
+                <p class="hero-subtitle">von Oskar, Emil und Karl</p>
             </div>
 
             <div class="scroll-indicator">
@@ -665,7 +899,7 @@
     <main>
 
         <!-- ABSCHNITT „WORUM GEHT ES?“ -->
-        <section class="container reveal">
+        <section class="container reveal" id="bereiche-uebersicht">
             <h2 class="section-title">Worum geht es?</h2>
             <p class="body-text" style="text-align: center; max-width: 820px; margin: 0 auto 36px auto; font-size: 19px; line-height: 1.6;">
                 Frankreich ist eines der bekanntesten Länder der Welt – und steckt trotzdem voller Überraschungen.
@@ -683,58 +917,304 @@
                 </p>
             </div>
 
-            <!-- DIE DREI KARTEN (BEREICH A / B / E) -->
+            <!-- DIE 3 ANKLICKBAREN BEREICHS-KARTEN -->
             <div class="cards-grid">
-                <!-- Karte 1 – Bereich A -->
-                <div class="card">
+                <!-- Karte 1 – Bereich A (Emil) -->
+                <a href="#bereich-a" class="card-clickable" title="Zu Bereich A springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_a.jpg" alt="Französischer Naturraum – Alpenlandschaft am Mont-Blanc-Massiv" class="card-image" loading="lazy">
                     </div>
-                    <h3 style="color: #0071E3;">Bereich A</h3>
-                    <h4>Wo liegt das Land? — Naturraum</h4>
+                    <h3 class="card-large-title" style="color: #0071E3;">Bereich A</h3>
                     <p class="body-text">
-                        Frankreich liegt in Westeuropa, zwischen Atlantik und Mittelmeer, und grenzt an acht Länder. Hohe
-                        Gebirge (Alpen, Pyrenäen), große Flüsse (Loire, Seine, Rhône) und zwei sehr unterschiedliche Küsten
-                        prägen den Naturraum – und damit, wie und wo die Menschen leben. Aus dieser Landschaft entsteht auch
-                        ein Bild im Kopf, das wir kritisch prüfen.
+                        Naturraum, Lage, Gebirge, Flüsse und zwei Küsten. Wie formt die Landschaft das Leben der Menschen – und welche Klischees entstehen daraus?
                     </p>
-                    <div class="card-author">
-                        <span class="author-label">[Name] · Bereich A</span>
+                    <div class="card-footer-info">
+                        <span class="card-author-name">Emil</span>
+                        <span class="card-arrow-cta">Details ansehen &darr;</span>
                     </div>
-                </div>
+                </a>
 
-                <!-- Karte 2 – Bereich B -->
-                <div class="card">
+                <!-- Karte 2 – Bereich B (Oskar) -->
+                <a href="#bereich-b" class="card-clickable" title="Zu Bereich B springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_b.jpg" alt="Bevölkerung und Städte – Boulevard Haussmann in Paris" class="card-image" loading="lazy">
                     </div>
-                    <h3 style="color: #34C759;">Bereich B</h3>
-                    <h4>Wie leben die Menschen? — Bevölkerung</h4>
+                    <h3 class="card-large-title" style="color: #34C759;">Bereich B</h3>
                     <p class="body-text">
-                        Rund 68 Millionen Menschen leben in Frankreich – sehr ungleich verteilt: dicht in Paris und an
-                        den Küsten, dünn in der „leeren Diagonale“. Städte, Sprachen und Herkunft sind vielfältiger, als viele
-                        denken. Wir fragen: Wo leben die Menschen, warum dort – und welche Vorstellungen von „den Franzosen“
-                        stimmen wirklich?
+                        68 Millionen Menschen, Altersstruktur, Sprachen und Migration. Wie verteilt sich die Bevölkerung zwischen Paris und der „leeren Diagonale“?
                     </p>
-                    <div class="card-author">
-                        <span class="author-label">[Name] · Bereich B</span>
+                    <div class="card-footer-info">
+                        <span class="card-author-name">Oskar</span>
+                        <span class="card-arrow-cta">Details ansehen &darr;</span>
                     </div>
-                </div>
+                </a>
 
-                <!-- Karte 3 – Bereich E -->
-                <div class="card">
+                <!-- Karte 3 – Bereich E (Karl) -->
+                <a href="#bereich-e" class="card-clickable" title="Zu Bereich E springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_e.jpg" alt="Kultur und Alltag – Lebendiges Pariser Straßencafé" class="card-image" loading="lazy">
                     </div>
-                    <h3 style="color: #AF52DE;">Bereich E</h3>
-                    <h4>Wie lebt &amp; denkt man dort? — Kultur &amp; Alltag</h4>
+                    <h3 class="card-large-title" style="color: #AF52DE;">Bereich E</h3>
                     <p class="body-text">
-                        Essen, Sprache, Religion und Alltag zeigen, wie in Frankreich gelebt und gedacht wird. Hinter
-                        Klischees wie „Baguette, Wein und Baskenmütze“ steckt oft eine ganz andere Wirklichkeit. Wir
-                        untersuchen, woher solche Bilder kommen – und wann aus einer Besonderheit ein Stereotyp wird.
+                        Kultur, Alltag, Baguette &amp; Streikkultur sowie die Methode der Raumanalyse. Wann wird aus einer Besonderheit ein Stereotyp?
                     </p>
-                    <div class="card-author">
-                        <span class="author-label">[Name] · Bereich E</span>
+                    <div class="card-footer-info">
+                        <span class="card-author-name">Karl</span>
+                        <span class="card-arrow-cta">Details ansehen &darr;</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VERTIEFUNG: BEREICH A (EMIL)                                   -->
+        <!-- ============================================================== -->
+        <section id="bereich-a" class="deepdive-section container reveal">
+            <div class="deepdive-header">
+                <div class="deepdive-title-group">
+                    <span class="deepdive-tag" style="background: rgba(0, 113, 227, 0.12); color: #0071E3;">Naturraum &amp; Lage</span>
+                    <h2 class="deepdive-title">Bereich A: Wo liegt das Land?</h2>
+                    <span class="deepdive-author-badge">Bearbeitet von <strong>Emil</strong></span>
+                </div>
+                <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zurück zur Übersicht</a>
+            </div>
+
+            <div class="deepdive-grid">
+                <!-- Punkt A1: Bedeutung von Klima & Naturraum fürs Leben -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Bedeutung von Klima &amp; Naturraum fürs Leben
+                    </h3>
+                    <p>
+                        Frankreich liegt in Westeuropa an einer geografischen Schnittstelle zwischen dem rauen Atlantik, dem milden Mittelmeer und dem Ärmelkanal und grenzt an acht Nachbarstaaten. Diese privilegierte Brückenlage prägt das Land fundamental:
+                    </p>
+                    <p>
+                        <strong>Naturräumliche Vielfalt:</strong> Hohe Gebirgszüge wie die Alpen (Mont Blanc mit 4.808&nbsp;m als höchster Punkt der EU) und die Pyrenäen bilden natürliche Barrieren, liefern aber auch enorme Wasserkraftressourcen. Mächtige Flusstäler (Loire, Seine, Rhône, Garonne) verbinden die Regionen und dienen seit Jahrhunderten als Verkehrs- und Handelsachsen.
+                    </p>
+                    <p>
+                        <strong>Wirtschaftliche Gunsträume:</strong> Die fruchtbaren Tiefebenen im Pariser und Aquitanischen Becken begünstigen intensive Landwirtschaft, während das gemäßigte atlantische und mediterrane Klima ideale Bedingungen für weltberühmten Weinbau und Ackerbau schafft.
+                    </p>
+                </div>
+
+                <!-- Punkt A2: Stereotypen-Check Naturraum -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Stereotypen-Check: Bild durch Landschaft &amp; Natur
+                    </h3>
+                    <p>
+                        Wie Landschaften im Kopf zu Klischees werden – der systematische Drei-Stufen-Abgleich:
+                    </p>
+
+                    <div class="check-grid">
+                        <div class="check-box">
+                            <span class="check-badge badge-klischee">Klischee</span>
+                            <div class="check-text">
+                                „Frankreich ist überall ein sonniges, idyllisches Lavendel- und Weinberg-Paradies (Postkarten-Romantik).“
+                            </div>
+                        </div>
+                        <div class="check-box">
+                            <span class="check-badge badge-belegbar">Belegbar</span>
+                            <div class="check-text">
+                                Das mediterrane Südfrankreich und berühmte Weinregionen (Bordeaux, Burgund) ziehen jährlich Millionen Touristen an.
+                            </div>
+                        </div>
+                        <div class="check-box">
+                            <span class="check-badge badge-ausgeblendet">Ausgeblendet</span>
+                            <div class="check-text">
+                                Raue atlantische Regen- und Sturmzonen (Bretagne), hochalpine Gletscher und kühle Agrar-Ebenen im Norden passen nicht ins Bild.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verknüpfung zur Karte -->
+                <div class="deepdive-card deepdive-card-full">
+                    <div class="map-jump-cta">
+                        <div class="map-jump-cta-text">
+                            <h4>Naturraum-Stationen auf der interaktiven Karte erkunden</h4>
+                            <p>Erfahre vor Ort in <strong>Bordeaux</strong> (Terroir &amp; Weinbau) und der <strong>Auvergne</strong> (Vulkanberge &amp; Käsevielfalt), wie der Naturraum den Alltag prägt.</p>
+                        </div>
+                        <a href="1.html" class="map-jump-cta-btn">Zur Kulturkarte &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VERTIEFUNG: BEREICH B (OSKAR)                                  -->
+        <!-- ============================================================== -->
+        <section id="bereich-b" class="deepdive-section container reveal">
+            <div class="deepdive-header">
+                <div class="deepdive-title-group">
+                    <span class="deepdive-tag" style="background: rgba(52, 199, 89, 0.14); color: #248A3D;">Bevölkerung &amp; Demografie</span>
+                    <h2 class="deepdive-title">Bereich B: Wie leben die Menschen?</h2>
+                    <span class="deepdive-author-badge">Bearbeitet von <strong>Oskar</strong></span>
+                </div>
+                <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zurück zur Übersicht</a>
+            </div>
+
+            <div class="deepdive-grid">
+                <!-- Punkt B1: Altersstruktur & Demografie -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#248A3D" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Altersstruktur &amp; demografischer Aufbau
+                    </h3>
+                    <p>
+                        Rund 68 Millionen Menschen leben in Frankreich. Die demografischen Kennzahlen zeigen eine im EU-Vergleich bemerkenswerte Struktur:
+                    </p>
+
+                    <div class="stats-chip-row">
+                        <div class="stat-chip">
+                            <div class="stat-chip-num">23 %</div>
+                            <div class="stat-chip-label">Kinder &amp; Jugendliche<br>(&lt; 20 Jahre)</div>
+                        </div>
+                        <div class="stat-chip">
+                            <div class="stat-chip-num">56 %</div>
+                            <div class="stat-chip-label">Erwerbsbevölkerung<br>(20 bis 64 Jahre)</div>
+                        </div>
+                        <div class="stat-chip">
+                            <div class="stat-chip-num">21 %</div>
+                            <div class="stat-chip-label">Seniorinnen &amp; Senioren<br>(65+ Jahre)</div>
+                        </div>
+                    </div>
+
+                    <p>
+                        <strong>Europäische Besonderheit:</strong> Frankreich verzeichnete jahrzehntelang eine der höchsten Geburtenraten Europas (~1,8 Kinder pro Frau), gefördert durch flächendeckende Ganztagsbetreuung (<em>Crèches</em> und <em>École maternelle</em> ab 3 Jahren). Dennoch altert auch hier die Gesellschaft spürbar.
+                    </p>
+                </div>
+
+                <!-- Punkt B2: Sprachen & Bevölkerungsgruppen -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#248A3D" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Sprachen, Vielfalt &amp; „Leere Diagonale“
+                    </h3>
+                    <p>
+                        <strong>Die „Leere Diagonale“ (<em>Diagonale du vide</em>):</strong> Die Bevölkerung ist extrem ungleich verteilt: Über 12 Millionen Menschen drängen sich im Großraum Paris und an den Küsten, während sich vom Nordosten bis in die Pyrenäen ein dünn besiedelter Korridor mit unter 30 Einwohnern/km² zieht.
+                    </p>
+                    <p>
+                        <strong>Historische Einwanderungsgesellschaft:</strong> Über 7 Millionen Menschen mit ausländischen Wurzeln leben in Frankreich. Prägend sind enge Bindungen an den Maghreb (Algerien, Marokko, Tunesien), Westafrika und Südeuropa.
+                    </p>
+                    <p>
+                        <strong>Sprachenpolitik:</strong> Artikel 2 der Verfassung legt fest: <em>„Die Sprache der Republik ist das Französische.“</em> Historische Regionalsprachen (Bretonisch, Okzitanisch, Elsässisch, Baskisch, Korsisch) kämpfen heute um ihren Fortbestand.
+                    </p>
+                </div>
+
+                <!-- Punkt B3: Stereotypen-Check Menschen -->
+                <div class="deepdive-card deepdive-card-full">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#248A3D" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Stereotypen-Check: „Wie die Menschen sind“
+                    </h3>
+
+                    <div class="check-grid">
+                        <div class="check-box">
+                            <span class="check-badge badge-klischee">Klischee</span>
+                            <div class="check-text">
+                                „Die Franzosen sind unnahbar, sprechen kein Englisch und sind Touristen gegenüber ungeduldig.“
+                            </div>
+                        </div>
+                        <div class="check-box">
+                            <span class="check-badge badge-belegbar">Belegbar</span>
+                            <div class="check-text">
+                                Im dichten Pariser Alltag herrscht Hektik. Zudem sind Begrüßungsformeln („Bonjour Madame/Monsieur“) obligatorisch – wer sie weglässt, gilt als unhöflich.
+                            </div>
+                        </div>
+                        <div class="check-box">
+                            <span class="check-badge badge-ausgeblendet">Ausgeblendet</span>
+                            <div class="check-text">
+                                Außerhalb der Hauptstadt herrscht herzliche Gastfreundschaft. Jüngere Generationen sprechen sehr gut Englisch, schätzen aber jeden Versuch auf Französisch.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-jump-cta" style="margin-top: 20px;">
+                        <div class="map-jump-cta-text">
+                            <h4>Bevölkerungs-Hotspots auf der Karte untersuchen</h4>
+                            <p>Entdecke die Kontraste zwischen der Hauptstadt <strong>Paris</strong> (Zentralismus) und der bunten Hafenmetropole <strong>Marseille</strong> (Migration &amp; Mittelmeer).</p>
+                        </div>
+                        <a href="1.html" class="map-jump-cta-btn">Zu den Stationen &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VERTIEFUNG: BEREICH E (KARL)                                   -->
+        <!-- ============================================================== -->
+        <section id="bereich-e" class="deepdive-section container reveal">
+            <div class="deepdive-header">
+                <div class="deepdive-title-group">
+                    <span class="deepdive-tag" style="background: rgba(175, 82, 222, 0.12); color: #AF52DE;">Kultur, Alltag &amp; Raumanalyse</span>
+                    <h2 class="deepdive-title">Bereich E: Wie lebt &amp; denkt man dort?</h2>
+                    <span class="deepdive-author-badge">Bearbeitet von <strong>Karl</strong></span>
+                </div>
+                <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zurück zur Übersicht</a>
+            </div>
+
+            <div class="deepdive-grid">
+                <!-- Punkt E1: Landesweite Themen -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AF52DE" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Landesweite Kulturthemen (nicht ortsgebunden)
+                    </h3>
+                    <p>
+                        <strong>Baguette &amp; Esskultur:</strong> Seit 2022 gehört das Baguette-Handwerk zum immateriellen UNESCO-Kulturerbe (~10 Mrd. Stück/Jahr). Doch der Alltagskonsum ist stark gesunken (auf rund ½ Baguette pro Person/Tag). Das Baskenmütze-Klischee (<em>Béret</em>) stammt eigentlich aus den Pyrenäen und wird fast nur noch im Tourismus-Marketing gepflegt.
+                    </p>
+                    <p>
+                        <strong>Streik- &amp; Streitkultur:</strong> Das Demonstrationsrecht gilt seit der Französischen Revolution von 1789 als hohes demokratisches Gut (Beispiel: Canuts-Seidenweberaufstände in Lyon 1831/34). Oft streiken nur bestimmte Branchen (z. B. Bahn), was in ausländischen Medien als „Dauerstillstand“ verallgemeinert wird.
+                    </p>
+                    <p>
+                        <strong>Laizismus (<em>Laïcité</em>):</strong> Die strikte gesetzliche Trennung von Staat und Religionsgemeinschaften (seit 1905) ist der wichtigste gesellschaftliche Grundkonsens der Republik.
+                    </p>
+                </div>
+
+                <!-- Punkt E2: Die Methode der Raumanalyse -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AF52DE" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        Die Methode der Raumanalyse (Ursache-Wirkung)
+                    </h3>
+                    <p>
+                        Auf der interaktiven Karte analysieren wir jedes Phänomen strukturiert nach den <strong>5 geographischen Leitfragen</strong>:
+                    </p>
+                    <ul style="padding-left: 20px; font-size: 14.5px; line-height: 1.6; color: #48484A; margin-bottom: 12px;">
+                        <li><strong>1. Wo?</strong> Exakte räumliche Verortung und Koordinaten.</li>
+                        <li><strong>2. Was?</strong> Das beobachtbare Phänomen oder Klischee.</li>
+                        <li><strong>3. Warum dort?</strong> Historische, politische oder naturräumliche Ursachen.</li>
+                        <li><strong>4. Folgen?</strong> Räumliche, gesellschaftliche und wirtschaftliche Auswirkungen.</li>
+                        <li><strong>5. Wandel?</strong> Wie sich Traditionen durch Generationen und Globalisierung verändern.</li>
+                    </ul>
+                    <p>
+                        So wird aus einem bloßen Vorurteil eine fundierte wissenschaftliche Raumanalyse.
+                    </p>
+                </div>
+
+                <!-- Punkt E3: Die Leitfrage vertieft & Überraschung ⑥ -->
+                <div class="deepdive-card deepdive-card-full">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AF52DE" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Stereotypen-Analyse &amp; die Überraschung ⑥ (Kinshasa)
+                    </h3>
+                    <p>
+                        <strong>Die zentrale Leitfrage beantwortet:</strong> <em>„Wann wird aus einer Besonderheit ein Stereotyp?“</em><br>
+                        Ein Stereotyp entsteht genau dann, wenn eine räumlich begrenzte Besonderheit (z. B. Weinbau im Bordelais, Baskenmütze in den Pyrenäen oder Haute Couture in Paris) medial auf ein gesamtes, 68-Millionen-Land verallgemeinert und im kollektiven Gedächtnis eingefroren wird.
+                    </p>
+                    <p>
+                        <strong>Die Überraschung ⑥ – Das wahre Zentrum der Frankophonie:</strong><br>
+                        Klischee: <em>„Französisch gehört Paris.“</em> – Realität: Das sprachliche Gravitationszentrum liegt längst in Afrika! In <strong>Kinshasa (Demokratische Republik Kongo)</strong> sprechen mehr Menschen Französisch als in Paris. Bis 2050 werden rund 90&nbsp;% aller Französischsprachigen der Welt Afrikaner sein.
+                    </p>
+
+                    <div class="map-jump-cta" style="margin-top: 18px;">
+                        <div class="map-jump-cta-text">
+                            <h4>Erkunde Station ⑥ „Das afrikanische Französisch“ auf der Karte</h4>
+                            <p>Mit einem Klick fliegt die interaktive Kamera von Europa direkt nach Zentralafrika (Kinshasa, DR Kongo).</p>
+                        </div>
+                        <a href="1.html" class="map-jump-cta-btn">Zu Station ⑥ fliegen &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -765,11 +1245,11 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-project">
-                <div class="footer-title">Projekt „Frankreich unter der Lupe“</div>
+                <div class="footer-title">Projekt „Frankreich“</div>
                 <p class="footer-roles">
-                    Bereich A (Naturraum): <strong>[Name]</strong> &middot; 
-                    Bereich B (Bevölkerung): <strong>[Name]</strong> &middot; 
-                    Bereich E (Kultur &amp; Alltag): <strong>[Name]</strong>
+                    Bereich A (Naturraum): <strong>Emil</strong> &middot; 
+                    Bereich B (Bevölkerung): <strong>Oskar</strong> &middot; 
+                    Bereich E (Kultur, Alltag &amp; Raumanalyse): <strong>Karl</strong>
                 </p>
             </div>
 
@@ -780,12 +1260,12 @@
                     <li><strong>Bereich A (Naturraum):</strong> <em>Lac Blanc im Mont-Blanc-Massiv, Französische Alpen</em> von Tiia Monto &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> via Wikimedia Commons.</li>
                     <li><strong>Bereich B (Bevölkerung):</strong> <em>Boulevard Haussmann mit Pariser Stadtleben</em> von ParisSharing &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
                     <li><strong>Bereich E (Kultur &amp; Alltag):</strong> <em>Klassisches Pariser Café (Café de Flore)</em> von madras91 &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Kartendaten:</strong> OpenStreetMap-Mitwirkende &middot; Map-Engine: Leaflet.js.</li>
+                    <li><strong>Kartendaten:</strong> OpenStreetMap-Mitwirkende &middot; Map-Engine: Leaflet.js &middot; Konturen: IGN / data.gouv.fr (Open Data).</li>
                 </ul>
             </div>
 
             <div class="footer-bottom">
-                <span>Geografie &amp; Kultur &middot; Schul- und Bildungsprojekt</span>
+                <span>Geografie &amp; Kultur &middot; Schul- und Bildungsprojekt von Oskar, Emil und Karl</span>
                 <span>Ausschließlich echte Fotografien &middot; Streng keine KI-Bilder &middot; Freie Creative-Commons-Lizenzen</span>
             </div>
         </div>
@@ -816,7 +1296,6 @@
 
             // Frankreich SVG Silhouette Scroll-Zeichen-Animation
             const path = document.getElementById('franceDrawPath');
-            const pin = document.getElementById('francePin');
             const heroBg = document.getElementById('heroBg');
             const heroContent = document.querySelector('.hero-content');
             let pathLength = 0;
@@ -838,26 +1317,17 @@
                 progress = Math.min(Math.max(progress, 0), 1);
 
                 if (!prefersReducedMotion) {
-                    // 1. Silhouette von Frankreich zeichnet sich beim Scrollen
+                    // 1. Umrisslinie von Frankreich zeichnet sich beim Scrollen in reinem Weiß
                     if (path && pathLength > 0) {
                         path.style.strokeDashoffset = pathLength * (1 - progress);
                     }
 
-                    // 2. Standort-Pin wandert von Paris nach Süden
-                    if (pin) {
-                        const startX = 165, startY = 78;   // Paris
-                        const endX = 185, endY = 210;     // Zentral-/Südfrankreich (Rhône-Tal)
-                        const curX = startX + (endX - startX) * progress;
-                        const curY = startY + (endY - startY) * progress;
-                        pin.setAttribute('transform', `translate(${curX}, ${curY})`);
-                    }
-
-                    // 3. Dezenter Parallax-Effekt für den Hintergrund
+                    // 2. Parallax-Effekt für den Hintergrund
                     if (heroBg) {
                         heroBg.style.transform = `scale(${1.02 + progress * 0.08}) translateY(${progress * 25}px)`;
                     }
 
-                    // 4. Hero-Text blendet sanft aus
+                    // 3. Hero-Text blendet beim Scrollen sanft aus
                     if (heroContent) {
                         heroContent.style.opacity = Math.max(0, 1 - progress * 3.5);
                         heroContent.style.transform = `translateY(${progress * -45}px)`;
