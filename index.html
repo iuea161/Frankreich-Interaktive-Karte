@@ -4,106 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Frankreich: Raum & Kultur – Interaktive Karte</title>
+    <title>Der Konflikt am Nil</title>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BP029N3ZFT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-BP029N3ZFT');
+    </script>
     <style>
         :root {
-            --system-font: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-            /* LIGHT MODE (Clean / Weiß / Apple) */
-            --bg-page: #F5F5F7;
-            --bg-surface: #FFFFFF;
-            --bg-surface-elevated: #F5F5F7;
-            --bg-surface-hover: #EBEBED;
+            --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --bg-primary: #F5F5F7;
+            --bg-secondary: #FFFFFF;
             --text-primary: #1D1D1F;
-            --text-secondary: #6E6E73;
-            --text-tertiary: #8E8E93;
-            --border-color: #E5E5EA;
-            --separator: #E5E5EA;
-            --separator-subtle: #F0F0F2;
-
-            /* Ruhiges Akzentblau */
-            --accent-blue: #1F3D7A;
-            --accent-blue-hover: #162E5C;
-            --accent-blue-subtle: rgba(31, 61, 122, 0.08);
-
-            /* Dezentes Rot als winziger Akzent */
-            --accent-red: #D32F2F;
-
-            /* Subtile, weiche Schatten */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
-
-            /* Apple Radien */
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 14px;
-            --radius-xl: 16px;
-            --radius-full: 9999px;
-
-            --space-1: 4px;
-            --space-2: 8px;
-            --space-3: 12px;
-            --space-4: 16px;
-            --space-5: 20px;
-            --space-6: 24px;
-            --space-8: 32px;
-
-            --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* DARK MODE (per prefers-color-scheme automatisch) */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg-page: #000000;
-                --bg-surface: #1C1C1E;
-                --bg-surface-elevated: #2C2C2E;
-                --bg-surface-hover: #3A3A3C;
-                --text-primary: #F5F5F7;
-                --text-secondary: #98989D;
-                --text-tertiary: #636366;
-                --border-color: #38383A;
-                --separator: #38383A;
-                --separator-subtle: #2C2C2E;
-
-                --accent-blue: #4D7CFF;
-                --accent-blue-hover: #6B93FF;
-                --accent-blue-subtle: rgba(77, 124, 255, 0.15);
-
-                --accent-red: #FF453A;
-
-                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-                --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
-            }
-        }
-
-        /* DARK MODE (per explizitem Toggle [data-theme="dark"]) */
-        [data-theme="dark"] {
-            --bg-page: #000000;
-            --bg-surface: #1C1C1E;
-            --bg-surface-elevated: #2C2C2E;
-            --bg-surface-hover: #3A3A3C;
-            --text-primary: #F5F5F7;
-            --text-secondary: #98989D;
-            --text-tertiary: #636366;
-            --border-color: #38383A;
-            --separator: #38383A;
-            --separator-subtle: #2C2C2E;
-
-            --accent-blue: #4D7CFF;
-            --accent-blue-hover: #6B93FF;
-            --accent-blue-subtle: rgba(77, 124, 255, 0.15);
-
-            --accent-red: #FF453A;
-
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+            --text-secondary: #86868B;
+            --accent-blue: #0071E3;
+            --accent-blue-hover: #0077ED;
+            --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
         /* RESET */
@@ -111,2871 +31,838 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
+        body {
             font-family: var(--system-font);
-            background-color: var(--bg-page);
+            background-color: var(--bg-primary);
             color: var(--text-primary);
-            overflow: hidden;
-            height: 100vh;
-            height: 100dvh;
-            width: 100vw;
-            position: fixed;
-            inset: 0;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            touch-action: manipulation;
-            transition: background-color 150ms var(--ease-apple), color 150ms var(--ease-apple);
+            padding-bottom: 0;
         }
 
-        /* APP-LAYOUT */
-        .app-layout {
+        /* HERO SECTION */
+        .hero-scroll-container {
+            height: 300vh;
+            /* Smooth scroll length */
+            position: relative;
+            background: #111;
+            /* Fallback */
+        }
+
+        .hero-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            height: 100dvh;
-            width: 100vw;
-            overflow: hidden;
-            background-color: var(--bg-page);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .map-wrapper {
-            flex: 1;
-            position: relative;
-            width: 100%;
-            min-height: 0;
-            overflow: hidden;
-            background: var(--bg-page);
-        }
-
-        /* REINER APPLE-LOOK: DECKENDE WEISSE FLÄCHEN, KEIN LIQUID GLASS, KEINE TRANSPARENZ */
-        .glass,
-        .glass-thick,
-        .glass-chrome {
-            background: var(--bg-surface);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
-        }
-
-        /* MAP */
-        #map {
+        #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            background: var(--bg-page);
-        }
-
-        /* BLOCK UNTER DER KARTE */
-        .landesweit-bar {
-            position: relative;
-            z-index: 400;
-            background: var(--bg-surface);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--shadow-sm);
-            flex-shrink: 0;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
-        }
-
-        .landesweit-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .landesweit-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-        }
-
-        .landesweit-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .landesweit-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 20px;
-            border-radius: var(--radius-full);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            font-family: var(--system-font);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple), transform 150ms var(--ease-apple);
-            user-select: none;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .landesweit-btn:hover {
-            background: var(--bg-surface-elevated);
-            border-color: var(--text-secondary);
-            transform: translateY(-1px);
-        }
-
-        .landesweit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .landesweit-btn.active {
-            border-color: var(--accent-blue);
-            background: var(--accent-blue-subtle);
-        }
-
-        .landesweit-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            color: var(--accent-blue);
-            flex-shrink: 0;
-        }
-
-        .landesweit-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .landesweit-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .landesweit-badge {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* SIDEBAR TOGGLE BUTTON (Mobile) */
-        .sidebar-toggle {
-            position: absolute;
-            top: var(--space-5);
-            left: var(--space-5);
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-full);
-            z-index: 550;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            background: var(--bg-surface);
-            box-shadow: var(--shadow-sm);
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .sidebar-toggle:hover {
-            background: var(--bg-surface-elevated);
-        }
-
-        .sidebar-toggle svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            position: absolute;
-            top: var(--space-5);
-            left: var(--space-5);
-            bottom: var(--space-5);
-            width: 320px;
-            border-radius: var(--radius-lg);
-            z-index: 500;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: transform 300ms var(--ease-apple), background-color 150ms var(--ease-apple);
-        }
-
-        .sidebar.collapsed {
-            transform: translateX(calc(-100% - var(--space-6)));
-        }
-
-        .sidebar-header {
-            padding: var(--space-5) var(--space-5) var(--space-3);
-            border-bottom: 1px solid var(--separator);
-        }
-
-        .sidebar-brand-top {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-
-        .brand-badge {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            background: var(--accent-blue);
-            color: #FFFFFF;
-            padding: 2px 7px;
-            border-radius: 4px;
-        }
-
-        .sidebar-brand-title {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            color: var(--text-primary);
-        }
-
-        .sidebar-brand-subtitle {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.35;
-        }
-
-        .sidebar-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: var(--space-4) var(--space-3);
-            scrollbar-width: thin;
-        }
-
-        .sidebar-section {
-            margin-bottom: var(--space-5);
-        }
-
-        .sidebar-section-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-            padding: 0 var(--space-3) var(--space-2);
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            padding: 8px 12px;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
-            user-select: none;
-            margin-bottom: 3px;
-            border-left: 3px solid transparent;
-        }
-
-        .nav-item:hover {
-            background: var(--bg-surface-elevated);
-        }
-
-        /* Aktiver Sidebar-Eintrag: dezente hellgraue Fläche + blauer Akzentstrich links */
-        .nav-item.active {
-            background: var(--bg-surface-elevated);
-            border-left-color: var(--accent-blue);
-        }
-
-        .nav-item-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 13px;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            color: var(--accent-blue);
-        }
-
-        .nav-item-icon svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .nav-item-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .nav-item-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .nav-item-description {
-            font-size: 12px;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* MAP CONTROLS */
-        .map-controls {
-            position: absolute;
-            top: var(--space-5);
-            right: var(--space-5);
-            z-index: 500;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            border-radius: var(--radius-md);
-            padding: 3px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .control-button {
-            background: none;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple), color 150ms var(--ease-apple);
-        }
-
-        .control-button:hover {
-            color: var(--text-primary);
-            background: var(--bg-surface-elevated);
-        }
-
-        .control-button.active {
-            color: var(--accent-blue);
-            background: var(--accent-blue-subtle);
-        }
-
-        .control-button svg {
-            width: 17px;
-            height: 17px;
-        }
-
-        .control-divider {
-            width: 1px;
-            height: 18px;
-            background: var(--separator);
-            margin: 0 2px;
-        }
-
-        /* ZOOM CONTROLS */
-        .zoom-controls {
-            position: absolute;
-            right: var(--space-5);
-            top: 74px;
-            z-index: 500;
-            flex-direction: column;
-        }
-
-        .zoom-controls .control-button {
-            width: 36px;
-            height: 36px;
-        }
-
-        .zoom-controls .control-divider {
-            width: 18px;
-            height: 1px;
-            margin: 2px 0;
-        }
-
-        /* TOUR BUTTON */
-        .tour-button {
-            position: absolute;
-            bottom: var(--space-4);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            padding: 10px 18px;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--text-primary);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: background-color 150ms var(--ease-apple), transform 150ms var(--ease-apple);
-            user-select: none;
-        }
-
-        .tour-button:hover {
-            background: var(--bg-surface-elevated);
-            transform: translateX(-50%) translateY(-1px);
-        }
-
-        .tour-button:active {
-            transform: translateX(-50%) scale(0.98);
-        }
-
-        .tour-button.playing {
-            background: var(--accent-blue);
-            color: #FFFFFF;
-            border-color: var(--accent-blue);
-        }
-
-        .tour-progress {
-            position: absolute;
-            bottom: calc(var(--space-4) + 46px);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 500;
-            display: none;
-            align-items: center;
-            gap: 7px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            padding: 6px 14px;
-            border-radius: var(--radius-full);
-        }
-
-        .tour-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--border-color);
-            transition: all 150ms var(--ease-apple);
-        }
-
-        .tour-dot.visited {
-            background: var(--text-secondary);
-        }
-
-        .tour-dot.active {
-            background: var(--accent-blue);
-            transform: scale(1.3);
-        }
-
-        /* INFO PANEL */
-        .info-panel {
-            position: absolute;
-            top: var(--space-5);
-            right: var(--space-5);
-            width: 390px;
-            max-width: calc(100% - 32px);
-            max-height: calc(100% - 40px);
-            border-radius: var(--radius-lg);
-            z-index: 600;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transform: translateX(calc(100% + var(--space-6)));
-            transition: transform 300ms var(--ease-apple);
-        }
-
-        .info-panel.visible {
-            transform: translateX(0);
-        }
-
-        .info-panel-header {
-            padding: var(--space-4) var(--space-5);
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-3);
-            border-bottom: 1px solid var(--separator);
-        }
-
-        .info-panel-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            flex-shrink: 0;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            color: var(--accent-blue);
-        }
-
-        .info-panel-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .info-panel-title-group {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .info-panel-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.25;
-            letter-spacing: -0.01em;
-        }
-
-        .info-panel-location {
-            font-size: 12.5px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        .info-panel-close {
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 150ms var(--ease-apple);
-        }
-
-        .info-panel-close:hover {
-            color: var(--text-primary);
-            background: var(--bg-surface-hover);
-        }
-
-        .info-panel-close svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .info-panel-content {
-            padding: var(--space-4) var(--space-5) var(--space-5);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        /* LESE-FELDER: KEINE BUNTEN KÄSTEN, SONDERN GROSSBUCHSTABEN-LABEL + FEINE LINIE */
-        .info-block {
-            padding: 10px 0 0 0;
-            border-top: 1px solid var(--separator);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border-radius: 0;
-        }
-
-        .info-block:first-child {
-            border-top: none;
-            padding-top: 0;
-        }
-
-        .info-block-badge {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-            background: transparent;
-            padding: 0;
-            border-radius: 0;
-            display: inline-block;
-        }
-
-        .info-block-badge.cliche {
-            color: var(--accent-red);
-        }
-
-        .info-block-badge.reality {
-            color: var(--accent-blue);
-        }
-
-        .info-block-badge.analysis {
-            color: var(--text-secondary);
-        }
-
-        .info-block-text {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        .info-analysis-rows {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 2px;
-        }
-
-        .info-analysis-row {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--separator-subtle);
-        }
-
-        .info-analysis-row:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        /* AUSKLAPPBARE ERKLÄRUNGEN (EINFACHE SPRACHE) */
-        .explain-toggle-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 2px;
-        }
-
-        .explain-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: var(--radius-full);
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            font-family: var(--system-font);
-            cursor: pointer;
-            transition: all 150ms var(--ease-apple);
-            user-select: none;
-        }
-
-        .explain-toggle-btn:hover {
-            color: var(--text-primary);
-            border-color: var(--text-secondary);
-        }
-
-        .explain-toggle-btn.active {
-            background: var(--accent-blue-subtle);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .explain-toggle-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--separator);
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .explain-toggle-btn.active .explain-toggle-indicator {
-            background: var(--accent-blue);
-            box-shadow: 0 0 0 2px var(--accent-blue-subtle);
-        }
-
-        .collapsible-field {
-            cursor: pointer;
-            border-radius: var(--radius-sm);
-            padding: 6px 8px;
-            margin: 0 -8px;
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .collapsible-field:hover {
-            background-color: var(--bg-surface-elevated);
-        }
-
-        .collapsible-field:focus-visible {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 1px;
-        }
-
-        .field-header-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .field-chevron-btn {
-            background: transparent;
-            border: none;
-            padding: 0;
-            margin: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            cursor: pointer;
-            pointer-events: none;
-        }
-
-        .field-chevron {
-            width: 15px;
-            height: 15px;
-            transition: transform 200ms var(--ease-apple), color 200ms var(--ease-apple);
-        }
-
-        .collapsible-field.expanded .field-chevron {
-            transform: rotate(180deg);
-            color: var(--accent-blue);
-        }
-
-        .field-explanation {
-            display: grid;
-            grid-template-rows: 0fr;
-            opacity: 0;
-            transition: grid-template-rows 200ms var(--ease-apple), opacity 200ms var(--ease-apple), margin 200ms var(--ease-apple);
-            margin-top: 0;
-            overflow: hidden;
-        }
-
-        .collapsible-field.expanded .field-explanation {
-            grid-template-rows: 1fr;
-            opacity: 1;
-            margin-top: 8px;
-        }
-
-        .field-explanation-inner {
-            min-height: 0;
-            overflow: hidden;
-            background: var(--bg-surface-elevated);
-            border-left: 2px solid var(--accent-blue);
-            padding: 9px 12px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        }
-
-        .field-explanation-tag {
-            font-size: 10.5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent-blue);
-            margin-bottom: 4px;
-        }
-
-        .field-explanation-body {
-            font-size: 13.5px;
-            line-height: 1.5;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .field-explanation,
-            .field-chevron {
-                transition: none !important;
-            }
-        }
-
-        .info-analysis-label {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--accent-blue);
-        }
-
-        .info-analysis-text {
-            font-size: 13.5px;
-            line-height: 1.45;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        .zoom-location-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-2);
-            padding: 10px 16px;
-            border-radius: var(--radius-md);
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            font-size: 13.5px;
-            font-weight: 600;
-            font-family: var(--system-font);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .zoom-location-button:hover {
-            background: var(--bg-surface-hover);
-        }
-
-        .zoom-location-button svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        .expand-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 11px 16px;
-            border-radius: var(--radius-md);
-            background: var(--accent-blue);
-            color: #FFFFFF;
-            border: 1px solid var(--accent-blue);
-            font-size: 13.5px;
-            font-weight: 600;
-            font-family: var(--system-font);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .expand-button:hover {
-            background: var(--accent-blue-hover);
-        }
-
-        .expand-button svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        /* DETAIL PANEL & OVERLAY */
-        .detail-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 200ms var(--ease-apple);
-        }
-
-        .detail-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .detail-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.97);
-            width: 740px;
-            max-width: 92vw;
-            max-height: 88vh;
-            border-radius: var(--radius-lg);
-            z-index: 1010;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-            pointer-events: none;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            transition: all 250ms var(--ease-apple);
-        }
-
-        .detail-panel.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .detail-header {
-            position: relative;
-            padding: var(--space-8) var(--space-6) var(--space-5);
-            color: #FFFFFF;
-            overflow: hidden;
-            min-height: 140px;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .detail-header-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.65);
+            object-fit: cover;
             z-index: 1;
         }
 
-        .detail-header-gradient {
+        /* Fallback BG */
+        .hero-fallback-bg {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.45) 100%);
-            z-index: 2;
-        }
-
-        .detail-header-content {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-        }
-
-        .detail-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: #FFFFFF;
-            background: var(--accent-blue);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            flex-shrink: 0;
-        }
-
-        .detail-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .detail-title-group h2 {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            line-height: 1.2;
-            color: #FFFFFF;
-        }
-
-        .detail-subtitle {
-            font-size: 13.5px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: 3px;
-        }
-
-        .detail-close {
-            position: absolute;
-            top: var(--space-4);
-            right: var(--space-4);
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple);
-        }
-
-        .detail-close:hover {
-            background: rgba(0, 0, 0, 0.75);
-        }
-
-        .detail-content {
-            padding: var(--space-6);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-5);
-            background: var(--bg-surface);
-        }
-
-        .detail-section {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-2);
-        }
-
-        .detail-section-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-        }
-
-        /* STATS CARDS */
-        .detail-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-3);
-        }
-
-        .stat-card {
-            background: var(--bg-surface-elevated);
-            border-radius: var(--radius-md);
-            padding: var(--space-3) var(--space-4);
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--accent-blue);
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -0.01em;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        /* KLISCHEE VS REALITÄT (MODAL) */
-        .compare-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-4);
-        }
-
-        .compare-card {
-            border: none;
-            border-top: 1px solid var(--separator);
-            padding: 10px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border-radius: 0;
-        }
-
-        .compare-badge {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            background: transparent;
-            padding: 0;
-            border-radius: 0;
-        }
-
-        .compare-badge.cliche {
-            color: var(--accent-red);
-        }
-
-        .compare-badge.reality {
-            color: var(--accent-blue);
-        }
-
-        .compare-text {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        /* RAUMANALYSE (MODAL) */
-        .raumanalyse-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-2);
-        }
-
-        .raumanalyse-card {
-            background: transparent;
-            border: none;
-            border-top: 1px solid var(--separator-subtle);
-            border-radius: 0;
-            padding: 8px 0;
-        }
-
-        .raumanalyse-card:first-child {
-            border-top: 1px solid var(--separator);
-        }
-
-        .raumanalyse-q {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--accent-blue);
-            margin-bottom: 2px;
-        }
-
-        .raumanalyse-a {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-
-        /* OVERSEAS JUMP CHIPS */
-        .overseas-box {
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: var(--space-4);
-            margin-top: var(--space-1);
-        }
-
-        .overseas-box-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .overseas-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .overseas-btn {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            font-size: 12px;
-            font-weight: 500;
-            font-family: var(--system-font);
-            padding: 5px 12px;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all 150ms var(--ease-apple);
-        }
-
-        .overseas-btn:hover {
-            background: var(--bg-surface-hover);
-            border-color: var(--text-secondary);
-        }
-
-        /* SCHLICHTE, DECKENDE APPLE-MARKER AUF DER KARTE */
-        .custom-marker-wrapper {
-            background: transparent;
-            border: none;
-        }
-
-        .map-marker {
-            cursor: pointer;
-            transition: transform 150ms var(--ease-apple);
-        }
-
-        .map-marker:hover {
-            transform: scale(1.1);
-            z-index: 1000 !important;
-        }
-
-        .marker-container {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: all 150ms var(--ease-apple);
-        }
-
-        .marker-bg {
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-blue);
-            background: var(--bg-surface);
+            background-image: url('hero/heroanimation/GERD_000.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            z-index: 0;
         }
 
-        .marker-bg svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        /* Aktiver Marker in Akzentblau */
-        .map-marker.active .marker-container {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(31, 61, 122, 0.25), var(--shadow-md);
-        }
-
-        .map-marker.active .marker-bg {
-            background: var(--accent-blue);
-            color: #FFFFFF;
-        }
-
-        /* Off-Map Inset Marker */
-        .map-marker.marker-offmap .marker-container {
-            border-style: dashed;
-            border-width: 2px;
-        }
-
-        .marker-inset-label {
+        .hero-overlay {
             position: absolute;
-            top: calc(100% + 5px);
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: 9.5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            background: var(--bg-surface);
-            color: var(--accent-blue);
-            border: 1px solid var(--border-color);
-            padding: 1px 6px;
-            border-radius: var(--radius-full);
-            box-shadow: var(--shadow-sm);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 2;
             pointer-events: none;
         }
 
-        /* SIDEBAR BACKDROP FÜR IPAD & MOBILE */
-        .sidebar-backdrop {
+        .hero-transition-mask {
             position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.28);
-            z-index: 495;
-            opacity: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            z-index: 5;
             pointer-events: none;
-            transition: opacity 250ms var(--ease-apple);
         }
 
-        .sidebar-backdrop.visible {
-            opacity: 1;
-            pointer-events: auto;
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+            padding: 20px;
+            color: #F5F5F7;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* RESPONSIVE DESIGN & IPAD OPTIMIERUNG */
-        @media (max-width: 1180px) {
-            .sidebar-toggle {
-                display: flex;
-                min-width: 44px;
-                min-height: 44px;
-            }
-
-            .sidebar {
-                top: max(12px, env(safe-area-inset-top));
-                left: max(12px, env(safe-area-inset-left));
-                bottom: max(12px, env(safe-area-inset-bottom));
-                width: 300px;
-                max-width: 84vw;
-                z-index: 520;
-                transform: translateX(calc(-100% - 24px));
-            }
-
-            .sidebar.visible {
-                transform: translateX(0);
-            }
-
-            .sidebar.collapsed {
-                transform: translateX(calc(-100% - 24px));
-            }
-
-            .info-panel {
-                top: max(12px, env(safe-area-inset-top));
-                right: max(12px, env(safe-area-inset-right));
-                bottom: max(12px, env(safe-area-inset-bottom));
-                max-width: 380px;
-            }
-
-            .control-button {
-                min-width: 44px;
-                min-height: 44px;
-            }
-
-            .info-panel-close,
-            .detail-close {
-                min-width: 44px;
-                min-height: 44px;
-            }
-
-            .landesweit-btn {
-                min-height: 44px;
-            }
+        .hero-title {
+            font-size: 80px;
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 24px;
         }
 
-        @media (max-width: 860px) {
-            .map-controls {
-                top: max(12px, env(safe-area-inset-top));
-                right: max(12px, env(safe-area-inset-right));
-            }
+        .hero-subtitle {
+            font-size: 28px;
+            line-height: 1.2;
+            font-weight: 500;
+        }
 
-            .zoom-controls {
-                right: max(12px, env(safe-area-inset-right));
-                bottom: 18px;
-                top: auto;
-            }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            z-index: 20;
+            color: white;
+            animation: bounce 2s infinite;
+        }
 
-            .tour-button {
-                bottom: 18px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+        @keyframes bounce {
 
-            .tour-progress {
-                bottom: 64px;
-            }
-
-            .landesweit-bar {
-                padding: 10px 14px;
-                padding-bottom: max(10px, env(safe-area-inset-bottom));
-                gap: 6px;
-            }
-
-            .landesweit-buttons {
-                gap: 8px;
-                width: 100%;
-            }
-
-            .landesweit-btn {
-                flex: 1 1 calc(50% - 8px);
-                min-width: 140px;
-                padding: 8px 12px;
-                font-size: 13px;
-                justify-content: center;
-            }
-
-            .info-panel {
-                top: auto;
-                right: 0;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                max-width: none;
-                max-height: 58vh;
-                border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-                transform: translateY(100%);
-                border-bottom: none;
-                border-left: none;
-                border-right: none;
-                box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
-            }
-
-            .info-panel.visible {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
 
-            .info-panel::before {
-                content: '';
-                position: absolute;
-                top: 8px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 36px;
-                height: 5px;
-                background: var(--separator);
-                border-radius: var(--radius-full);
-                z-index: 10;
+            40% {
+                transform: translateY(-10px);
             }
 
-            .info-panel-header {
-                padding-top: 20px;
+            60% {
+                transform: translateY(-5px);
             }
+        }
 
-            .detail-panel {
-                top: auto;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                transform: translateY(100%) translateX(0);
-                width: 100%;
-                max-width: none;
-                max-height: 88vh;
-                border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            }
+        /* CONTENT */
+        main {
+            position: relative;
+            z-index: 20;
+            background: var(--bg-primary);
+        }
 
-            .detail-panel.visible {
-                transform: translateY(0) translateX(0);
-            }
+        .container {
+            max-width: 1200px;
+            /* Increased from 980px to fit 3 cards comfortably */
+            margin: 0 auto;
+            padding: 120px 40px;
+        }
 
-            .detail-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .section-title {
+            font-size: 56px;
+            line-height: 1.07;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 60px;
+            text-align: center;
+            color: #1d1d1f;
+        }
 
-            .compare-grid {
+        .body-text {
+            font-size: 21px;
+            line-height: 1.4;
+            font-weight: 400;
+            color: #1d1d1f;
+        }
+
+        /* CARD GRID */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Force 3 columns */
+            gap: 24px;
+            /* Slightly reduced gap to make them fit nicely */
+            margin-top: 60px;
+        }
+
+        /* Responsive: Stack on smaller screens */
+        @media(max-width: 900px) {
+            .cards-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        @supports (padding: env(safe-area-inset-bottom)) {
-            .landesweit-bar {
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
-                padding-left: max(16px, env(safe-area-inset-left));
-                padding-right: max(16px, env(safe-area-inset-right));
-            }
+        .card {
+            background: #FFFFFF;
+            border-radius: 30px;
+            padding: 32px;
+            /* Reduced from 48px to save space for 3-col layout */
+            box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .card h4 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+            line-height: 1.2;
+        }
+
+        /* MEDIA SECTION - Vertical Layout */
+        .media-column {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            /* Space between Video and Podcast */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-group {
+            width: 100%;
+            /* Just a structural wrapper */
+        }
+
+        /* MEDIA SECTION - Custom Player Updates */
+        .media-column {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-group {
+            width: 100%;
+        }
+
+        .custom-video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .custom-video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .custom-video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 54px;
+            background: rgba(30, 30, 30, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 27px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .custom-video-wrapper:hover .custom-video-controls,
+        .custom-video-wrapper.active .custom-video-controls,
+        .custom-video-wrapper.paused .custom-video-controls {
+            opacity: 1;
+        }
+
+        .custom-video-wrapper.paused .custom-video-controls,
+        .custom-video-wrapper:hover .custom-video-controls {
+            opacity: 1;
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 0;
+            transition: opacity 0.2s;
+        }
+
+        .ctrl-btn:active {
+            opacity: 0.6;
+        }
+
+        .ctrl-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .time-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 100%;
+        }
+
+        input[type=range].custom-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type=range].video-slider {
+            background: linear-gradient(to right, white var(--val, 0%), rgba(255, 255, 255, 0.3) var(--val, 0%));
+        }
+
+        input[type=range].audio-slider {
+            background: linear-gradient(to right, #1D1D1F var(--val, 0%), rgba(0, 0, 0, 0.08) var(--val, 0%));
+        }
+
+        input[type=range].custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s;
+        }
+
+        input[type=range].video-slider::-webkit-slider-thumb {
+            background: white;
+        }
+
+        input[type=range].audio-slider::-webkit-slider-thumb {
+            background: #1D1D1F;
+        }
+
+        input[type=range].custom-slider::-webkit-slider-thumb:active {
+            transform: scale(1.2);
+        }
+
+        .caption {
+            margin-top: 20px;
+            text-align: center;
+            color: #86868b;
+            font-weight: 500;
+        }
+
+        /* PODCAST - Custom Player */
+        .podcast-minimalist-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            width: 100%;
+        }
+
+        .podcast-title-simple {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+
+        .custom-audio-wrapper {
+            display: flex;
+            align-items: center;
+            background: #F5F5F7;
+            height: 64px;
+            border-radius: 32px;
+            padding: 0 24px;
+            gap: 16px;
+        }
+
+        .custom-audio-wrapper .ctrl-btn {
+            color: #1D1D1F;
+        }
+
+        .custom-audio-wrapper .ctrl-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .custom-audio-wrapper .time-text {
+            color: #86868b;
+            font-size: 14px;
+        }
+
+
+
+
+        /* MAP SECTION - Restored "Gray Bar" look */
+        .map-section {
+            background: #000;
+            color: #fff;
+            padding-top: 100px;
+            padding-bottom: 0;
+            /* Removing bottom padding so it hits edge */
+        }
+
+        .map-preview-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .map-preview-container:hover {
+            transform: scale(1.02);
+        }
+
+        .device-frame {
+            border: 12px solid #333;
+            border-radius: 20px 20px 0 0;
+            aspect-ratio: 16/9;
+            background: #222;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 -10px 40px rgba(255, 255, 255, 0.05);
+        }
+
+        .device-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .map-preview-container:hover .click-overlay {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .click-cta {
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: scale(0.95) translateY(40px);
+            /* Slightly smaller start for "blopping" out effect */
+            transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-out-cubic);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
     </style>
 </head>
 
 <body>
-    <div class="app-layout">
-        <!-- Kartenbereich (oben) -->
-        <div class="map-wrapper">
-            <!-- Leaflet Map -->
-            <div id="map"></div>
 
-            <!-- Sidebar Toggle (Mobile) -->
-            <button class="sidebar-toggle glass" id="sidebarToggle" aria-label="Navigation öffnen">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
+    <section class="hero-scroll-container">
+        <div class="hero-sticky">
+            <div class="hero-fallback-bg"></div>
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="hero-transition-mask"></div>
+
+            <div class="hero-content reveal active">
+                <h1 class="hero-title">Der Konflikt am Nil</h1>
+                <p class="hero-subtitle">Ein Jahrhundertprojekt für Äthiopien.<br>Eine existenzielle Bedrohung für
+                    Ägypten.</p>
+            </div>
+
+            <div class="scroll-indicator">
+                <span
+                    style="font-size:12px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:block;">SCROLLEN</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
                 </svg>
-            </button>
-
-            <!-- Schwebende Sidebar (Apple Style) -->
-            <nav class="sidebar glass-thick" id="sidebar">
-                <div class="sidebar-header">
-                    <div class="sidebar-brand-top">
-                        <span class="brand-badge">Frankreich</span>
-                        <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Kultur & Raum</span>
-                    </div>
-                    <div class="sidebar-brand-title">Raumanalyse</div>
-                    <div class="sidebar-brand-subtitle">7 Stationen & landesweite Phänomene</div>
-                </div>
-
-                <div class="sidebar-content">
-                    <!-- Schlüsselorte auf der Karte -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-section-title">Stationen auf der Karte (7)</div>
-                        <div id="stationNavList">
-                            <!-- Wird dynamisch mit den 7 Karten-Stationen befüllt -->
-                        </div>
-                    </div>
-
-                    <!-- Landesweit -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-section-title">Gilt landesweit (nicht ortsgebunden)</div>
-                        <div class="nav-item" onclick="openLandesweit('boulangerie')">
-                            <div class="nav-item-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
-                                    <path d="M3 15C3 8.37 8.37 3 15 3c2.5 0 4.5 1 5.5 2.5 1 1.5 1 3.5.5 5.5-2.5 6.5-8 10-14 10-2.2 0-4-1.8-4-4v-2z"></path>
-                                    <path d="M7 11l3-3"></path>
-                                    <path d="M11 15l3-3"></path>
-                                    <path d="M15 19l3-3"></path>
-                                </svg>
-                            </div>
-                            <div class="nav-item-content">
-                                <div class="nav-item-title">Béret & Baguette</div>
-                                <div class="nav-item-description">Bereich ④⑤ • Alltags- & Esskultur</div>
-                            </div>
-                        </div>
-                        <div class="nav-item" onclick="openLandesweit('streik')">
-                            <div class="nav-item-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
-                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                                    <line x1="4" y1="22" x2="4" y2="15"></line>
-                                </svg>
-                            </div>
-                            <div class="nav-item-content">
-                                <div class="nav-item-title">Protest- & Streikkultur</div>
-                                <div class="nav-item-description">Bereich ④⑤ • Politische Identität</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ansichten -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-section-title">Ansichten</div>
-                        <div class="nav-item" data-action="overview">
-                            <div class="nav-item-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                                    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                                    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                                    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-                                </svg>
-                            </div>
-                            <div class="nav-item-content">
-                                <div class="nav-item-title">Gesamtübersicht Frankreich</div>
-                                <div class="nav-item-description">Kamera zentrieren</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Backdrop für geschlossene/offene Sidebar auf iPad/Mobile -->
-            <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-
-            <!-- Kartentyp-Umschaltung (Standard, Satellit, Gelände + Dark Mode Toggle) -->
-            <div class="map-controls">
-                <div class="control-group glass">
-                    <button class="control-button active" data-layer="standard" title="Karte">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                            <line x1="8" y1="2" x2="8" y2="18"></line>
-                            <line x1="16" y1="6" x2="16" y2="22"></line>
-                        </svg>
-                    </button>
-                    <div class="control-divider"></div>
-                    <button class="control-button" data-layer="satellite" title="Satellit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                    </button>
-                    <div class="control-divider"></div>
-                    <button class="control-button" data-layer="terrain" title="Gelände">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M8 3l4 8 5-5 5 15H2L8 3z"></path>
-                        </svg>
-                    </button>
-                    <div class="control-divider"></div>
-                    <button class="control-button" id="themeToggleBtn" title="Erscheinungsbild umschalten (Hell / Dunkel)">
-                        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon-moon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Zoom-Steuerung -->
-            <div class="zoom-controls glass control-group">
-                <button class="control-button" id="zoomIn" title="Vergrößern">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </button>
-                <div class="control-divider"></div>
-                <button class="control-button" id="zoomOut" title="Verkleinern">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Interaktive Tour (Apple-Style) -->
-            <button class="tour-button glass" id="tourButton" aria-label="Tour starten">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="tourIcon" style="width: 17px; height: 17px;">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <span class="tour-button-text" id="tourText">Tour starten</span>
-            </button>
-            <div class="tour-progress" id="tourProgress"></div>
-
-            <!-- Info-Panel (Rechts einschwebend) -->
-            <div class="info-panel glass-chrome" id="infoPanel">
-                <div class="info-panel-header">
-                    <div class="info-panel-icon" id="infoPanelIcon"></div>
-                    <div class="info-panel-title-group">
-                        <h2 class="info-panel-title" id="infoPanelTitle">Standort</h2>
-                        <p class="info-panel-location" id="infoPanelLocation">Region</p>
-                    </div>
-                    <button class="info-panel-close" id="infoPanelClose" aria-label="Schließen">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-                <div class="info-panel-content">
-                    <!-- Schalter: Alles einfach erklären -->
-                    <div class="explain-toggle-row">
-                        <button type="button" class="explain-toggle-btn" id="explainAllToggle" aria-pressed="false" onclick="toggleAllExplanations()">
-                            <span class="explain-toggle-indicator"></span>
-                            <span class="explain-toggle-label">Alles einfach erklären</span>
-                        </button>
-                    </div>
-
-                    <!-- 1. KLISCHEE -->
-                    <div class="info-block info-block-cliche collapsible-field" id="fieldCliche" tabindex="0" role="button" aria-expanded="false" onclick="toggleField(this)">
-                        <div class="field-header-row">
-                            <span class="info-block-badge cliche">Klischee</span>
-                            <button type="button" class="field-chevron-btn" aria-label="Einfache Erklärung umschalten" tabindex="-1">
-                                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="info-block-text" id="infoPanelCliche"></p>
-                        <div class="field-explanation">
-                            <div class="field-explanation-inner">
-                                <div class="field-explanation-tag">Einfach erklärt</div>
-                                <p class="field-explanation-body" id="infoPanelClicheExplain"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. REALITÄT -->
-                    <div class="info-block info-block-reality collapsible-field" id="fieldReality" tabindex="0" role="button" aria-expanded="false" onclick="toggleField(this)">
-                        <div class="field-header-row">
-                            <span class="info-block-badge reality">Realität</span>
-                            <button type="button" class="field-chevron-btn" aria-label="Einfache Erklärung umschalten" tabindex="-1">
-                                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="info-block-text" id="infoPanelReality"></p>
-                        <div class="field-explanation">
-                            <div class="field-explanation-inner">
-                                <div class="field-explanation-tag">Einfach erklärt</div>
-                                <p class="field-explanation-body" id="infoPanelRealityExplain"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. RAUMANALYSE -->
-                    <div class="info-block info-block-analysis">
-                        <div class="info-block-badge analysis">Raumanalyse</div>
-                        <div class="info-analysis-rows" id="infoPanelAnalysis"></div>
-                    </div>
-
-                    <!-- BUTTONS -->
-                    <button class="zoom-location-button" id="zoomLocationButton">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            <line x1="11" y1="8" x2="11" y2="14"></line>
-                            <line x1="8" y1="11" x2="14" y2="11"></line>
-                        </svg>
-                        <span>Näher heranzoomen</span>
-                    </button>
-
-                    <button class="expand-button" id="expandButton">
-                        <span>Großansicht mit Kennzahlen</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Detail Panel & Overlay -->
-            <div class="detail-overlay" id="detailOverlay"></div>
-            <div class="detail-panel glass-chrome" id="detailPanel">
-                <div class="detail-header">
-                    <div class="detail-header-bg" id="detailHeaderBg"></div>
-                    <div class="detail-header-gradient"></div>
-                    <div class="detail-header-content">
-                        <div class="detail-icon" id="detailIcon"></div>
-                        <div class="detail-title-group">
-                            <h2 class="detail-title" id="detailTitle">Standort</h2>
-                            <p class="detail-subtitle" id="detailSubtitle">Region</p>
-                        </div>
-                    </div>
-                    <button class="detail-close" id="detailClose" aria-label="Schließen">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-                <div class="detail-content" id="detailContent"></div>
             </div>
         </div>
+    </section>
 
-        <!-- EIGENER BLOCK UNTER DER KARTE (KEIN PIN, ALS BUTTONS) -->
-        <section class="landesweit-bar glass-thick">
-            <div class="landesweit-header">
-                <span class="landesweit-title">Gilt landesweit – nicht an einen Ort gebunden</span>
-            </div>
-            <div class="landesweit-buttons">
-                <button class="landesweit-btn" id="btn-landesweit-boulangerie" onclick="openLandesweit('boulangerie')">
-                    <span class="landesweit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 15C3 8.37 8.37 3 15 3c2.5 0 4.5 1 5.5 2.5 1 1.5 1 3.5.5 5.5-2.5 6.5-8 10-14 10-2.2 0-4-1.8-4-4v-2z"></path>
-                            <path d="M7 11l3-3"></path>
-                            <path d="M11 15l3-3"></path>
-                            <path d="M15 19l3-3"></path>
-                        </svg>
-                    </span>
-                    <span class="landesweit-label">Béret & Baguette</span>
-                    <span class="landesweit-badge">Bereich ④⑤</span>
-                </button>
-                <button class="landesweit-btn" id="btn-landesweit-streik" onclick="openLandesweit('streik')">
-                    <span class="landesweit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                            <line x1="4" y1="22" x2="4" y2="15"></line>
-                        </svg>
-                    </span>
-                    <span class="landesweit-label">Protest- & Streikkultur</span>
-                    <span class="landesweit-badge">Bereich ④⑤</span>
-                </button>
+    <main>
+
+        <!-- TEXTS RESTORED TO ORIGINAL LENGTH -->
+        <section class="container reveal">
+            <h2 class="section-title">Worum geht es?</h2>
+            <p class="body-text" style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">
+                Der "Grand Ethiopian Renaissance Dam" (GERD) ist das größte Wasserkraftprojekt Afrikas. Äthiopien sieht
+                darin den Schlüssel zur wirtschaftlichen Entwicklung und Elektrifizierung des Landes. Für die
+                flussabwärts gelegenen Nachbarn Ägypten und Sudan jedoch stellt der Staudamm eine potenzielle Bedrohung
+                für ihre Wasserversorgung und damit ihre Existenzgrundlage dar.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 style="color: #0071e3;">Äthiopien</h3>
+                    <h4>Strom für Entwicklung</h4>
+                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
+                        Für Äthiopien ist der Damm ein Symbol nationalen Stolzes. Über 60% der Bevölkerung haben keinen
+                        Zugang zu Strom. Der Damm soll diese Lücke schließen und Äthiopien zum Energie-Exporteur machen.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #ff3b30;">Ägypten</h3>
+                    <h4>Existenzielle Angst</h4>
+                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
+                        Ägypten bezieht rund 90% seines Süßwassers aus dem Nil. Kairo befürchtet, dass der Staudamm den
+                        Wasserfluss drastisch reduziert und beruft sich auf historische Nutzungsrechte.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #ff9500;">Sudan</h3>
+                    <h4>Zwischen den Fronten</h4>
+                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
+                        Der Sudan könnte vom Damm profitieren (Strom, Hochwasserschutz), teilt aber die ägyptischen
+                        Sorgen um Wassermangel und fordert verbindliche Abkommen zum Betrieb.
+                    </p>
+                </div>
             </div>
         </section>
-    </div>
 
-    <!-- Leaflet JS Library -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <!-- MEDIATHEK - MINIMALIST LAYOUT -->
+        <section class="container reveal" style="padding-top: 0;">
+            <h2 class="section-title" style="margin-bottom: 20px; margin-top: -80px;">Mediathek</h2>
+            <!-- Pulled up MAX amount (-80px) -->
+            <p class="body-text"
+                style="text-align: center; margin-bottom: 60px; color: #86868b; font-size:28px; font-weight:500;">
+                Tiefere Einblicke in den Konflikt.
+            </p>
 
-    <script>
-        // ========================================
-        // SVG ICONS (Apple Style)
-        // ========================================
-        const icons = {
-            paris: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L10.5 7H13.5L12 2ZM9.8 8L8 14H16L14.2 8H9.8ZM7.5 15L5 22H8.3C8.7 20 10.1 18.5 12 18.5C13.9 18.5 15.3 20 15.7 22H19L16.5 15H7.5Z"/></svg>`,
-            bread: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15C3 8.37 8.37 3 15 3c2.5 0 4.5 1 5.5 2.5 1 1.5 1 3.5.5 5.5-2.5 6.5-8 10-14 10-2.2 0-4-1.8-4-4v-2z"/><path d="M7 11l3-3"/><path d="M11 15l3-3"/><path d="M15 19l3-3"/></svg>`,
-            wine: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3V9C6 12.31 8.69 15 12 15C15.31 15 18 12.31 18 9V3H6ZM16 5V8.5C16 10.71 14.21 12.5 12 12.5C9.79 12.5 8 10.71 8 8.5V5H16ZM11 16.92V20H8V22H16V20H13V16.92C16.96 16.44 20 13.08 20 9V3H4V9C4 13.08 7.04 16.44 11 16.92Z"/></svg>`,
-            cheese: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 3L2 9.5V20C2 20.55 2.45 21 3 21H21C21.55 21 22 20.55 22 20V9.5L11.5 3ZM18 16C16.9 16 16 15.1 16 14C16 12.9 16.9 12 18 12C19.1 12 20 12.9 20 14C20 15.1 19.1 16 18 16ZM9 18C7.9 18 7 17.1 7 16C7 14.9 7.9 14 9 14C10.1 14 11 14.9 11 16C11 17.1 10.1 18 9 18Z"/></svg>`,
-            language: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM18 14H6V12H18V14ZM18 11H6V9H18V11ZM18 8H6V6H18V8Z"/></svg>`,
-            port: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.58 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z"/></svg>`,
-            protest: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
-            globe: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 4C14.07 4 15.97 4.75 17.46 6H6.54C8.03 4.75 9.93 4 12 4ZM4.26 8H19.74C20.21 9.24 20.48 10.59 20.48 12C20.48 13.41 20.21 14.76 19.74 16H4.26C3.79 14.76 3.52 13.41 3.52 12C3.52 10.59 3.79 9.24 4.26 8ZM12 20C9.93 20 8.03 19.25 6.54 18H17.46C15.97 19.25 14.07 20 12 20Z"/></svg>`,
-            pin: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
-        };
-
-        // ========================================
-        // AUSFÜHRLICHE ERKLÄRUNGEN IN EINFACHER SPRACHE (PRO FELD)
-        // ========================================
-        const erlaeuterungen = {
-            paris: {
-                klischee: "Viele Menschen denken bei Frankreich sofort an Paris: an Mode, an Verliebte am Eiffelturm, an Romantik. Paris wird also oft so dargestellt, als wäre das ganze Land genau wie seine Hauptstadt.",
-                realitaet: "Paris ist wirklich ein weltweit wichtiger Ort für Mode und Kultur, und kein Land der Erde wird von mehr Touristen besucht als Frankreich. Trotzdem lebt nur etwa jeder fünfte Franzose in oder um Paris – die anderen rund 80 % wohnen in kleinen Städten, Dörfern, Bergregionen oder in den Überseegebieten. Manche Touristen erleben sogar das „Paris-Syndrom“: Sie sind enttäuscht, weil die echte Stadt (mit Verkehr, Hektik und ganz normalem Alltag) nicht dem perfekten Bild aus Filmen und Werbung entspricht.",
-                wo: "Paris liegt im Norden Frankreichs, ungefähr in der Mitte zwischen den Küsten, an der Seine (dem Fluss, der durch die Stadt fließt).",
-                was: "Das Besondere ist nicht die Stadt selbst, sondern ein Denkfehler: Die eine Stadt Paris wird stellvertretend für das ganze Land genommen – als ob „Paris“ und „Frankreich“ dasselbe wären.",
-                warumDort: "Frankreich ist stark „zentralistisch“ aufgebaut. Zentralismus bedeutet: Fast alle Macht und Bedeutung sind an einem einzigen Ort gebündelt – hier in Paris. Das begann schon bei den Königen, wurde durch die Französische Revolution (ab 1789) und besonders durch Kaiser Napoleon noch verstärkt. So wurde Paris gleichzeitig politisches Zentrum (Regierung) und kulturelles Zentrum (Kunst, Mode, Medien).",
-                folgen: "Weil alles auf Paris schaut, geraten die anderen Teile des Landes leicht in Vergessenheit: die Dörfer, die Vororte der Großstädte und die weit entfernten Überseegebiete. Ihr Alltag passt nicht ins berühmte Postkartenbild und wird deshalb kaum wahrgenommen.",
-                wandel: "Das ändert sich langsam: Die einzelnen Regionen wollen heute mehr selbst entscheiden und mehr eigene Bedeutung haben, statt dass immer nur Paris den Ton angibt."
-            },
-            bordeaux: {
-                klischee: "Ein weit verbreitetes Bild ist, dass alle Franzosen ununterbrochen Wein trinken – zu jedem Essen und bei jeder Gelegenheit.",
-                realitaet: "Wein gehört in Frankreich tatsächlich zum Alltag und zum Nationalstolz. Aber Wein wächst nicht überall, sondern nur in bestimmten Gegenden mit dem richtigen Wetter und Boden. Und die jüngere Generation trinkt heute deutlich weniger Wein als früher – das Klischee „ständig“ stimmt also nicht mehr.",
-                wo: "Wein kommt vor allem aus bekannten Weinregionen wie Bordeaux, Burgund, der Champagne, dem Rhône- und Loiretal und dem Elsass. Damit niemand schummelt, gibt es die „AOC“ (Appellation d’Origine Contrôlée = „kontrollierte Herkunftsbezeichnung“): ein amtliches Siegel, das garantiert, dass ein Wein wirklich aus genau dieser Gegend stammt und nach festen Regeln gemacht wurde.",
-                was: "Weinbau ist hier mehr als Landwirtschaft – er ist Teil der Kultur. Dahinter steckt die Idee des „Terroir“: Damit meint man das Zusammenspiel aus Boden, Klima, Lage und langer Tradition einer Gegend, das jeden Wein einzigartig macht.",
-                warumDort: "Diese Regionen haben das passende mild-warme Klima, sonnige Flusstäler und besondere Böden (z. B. Kalk oder Schiefer – Gesteinsarten, auf denen Reben gut wachsen). Dazu kommt die Geschichte: Schon die alten Römer brachten den Weinbau mit, und im Mittelalter haben Mönche in den Klöstern das Weinmachen immer weiter verbessert.",
-                folgen: "Der Wein prägt gleich mehreres: die Landschaft (ganze Hügel voller Weinberge), die Wirtschaft (Export in alle Welt und „Weintourismus“, also Reisende, die extra zum Weinprobieren kommen) und den Alltag (ein Glas Wein zum Essen gehört für viele einfach dazu).",
-                wandel: "Durch den Klimawandel wird es wärmer, deshalb wandert der Weinbau langsam weiter nach Norden – inzwischen wird sogar in England Wein angebaut. Außerdem gibt es starke Konkurrenz aus Ländern wie Chile, Kalifornien oder Australien, und immer mehr Winzer stellen Bio-Weine her."
-            },
-            auvergne: {
-                klischee: "Frankreich gilt als das Käseland schlechthin – man sagt oft, es gebe dort unzählige, vielleicht tausend verschiedene Käsesorten.",
-                realitaet: "Der frühere Präsident Charles de Gaulle sagte einmal scherzhaft, wie schwer ein Land mit „246 Käsesorten“ zu regieren sei. Tatsächlich schätzt man heute sogar 1000 bis 1600 Sorten. Fast jede Region hat ihre eigenen, typischen Käse.",
-                wo: "Besonders viele Käsesorten kommen aus den Bergregionen, zum Beispiel aus der Auvergne – einer Gegend mit erloschenen Vulkanen und viel Weideland mitten in Frankreich.",
-                was: "Zu beobachten ist eine riesige Vielfalt an Käse, die sich von Region zu Region unterscheidet – jeder Ort ist ein bisschen stolz auf seinen eigenen Käse.",
-                warumDort: "In den Bergen gibt es „Almwirtschaft“ – Kühe, Schafe oder Ziegen weiden im Sommer auf hoch gelegenen Wiesen (Almen). Zusammen mit den sehr unterschiedlichen Böden und Klimazonen entsteht so überall ein anderer Käse. Auch hier gilt das „Terroir“-Prinzip (das Zusammenspiel aus Boden, Klima und Tradition). Käse ist sozusagen „essbare Regionalität“ – man schmeckt, woher er kommt.",
-                folgen: "Der Käse macht die Unterschiede zwischen den Regionen schmeckbar und stärkt die Verbundenheit der Menschen mit ihrer Heimat.",
-                wandel: "Wie beim Wein gibt es auch für viele Käse das AOC-Herkunftssiegel, das die echten, handgemachten Sorten schützt. Trotzdem verdrängt billiger Käse aus großen Fabriken immer mehr die handwerkliche Herstellung."
-            },
-            bretagne: {
-                klischee: "Ein häufiges Vorurteil: In Frankreich werde nur Französisch gesprochen, und die Leute würden aus Hochnäsigkeit absichtlich kein Englisch reden.",
-                realitaet: "In Wahrheit gibt es in Frankreich viele „Regionalsprachen“ – das sind eigene Sprachen einzelner Gegenden, zum Beispiel Bretonisch in der Bretagne, dazu Okzitanisch, Elsässisch, Korsisch und Baskisch. Und der Eindruck „die wollen kein Englisch“ ist oft nur ein Missverständnis über Höflichkeit: In Frankreich grüßt man zuerst mit „Bonjour“, bevor man etwas fragt – wer das vergisst, wirkt unhöflich und bekommt dann eine kühlere Antwort. Das ist eine Umgangsregel, kein Zeichen von Arroganz.",
-                wo: "Diese Regionalsprachen werden vor allem am Rand des Landes gesprochen – in der Bretagne, im Elsass, im Süden (Okzitanien), auf Korsika und im Baskenland an der Grenze zu Spanien.",
-                was: "Zu beobachten ist Mehrsprachigkeit: Neben dem offiziellen Hochfranzösisch existieren viele ältere Regionalsprachen. Über das „richtige“ Französisch wacht die Académie française – eine 1635 gegründete Sprach-Akademie, die z. B. empfiehlt, französische Wörter statt englischer zu benutzen.",
-                warumDort: "Wegen des Zentralismus (der Konzentration auf eine Hauptsprache und auf Paris) war in der Schule lange Zeit nur Hochfranzösisch erlaubt. Die Regionalsprachen wurden dadurch zurückgedrängt und fast vergessen.",
-                folgen: "Die Folge: Viele dieser alten Sprachen wären beinahe ausgestorben, weil kaum noch jüngere Menschen sie lernten.",
-                wandel: "Heute werden die Regionalsprachen wieder gefördert – es gibt zweisprachige Schulen (französisch und z. B. bretonisch), damit sie nicht verloren gehen."
-            },
-            marseille: {
-                klischee: "Ein Klischee stellt Frankreich als ganz einheitlich dar: weiß, christlich (katholisch) und eben „Baguette und Rotwein“ – als wären alle Franzosen gleich.",
-                realitaet: "Tatsächlich ist Frankreich kulturell sehr gemischt – vor allem wegen seiner Kolonialgeschichte (Frankreich beherrschte früher viele Länder, besonders in Nordafrika) und der späteren Zuwanderung von dort. So gehört heute Couscous (ein nordafrikanisches Gericht) zu den beliebtesten Speisen, Musikstile wie Raï (nordafrikanische Popmusik) und französischer Rap kommen oft aus den „banlieues“ (den Vororten der Großstädte), und Jugendliche sprechen „Verlan“ (eine Spielsprache, bei der man die Silben eines Wortes umdreht). Gleichzeitig ist Frankreich der am stärksten weltlich orientierte Staat Europas und hat zugleich die größte muslimische und die größte jüdische Gemeinde Westeuropas.",
-                wo: "Diese Vielfalt findet man besonders in den großen Hafen- und Großstädten und ihren Vororten – Marseille am Mittelmeer ist dafür ein gutes Beispiel.",
-                was: "Zu beobachten ist ein gemischter Alltag: Das Essen, die Musik und sogar die Sprache der Jugendlichen vereinen französische und zugewanderte Einflüsse.",
-                warumDort: "Der Grund ist räumlich gut erklärbar: Zuwanderer kamen oft übers Mittelmeer und damit über die Hafenstädte ins Land und ließen sich dann in den Vororten der Großstädte nieder. Genau dort entstand eine neue, gemischte Alltagskultur.",
-                folgen: "Dadurch entsteht ständig neue Kultur, und die Frage „Was ist eigentlich typisch französisch?“ wird immer wieder neu beantwortet.",
-                wandel: "Kurz gesagt: Zuwanderung führt zu mehr Vielfalt, und diese Vielfalt verändert den ganz normalen Alltag der Menschen."
-            },
-            kinshasa: {
-                klischee: "Man denkt automatisch, Französisch sei vor allem die Sprache von Paris und Frankreich – als läge das „Zuhause“ der Sprache allein dort.",
-                realitaet: "Französisch ist heute die viertmeistgesprochene Sprache der Welt mit rund 396 Millionen Sprechern. Das Überraschende: Etwa 65 %, also fast zwei Drittel von ihnen, leben in Afrika – nicht in Europa. In Kinshasa, der Hauptstadt der Demokratischen Republik Kongo, sprechen sogar mehr Menschen Französisch als in Paris. Fachleute schätzen, dass bis zum Jahr 2050 rund 90 % aller „Frankophonen“ (so nennt man alle Französischsprechenden weltweit) in Afrika leben werden.",
-                wo: "Die meisten Französischsprecher leben in West- und Zentralafrika, zum Beispiel in der Demokratischen Republik Kongo, aber auch in Ländern wie Senegal oder der Elfenbeinküste.",
-                was: "Zu beobachten ist eine Verschiebung: Das eigentliche Zentrum der französischsprachigen Welt liegt – von der Zahl der Sprecher her – längst nicht mehr in Frankreich, sondern in Afrika.",
-                warumDort: "Das hat zwei Gründe: Erstens die Kolonialgeschichte – Frankreich beherrschte früher große Teile Afrikas, und Französisch blieb dort Amts- und Schulsprache. Zweitens das starke Bevölkerungswachstum: In vielen afrikanischen Ländern werden viele Kinder geboren, die mit Französisch aufwachsen.",
-                folgen: "Das bedeutet: Die Zukunft des Französischen wird in Afrika entschieden, nicht in Paris. Auch neue Wörter und Ausdrücke entstehen zunehmend dort.",
-                wandel: "Das Klischee „Französisch gehört Paris“ stimmt also immer weniger – Frankreich ist nur noch ein kleiner Teil der riesigen französischsprachigen Welt."
-            },
-            boulangerie: {
-                klischee: "Das vielleicht bekannteste Bild: ein Franzose mit flacher „Baskenmütze“ (einer runden, flachen Mütze, französisch „Béret“), einer Baguette unter dem Arm, der dauernd Baguette, Croissant und Käse isst.",
-                realitaet: "Die Baguette ist wirklich wichtig: Seit 2022 gehört sie sogar zum „UNESCO-Kulturerbe“ (einer Liste der UNESCO, der Kulturorganisation der UNO, die wertvolle Traditionen schützt), und es werden rund 10 Milliarden Stück pro Jahr gebacken. Aber: Die Menschen essen heute viel weniger davon – im Schnitt nur noch etwa eine halbe Baguette pro Person und Tag. Erfunden hat sie wahrscheinlich sogar ein Bäcker aus Wien (um 1839), sie ist also gar nicht uralt-französisch. Und die Baskenmütze stammt eigentlich aus dem Baskenland und wird heute kaum noch getragen.",
-                wo: "Dieses Klischee bezieht sich nicht auf einen bestimmten Ort – eine „Boulangerie“ (so heißt die Bäckerei auf Französisch) gibt es überall im ganzen Land.",
-                was: "Es ist ein Klischee über Essen und Kleidung zugleich: Baguette (Essen) und Baskenmütze (Kleidung) sollen „typisch Franzose“ bedeuten.",
-                warumDort: "Das Bild stammt vor allem aus Werbung und aus Filmen des 20. Jahrhunderts. Es wurde quasi „eingefroren“ – also festgehalten und immer wiederholt, obwohl sich das echte Leben längst verändert hat.",
-                folgen: "So entstand ein Bild, das mit dem heutigen Alltag der meisten Franzosen nur noch wenig zu tun hat.",
-                wandel: "Jüngere Menschen essen heute viel abwechslungsreicher (auch Fast Food). Das Baguette-Béret-Bild lebt vor allem noch in der Werbung und im Tourismus weiter."
-            },
-            streik: {
-                klischee: "Im Ausland heißt es oft, in Frankreich werde ununterbrochen gestreikt – ständig stehe das Land still.",
-                realitaet: "Es stimmt, dass Protest in Frankreich eine lange Tradition hat und das Recht zu streiken als sehr wichtig gilt. Aber „ständig“ und „alle“ ist übertrieben: Meist streiken nur einzelne Berufsgruppen (zum Beispiel bei der Bahn), und sehr viele Menschen streiken nie.",
-                wo: "Proteste gibt es im ganzen Land. Ein gutes historisches Beispiel ist Lyon: Dort erhoben sich 1831 und 1834 die „Canuts“ – das waren Seidenweber, also Arbeiter, die Seidenstoffe herstellten. Ihr Aufstand gilt als eine der ersten Arbeiterbewegungen überhaupt.",
-                was: "Zu beobachten ist, dass Streik und Demonstration als ganz normale, anerkannte Mittel gelten, um politisch etwas durchzusetzen.",
-                warumDort: "Das geht auf die Französische Revolution von 1789 zurück: Seitdem gilt „auf die Straße gehen“ als legitimes Recht der Bürger, sich gegen die Mächtigen zu wehren.",
-                folgen: "Dadurch ist Protest ein fester Teil des politischen Selbstverständnisses geworden – viele Franzosen sind stolz darauf, für ihre Rechte einzutreten.",
-                wandel: "Große Protestwellen wie die „Gelbwesten“ (eine Protestbewegung ab 2018, benannt nach den gelben Warnwesten) werden weltweit im Fernsehen gezeigt. Das verstärkt im Ausland den Eindruck, in Frankreich werde „ständig“ gestreikt."
-            }
-        };
-
-        // ========================================
-        // 6 SCHLÜSSELORTE AUF DER KARTE (EXAKT 6 PINS)
-        // ========================================
-        const locations = {
-            paris: {
-                id: 1,
-                name: "Paris",
-                subtitle: "Norden-Zentrum • Île-de-France",
-                bereich: "④⑤",
-                title: "„Paris ist Frankreich”",
-                coordinates: [48.8566, 2.3522],
-                zoom: 12,
-                detailZoom: 14,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'paris',
-                headerImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
-                description: "Paris gilt weltweit als Inbegriff Frankreichs: Mode, Romantik, Eiffelturm. Doch der ausgeprägte historische Zentralismus verdeckt, dass 80 % der Bevölkerung außerhalb der Hauptstadt leben.",
-                klischee: "Mode, Liebe, Eiffelturm – Paris gilt als „typisch Frankreich”.",
-                realitaet: "Paris ist Mode- und Kulturzentrum, Frankreich das meistbesuchte Land der Welt. Aber rund 80 % leben nicht in Paris. Stichwort „Paris-Syndrom”.",
-                facts: [
-                    "Rund 80 % der Franzosen leben nicht in Paris",
-                    "Meistbesuchtes Reiseland der Erde (~100 Mio. Gäste)",
-                    "Zentralismus seit Revolution 1789 und Napoleon",
-                    "Spannung zwischen Metropole und ländlichen Regionen"
-                ],
-                stats: [
-                    { value: '80%', label: 'leben außerhalb' },
-                    { value: '#1', label: 'Reiseziel weltweit' },
-                    { value: '1789', label: 'Zentralismus' }
-                ],
-                raumanalyse: {
-                    wo: "Paris, im Norden-Zentrum.",
-                    was: "Paris wird mit „ganz Frankreich” gleichgesetzt.",
-                    warumDort: "Zentralismus seit Revolution 1789 und Napoleon → politisches und kulturelles Zentrum.",
-                    folgen: "Der Rest des Landes (Dörfer, Vororte, Übersee) wird übersehen.",
-                    wandel: "Die Regionen fordern heute mehr Eigenständigkeit."
-                },
-                erlaeuterung: erlaeuterungen.paris
-            },
-            bordeaux: {
-                id: 2,
-                name: "Bordeaux",
-                subtitle: "Südwesten • Aquitanien / Atlantik",
-                bereich: "② (Kernstation)",
-                title: "„Wein & Terroir”",
-                coordinates: [44.8378, -0.5792],
-                zoom: 11,
-                detailZoom: 13,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'wine',
-                headerImage: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=80',
-                description: "Weinanbau als Kulturpraxis, geschützt durch das Terroir-Prinzip. Geprägt von Klima, Böden und langer Tradition.",
-                klischee: "„Die Franzosen trinken ständig Wein.”",
-                realitaet: "Wein ist Alltag und Identität, aber an bestimmte Regionen gebunden; Junge trinken weniger.",
-                facts: [
-                    "AOC schützt Herkunft (Bordeaux, Burgund, Champagne, Rhône, etc.)",
-                    "Klimawandel verschiebt Anbaugrenzen nordwärts",
-                    "Weinbau seit Römerzeit und mittelalterlichen Klöstern",
-                    "Verändertes Konsumverhalten bei jungen Generationen"
-                ],
-                stats: [
-                    { value: 'AOC', label: 'Herkunftsschutz' },
-                    { value: '#2', label: 'Weinproduzent weltweit' },
-                    { value: '-30%', label: 'Konsum seit 1960' }
-                ],
-                raumanalyse: {
-                    wo: "Bordeaux, Burgund, Champagne, Rhône, Loire, Elsass; AOC schützt die Herkunft.",
-                    was: "Weinanbau als Kulturpraxis, geschützt durch das Terroir-Prinzip.",
-                    warumDort: "Klima, Flusstäler, Kalk-/Schieferböden; Römer und Klöster brachten den Weinbau.",
-                    folgen: "Prägt Landschaft (Weinberge), Wirtschaft (Weintourismus) und Alltag.",
-                    wandel: "Klimawandel verschiebt den Anbau nach Norden (sogar England!), globale Konkurrenz, Bioweine."
-                },
-                erlaeuterung: erlaeuterungen.bordeaux
-            },
-            auvergne: {
-                id: 3,
-                name: "Auvergne / Clermont-Ferrand",
-                subtitle: "Zentralmassiv • Vulkanregion",
-                bereich: "③",
-                title: "„Käse & Regionalität”",
-                coordinates: [45.7772, 3.0870],
-                zoom: 10,
-                detailZoom: 12,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'cheese',
-                headerImage: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=1200&q=80',
-                description: "Käse als essbares Zeichen für Regionalität: Große Sortenvielfalt durch traditionelle Almwirtschaft auf vulkanischen Bergweiden.",
-                klischee: "„1000 Käsesorten – typisch französisch.”",
-                realitaet: "De Gaulle sprach von „246 Käsesorten”; real schätzt man 1000–1600. Jede Region hat eigene Käse.",
-                facts: [
-                    "1000 bis 1600 verschiedene Käsesorten in Frankreich",
-                    "Almwirtschaft und Terroir prägen den Geschmack",
-                    "AOC-Siegel schützt traditionelle Handwerkskäse",
-                    "Spannung zwischen Industriekäse und handwerklicher Tradition"
-                ],
-                stats: [
-                    { value: '1000+', label: 'Käsesorten' },
-                    { value: '46', label: 'AOC-Käsesorten' },
-                    { value: '246', label: 'de-Gaulle-Zitat' }
-                ],
-                raumanalyse: {
-                    wo: "Besonders in Bergregionen wie der Auvergne.",
-                    was: "Große regionale Käsevielfalt.",
-                    warumDort: "Almwirtschaft plus unterschiedliche Böden und Klimazonen (Terroir).",
-                    folgen: "Käse als essbares Zeichen für Regionalität.",
-                    wandel: "AOC schützt die Herkunft, Industriekäse verdrängt das Handwerk."
-                },
-                erlaeuterung: erlaeuterungen.auvergne
-            },
-            bretagne: {
-                id: 4,
-                name: "Bretagne / Brest",
-                subtitle: "Nordwest-Zipfel • Atlantikküste",
-                bereich: "③ + ④⑤",
-                title: "„Eine Sprache, viele Sprachen”",
-                coordinates: [48.3904, -4.4861],
-                zoom: 9,
-                detailZoom: 12,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'language',
-                headerImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-                description: "Mehrsprachigkeit neben dem Hochfranzösischen. Der Eindruck, Franzosen sprächen kein Englisch, beruht meist auf einem Höflichkeits-Missverständnis.",
-                klischee: "„Man spricht nur Französisch und will aus Arroganz kein Englisch.”",
-                realitaet: "Viele Regionalsprachen (Bretonisch, Okzitanisch, Elsässisch, Korsisch, Baskisch). Der „kein Englisch”-Eindruck ist oft nur ein Höflichkeits-Missverständnis (zuerst „Bonjour” sagen).",
-                facts: [
-                    "Historische Unterdrückung regionaler Sprachen durch Zentralismus",
-                    "Académie française wacht seit 1635 über Hochfranzösisch",
-                    "Renaissance durch zweisprachige Schulen (écoles bilingues)",
-                    "Höflichkeitsrituale: „Bonjour” als Schlüssel zu Gesprächen"
-                ],
-                stats: [
-                    { value: '75', label: 'Regionalsprachen' },
-                    { value: '1635', label: 'Académie française' },
-                    { value: '1990er', label: 'Sprachrenaissance' }
-                ],
-                raumanalyse: {
-                    wo: "Regionalsprachen am Rand des Landes.",
-                    was: "Mehrsprachigkeit neben dem Hochfranzösischen (bewacht von der Académie française, 1635).",
-                    warumDort: "Der Zentralismus ließ lange nur Hochfranzösisch in der Schule zu.",
-                    folgen: "Regionalsprachen wurden fast verdrängt.",
-                    wandel: "Wiederbelebung in zweisprachigen Schulen (écoles bilingues)."
-                },
-                erlaeuterung: erlaeuterungen.bretagne
-            },
-            marseille: {
-                id: 5,
-                name: "Marseille",
-                subtitle: "Süden • Mittelmeerhafen",
-                bereich: "③",
-                title: "„Vielfalt durch Migration”",
-                coordinates: [43.2965, 5.3698],
-                zoom: 11,
-                detailZoom: 13,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'port',
-                headerImage: 'https://images.unsplash.com/photo-1589705973215-6f3be4d78775?auto=format&fit=crop&w=1200&q=80',
-                description: "Durch Kolonialgeschichte und Mittelmeer-Migration gemischte Alltagskultur: Couscous, Rap aus den Banlieues und die Jugendsprache Verlan.",
-                klischee: "Frankreich sei „rein weiß, katholisch, Baguette”.",
-                realitaet: "Durch Kolonialgeschichte und Migration gemischt: Couscous als Lieblingsgericht, Raï und Rap aus den banlieues, Jugendsprache Verlan. Europas säkularster Staat mit zugleich der größten muslimischen und jüdischen Minderheit Westeuropas.",
-                facts: [
-                    "Couscous regelmäßig unter den beliebtesten Nationalgerichten",
-                    "Europas säkularster Staat mit größter muslimischer & jüdischer Minderheit",
-                    "Marseille als historischer Haupthafen für Einwanderung",
-                    "Rap und Verlan prägen die Alltagssprache landesweit"
-                ],
-                stats: [
-                    { value: '#1', label: 'Mittelmeerhafen' },
-                    { value: 'Top 3', label: 'Lieblingsgericht Couscous' },
-                    { value: 'Laizität', label: '& Vielfalt' }
-                ],
-                raumanalyse: {
-                    wo: "Vor allem in Hafen- und Großstädten und ihren Vororten.",
-                    was: "Eine gemischte Alltagskultur (Essen, Musik, Sprache).",
-                    warumDort: "Migranten kamen über die Mittelmeerhäfen in die Vororte der Großstädte.",
-                    folgen: "Neue Alltagskultur; die Identität wird ständig neu verhandelt.",
-                    wandel: "Migration → Vielfalt → Veränderung im Alltag."
-                },
-                erlaeuterung: erlaeuterungen.marseille
-            },
-            kinshasa: {
-                id: 6,
-                name: "Kinshasa (DR Kongo)",
-                subtitle: "Zentralafrika • Größte frankophone Stadt",
-                bereich: "Tag ⑥",
-                title: "„Das afrikanische Französisch”",
-                coordinates: [-4.32, 15.31],
-                zoom: 5,
-                detailZoom: 9,
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'language',
-                headerImage: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80',
-                description: "Französisch ist die viertmeistgesprochene Sprache der Welt. Doch das wahre Zentrum liegt in Afrika: In Kinshasa sprechen mehr Menschen Französisch als in Paris.",
-                klischee: "„Französisch gehört Paris.“",
-                realitaet: "Französisch ist die viertmeistgesprochene Sprache der Welt (~396 Mio.), aber ~65 % der Sprecher leben in Afrika. In Kinshasa sprechen mehr Menschen Französisch als in Paris; bis 2050 werden ~90 % der Frankophonen Afrikaner sein.",
-                facts: [
-                    "Viertmeistgesprochene Sprache der Welt (~396 Mio. Sprecher)",
-                    "Rund 65 % aller Französischsprecher leben in Afrika",
-                    "In Kinshasa sprechen mehr Menschen Französisch als in Paris",
-                    "Bis 2050 werden ~90 % der Frankophonen Afrikaner sein"
-                ],
-                stats: [
-                    { value: '~396 Mio.', label: 'Sprecher weltweit' },
-                    { value: '~65%', label: 'leben in Afrika' },
-                    { value: '~90%', label: 'Afrikaner bis 2050' },
-                    { value: '#1', label: 'Kinshasa > Paris' }
-                ],
-                raumanalyse: {
-                    wo: "Vor allem West- und Zentralafrika (z. B. DR Kongo).",
-                    was: "Das Zentrum der frankophonen Welt.",
-                    warumDort: "Kolonialgeschichte + starkes Bevölkerungswachstum.",
-                    folgen: "Die Zukunft der Sprache liegt in Afrika, nicht in Frankreich.",
-                    wandel: "Paris verliert seine Rolle als „Zentrum“."
-                },
-                erlaeuterung: erlaeuterungen.kinshasa
-            }
-        };
-
-        // ========================================
-        // LANDESWEITE STATIONEN (UNTER DER KARTE)
-        // ========================================
-        const landesweitLocations = {
-            boulangerie: {
-                id: 1,
-                name: "Béret & Baguette",
-                subtitle: "Landesweit – nicht an einen Ort gebunden",
-                bereich: "Bereich ④⑤",
-                title: "Béret & Baguette",
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'bread',
-                headerImage: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80',
-                description: "Baskenmütze, Baguette unterm Arm, ständig Baguette/Croissant/Käse – ein weltweites Klischee, das mit dem heutigen Konsumalltag wenig zu tun hat.",
-                klischee: "Baskenmütze, Baguette unterm Arm, ständig Baguette/Croissant/Käse.",
-                realitaet: "Baguette seit 2022 UNESCO-Kulturerbe, ~10 Mrd./Jahr; aber Konsum stark gesunken (~½ pro Person/Tag), wohl von einem Wiener Bäcker (1839) erfunden, Name erst 1920; Béret ist baskisch und kaum getragen.",
-                facts: [
-                    "Baguette seit 2022 UNESCO-Kulturerbe, ~10 Mrd./Jahr",
-                    "Konsum stark gesunken (~½ pro Person/Tag)",
-                    "Wohl von Wiener Bäcker (1839) erfunden, Name erst 1920",
-                    "Béret ist baskisch und wird heute kaum getragen"
-                ],
-                stats: [
-                    { value: '2022', label: 'UNESCO-Kulturerbe' },
-                    { value: '~10 Mrd.', label: 'Stück / Jahr' },
-                    { value: '½', label: 'pro Person / Tag' }
-                ],
-                raumanalyse: {
-                    wo: "Landesweit, in jeder Boulangerie.",
-                    was: "Ess- und Kleidungs-Klischee.",
-                    warumDort: "Tourismuswerbung und Filme des 20. Jh. haben es eingefroren.",
-                    warumTitle: "Warum (als Bild)?",
-                    folgen: "Ein Bild, das den heutigen Alltag nicht trifft.",
-                    wandel: "Jüngere essen anders; es lebt im Marketing."
-                },
-                erlaeuterung: erlaeuterungen.boulangerie
-            },
-            streik: {
-                id: 2,
-                name: "Protest- & Streikkultur",
-                subtitle: "Landesweit – nicht an einen Ort gebunden",
-                bereich: "Bereich ④⑤",
-                title: "Protest- & Streikkultur",
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'protest',
-                headerImage: 'https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?auto=format&fit=crop&w=1200&q=80',
-                description: "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher demokratischer Wert.",
-                klischee: "„Die Franzosen streiken ständig.”",
-                realitaet: "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher Wert. Aber nicht „alle” und nicht „ständig” – oft nur einzelne Branchen.",
-                facts: [
-                    "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher Wert",
-                    "Nicht „alle” und nicht „ständig” – oft nur einzelne Branchen",
-                    "Historisches Vorbild: Seidenweber-Aufstände / Canuts 1831/34 in Lyon",
-                    "Medienbilder (Gelbwesten) verstärken das Bild im Ausland"
-                ],
-                stats: [
-                    { value: '1789', label: 'Revolutionserbe' },
-                    { value: '1831/34', label: 'Canuts Lyon' },
-                    { value: 'Grundrecht', label: 'Streikrecht' }
-                ],
-                raumanalyse: {
-                    wo: "Landesweit (Beispiel Lyon: Seidenweber-Aufstände/Canuts 1831/34).",
-                    was: "Streik und Demo als politisches Mittel.",
-                    warumDort: "Seit der Revolution 1789 anerkannt.",
-                    warumTitle: "Warum?",
-                    folgen: "Teil der politischen Identität.",
-                    wandel: "Medienbilder (Gelbwesten) verstärken das Bild im Ausland."
-                },
-                erlaeuterung: erlaeuterungen.streik
-            }
-        };
-
-        // Tour führt über die 6 Karten-Pins
-        const tourOrder = ['paris', 'bordeaux', 'auvergne', 'bretagne', 'marseille', 'kinshasa'];
-
-        // ========================================
-        // MAP INITIALIZATION (CARTO Positron / Dark Matter)
-        // ========================================
-        const map = L.map('map', {
-            zoomControl: false,
-            attributionControl: false,
-            zoomSnap: 0.5,
-            zoomDelta: 0.5,
-            wheelPxPerZoomLevel: 100
-        }).setView([46.6, 2.3], 6);
-
-        // Ruhige, schlichte CARTO-TileLayers ohne Gitter
-        const standardLightLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19,
-            subdomains: 'abcd'
-        });
-
-        const standardDarkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19,
-            subdomains: 'abcd'
-        });
-
-        const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19
-        });
-
-        const terrainLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            maxZoom: 17
-        });
-
-        let activeLayer = 'standard';
-
-        function isDarkMode() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') return true;
-            if (currentTheme === 'light') return false;
-            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        }
-
-        function updateBaseLayer() {
-            if (activeLayer === 'standard') {
-                if (map.hasLayer(standardLightLayer)) map.removeLayer(standardLightLayer);
-                if (map.hasLayer(standardDarkLayer)) map.removeLayer(standardDarkLayer);
-
-                if (isDarkMode()) {
-                    standardDarkLayer.addTo(map);
-                } else {
-                    standardLightLayer.addTo(map);
-                }
-            }
-        }
-
-        updateBaseLayer();
-
-        // ========================================
-        // RUNDE APPLE-MARKER AUF DER KARTE (7 PINS)
-        // ========================================
-        const markers = {};
-
-        Object.entries(locations).forEach(([key, location]) => {
-            if (!location.coordinates) return;
-
-            const iconSvg = icons[location.iconType];
-            const isOffMap = location.isOffMap;
-
-            const markerHtml = `
-                <div class="map-marker ${isOffMap ? 'marker-offmap' : ''}" id="marker-${key}">
-                    <div class="marker-container">
-                        <div class="marker-bg">
-                            ${iconSvg}
-                        </div>
-                    </div>
-                    ${isOffMap ? '<div class="marker-inset-label">Off-Map Inset</div>' : ''}
-                </div>
-            `;
-
-            const icon = L.divIcon({
-                className: 'custom-marker-wrapper',
-                html: markerHtml,
-                iconSize: [36, 36],
-                iconAnchor: [18, 18]
-            });
-
-            const marker = L.marker(location.coordinates, { icon }).addTo(map);
-
-            marker.on('click', () => {
-                showInfoPanel(key);
-                map.flyTo(location.coordinates, location.zoom, {
-                    duration: key === 'kinshasa' ? 1.4 : 1.0,
-                    easeLinearity: 0.35
-                });
-            });
-
-            markers[key] = marker;
-        });
-
-        // ========================================
-        // SIDEBAR LISTE RENDERN (7 KARTENORTE)
-        // ========================================
-        const stationNavList = document.getElementById('stationNavList');
-
-        function renderSidebarStations() {
-            stationNavList.innerHTML = '';
-
-            Object.entries(locations).forEach(([key, location]) => {
-                const item = document.createElement('div');
-                item.className = 'nav-item';
-                item.dataset.location = key;
-
-                item.innerHTML = `
-                    <div class="nav-item-icon">
-                        ${icons[location.iconType]}
-                    </div>
-                    <div class="nav-item-content">
-                        <div class="nav-item-title">${location.id}. ${location.name}</div>
-                        <div class="nav-item-description">${location.title}</div>
-                    </div>
-                `;
-
-                item.addEventListener('click', () => {
-                    navigateToLocation(key);
-                    if (window.innerWidth <= 1180) {
-                        sidebar.classList.remove('visible');
-                        sidebar.classList.add('collapsed');
-                        sidebarBackdrop?.classList.remove('visible');
-                    }
-                });
-
-                stationNavList.appendChild(item);
-            });
-        }
-
-        renderSidebarStations();
-
-        // ========================================
-        // UI ELEMENTE & INTERAKTIONEN
-        // ========================================
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const infoPanel = document.getElementById('infoPanel');
-        const infoPanelClose = document.getElementById('infoPanelClose');
-        const expandButton = document.getElementById('expandButton');
-        const zoomLocationButton = document.getElementById('zoomLocationButton');
-        const detailOverlay = document.getElementById('detailOverlay');
-        const detailPanel = document.getElementById('detailPanel');
-        const detailClose = document.getElementById('detailClose');
-        const tourButton = document.getElementById('tourButton');
-        const tourText = document.getElementById('tourText');
-        const tourIcon = document.getElementById('tourIcon');
-        const tourProgress = document.getElementById('tourProgress');
-
-        let currentLocation = null;
-        let tourActive = false;
-        let tourIndex = 0;
-        let tourTimeout = null;
-
-        // Sidebar Toggle & Backdrop (iPad / Mobile)
-        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-        sidebarToggle?.addEventListener('click', () => {
-            const isVisible = sidebar.classList.contains('visible');
-            if (isVisible) {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-                sidebarBackdrop?.classList.remove('visible');
-            } else {
-                sidebar.classList.add('visible');
-                sidebar.classList.remove('collapsed');
-                sidebarBackdrop?.classList.add('visible');
-            }
-        });
-
-        sidebarBackdrop?.addEventListener('click', () => {
-            sidebar.classList.remove('visible');
-            sidebar.classList.add('collapsed');
-            sidebarBackdrop.classList.remove('visible');
-        });
-
-        // Overview Button
-        document.querySelector('.nav-item[data-action="overview"]')?.addEventListener('click', () => {
-            if (window.innerWidth <= 1180) {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-                sidebarBackdrop?.classList.remove('visible');
-            }
-            showOverview();
-        });
-
-        function navigateToLocation(key) {
-            const location = locations[key];
-            if (!location) return;
-
-            if (window.innerWidth <= 1180) {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-                sidebarBackdrop?.classList.remove('visible');
-            }
-
-            map.flyTo(location.coordinates, location.zoom, {
-                duration: 1.0,
-                easeLinearity: 0.35
-            });
-
-            setTimeout(() => {
-                showInfoPanel(key);
-            }, 300);
-        }
-
-        function showOverview() {
-            hideInfoPanel();
-            stopTour();
-            map.flyTo([46.6, 2.3], 6, {
-                duration: 1.0
-            });
-        }
-
-        // ========================================
-        // LANDESWEIT-BUTTONS CLICK-HANDLER
-        // ========================================
-        window.openLandesweit = function(key) {
-            stopTour();
-            if (window.innerWidth <= 1180) {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-                sidebarBackdrop?.classList.remove('visible');
-            }
-            map.flyTo([46.6, 2.3], 6, {
-                duration: 1.0,
-                easeLinearity: 0.35
-            });
-            showInfoPanel(key);
-
-            // Button Active State im Block
-            document.querySelectorAll('.landesweit-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.getElementById(`btn-landesweit-${key}`);
-            if (activeBtn) activeBtn.classList.add('active');
-        };
-
-        // ========================================
-        // INFO PANEL
-        // ========================================
-        // ========================================
-        // AUSKLAPP-LOGIK FÜR EINFACHE ERKLÄRUNGEN
-        // ========================================
-        window.toggleField = function(el) {
-            if (!el) return;
-            const isExpanded = el.classList.contains('expanded');
-            if (isExpanded) {
-                el.classList.remove('expanded');
-                el.setAttribute('aria-expanded', 'false');
-            } else {
-                el.classList.add('expanded');
-                el.setAttribute('aria-expanded', 'true');
-            }
-            updateExplainAllState();
-        };
-
-        window.updateExplainAllState = function() {
-            const allFields = document.querySelectorAll('.collapsible-field');
-            if (allFields.length === 0) return;
-            const allExpanded = Array.from(allFields).every(f => f.classList.contains('expanded'));
-            const toggleBtn = document.getElementById('explainAllToggle');
-            if (toggleBtn) {
-                toggleBtn.classList.toggle('active', allExpanded);
-                toggleBtn.setAttribute('aria-pressed', allExpanded ? 'true' : 'false');
-            }
-        };
-
-        window.toggleAllExplanations = function() {
-            const allFields = document.querySelectorAll('.collapsible-field');
-            const anyClosed = Array.from(allFields).some(f => !f.classList.contains('expanded'));
-            allFields.forEach(f => {
-                if (anyClosed) {
-                    f.classList.add('expanded');
-                    f.setAttribute('aria-expanded', 'true');
-                } else {
-                    f.classList.remove('expanded');
-                    f.setAttribute('aria-expanded', 'false');
-                }
-            });
-            updateExplainAllState();
-        };
-
-        function showInfoPanel(key) {
-            currentLocation = key;
-            const location = locations[key] || landesweitLocations[key];
-            if (!location) return;
-
-            const isLandesweit = !location.coordinates;
-            const erl = location.erlaeuterung || {};
-
-            document.getElementById('infoPanelIcon').innerHTML = icons[location.iconType] || icons.pin || icons.paris;
-            document.getElementById('infoPanelTitle').textContent = isLandesweit ? location.name : `${location.id}. ${location.name}`;
-            document.getElementById('infoPanelLocation').textContent = `${location.title} • ${location.subtitle}`;
-
-            // 1. Klischee
-            const clicheEl = document.getElementById('infoPanelCliche');
-            if (clicheEl) clicheEl.textContent = location.klischee;
-            const clicheExp = document.getElementById('infoPanelClicheExplain');
-            if (clicheExp) clicheExp.textContent = erl.klischee || '';
-
-            // 2. Realität
-            const realityEl = document.getElementById('infoPanelReality');
-            if (realityEl) realityEl.textContent = location.realitaet;
-            const realityExp = document.getElementById('infoPanelRealityExplain');
-            if (realityExp) realityExp.textContent = erl.realitaet || '';
-
-            // 3. Raumanalyse
-            const analysisEl = document.getElementById('infoPanelAnalysis');
-            if (analysisEl && location.raumanalyse) {
-                const warumTitle = location.raumanalyse.warumTitle || 'Warum dort?';
-                const warumText = location.raumanalyse.warumDort || location.raumanalyse.warum;
-                const warumExplain = erl.warumDort || erl.warum || '';
-
-                const rows = [
-                    { label: 'Wo?', text: location.raumanalyse.wo, explain: erl.wo || '' },
-                    { label: 'Was?', text: location.raumanalyse.was, explain: erl.was || '' },
-                    { label: warumTitle, text: warumText, explain: warumExplain },
-                    { label: 'Folgen?', text: location.raumanalyse.folgen, explain: erl.folgen || '' },
-                    { label: 'Wandel?', text: location.raumanalyse.wandel, explain: erl.wandel || '' }
-                ];
-
-                analysisEl.innerHTML = rows.map(r => `
-                    <div class="info-analysis-row collapsible-field" tabindex="0" role="button" aria-expanded="false" onclick="toggleField(this)">
-                        <div class="field-header-row">
-                            <span class="info-analysis-label">${r.label}</span>
-                            <button type="button" class="field-chevron-btn" aria-label="Einfache Erklärung umschalten" tabindex="-1">
-                                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
+            <div class="media-column">
+                <!-- 1. VIDEO -->
+                <div class="video-group">
+                    <div class="custom-video-wrapper paused">
+                        <video playsinline
+                            poster="https://images.tagesschau.de/image/d4ac8485-18bf-4c87-b4b7-68568036b949/AAABmSmxypc/AAABmyZEoeA/16x9-1920/grand-ethiopian-renaissance-dam-102.jpg">
+                            <source
+                                src="https://tagesschau-progressive.ard-mcdn.de/video/2025/0909/TV-20250909-0905-0500.webxxl.h264.mp4"
+                                type="video/mp4">
+                            Ihr Browser unterstützt das Video-Tag nicht.
+                        </video>
+                        <div class="custom-video-controls">
+                            <button class="ctrl-btn play-pause-btn" aria-label="Play/Pause">
+                                <svg class="icon-play" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                </svg>
+                            </button>
+                            <span class="time-text current-time">0:00</span>
+                            <div class="progress-container">
+                                <input type="range" class="custom-slider video-slider" value="0" step="0.1" min="0"
+                                    max="100">
+                            </div>
+                            <span class="time-text total-time">0:00</span>
+                            <button class="ctrl-btn fullscreen-btn" aria-label="Vollbild">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
                                 </svg>
                             </button>
                         </div>
-                        <span class="info-analysis-text">${r.text}</span>
-                        <div class="field-explanation">
-                            <div class="field-explanation-inner">
-                                <div class="field-explanation-tag">Einfach erklärt</div>
-                                <p class="field-explanation-body">${r.explain}</p>
-                            </div>
+                    </div>
+                    <p class="caption">Tagesschau: Neuer Mega-Staudamm entzweit Nil-Anrainer</p>
+                </div>
+
+                <!-- 2. PODCAST -->
+                <div class="podcast-minimalist-wrapper">
+                    <h4 class="podcast-title-simple">Tagesschau Podcast</h4>
+                    <div class="custom-audio-wrapper paused">
+                        <audio preload="metadata">
+                            <source
+                                src="https://tagesschau-podcast.ard-mcdn.de/audio/2025/0909/AU-20250909-0700-1100.mp3"
+                                type="audio/mpeg">
+                        </audio>
+                        <button class="ctrl-btn play-pause-btn" aria-label="Play/Pause">
+                            <svg class="icon-play" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                            </svg>
+                        </button>
+                        <span class="time-text current-time">0:00</span>
+                        <div class="progress-container">
+                            <input type="range" class="custom-slider audio-slider" value="0" step="0.1" min="0"
+                                max="100">
+                        </div>
+                        <span class="time-text total-time">0:00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAP SECTION -->
+        <section class="map-section reveal">
+            <div class="container" style="text-align: center; padding-top:0;">
+                <h2 class="section-title" style="color: white; margin-bottom: 20px;">Geopolitische Karte</h2>
+                <p class="body-text" style="color: #86868b; margin-bottom: 80px; font-size:28px; font-weight:500;">
+                    Erkunden Sie die Lage vor Ort interaktiv.</p>
+
+                <div class="map-preview-container" onclick="openMap()">
+                    <div class="device-frame">
+                        <iframe src="1.html" scrolling="no" style="pointer-events: none;"></iframe>
+                        <div class="click-overlay">
+                            <span class="click-cta">Interaktive Karte öffnen</span>
                         </div>
                     </div>
-                `).join('');
-            }
+                </div>
+            </div>
+        </section>
 
-            // Keyboard-Accessibility für alle collapsible fields
-            document.querySelectorAll('.collapsible-field').forEach(f => {
-                f.onkeydown = function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleField(f);
+
+
+    </main>
+
+    <script>
+        // --- MAP LOGIC ---
+        function openMap() {
+            // Native Navigation: Navigate to the map page
+            window.location.href = "1.html";
+        }
+
+        // --- CUSTOM MEDIA PLAYER LOGIC ---
+        function initCustomPlayers() {
+            const formatTime = (seconds) => {
+                if (isNaN(seconds)) return "0:00";
+                const m = Math.floor(seconds / 60);
+                const s = Math.floor(seconds % 60);
+                return m + ":" + (s < 10 ? "0" + s : s);
+            };
+
+            const setupPlayer = (wrapperSelector, isVideo) => {
+                const wrapper = document.querySelector(wrapperSelector);
+                if (!wrapper) return;
+
+                const media = wrapper.querySelector(isVideo ? 'video' : 'audio');
+                const btn = wrapper.querySelector('.play-pause-btn');
+                const iconPlay = btn.querySelector('.icon-play');
+                const iconPause = btn.querySelector('.icon-pause');
+                const slider = wrapper.querySelector('.custom-slider');
+                const timeCurrent = wrapper.querySelector('.current-time');
+                const timeTotal = wrapper.querySelector('.total-time');
+
+                const updatePlayUI = () => {
+                    if (media.paused) {
+                        iconPlay.style.display = 'block';
+                        iconPause.style.display = 'none';
+                        wrapper.classList.remove('active');
+                        wrapper.classList.add('paused');
+                    } else {
+                        iconPlay.style.display = 'none';
+                        iconPause.style.display = 'block';
+                        wrapper.classList.add('active');
+                        wrapper.classList.remove('paused');
                     }
                 };
-            });
 
-            // Reset Ausklapp-Zustände beim Öffnen neuer Station
-            document.querySelectorAll('.collapsible-field').forEach(f => {
-                f.classList.remove('expanded');
-                f.setAttribute('aria-expanded', 'false');
-            });
-            const explainToggle = document.getElementById('explainAllToggle');
-            if (explainToggle) {
-                explainToggle.classList.remove('active');
-                explainToggle.setAttribute('aria-pressed', 'false');
-            }
+                const togglePlay = () => {
+                    if (media.paused) media.play();
+                    else media.pause();
+                };
 
-            infoPanel.classList.add('visible');
+                btn.addEventListener('click', togglePlay);
+                if (isVideo) media.addEventListener('click', togglePlay);
 
-            // Marker Active State (nur wenn auf Karte)
-            document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
-            if (!isLandesweit) {
-                const activeM = document.getElementById(`marker-${key}`);
-                if (activeM) activeM.classList.add('active');
-            }
+                media.addEventListener('play', updatePlayUI);
+                media.addEventListener('pause', updatePlayUI);
 
-            // Zoom-Button Label anpassen
-            const zoomBtn = document.getElementById('zoomLocationButton');
-            if (zoomBtn) {
-                if (key === 'kinshasa') {
-                    zoomBtn.innerHTML = `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
-                        <span>Zurück nach Frankreich</span>
-                    `;
-                } else if (isLandesweit) {
-                    zoomBtn.innerHTML = `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-                        </svg>
-                        <span>Gesamtübersicht Frankreich</span>
-                    `;
-                } else {
-                    zoomBtn.innerHTML = `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            <line x1="11" y1="8" x2="11" y2="14"></line>
-                            <line x1="8" y1="11" x2="14" y2="11"></line>
-                        </svg>
-                        <span>Näher heranzoomen</span>
-                    `;
-                }
-            }
-
-            // Nav Item Active State
-            document.querySelectorAll('#stationNavList .nav-item').forEach(el => {
-                el.classList.toggle('active', el.dataset.location === key);
-            });
-        }
-
-        function hideInfoPanel() {
-            infoPanel.classList.remove('visible');
-            currentLocation = null;
-            document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.landesweit-btn').forEach(btn => btn.classList.remove('active'));
-        }
-
-        infoPanelClose.addEventListener('click', hideInfoPanel);
-
-        // Näher heranzoomen / Übersicht Button
-        zoomLocationButton.addEventListener('click', () => {
-            if (currentLocation === 'kinshasa') {
-                showOverview();
-            } else if (currentLocation) {
-                const location = locations[currentLocation] || landesweitLocations[currentLocation];
-                if (location && location.coordinates) {
-                    map.flyTo(location.coordinates, location.detailZoom, {
-                        duration: 0.8,
-                        easeLinearity: 0.4
-                    });
-                } else {
-                    showOverview();
-                }
-            }
-        });
-
-        // ========================================
-        // DETAIL PANEL (MODAL MIT RAUMANALYSE)
-        // ========================================
-        expandButton.addEventListener('click', () => {
-            if (currentLocation) {
-                showDetailPanel(currentLocation);
-            }
-        });
-
-        function showDetailPanel(key) {
-            const loc = locations[key] || landesweitLocations[key];
-            if (!loc) return;
-
-            document.getElementById('detailHeaderBg').style.backgroundImage = `url(${loc.headerImage})`;
-            document.getElementById('detailIcon').innerHTML = icons[loc.iconType] || icons.pin || icons.paris;
-            document.getElementById('detailTitle').textContent = loc.coordinates ? `${loc.id}. ${loc.name}` : loc.name;
-            document.getElementById('detailSubtitle').textContent = `${loc.title} • ${loc.bereich ? (loc.bereich.startsWith('Bereich') ? loc.bereich : 'Bereich ' + loc.bereich) : loc.subtitle}`;
-
-            let africaBoxHtml = '';
-            if (key === 'kinshasa') {
-                africaBoxHtml = `
-                    <div class="overseas-box">
-                        <div class="overseas-box-title">Geografische Verortung:</div>
-                        <div class="overseas-buttons">
-                            <button class="overseas-btn" onclick="map.flyTo([-4.32, 15.31], 9, {duration: 1.2})">
-                                Näher an Kinshasa heranzoomen
-                            </button>
-                            <button class="overseas-btn" style="background: var(--accent-blue); color: #FFFFFF;" onclick="hideDetailPanel(); showOverview();">
-                                Zurück nach Frankreich (Festland)
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-
-            const warumTitle = loc.raumanalyse.warumTitle || 'Warum? (Ursachen)';
-            const warumText = loc.raumanalyse.warumDort || loc.raumanalyse.warum;
-
-            document.getElementById('detailContent').innerHTML = `
-                <!-- Kennzahlen / Stats -->
-                <div class="detail-section">
-                    <h3 class="detail-section-title">Wichtige Kennzahlen</h3>
-                    <div class="detail-stats">
-                        ${loc.stats.map(s => `
-                            <div class="stat-card">
-                                <div class="stat-value">${s.value}</div>
-                                <div class="stat-label">${s.label}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <!-- Klischee vs. Realität -->
-                <div class="detail-section">
-                    <h3 class="detail-section-title">Gegenüberstellung: Vorurteil & Realität</h3>
-                    <div class="compare-grid">
-                        <div class="compare-card cliche">
-                            <span class="compare-badge cliche">Klischee</span>
-                            <p class="compare-text">${loc.klischee}</p>
-                        </div>
-                        <div class="compare-card reality">
-                            <span class="compare-badge reality">Realität</span>
-                            <p class="compare-text">${loc.realitaet}</p>
-                        </div>
-                    </div>
-                </div>
-
-                ${africaBoxHtml}
-
-                <!-- Strukturierte Raumanalyse -->
-                <div class="detail-section">
-                    <h3 class="detail-section-title">Strukturierte Raumanalyse</h3>
-                    <div class="raumanalyse-timeline">
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-q">Wo?</div>
-                            <div class="raumanalyse-a">${loc.raumanalyse.wo}</div>
-                        </div>
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-q">Was?</div>
-                            <div class="raumanalyse-a">${loc.raumanalyse.was}</div>
-                        </div>
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-q">${warumTitle}</div>
-                            <div class="raumanalyse-a">${warumText}</div>
-                        </div>
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-q">Folgen?</div>
-                            <div class="raumanalyse-a">${loc.raumanalyse.folgen}</div>
-                        </div>
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-q">Wandel?</div>
-                            <div class="raumanalyse-a">${loc.raumanalyse.wandel}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            detailOverlay.classList.add('visible');
-            detailPanel.classList.add('visible');
-        }
-
-        function hideDetailPanel() {
-            detailOverlay.classList.remove('visible');
-            detailPanel.classList.remove('visible');
-        }
-
-        detailClose.addEventListener('click', hideDetailPanel);
-        detailOverlay.addEventListener('click', hideDetailPanel);
-
-        // ========================================
-        // INTERAKTIVE TOUR DURCH DIE 6 KARTEN-STATIONEN
-        // ========================================
-        function initTourProgress() {
-            tourProgress.innerHTML = tourOrder.map((_, i) =>
-                `<div class="tour-dot" data-index="${i}"></div>`
-            ).join('');
-        }
-
-        function updateTourProgress() {
-            const dots = tourProgress.querySelectorAll('.tour-dot');
-            dots.forEach((dot, i) => {
-                dot.classList.remove('active', 'visited');
-                if (i === tourIndex) {
-                    dot.classList.add('active');
-                } else if (i < tourIndex) {
-                    dot.classList.add('visited');
-                }
-            });
-        }
-
-        function startTour() {
-            tourActive = true;
-            tourIndex = 0;
-            tourButton.classList.add('playing');
-            tourText.textContent = 'Tour stoppen';
-            tourIcon.innerHTML = '<rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/>';
-
-            initTourProgress();
-            tourProgress.style.display = 'flex';
-
-            playTourStep();
-        }
-
-        function stopTour() {
-            tourActive = false;
-            tourButton.classList.remove('playing');
-            tourText.textContent = 'Tour starten';
-            tourIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>';
-            tourProgress.style.display = 'none';
-
-            if (tourTimeout) {
-                clearTimeout(tourTimeout);
-                tourTimeout = null;
-            }
-        }
-
-        function playTourStep() {
-            if (!tourActive || tourIndex >= tourOrder.length) {
-                stopTour();
-                showOverview();
-                return;
-            }
-
-            const key = tourOrder[tourIndex];
-            const loc = locations[key];
-
-            updateTourProgress();
-
-            map.flyTo(loc.coordinates, loc.zoom, {
-                duration: 1.2,
-                easeLinearity: 0.35
-            });
-
-            setTimeout(() => {
-                showInfoPanel(key);
-            }, 400);
-
-            tourTimeout = setTimeout(() => {
-                tourIndex++;
-                playTourStep();
-            }, 6000);
-        }
-
-        tourButton.addEventListener('click', () => {
-            if (tourActive) {
-                stopTour();
-            } else {
-                startTour();
-            }
-        });
-
-        // ========================================
-        // KARTEN-LAYER UMSCHALTUNG
-        // ========================================
-        document.querySelectorAll('.control-button[data-layer]').forEach(button => {
-            button.addEventListener('click', () => {
-                const layer = button.dataset.layer;
-
-                if (activeLayer === 'standard') {
-                    if (map.hasLayer(standardLightLayer)) map.removeLayer(standardLightLayer);
-                    if (map.hasLayer(standardDarkLayer)) map.removeLayer(standardDarkLayer);
-                } else if (activeLayer === 'satellite') {
-                    map.removeLayer(satelliteLayer);
-                } else if (activeLayer === 'terrain') {
-                    map.removeLayer(terrainLayer);
-                }
-
-                if (layer === 'standard') {
-                    if (isDarkMode()) standardDarkLayer.addTo(map);
-                    else standardLightLayer.addTo(map);
-                } else if (layer === 'satellite') {
-                    satelliteLayer.addTo(map);
-                } else if (layer === 'terrain') {
-                    terrainLayer.addTo(map);
-                }
-
-                activeLayer = layer;
-
-                document.querySelectorAll('.control-button[data-layer]').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.layer === layer);
+                media.addEventListener('loadedmetadata', () => {
+                    timeTotal.textContent = formatTime(media.duration);
                 });
+
+                media.addEventListener('timeupdate', () => {
+                    if (!isNaN(media.currentTime)) {
+                        timeCurrent.textContent = formatTime(media.currentTime);
+                        const prog = (media.currentTime / media.duration) * 100 || 0;
+                        slider.value = prog;
+                        slider.style.setProperty('--val', prog + '%');
+                    }
+                });
+
+                media.addEventListener('ended', () => {
+                    updatePlayUI();
+                    slider.value = 0;
+                    slider.style.setProperty('--val', '0%');
+                });
+
+                slider.addEventListener('input', () => {
+                    const time = (slider.value / 100) * media.duration;
+                    media.currentTime = time;
+                    slider.style.setProperty('--val', slider.value + '%');
+                });
+
+                if (isVideo) {
+                    const fsBtn = wrapper.querySelector('.fullscreen-btn');
+                    if (fsBtn) {
+                        fsBtn.addEventListener('click', () => {
+                            if (media.requestFullscreen) media.requestFullscreen();
+                            else if (media.webkitRequestFullscreen) media.webkitRequestFullscreen();
+                        });
+                    }
+                }
+            };
+
+            setupPlayer('.custom-video-wrapper', true);
+            setupPlayer('.custom-audio-wrapper', false);
+        }
+
+        // --- ANIMATION LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initCustomPlayers();
+
+            // Animation Observer (Re-Triggerable)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        // Remove class to allow re-triggering animation on next scroll
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            const onScroll = () => {
+                // Hero Parallax Logic
+                const scroll = window.scrollY;
+                const heroH = document.querySelector('.hero-scroll-container').offsetHeight;
+                const winH = window.innerHeight;
+                let progress = scroll / (heroH - winH);
+                progress = Math.min(Math.max(progress, 0), 1);
+
+                const canvas = document.getElementById('hero-canvas');
+                if (canvas && images.length > 0) {
+                    const frame = Math.floor(progress * 23);
+                    render(frame);
+
+                    const content = document.querySelector('.hero-content');
+                    if (content) {
+                        content.style.opacity = Math.max(0, 1 - progress * 4);
+                        content.style.transform = `translateY(${progress * -50}px)`;
+                    }
+                }
+            };
+
+            // Canvas Init
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas ? canvas.getContext('2d') : null;
+            const images = [];
+
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                const loadImages = () => {
+                    for (let i = 0; i < 24; i++) {
+                        const img = new Image();
+                        img.src = `hero/heroanimation/GERD_${i.toString().padStart(3, '0')}.jpg`;
+                        img.onload = () => { if (i === 0) render(0); };
+                        images.push(img);
+                    }
+                };
+                loadImages(); // Start loading
+            }
+
+            const render = (idx) => {
+                if (!images[idx] || !images[idx].complete) return;
+                const img = images[idx];
+                const cW = canvas.width; const cH = canvas.height;
+                const iW = img.width; const iH = img.height;
+
+                // Cover Logic
+                let dW, dH, oX, oY;
+                if (cW / cH > iW / iH) {
+                    dW = cW; dH = cW * (iH / iW);
+                    oX = 0; oY = (cH - dH) / 2;
+                } else {
+                    dH = cH; dW = cH * (iW / iH);
+                    oX = (cW - dW) / 2; oY = 0;
+                }
+
+                ctx.clearRect(0, 0, cW, cH);
+                ctx.drawImage(img, oX, oY, dW, dH);
+            };
+
+            window.addEventListener('scroll', onScroll);
+            window.addEventListener('resize', () => {
+                if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+                onScroll();
             });
+            onScroll();
         });
-
-        // ========================================
-        // THEME TOGGLE (LIGHT / DARK)
-        // ========================================
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        const sunIcon = document.querySelector('.theme-icon-sun');
-        const moonIcon = document.querySelector('.theme-icon-moon');
-
-        function updateThemeUI() {
-            const dark = isDarkMode();
-            if (sunIcon && moonIcon) {
-                sunIcon.style.display = dark ? 'none' : 'block';
-                moonIcon.style.display = dark ? 'block' : 'none';
-            }
-            updateBaseLayer();
-        }
-
-        themeToggleBtn?.addEventListener('click', () => {
-            const currentlyDark = isDarkMode();
-            const newTheme = currentlyDark ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('france_map_theme', newTheme);
-            updateThemeUI();
-        });
-
-        // Gespeichertes Theme laden
-        const savedTheme = localStorage.getItem('france_map_theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
-        updateThemeUI();
-
-        // System Theme Änderungen abhören
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (!localStorage.getItem('france_map_theme')) {
-                updateThemeUI();
-            }
-        });
-
-        // ========================================
-        // ZOOM BUTTONS
-        // ========================================
-        document.getElementById('zoomIn').addEventListener('click', () => {
-            map.zoomIn(1);
-        });
-
-        document.getElementById('zoomOut').addEventListener('click', () => {
-            map.zoomOut(1);
-        });
-
-        // ========================================
-        // RESPONSIVE BEHAVIOR
-        // ========================================
-        function initResponsive() {
-            if (window.innerWidth > 900) {
-                sidebar.classList.add('visible');
-                sidebar.classList.remove('collapsed');
-            } else {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-            }
-        }
-
-        initResponsive();
-        window.addEventListener('resize', initResponsive);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                hideDetailPanel();
-                hideInfoPanel();
-                stopTour();
-            }
-        });
-
-        initTourProgress();
     </script>
 </body>
 
