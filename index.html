@@ -4,16 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Der Konflikt am Nil</title>
+    <title>Frankreich unter der Lupe</title>
+    <meta name="description" content="Frankreich unter der Lupe: Ein Blick hinter Raum, Menschen und Klischees – von Naturraum über Bevölkerung bis zur Kultur und interaktiven Karte.">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BP029N3ZFT"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-BP029N3ZFT');
-    </script>
     <style>
         :root {
             --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -47,8 +40,7 @@
             height: 300vh;
             /* Smooth scroll length */
             position: relative;
-            background: #111;
-            /* Fallback */
+            background: #0B0B0E;
         }
 
         .hero-sticky {
@@ -63,28 +55,20 @@
             text-align: center;
         }
 
-        #hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        /* Fallback BG */
+        /* Hero Background Photo (Real, Freely Licensed France Landscape) */
         .hero-fallback-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('hero/heroanimation/GERD_000.jpg');
+            background-image: url('images/hero_france.jpg');
             background-size: cover;
-            background-position: center;
-            opacity: 0.6;
+            background-position: center 35%;
+            opacity: 0.48;
             z-index: 0;
+            transform: scale(1.02);
+            transition: transform 0.1s ease-out;
         }
 
         .hero-overlay {
@@ -93,7 +77,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.8) 100%);
+            background: radial-gradient(circle at center, rgba(11, 11, 14, 0.4) 0%, rgba(11, 11, 14, 0.85) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -103,32 +87,106 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 200px;
+            height: 220px;
             background: linear-gradient(to bottom, transparent, var(--bg-primary));
             z-index: 5;
             pointer-events: none;
         }
 
+        /* FRANCE SILHOUETTE VECTOR SCROLL ANIMATION */
+        .france-scroll-stage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(82vw, 500px);
+            height: min(82vw, 500px);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .france-silhouette-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.7));
+        }
+
+        .france-path-ghost {
+            fill: rgba(255, 255, 255, 0.03);
+            stroke: rgba(255, 255, 255, 0.16);
+            stroke-width: 1.5;
+            stroke-dasharray: 4 6;
+        }
+
+        .france-path-draw {
+            fill: none;
+            stroke: url(#franceTricoloreGrad);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 10px rgba(77, 124, 255, 0.7));
+            transition: stroke-dashoffset 0.08s linear;
+        }
+
+        .france-pin-marker {
+            transition: transform 0.12s linear;
+        }
+
+        .pin-dot {
+            fill: #FF3B30;
+            stroke: #FFFFFF;
+            stroke-width: 2;
+        }
+
+        .pin-pulse {
+            fill: rgba(255, 59, 48, 0.35);
+            animation: pinPulse 2s infinite ease-out;
+        }
+
+        .pin-label {
+            font-size: 11px;
+            font-weight: 700;
+            fill: #FFFFFF;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+            font-family: var(--system-font);
+        }
+
+        @keyframes pinPulse {
+            0% {
+                r: 4;
+                opacity: 0.9;
+            }
+
+            100% {
+                r: 16;
+                opacity: 0;
+            }
+        }
+
         .hero-content {
             z-index: 10;
-            max-width: 900px;
+            max-width: 920px;
             padding: 20px;
             color: #F5F5F7;
-            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
         }
 
         .hero-title {
-            font-size: 80px;
+            font-size: 76px;
             line-height: 1.05;
             font-weight: 700;
-            letter-spacing: -0.015em;
+            letter-spacing: -0.02em;
             margin-bottom: 24px;
         }
 
         .hero-subtitle {
-            font-size: 28px;
-            line-height: 1.2;
+            font-size: 26px;
+            line-height: 1.35;
             font-weight: 500;
+            color: #E5E5EA;
         }
 
         .scroll-indicator {
@@ -136,7 +194,27 @@
             bottom: 40px;
             z-index: 20;
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
             animation: bounce 2s infinite;
+            pointer-events: none;
+        }
+
+        .scroll-indicator-text {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+            stroke: rgba(255, 255, 255, 0.85);
         }
 
         @keyframes bounce {
@@ -150,11 +228,11 @@
             }
 
             40% {
-                transform: translateY(-10px);
+                transform: translateY(-8px);
             }
 
             60% {
-                transform: translateY(-5px);
+                transform: translateY(-4px);
             }
         }
 
@@ -167,294 +245,151 @@
 
         .container {
             max-width: 1200px;
-            /* Increased from 980px to fit 3 cards comfortably */
             margin: 0 auto;
-            padding: 120px 40px;
+            padding: 110px 40px;
         }
 
         .section-title {
-            font-size: 56px;
-            line-height: 1.07;
+            font-size: 52px;
+            line-height: 1.08;
             font-weight: 600;
-            letter-spacing: -0.005em;
-            margin-bottom: 60px;
+            letter-spacing: -0.015em;
+            margin-bottom: 30px;
             text-align: center;
-            color: #1d1d1f;
         }
 
         .body-text {
-            font-size: 21px;
-            line-height: 1.4;
-            font-weight: 400;
-            color: #1d1d1f;
+            font-size: 20px;
+            line-height: 1.5;
+            color: #48484A;
         }
 
-        /* CARD GRID */
+        /* LEITFRAGE BOX */
+        .leitfrage-box {
+            max-width: 860px;
+            margin: 0 auto 60px auto;
+            background: #FFFFFF;
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 18px;
+            padding: 26px 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .leitfrage-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .leitfrage-text {
+            font-size: 20px;
+            line-height: 1.45;
+            font-weight: 600;
+            color: #1D1D1F;
+        }
+
+        /* 3 CARDS GRID */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            /* Force 3 columns */
-            gap: 24px;
-            /* Slightly reduced gap to make them fit nicely */
-            margin-top: 60px;
-        }
-
-        /* Responsive: Stack on smaller screens */
-        @media(max-width: 900px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: 28px;
+            margin-top: 20px;
         }
 
         .card {
             background: #FFFFFF;
-            border-radius: 30px;
-            padding: 32px;
-            /* Reduced from 48px to save space for 3-col layout */
-            box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.06);
-            transition: 0.3s;
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px) scale(1.015);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image-wrap {
+            width: 100%;
+            height: 180px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 22px;
+            background: #E5E5EA;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s var(--ease-out-cubic);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
         }
 
         .card h3 {
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 13px;
+            letter-spacing: 0.06em;
+            font-size: 12px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .card h4 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: #1d1d1f;
-            line-height: 1.2;
-        }
-
-        /* MEDIA SECTION - Vertical Layout */
-        .media-column {
-            display: flex;
-            flex-direction: column;
-            gap: 80px;
-            /* Space between Video and Podcast */
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .video-group {
-            width: 100%;
-            /* Just a structural wrapper */
-        }
-
-        /* MEDIA SECTION - Custom Player Updates */
-        .media-column {
-            display: flex;
-            flex-direction: column;
-            gap: 80px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .video-group {
-            width: 100%;
-        }
-
-        .custom-video-wrapper {
-            position: relative;
-            width: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            background: #000;
-        }
-
-        .custom-video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .custom-video-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            height: 54px;
-            background: rgba(30, 30, 30, 0.55);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 27px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            gap: 16px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-
-        .custom-video-wrapper:hover .custom-video-controls,
-        .custom-video-wrapper.active .custom-video-controls,
-        .custom-video-wrapper.paused .custom-video-controls {
-            opacity: 1;
-        }
-
-        .custom-video-wrapper.paused .custom-video-controls,
-        .custom-video-wrapper:hover .custom-video-controls {
-            opacity: 1;
-        }
-
-        .ctrl-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            padding: 0;
-            transition: opacity 0.2s;
-        }
-
-        .ctrl-btn:active {
-            opacity: 0.6;
-        }
-
-        .ctrl-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .time-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 13px;
-            font-weight: 500;
-            font-variant-numeric: tabular-nums;
-            min-width: 36px;
-            text-align: center;
-        }
-
-        .progress-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            position: relative;
-            height: 100%;
-        }
-
-        input[type=range].custom-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            outline: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        input[type=range].video-slider {
-            background: linear-gradient(to right, white var(--val, 0%), rgba(255, 255, 255, 0.3) var(--val, 0%));
-        }
-
-        input[type=range].audio-slider {
-            background: linear-gradient(to right, #1D1D1F var(--val, 0%), rgba(0, 0, 0, 0.08) var(--val, 0%));
-        }
-
-        input[type=range].custom-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.1s;
-        }
-
-        input[type=range].video-slider::-webkit-slider-thumb {
-            background: white;
-        }
-
-        input[type=range].audio-slider::-webkit-slider-thumb {
-            background: #1D1D1F;
-        }
-
-        input[type=range].custom-slider::-webkit-slider-thumb:active {
-            transform: scale(1.2);
-        }
-
-        .caption {
-            margin-top: 20px;
-            text-align: center;
-            color: #86868b;
-            font-weight: 500;
-        }
-
-        /* PODCAST - Custom Player */
-        .podcast-minimalist-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: left;
-            width: 100%;
-        }
-
-        .podcast-title-simple {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            color: #1d1d1f;
-            margin-bottom: 20px;
-            margin-left: 20px;
-        }
-
-        .custom-audio-wrapper {
-            display: flex;
-            align-items: center;
-            background: #F5F5F7;
-            height: 64px;
-            border-radius: 32px;
-            padding: 0 24px;
-            gap: 16px;
-        }
-
-        .custom-audio-wrapper .ctrl-btn {
+            margin-bottom: 14px;
             color: #1D1D1F;
+            line-height: 1.25;
         }
 
-        .custom-audio-wrapper .ctrl-btn svg {
-            width: 24px;
-            height: 24px;
+        .card .body-text {
+            font-size: 16px;
+            line-height: 1.55;
+            color: #48484A;
+            flex-grow: 1;
         }
 
-        .custom-audio-wrapper .time-text {
-            color: #86868b;
-            font-size: 14px;
+        .card-author {
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 1px solid #F0F0F2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
+        .author-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
 
-
-
-        /* MAP SECTION - Restored "Gray Bar" look */
+        /* MAP SECTION */
         .map-section {
-            background: #000;
-            color: #fff;
-            padding-top: 100px;
-            padding-bottom: 0;
-            /* Removing bottom padding so it hits edge */
+            background: #000000;
+            color: white;
+            padding: 120px 0 100px 0;
+            position: relative;
         }
 
         .map-preview-container {
-            max-width: 900px;
+            max-width: 940px;
             margin: 0 auto;
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s var(--ease-out-cubic);
         }
 
         .map-preview-container:hover {
@@ -462,13 +397,13 @@
         }
 
         .device-frame {
-            border: 12px solid #333;
-            border-radius: 20px 20px 0 0;
+            border: 12px solid #2C2C2E;
+            border-radius: 24px 24px 0 0;
             aspect-ratio: 16/9;
-            background: #222;
+            background: #1C1C1E;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 -10px 40px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         .device-frame iframe {
@@ -484,7 +419,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -492,26 +427,120 @@
         }
 
         .map-preview-container:hover .click-overlay {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.25);
         }
 
         .click-cta {
-            padding: 14px 28px;
-            background: rgba(255, 255, 255, 0.15);
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 32px;
             font-weight: 600;
+            font-size: 16px;
             color: white;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: background 0.2s, transform 0.2s;
         }
 
-        /* ANIMATIONS */
+        .map-preview-container:hover .click-cta {
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(1.04);
+        }
+
+        /* SITE FOOTER / IMPRESSUM */
+        .site-footer {
+            background: #0B0B0E;
+            color: #F5F5F7;
+            padding: 70px 40px 90px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .footer-project {
+            margin-bottom: 36px;
+        }
+
+        .footer-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+
+        .footer-roles {
+            font-size: 15px;
+            color: #8E8E93;
+            line-height: 1.6;
+        }
+
+        .footer-roles strong {
+            color: #F5F5F7;
+        }
+
+        .footer-sources h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8E8E93;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .sources-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+        }
+
+        .sources-list li {
+            font-size: 13px;
+            line-height: 1.65;
+            color: #A1A1A6;
+            margin-bottom: 10px;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .sources-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4D7CFF;
+        }
+
+        .sources-list a {
+            color: #6495ED;
+            text-decoration: none;
+        }
+
+        .sources-list a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+            color: #636366;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* REVEAL ANIMATIONS */
         .reveal {
             opacity: 0;
-            transform: scale(0.95) translateY(40px);
-            /* Slightly smaller start for "blopping" out effect */
+            transform: scale(0.96) translateY(36px);
             transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-out-cubic);
         }
 
@@ -519,30 +548,115 @@
             opacity: 1;
             transform: scale(1) translateY(0);
         }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-title {
+                font-size: 50px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 38px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 80px 24px;
+            }
+
+            .device-frame {
+                border-width: 8px;
+            }
+        }
+
+        /* PREFERS REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-scroll-container {
+                height: 100vh;
+            }
+
+            .france-path-draw {
+                stroke-dashoffset: 0 !important;
+                transition: none !important;
+            }
+
+            .pin-pulse {
+                animation: none !important;
+            }
+
+            .scroll-indicator {
+                animation: none !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .card:hover {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- HERO SECTION WITH FRANCE VECTOR SCROLL ANIMATION -->
     <section class="hero-scroll-container">
         <div class="hero-sticky">
-            <div class="hero-fallback-bg"></div>
-            <canvas id="hero-canvas"></canvas>
+            <div class="hero-fallback-bg" id="heroBg"></div>
             <div class="hero-overlay"></div>
+
+            <!-- FRANCE SILHOUETTE VECTOR STAGE -->
+            <div class="france-scroll-stage">
+                <svg class="france-silhouette-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-label="Silhouette von Frankreich">
+                    <defs>
+                        <!-- Tricolore Gradient for France drawing stroke -->
+                        <linearGradient id="franceTricoloreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4D7CFF" />
+                            <stop offset="48%" stop-color="#FFFFFF" />
+                            <stop offset="100%" stop-color="#FF453A" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Ghost Silhouette (Dashed guide outline) -->
+                    <path class="france-path-ghost" d="M 168,16 C 172.5,15.7 178.3,25.7 185,30 C 191.7,34.3 200.2,38.0 208,42 C 215.8,46.0 224.7,49.7 232,54 C 239.3,58.3 244.8,62.0 252,68 C 259.2,74.0 269.0,82.3 275,90 C 281.0,97.7 286.5,105.3 288,114 C 289.5,122.7 286.3,134.3 284,142 C 281.7,149.7 277.3,154.0 274,160 C 270.7,166.0 263.7,171.0 264,178 C 264.3,185.0 272.3,194.7 276,202 C 279.7,209.3 286.3,213.7 286,222 C 285.7,230.3 275.0,243.3 274,252 C 273.0,260.7 279.7,268.3 280,274 C 280.3,279.7 280.7,283.3 276,286 C 271.3,288.7 260.3,290.3 252,290 C 243.7,289.7 235.0,284.7 226,284 C 217.0,283.3 207.0,284.3 198,286 C 189.0,287.7 180.0,291.3 172,294 C 164.0,296.7 156.7,300.3 150,302 C 143.3,303.7 140.0,304.0 132,304 C 124.0,304.0 112.0,303.3 102,302 C 92.0,300.7 80.0,299.3 72,296 C 64.0,292.7 56.7,288.3 54,282 C 51.3,275.7 53.7,267.3 56,258 C 58.3,248.7 67.0,236.3 68,226 C 69.0,215.7 64.7,205.7 62,196 C 59.3,186.3 56.7,176.0 52,168 C 47.3,160.0 39.7,153.7 34,148 C 28.3,142.3 22.3,139.0 18,134 C 13.7,129.0 10.0,123.0 8,118 C 6.0,113.0 4.3,108.3 6,104 C 7.7,99.7 11.0,95.0 18,92 C 25.0,89.0 38.7,85.7 48,86 C 57.3,86.3 67.3,98.0 74,94 C 80.7,90.0 83.3,68.0 88,62 C 92.7,56.0 96.0,55.7 102,58 C 108.0,60.3 117.0,77.0 124,76 C 131.0,75.0 138.3,59.3 144,52 C 149.7,44.7 154.0,38.0 158,32 C 162.0,26.0 166.3,18.7 168,16 Z" />
+
+                    <!-- Animated Drawing Contour (Stroke Dashoffset controlled by Scroll) -->
+                    <path id="franceDrawPath" class="france-path-draw" d="M 168,16 C 172.5,15.7 178.3,25.7 185,30 C 191.7,34.3 200.2,38.0 208,42 C 215.8,46.0 224.7,49.7 232,54 C 239.3,58.3 244.8,62.0 252,68 C 259.2,74.0 269.0,82.3 275,90 C 281.0,97.7 286.5,105.3 288,114 C 289.5,122.7 286.3,134.3 284,142 C 281.7,149.7 277.3,154.0 274,160 C 270.7,166.0 263.7,171.0 264,178 C 264.3,185.0 272.3,194.7 276,202 C 279.7,209.3 286.3,213.7 286,222 C 285.7,230.3 275.0,243.3 274,252 C 273.0,260.7 279.7,268.3 280,274 C 280.3,279.7 280.7,283.3 276,286 C 271.3,288.7 260.3,290.3 252,290 C 243.7,289.7 235.0,284.7 226,284 C 217.0,283.3 207.0,284.3 198,286 C 189.0,287.7 180.0,291.3 172,294 C 164.0,296.7 156.7,300.3 150,302 C 143.3,303.7 140.0,304.0 132,304 C 124.0,304.0 112.0,303.3 102,302 C 92.0,300.7 80.0,299.3 72,296 C 64.0,292.7 56.7,288.3 54,282 C 51.3,275.7 53.7,267.3 56,258 C 58.3,248.7 67.0,236.3 68,226 C 69.0,215.7 64.7,205.7 62,196 C 59.3,186.3 56.7,176.0 52,168 C 47.3,160.0 39.7,153.7 34,148 C 28.3,142.3 22.3,139.0 18,134 C 13.7,129.0 10.0,123.0 8,118 C 6.0,113.0 4.3,108.3 6,104 C 7.7,99.7 11.0,95.0 18,92 C 25.0,89.0 38.7,85.7 48,86 C 57.3,86.3 67.3,98.0 74,94 C 80.7,90.0 83.3,68.0 88,62 C 92.7,56.0 96.0,55.7 102,58 C 108.0,60.3 117.0,77.0 124,76 C 131.0,75.0 138.3,59.3 144,52 C 149.7,44.7 154.0,38.0 158,32 C 162.0,26.0 166.3,18.7 168,16 Z" />
+
+                    <!-- Paris Location Pin traveling southwards upon scrolling -->
+                    <g id="francePin" class="france-pin-marker" transform="translate(165, 78)">
+                        <circle class="pin-pulse" r="8" />
+                        <circle class="pin-dot" r="4.5" />
+                        <text class="pin-label" x="8" y="4">Paris</text>
+                    </g>
+                </svg>
+            </div>
+
             <div class="hero-transition-mask"></div>
 
             <div class="hero-content reveal active">
-                <h1 class="hero-title">Der Konflikt am Nil</h1>
-                <p class="hero-subtitle">Ein Jahrhundertprojekt für Äthiopien.<br>Eine existenzielle Bedrohung für
-                    Ägypten.</p>
+                <h1 class="hero-title">Frankreich unter der Lupe</h1>
+                <p class="hero-subtitle">
+                    Ein Land, das jeder zu kennen glaubt.<br>
+                    Ein Blick hinter Raum, Menschen und Klischees.
+                </p>
             </div>
 
             <div class="scroll-indicator">
-                <span
-                    style="font-size:12px; font-weight:700; letter-spacing:1px; margin-bottom:6px; display:block;">SCROLLEN</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                <span class="scroll-indicator-text">SCROLLEN</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
             </div>
         </div>
@@ -550,128 +664,93 @@
 
     <main>
 
-        <!-- TEXTS RESTORED TO ORIGINAL LENGTH -->
+        <!-- ABSCHNITT „WORUM GEHT ES?“ -->
         <section class="container reveal">
             <h2 class="section-title">Worum geht es?</h2>
-            <p class="body-text" style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">
-                Der "Grand Ethiopian Renaissance Dam" (GERD) ist das größte Wasserkraftprojekt Afrikas. Äthiopien sieht
-                darin den Schlüssel zur wirtschaftlichen Entwicklung und Elektrifizierung des Landes. Für die
-                flussabwärts gelegenen Nachbarn Ägypten und Sudan jedoch stellt der Staudamm eine potenzielle Bedrohung
-                für ihre Wasserversorgung und damit ihre Existenzgrundlage dar.
+            <p class="body-text" style="text-align: center; max-width: 820px; margin: 0 auto 36px auto; font-size: 19px; line-height: 1.6;">
+                Frankreich ist eines der bekanntesten Länder der Welt – und steckt trotzdem voller Überraschungen.
+                In diesem Projekt erklären wir Frankreich geografisch und hinterfragen die Klischees, die wir mit dem
+                Land verbinden. Dafür nehmen wir drei Blickwinkel ein: den Naturraum (A), die Bevölkerung (B) und die
+                Kultur (E). Am Ende führt alles auf eine interaktive Karte, auf der man Frankreich Ort für Ort
+                entdecken kann.
             </p>
 
+            <!-- Hervorgehobene Leitfrage -->
+            <div class="leitfrage-box">
+                <span class="leitfrage-tag">Zentrale Leitfrage</span>
+                <p class="leitfrage-text">
+                    „Wie lässt sich Frankreich geografisch erklären – und wann wird aus einer Besonderheit ein Stereotyp über ein ganzes Land?“
+                </p>
+            </div>
+
+            <!-- DIE DREI KARTEN (BEREICH A / B / E) -->
             <div class="cards-grid">
+                <!-- Karte 1 – Bereich A -->
                 <div class="card">
-                    <h3 style="color: #0071e3;">Äthiopien</h3>
-                    <h4>Strom für Entwicklung</h4>
-                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
-                        Für Äthiopien ist der Damm ein Symbol nationalen Stolzes. Über 60% der Bevölkerung haben keinen
-                        Zugang zu Strom. Der Damm soll diese Lücke schließen und Äthiopien zum Energie-Exporteur machen.
-                    </p>
-                </div>
-                <div class="card">
-                    <h3 style="color: #ff3b30;">Ägypten</h3>
-                    <h4>Existenzielle Angst</h4>
-                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
-                        Ägypten bezieht rund 90% seines Süßwassers aus dem Nil. Kairo befürchtet, dass der Staudamm den
-                        Wasserfluss drastisch reduziert und beruft sich auf historische Nutzungsrechte.
-                    </p>
-                </div>
-                <div class="card">
-                    <h3 style="color: #ff9500;">Sudan</h3>
-                    <h4>Zwischen den Fronten</h4>
-                    <p class="body-text" style="font-size: 17px; margin-bottom: 0;">
-                        Der Sudan könnte vom Damm profitieren (Strom, Hochwasserschutz), teilt aber die ägyptischen
-                        Sorgen um Wassermangel und fordert verbindliche Abkommen zum Betrieb.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- MEDIATHEK - MINIMALIST LAYOUT -->
-        <section class="container reveal" style="padding-top: 0;">
-            <h2 class="section-title" style="margin-bottom: 20px; margin-top: -80px;">Mediathek</h2>
-            <!-- Pulled up MAX amount (-80px) -->
-            <p class="body-text"
-                style="text-align: center; margin-bottom: 60px; color: #86868b; font-size:28px; font-weight:500;">
-                Tiefere Einblicke in den Konflikt.
-            </p>
-
-            <div class="media-column">
-                <!-- 1. VIDEO -->
-                <div class="video-group">
-                    <div class="custom-video-wrapper paused">
-                        <video playsinline
-                            poster="https://images.tagesschau.de/image/d4ac8485-18bf-4c87-b4b7-68568036b949/AAABmSmxypc/AAABmyZEoeA/16x9-1920/grand-ethiopian-renaissance-dam-102.jpg">
-                            <source
-                                src="https://tagesschau-progressive.ard-mcdn.de/video/2025/0909/TV-20250909-0905-0500.webxxl.h264.mp4"
-                                type="video/mp4">
-                            Ihr Browser unterstützt das Video-Tag nicht.
-                        </video>
-                        <div class="custom-video-controls">
-                            <button class="ctrl-btn play-pause-btn" aria-label="Play/Pause">
-                                <svg class="icon-play" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z" />
-                                </svg>
-                                <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;">
-                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                                </svg>
-                            </button>
-                            <span class="time-text current-time">0:00</span>
-                            <div class="progress-container">
-                                <input type="range" class="custom-slider video-slider" value="0" step="0.1" min="0"
-                                    max="100">
-                            </div>
-                            <span class="time-text total-time">0:00</span>
-                            <button class="ctrl-btn fullscreen-btn" aria-label="Vollbild">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
-                                </svg>
-                            </button>
-                        </div>
+                    <div class="card-image-wrap">
+                        <img src="images/bereich_a.jpg" alt="Französischer Naturraum – Alpenlandschaft am Mont-Blanc-Massiv" class="card-image" loading="lazy">
                     </div>
-                    <p class="caption">Tagesschau: Neuer Mega-Staudamm entzweit Nil-Anrainer</p>
+                    <h3 style="color: #0071E3;">Bereich A</h3>
+                    <h4>Wo liegt das Land? — Naturraum</h4>
+                    <p class="body-text">
+                        Frankreich liegt in Westeuropa, zwischen Atlantik und Mittelmeer, und grenzt an acht Länder. Hohe
+                        Gebirge (Alpen, Pyrenäen), große Flüsse (Loire, Seine, Rhône) und zwei sehr unterschiedliche Küsten
+                        prägen den Naturraum – und damit, wie und wo die Menschen leben. Aus dieser Landschaft entsteht auch
+                        ein Bild im Kopf, das wir kritisch prüfen.
+                    </p>
+                    <div class="card-author">
+                        <span class="author-label">[Name] · Bereich A</span>
+                    </div>
                 </div>
 
-                <!-- 2. PODCAST -->
-                <div class="podcast-minimalist-wrapper">
-                    <h4 class="podcast-title-simple">Tagesschau Podcast</h4>
-                    <div class="custom-audio-wrapper paused">
-                        <audio preload="metadata">
-                            <source
-                                src="https://tagesschau-podcast.ard-mcdn.de/audio/2025/0909/AU-20250909-0700-1100.mp3"
-                                type="audio/mpeg">
-                        </audio>
-                        <button class="ctrl-btn play-pause-btn" aria-label="Play/Pause">
-                            <svg class="icon-play" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z" />
-                            </svg>
-                            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;">
-                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                            </svg>
-                        </button>
-                        <span class="time-text current-time">0:00</span>
-                        <div class="progress-container">
-                            <input type="range" class="custom-slider audio-slider" value="0" step="0.1" min="0"
-                                max="100">
-                        </div>
-                        <span class="time-text total-time">0:00</span>
+                <!-- Karte 2 – Bereich B -->
+                <div class="card">
+                    <div class="card-image-wrap">
+                        <img src="images/bereich_b.jpg" alt="Bevölkerung und Städte – Boulevard Haussmann in Paris" class="card-image" loading="lazy">
+                    </div>
+                    <h3 style="color: #34C759;">Bereich B</h3>
+                    <h4>Wie leben die Menschen? — Bevölkerung</h4>
+                    <p class="body-text">
+                        Rund 68 Millionen Menschen leben in Frankreich – sehr ungleich verteilt: dicht in Paris und an
+                        den Küsten, dünn in der „leeren Diagonale“. Städte, Sprachen und Herkunft sind vielfältiger, als viele
+                        denken. Wir fragen: Wo leben die Menschen, warum dort – und welche Vorstellungen von „den Franzosen“
+                        stimmen wirklich?
+                    </p>
+                    <div class="card-author">
+                        <span class="author-label">[Name] · Bereich B</span>
+                    </div>
+                </div>
+
+                <!-- Karte 3 – Bereich E -->
+                <div class="card">
+                    <div class="card-image-wrap">
+                        <img src="images/bereich_e.jpg" alt="Kultur und Alltag – Lebendiges Pariser Straßencafé" class="card-image" loading="lazy">
+                    </div>
+                    <h3 style="color: #AF52DE;">Bereich E</h3>
+                    <h4>Wie lebt &amp; denkt man dort? — Kultur &amp; Alltag</h4>
+                    <p class="body-text">
+                        Essen, Sprache, Religion und Alltag zeigen, wie in Frankreich gelebt und gedacht wird. Hinter
+                        Klischees wie „Baguette, Wein und Baskenmütze“ steckt oft eine ganz andere Wirklichkeit. Wir
+                        untersuchen, woher solche Bilder kommen – und wann aus einer Besonderheit ein Stereotyp wird.
+                    </p>
+                    <div class="card-author">
+                        <span class="author-label">[Name] · Bereich E</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAP SECTION -->
+        <!-- ABSCHNITT „INTERAKTIVE KULTURKARTE“ -->
         <section class="map-section reveal">
-            <div class="container" style="text-align: center; padding-top:0;">
-                <h2 class="section-title" style="color: white; margin-bottom: 20px;">Geopolitische Karte</h2>
-                <p class="body-text" style="color: #86868b; margin-bottom: 80px; font-size:28px; font-weight:500;">
-                    Erkunden Sie die Lage vor Ort interaktiv.</p>
+            <div class="container" style="text-align: center; padding-top: 0;">
+                <h2 class="section-title" style="color: white; margin-bottom: 20px;">Interaktive Kulturkarte</h2>
+                <p class="body-text" style="color: #8E8E93; margin-bottom: 60px; font-size: 24px; font-weight: 500; max-width: 820px; margin-left: auto; margin-right: auto;">
+                    Jetzt wird es konkret: Entdecke Frankreich Ort für Ort – mit Klischee, Realität und Raumanalyse an jedem Punkt.
+                </p>
 
                 <div class="map-preview-container" onclick="openMap()">
                     <div class="device-frame">
-                        <iframe src="1.html" scrolling="no" style="pointer-events: none;"></iframe>
+                        <iframe src="1.html" scrolling="no" style="pointer-events: none;" title="Vorschau der interaktiven Frankreich-Kulturkarte"></iframe>
                         <div class="click-overlay">
                             <span class="click-cta">Interaktive Karte öffnen</span>
                         </div>
@@ -680,114 +759,54 @@
             </div>
         </section>
 
-
-
     </main>
 
+    <!-- FOOTER / IMPRESSUM -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-project">
+                <div class="footer-title">Projekt „Frankreich unter der Lupe“</div>
+                <p class="footer-roles">
+                    Bereich A (Naturraum): <strong>[Name]</strong> &middot; 
+                    Bereich B (Bevölkerung): <strong>[Name]</strong> &middot; 
+                    Bereich E (Kultur &amp; Alltag): <strong>[Name]</strong>
+                </p>
+            </div>
+
+            <div class="footer-sources">
+                <h4>Quellen &amp; Bildnachweise</h4>
+                <ul class="sources-list">
+                    <li><strong>Hero-Hintergrund:</strong> <em>Paris Night (Skyline, Seine &amp; Eiffelturm bei Nacht)</em> von Benh LIEU SONG &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Bereich A (Naturraum):</strong> <em>Lac Blanc im Mont-Blanc-Massiv, Französische Alpen</em> von Tiia Monto &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Bereich B (Bevölkerung):</strong> <em>Boulevard Haussmann mit Pariser Stadtleben</em> von ParisSharing &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Bereich E (Kultur &amp; Alltag):</strong> <em>Klassisches Pariser Café (Café de Flore)</em> von madras91 &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Kartendaten:</strong> OpenStreetMap-Mitwirkende &middot; Map-Engine: Leaflet.js.</li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom">
+                <span>Geografie &amp; Kultur &middot; Schul- und Bildungsprojekt</span>
+                <span>Ausschließlich echte Fotografien &middot; Streng keine KI-Bilder &middot; Freie Creative-Commons-Lizenzen</span>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // --- MAP LOGIC ---
+        // --- MAP NAVIGATION ---
         function openMap() {
-            // Native Navigation: Navigate to the map page
             window.location.href = "1.html";
         }
 
-        // --- CUSTOM MEDIA PLAYER LOGIC ---
-        function initCustomPlayers() {
-            const formatTime = (seconds) => {
-                if (isNaN(seconds)) return "0:00";
-                const m = Math.floor(seconds / 60);
-                const s = Math.floor(seconds % 60);
-                return m + ":" + (s < 10 ? "0" + s : s);
-            };
-
-            const setupPlayer = (wrapperSelector, isVideo) => {
-                const wrapper = document.querySelector(wrapperSelector);
-                if (!wrapper) return;
-
-                const media = wrapper.querySelector(isVideo ? 'video' : 'audio');
-                const btn = wrapper.querySelector('.play-pause-btn');
-                const iconPlay = btn.querySelector('.icon-play');
-                const iconPause = btn.querySelector('.icon-pause');
-                const slider = wrapper.querySelector('.custom-slider');
-                const timeCurrent = wrapper.querySelector('.current-time');
-                const timeTotal = wrapper.querySelector('.total-time');
-
-                const updatePlayUI = () => {
-                    if (media.paused) {
-                        iconPlay.style.display = 'block';
-                        iconPause.style.display = 'none';
-                        wrapper.classList.remove('active');
-                        wrapper.classList.add('paused');
-                    } else {
-                        iconPlay.style.display = 'none';
-                        iconPause.style.display = 'block';
-                        wrapper.classList.add('active');
-                        wrapper.classList.remove('paused');
-                    }
-                };
-
-                const togglePlay = () => {
-                    if (media.paused) media.play();
-                    else media.pause();
-                };
-
-                btn.addEventListener('click', togglePlay);
-                if (isVideo) media.addEventListener('click', togglePlay);
-
-                media.addEventListener('play', updatePlayUI);
-                media.addEventListener('pause', updatePlayUI);
-
-                media.addEventListener('loadedmetadata', () => {
-                    timeTotal.textContent = formatTime(media.duration);
-                });
-
-                media.addEventListener('timeupdate', () => {
-                    if (!isNaN(media.currentTime)) {
-                        timeCurrent.textContent = formatTime(media.currentTime);
-                        const prog = (media.currentTime / media.duration) * 100 || 0;
-                        slider.value = prog;
-                        slider.style.setProperty('--val', prog + '%');
-                    }
-                });
-
-                media.addEventListener('ended', () => {
-                    updatePlayUI();
-                    slider.value = 0;
-                    slider.style.setProperty('--val', '0%');
-                });
-
-                slider.addEventListener('input', () => {
-                    const time = (slider.value / 100) * media.duration;
-                    media.currentTime = time;
-                    slider.style.setProperty('--val', slider.value + '%');
-                });
-
-                if (isVideo) {
-                    const fsBtn = wrapper.querySelector('.fullscreen-btn');
-                    if (fsBtn) {
-                        fsBtn.addEventListener('click', () => {
-                            if (media.requestFullscreen) media.requestFullscreen();
-                            else if (media.webkitRequestFullscreen) media.webkitRequestFullscreen();
-                        });
-                    }
-                }
-            };
-
-            setupPlayer('.custom-video-wrapper', true);
-            setupPlayer('.custom-audio-wrapper', false);
-        }
-
-        // --- ANIMATION LOGIC ---
+        // --- ANIMATIONS & SCROLL BEHAVIOR ---
         document.addEventListener('DOMContentLoaded', () => {
-            initCustomPlayers();
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            // Animation Observer (Re-Triggerable)
+            // IntersectionObserver für sanftes Einblenden der Abschnitte
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     } else {
-                        // Remove class to allow re-triggering animation on next scroll
                         entry.target.classList.remove('active');
                     }
                 });
@@ -795,72 +814,58 @@
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+            // Frankreich SVG Silhouette Scroll-Zeichen-Animation
+            const path = document.getElementById('franceDrawPath');
+            const pin = document.getElementById('francePin');
+            const heroBg = document.getElementById('heroBg');
+            const heroContent = document.querySelector('.hero-content');
+            let pathLength = 0;
+
+            if (path) {
+                pathLength = path.getTotalLength();
+                path.style.strokeDasharray = pathLength;
+                path.style.strokeDashoffset = prefersReducedMotion ? 0 : pathLength;
+            }
+
             const onScroll = () => {
-                // Hero Parallax Logic
                 const scroll = window.scrollY;
-                const heroH = document.querySelector('.hero-scroll-container').offsetHeight;
+                const container = document.querySelector('.hero-scroll-container');
+                if (!container) return;
+
+                const heroH = container.offsetHeight;
                 const winH = window.innerHeight;
                 let progress = scroll / (heroH - winH);
                 progress = Math.min(Math.max(progress, 0), 1);
 
-                const canvas = document.getElementById('hero-canvas');
-                if (canvas && images.length > 0) {
-                    const frame = Math.floor(progress * 23);
-                    render(frame);
+                if (!prefersReducedMotion) {
+                    // 1. Silhouette von Frankreich zeichnet sich beim Scrollen
+                    if (path && pathLength > 0) {
+                        path.style.strokeDashoffset = pathLength * (1 - progress);
+                    }
 
-                    const content = document.querySelector('.hero-content');
-                    if (content) {
-                        content.style.opacity = Math.max(0, 1 - progress * 4);
-                        content.style.transform = `translateY(${progress * -50}px)`;
+                    // 2. Standort-Pin wandert von Paris nach Süden
+                    if (pin) {
+                        const startX = 165, startY = 78;   // Paris
+                        const endX = 185, endY = 210;     // Zentral-/Südfrankreich (Rhône-Tal)
+                        const curX = startX + (endX - startX) * progress;
+                        const curY = startY + (endY - startY) * progress;
+                        pin.setAttribute('transform', `translate(${curX}, ${curY})`);
+                    }
+
+                    // 3. Dezenter Parallax-Effekt für den Hintergrund
+                    if (heroBg) {
+                        heroBg.style.transform = `scale(${1.02 + progress * 0.08}) translateY(${progress * 25}px)`;
+                    }
+
+                    // 4. Hero-Text blendet sanft aus
+                    if (heroContent) {
+                        heroContent.style.opacity = Math.max(0, 1 - progress * 3.5);
+                        heroContent.style.transform = `translateY(${progress * -45}px)`;
                     }
                 }
             };
 
-            // Canvas Init
-            const canvas = document.getElementById('hero-canvas');
-            const ctx = canvas ? canvas.getContext('2d') : null;
-            const images = [];
-
-            if (canvas) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                const loadImages = () => {
-                    for (let i = 0; i < 24; i++) {
-                        const img = new Image();
-                        img.src = `hero/heroanimation/GERD_${i.toString().padStart(3, '0')}.jpg`;
-                        img.onload = () => { if (i === 0) render(0); };
-                        images.push(img);
-                    }
-                };
-                loadImages(); // Start loading
-            }
-
-            const render = (idx) => {
-                if (!images[idx] || !images[idx].complete) return;
-                const img = images[idx];
-                const cW = canvas.width; const cH = canvas.height;
-                const iW = img.width; const iH = img.height;
-
-                // Cover Logic
-                let dW, dH, oX, oY;
-                if (cW / cH > iW / iH) {
-                    dW = cW; dH = cW * (iH / iW);
-                    oX = 0; oY = (cH - dH) / 2;
-                } else {
-                    dH = cH; dW = cH * (iW / iH);
-                    oX = (cW - dW) / 2; oY = 0;
-                }
-
-                ctx.clearRect(0, 0, cW, cH);
-                ctx.drawImage(img, oX, oY, dW, dH);
-            };
-
-            window.addEventListener('scroll', onScroll);
-            window.addEventListener('resize', () => {
-                if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-                onScroll();
-            });
+            window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
         });
     </script>
