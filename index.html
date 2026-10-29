@@ -10,27 +10,83 @@
     <style>
         :root {
             --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            --bg-primary: #F5F5F7;
-            --bg-secondary: #FFFFFF;
-            --bg-elevated: #FFFFFF;
-            --text-primary: #1D1D1F;
-            --text-secondary: #6E6E73;
-            --text-tertiary: #86868B;
-            --accent-blue: #0071E3;
-            --accent-blue-hover: #0077ED;
-            --accent-green: #34C759;
-            --accent-purple: #AF52DE;
-            --border-color: #E5E5EA;
-            --border-subtle: #F0F0F2;
-            --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+            
+            /* EDITORIAL PALETTE (Taste-Skill: Subject-driven French Cartography) */
+            --bg-base: #F8F9FA;
+            --bg-surface: #FFFFFF;
+            --bg-subtle: #F1F3F5;
+            
+            --ink-900: #0F172A; /* Deep French Ink / Obsidian Slate */
+            --ink-700: #334155; /* Slate Body Text */
+            --ink-500: #64748B; /* Neutral Secondary */
+            --ink-400: #94A3B8; /* Tertiary / Captions */
+            --text-primary: var(--ink-900);
+            --text-secondary: var(--ink-500);
+            --text-tertiary: var(--ink-400);
+            --border-color: var(--border-hairline);
+            --border-subtle: rgba(15, 23, 42, 0.05);
+            --border-hairline: rgba(15, 23, 42, 0.08);
+            --border-hover: rgba(15, 23, 42, 0.16);
+
+            /* REFINED AREA ACCENTS (Subtle, dignified, authentic to geography) */
+            /* Bereich A · Naturraum (Emil): Deep Alpine Sage & Pine */
+            --area-a: #1E4D38;
+            --area-a-subtle: #F2F7F4;
+            --area-a-border: rgba(30, 77, 56, 0.18);
+            
+            /* Bereich B · Bevölkerung (Oskar): Sèvres Navy / Atlantic */
+            --area-b: #1E3A8A;
+            --area-b-subtle: #F1F5F9;
+            --area-b-border: rgba(30, 58, 138, 0.18);
+            
+            /* Bereich E · Kultur (Karl): Bordeaux Grand Cru / Terracotta */
+            --area-e: #7A222B;
+            --area-e-subtle: #FAF2F2;
+            --area-e-border: rgba(122, 34, 43, 0.18);
+
+            /* IMPECCABLE ELEVATIONS & RADII */
+            --radius-card: 14px;
+            --radius-sm: 8px;
+            --radius-full: 9999px;
+            
+            --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.03), 0 8px 24px rgba(15, 23, 42, 0.03);
+            --shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.05), 0 16px 36px rgba(15, 23, 42, 0.06);
+
+            /* EMIL KOWALSKI FLUID SPRINGS & PHYSICAL FEEL */
+            --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-tactile: transform 100ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms ease;
+        }
+
+        /* BROWSER SURFACES (Impeccable craft floor) */
+        ::selection {
+            background: #1E3A8A;
+            color: #FFFFFF;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F3F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
         }
 
         html {
             scroll-behavior: smooth;
         }
 
-        /* RESET */
-        * {
+        /* RESET & BASE */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -38,11 +94,12 @@
 
         body {
             font-family: var(--system-font);
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            background-color: var(--bg-base);
+            color: var(--ink-900);
+            line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 0;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* HERO SECTION */
@@ -96,7 +153,7 @@
             left: 0;
             width: 100%;
             height: 200px;
-            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            background: linear-gradient(to bottom, transparent, var(--bg-base));
             z-index: 5;
             pointer-events: none;
         }
@@ -156,7 +213,7 @@
             font-size: 11px;
             font-weight: 700;
             fill: #FFFFFF;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
             font-family: var(--system-font);
@@ -183,19 +240,19 @@
         }
 
         .hero-title {
-            font-size: 88px;
+            font-size: clamp(56px, 9vw, 92px);
             line-height: 1.0;
             font-weight: 700;
-            letter-spacing: -0.025em;
+            letter-spacing: -0.03em;
             margin-bottom: 16px;
         }
 
         .hero-subtitle {
-            font-size: 24px;
-            line-height: 1.35;
+            font-size: clamp(18px, 3vw, 24px);
+            line-height: 1.4;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.88);
-            letter-spacing: -0.01em;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: -0.015em;
         }
 
         .scroll-indicator {
@@ -214,7 +271,7 @@
         .scroll-indicator-text {
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.16em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.85);
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -242,94 +299,105 @@
         main {
             position: relative;
             z-index: 20;
-            background: var(--bg-primary);
+            background: var(--bg-base);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 100px 40px;
+            padding: 90px 32px;
         }
 
         .section-title {
-            font-size: 48px;
-            line-height: 1.1;
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            margin-bottom: 24px;
+            font-size: clamp(34px, 5vw, 44px);
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 22px;
             text-align: center;
+            color: var(--ink-900);
         }
 
         .body-text {
-            font-size: 19px;
-            line-height: 1.55;
-            color: #48484A;
+            font-size: 17.5px;
+            line-height: 1.65;
+            color: var(--ink-700);
+            max-width: 68ch;
         }
 
-        /* LEITFRAGE BOX */
+        /* EDITORIAL LEITFRAGE BOX (Taste-Skill & Impeccable: No cheap thick left stripe) */
         .leitfrage-box {
-            max-width: 860px;
-            margin: 0 auto 50px auto;
-            background: #FFFFFF;
-            border-left: 4px solid var(--accent-blue);
-            border-radius: 18px;
-            padding: 24px 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            text-align: left;
+            max-width: 780px;
+            margin: 0 auto 52px auto;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            padding: 32px 36px;
+            box-shadow: var(--shadow-subtle);
+            text-align: center;
+            position: relative;
         }
 
         .leitfrage-tag {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent-blue);
-            margin-bottom: 8px;
+            letter-spacing: 0.12em;
+            color: var(--area-b);
+            margin-bottom: 12px;
         }
 
         .leitfrage-text {
-            font-size: 20px;
-            line-height: 1.45;
+            font-size: 21px;
+            line-height: 1.5;
             font-weight: 600;
-            color: #1D1D1F;
+            color: var(--ink-900);
+            letter-spacing: -0.015em;
         }
 
-        /* 3 CARDS GRID (CLICKABLE) */
+        /* 3 CARDS GRID (Taste-skill & Emil Kowalski tactile feel) */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 24px;
             margin-top: 20px;
         }
 
         .card-clickable {
-            background: #FFFFFF;
-            border-radius: 28px;
-            padding: 28px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: var(--bg-surface);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            border: 1px solid var(--border-hairline);
+            box-shadow: var(--shadow-subtle);
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            border: 1px solid transparent;
-            transition: transform 0.3s var(--ease-out-cubic), box-shadow 0.3s var(--ease-out-cubic), border-color 0.3s;
+            transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring), border-color 0.25s ease;
             cursor: pointer;
         }
 
         .card-clickable:hover {
-            transform: translateY(-6px) scale(1.015);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 113, 227, 0.2);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--border-hover);
+        }
+
+        .card-clickable:active {
+            transform: scale(0.985);
+            transition: var(--transition-tactile);
         }
 
         .card-image-wrap {
             width: 100%;
-            height: 180px;
-            border-radius: 18px;
+            height: 185px;
+            border-radius: var(--radius-sm);
             overflow: hidden;
-            margin-bottom: 22px;
-            background: #E5E5EA;
+            margin-bottom: 20px;
+            background: #E2E8F0;
         }
 
         .card-image {
@@ -337,132 +405,202 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.4s var(--ease-out-cubic);
+            transition: transform 0.4s var(--ease-spring);
         }
 
         .card-clickable:hover .card-image {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .card-large-title {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 12px;
-            line-height: 1.15;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            color: var(--ink-900);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
+        .card-area-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .tag-area-a { background: var(--area-a-subtle); color: var(--area-a); border: 1px solid var(--area-a-border); }
+        .tag-area-b { background: var(--area-b-subtle); color: var(--area-b); border: 1px solid var(--area-b-border); }
+        .tag-area-e { background: var(--area-e-subtle); color: var(--area-e); border: 1px solid var(--area-e-border); }
+
         .card-clickable .body-text {
-            font-size: 16px;
-            line-height: 1.55;
-            color: #48484A;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--ink-700);
             flex-grow: 1;
             margin-bottom: 20px;
         }
 
         .card-footer-info {
-            padding-top: 16px;
-            border-top: 1px solid #F0F0F2;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-hairline);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .card-author-name {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--ink-900);
         }
 
         .card-arrow-cta {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
-            color: var(--accent-blue);
+            color: var(--ink-500);
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            transition: color 0.15s ease, transform 0.15s ease;
+        }
+
+        .card-clickable:hover .card-arrow-cta {
+            color: var(--area-b);
+            transform: translateY(2px);
         }
 
         /* DEEPDIVE SECTIONS FOR BEREICH A, B, E */
         .deepdive-section {
-            padding-top: 70px;
-            padding-bottom: 80px;
-            border-top: 1px solid var(--border-color);
+            padding-top: 80px;
+            padding-bottom: 90px;
+            border-top: 1px solid var(--border-hairline);
         }
 
-        .deepdive-header {
-            margin-bottom: 40px;
+        /* EDITORIAL AREA HEADER LOCKUP (Replaces childish 48px square badge) */
+        .bereich-shield-banner {
             display: flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
+            align-items: center;
             justify-content: space-between;
             gap: 16px;
+            padding: 14px 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-subtle);
         }
 
-        .deepdive-title-group {
-            max-width: 800px;
+        .shield-left-lockup {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .deepdive-tag {
-            display: inline-block;
-            font-size: 12px;
+        .shield-letter-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            font-family: var(--system-font);
+            flex-shrink: 0;
+        }
+
+        .shield-badge-a {
+            background: var(--area-a-subtle);
+            color: var(--area-a);
+            border: 1px solid var(--area-a-border);
+        }
+
+        .shield-badge-b {
+            background: var(--area-b-subtle);
+            color: var(--area-b);
+            border: 1px solid var(--area-b-border);
+        }
+
+        .shield-badge-e {
+            background: var(--area-e-subtle);
+            color: var(--area-e);
+            border: 1px solid var(--area-e-border);
+        }
+
+        .shield-name-title {
+            font-size: 17px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-bottom: 12px;
+            color: var(--ink-900);
+            line-height: 1.25;
+            letter-spacing: -0.01em;
         }
 
-        .deepdive-title {
-            font-size: 40px;
-            font-weight: 700;
-            letter-spacing: -0.015em;
-            line-height: 1.15;
-            color: #1D1D1F;
-            margin-bottom: 8px;
-        }
-
-        .deepdive-author-badge {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
+        .shield-subtitle {
+            font-size: 13px;
+            color: var(--ink-500);
+            margin-top: 2px;
         }
 
         .jump-back-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
-            color: var(--accent-blue);
+            color: var(--ink-700);
             text-decoration: none;
-            padding: 8px 14px;
-            background: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            transition: all 0.2s;
+            padding: 7px 14px;
+            background: var(--bg-base);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-sm);
+            transition: all 0.15s ease;
         }
 
         .jump-back-link:hover {
-            background: #F5F5F7;
-            transform: translateY(-1px);
+            background: #FFFFFF;
+            border-color: var(--border-hover);
+            color: var(--ink-900);
         }
+
+        .jump-back-link:active {
+            transform: scale(0.97);
+        }
+
+        .deepdive-header {
+            margin-bottom: 32px;
+        }
+
+        .deepdive-title {
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--ink-900);
+        }
+
+        .color-area-a { color: var(--area-a); }
+        .color-area-b { color: var(--area-b); }
+        .color-area-e { color: var(--area-e); }
 
         /* DEEPDIVE CONTENT PANELS */
         .deepdive-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .deepdive-card {
-            background: #FFFFFF;
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            border: 1px solid var(--border-hairline);
+            box-shadow: var(--shadow-subtle);
         }
 
         .deepdive-card-full {
@@ -470,11 +608,11 @@
         }
 
         .deepdive-card-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.015em;
             margin-bottom: 14px;
-            color: #1D1D1F;
+            color: var(--ink-900);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -482,162 +620,90 @@
 
         .deepdive-card p {
             font-size: 15px;
-            line-height: 1.6;
-            color: #48484A;
+            line-height: 1.65;
+            color: var(--ink-700);
             margin-bottom: 12px;
+            max-width: 68ch;
         }
 
         .deepdive-card p:last-child {
             margin-bottom: 0;
         }
 
-        /* STEREOTYPEN-CHECK BOX (Klischee / Woher? / Belegbar? / Ausgeblendet?) */
+        /* STEREOTYPEN-CHECK BOX (Editorial analytical matrix) */
         .check-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
+            gap: 12px;
             margin-top: 18px;
         }
 
         .check-box {
             padding: 16px;
-            border-radius: 14px;
-            background: #F5F5F7;
+            border-radius: var(--radius-sm);
+            background: var(--bg-base);
+            border: 1px solid var(--border-hairline);
             display: flex;
             flex-direction: column;
+            transition: border-color 0.15s ease;
+        }
+
+        .check-box:hover {
+            border-color: var(--border-hover);
         }
 
         .check-badge {
             display: inline-block;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 8px;
-            padding: 2px 7px;
-            border-radius: 5px;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
             align-self: flex-start;
         }
 
         .badge-klischee {
-            background: rgba(255, 59, 48, 0.12);
-            color: #D70015;
+            background: var(--area-e-subtle);
+            color: var(--area-e);
+            border: 1px solid var(--area-e-border);
         }
 
         .badge-woher {
-            background: rgba(88, 86, 214, 0.14);
-            color: #5856D6;
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid rgba(71, 85, 105, 0.18);
         }
 
         .badge-belegbar {
-            background: rgba(52, 199, 89, 0.14);
-            color: #248A3D;
+            background: var(--area-a-subtle);
+            color: var(--area-a);
+            border: 1px solid var(--area-a-border);
         }
 
         .badge-ausgeblendet {
-            background: rgba(0, 113, 227, 0.12);
-            color: #0071E3;
+            background: var(--area-b-subtle);
+            color: var(--area-b);
+            border: 1px solid var(--area-b-border);
         }
 
-        /* BEREICHS-ABHEBUNG & SCHILDER (AKZENTE: A=Grün, B=Blau, E=Warmrot) */
-        .section-accent-a {
-            border-top: 3px solid #248A3D;
-            padding-top: 28px;
-        }
-
-        .section-accent-b {
-            border-top: 3px solid #0071E3;
-            padding-top: 28px;
-        }
-
-        .section-accent-e {
-            border-top: 3px solid #D70015;
-            padding-top: 28px;
-        }
-
-        .bereich-shield-banner {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 14px 20px;
-            background: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .shield-letter-badge {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 800;
-            font-family: var(--system-font);
-            flex-shrink: 0;
-        }
-
-        .shield-badge-a {
-            background: rgba(36, 138, 61, 0.12);
-            color: #248A3D;
-            border: 1.5px solid rgba(36, 138, 61, 0.35);
-        }
-
-        .shield-badge-b {
-            background: rgba(0, 113, 227, 0.12);
-            color: #0071E3;
-            border: 1.5px solid rgba(0, 113, 227, 0.35);
-        }
-
-        .shield-badge-e {
-            background: rgba(215, 0, 21, 0.12);
-            color: #D70015;
-            border: 1.5px solid rgba(215, 0, 21, 0.35);
-        }
-
-        .shield-text-group {
-            flex: 1;
-        }
-
-        .shield-name-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.2;
-        }
-
-        .shield-subtitle {
+        .check-text {
             font-size: 13.5px;
-            color: var(--text-secondary);
-            margin-top: 2px;
+            line-height: 1.55;
+            color: var(--ink-700);
         }
 
-        .card-color-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        .dot-green { background-color: #248A3D; }
-        .dot-blue { background-color: #0071E3; }
-        .dot-red { background-color: #D70015; }
-
-        /* ORIENTIERUNGSKARTE */
+        /* ORIENTIERUNGSKARTE & ATLAS LEGENDE */
         .orientation-map-container {
             position: relative;
             width: 100%;
             max-width: 900px;
-            margin: 18px auto 20px auto;
-            border-radius: 18px;
+            margin: 20px auto 24px auto;
+            border-radius: var(--radius-card);
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+            border: 1px solid var(--border-hairline);
             background: #D9EAF2;
         }
 
@@ -655,22 +721,24 @@
         }
 
         .orientation-legend-item {
-            background: #F5F5F7;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
             padding: 14px 16px;
-            border-radius: 14px;
+            border-radius: var(--radius-sm);
             font-size: 13.5px;
-            line-height: 1.5;
-            color: var(--text-primary);
-            border-left: 3px solid #248A3D;
+            line-height: 1.55;
+            color: var(--ink-700);
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
         }
 
         .orientation-legend-item strong {
-            color: #248A3D;
+            color: var(--area-a);
             display: block;
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 3px;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
         }
 
         /* RAUMANALYSE-KETTEN */
@@ -682,36 +750,38 @@
         }
 
         .raumanalyse-card {
-            background: #F5F5F7;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(0, 0, 0, 0.04);
+            background: var(--bg-surface);
+            border-radius: var(--radius-card);
+            padding: 22px;
+            border: 1px solid var(--border-hairline);
+            box-shadow: var(--shadow-subtle);
             display: flex;
             flex-direction: column;
         }
 
         .raumanalyse-card-header {
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-hairline);
         }
 
         .raumanalyse-badge {
             display: inline-block;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
             padding: 3px 8px;
-            border-radius: 5px;
-            margin-bottom: 6px;
+            border-radius: 4px;
+            margin-bottom: 8px;
         }
 
         .raumanalyse-card-header h4 {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--ink-900);
             margin: 0;
+            letter-spacing: -0.01em;
         }
 
         .raumanalyse-steps {
@@ -720,26 +790,34 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 12px;
         }
 
         .raumanalyse-steps li {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333336;
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-700);
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(15, 23, 42, 0.06);
+        }
+
+        .raumanalyse-steps li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .raumanalyse-step-label {
-            display: block;
+            display: inline-block;
             font-weight: 700;
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            margin-bottom: 2px;
+            letter-spacing: 0.06em;
+            color: var(--ink-500);
+            width: 78px;
+            margin-right: 6px;
         }
 
-        /* STATS CHIPS / NUMBERS */
+        /* STATS CHIPS / NUMBERS (Emil Kowalski tabular-nums) */
         .stats-chip-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -748,73 +826,83 @@
         }
 
         .stat-chip {
-            background: #F5F5F7;
-            padding: 18px;
-            border-radius: 16px;
+            background: var(--bg-base);
+            border: 1px solid var(--border-hairline);
+            padding: 20px 16px;
+            border-radius: var(--radius-sm);
             text-align: center;
         }
 
         .stat-chip-num {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--area-b);
             margin-bottom: 4px;
             font-variant-numeric: tabular-nums;
+            letter-spacing: -0.025em;
+            line-height: 1;
         }
 
         .stat-chip-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            line-height: 1.35;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--ink-500);
+            line-height: 1.4;
         }
 
         /* MAP LINK CTA BANNER INSIDE DEEPDIVE */
         .map-jump-cta {
-            background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
-            border-radius: 20px;
-            padding: 22px 28px;
+            background: var(--ink-900);
+            border-radius: var(--radius-card);
+            padding: 24px 28px;
             color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 24px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            gap: 20px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .map-jump-cta-text h4 {
-            font-size: 17px;
+            font-size: 16.5px;
             font-weight: 600;
+            color: #F8FAFC;
+            letter-spacing: -0.01em;
             margin-bottom: 4px;
         }
 
         .map-jump-cta-text p {
-            font-size: 13px;
-            color: #8E8E93;
+            font-size: 13.5px;
+            color: #94A3B8;
             margin-bottom: 0;
         }
 
         .map-jump-cta-btn {
-            background: var(--accent-blue);
-            color: #FFFFFF;
+            background: #FFFFFF;
+            color: var(--ink-900);
             text-decoration: none;
             padding: 10px 20px;
-            border-radius: 20px;
+            border-radius: var(--radius-sm);
             font-size: 13px;
             font-weight: 600;
             white-space: nowrap;
-            transition: background 0.2s, transform 0.2s;
+            transition: all 0.15s ease;
         }
 
         .map-jump-cta-btn:hover {
-            background: var(--accent-blue-hover);
-            transform: scale(1.03);
+            background: #F1F5F9;
+            transform: translateY(-1px);
+        }
+
+        .map-jump-cta-btn:active {
+            transform: scale(0.97);
         }
 
         /* MAP SECTION */
         .map-section {
-            background: #000000;
-            color: white;
+            background: #0B0F19;
+            color: #F8FAFC;
             padding: 120px 0 100px 0;
             position: relative;
         }
@@ -824,21 +912,21 @@
             margin: 0 auto;
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s var(--ease-out-cubic);
+            transition: transform 0.3s var(--ease-spring);
         }
 
         .map-preview-container:hover {
-            transform: scale(1.02);
+            transform: scale(1.015);
         }
 
         .device-frame {
-            border: 12px solid #2C2C2E;
-            border-radius: 24px 24px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: var(--radius-card);
             aspect-ratio: 16/9;
-            background: #1C1C1E;
+            background: #111827;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
         }
 
         .device-frame iframe {
@@ -854,7 +942,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(11, 15, 25, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -862,35 +950,31 @@
         }
 
         .map-preview-container:hover .click-overlay {
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(11, 15, 25, 0.25);
         }
 
         .click-cta {
-            padding: 16px 32px;
-            background: rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 32px;
+            padding: 14px 28px;
+            background: #FFFFFF;
+            color: #0B0F19;
+            border-radius: var(--radius-sm);
             font-weight: 600;
-            font-size: 16px;
-            color: white;
-            letter-spacing: 0.3px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            transition: background 0.2s, transform 0.2s;
+            font-size: 15px;
+            letter-spacing: -0.01em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.15s var(--ease-spring), background 0.15s ease;
         }
 
-        .map-preview-container:hover .click-cta {
-            background: rgba(255, 255, 255, 0.28);
-            transform: scale(1.04);
+        .click-cta:active {
+            transform: scale(0.97);
         }
 
         /* SITE FOOTER / IMPRESSUM */
         .site-footer {
-            background: #0B0B0E;
-            color: #F5F5F7;
-            padding: 70px 40px 90px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: #070A10;
+            color: #F8FAFC;
+            padding: 80px 40px 90px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .footer-content {
@@ -906,26 +990,26 @@
         .footer-title {
             font-size: 22px;
             font-weight: 700;
-            letter-spacing: -0.015em;
+            letter-spacing: -0.02em;
             margin-bottom: 8px;
             color: #FFFFFF;
         }
 
         .footer-roles {
-            font-size: 15px;
-            color: #8E8E93;
+            font-size: 14.5px;
+            color: #94A3B8;
             line-height: 1.6;
         }
 
         .footer-roles strong {
-            color: #F5F5F7;
+            color: #F8FAFC;
         }
 
         .footer-sources h4 {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #8E8E93;
+            letter-spacing: 0.1em;
+            color: #94A3B8;
             margin-bottom: 14px;
             font-weight: 600;
         }
@@ -937,9 +1021,9 @@
         }
 
         .sources-list li {
-            font-size: 13px;
+            font-size: 13.5px;
             line-height: 1.65;
-            color: #A1A1A6;
+            color: #CBD5E1;
             margin-bottom: 10px;
             padding-left: 14px;
             position: relative;
@@ -949,11 +1033,11 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #FFFFFF;
+            color: #64748B;
         }
 
         .sources-list a {
-            color: #6495ED;
+            color: #93C5FD;
             text-decoration: none;
         }
 
@@ -964,8 +1048,8 @@
         .footer-bottom {
             padding-top: 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 12px;
-            color: #636366;
+            font-size: 12.5px;
+            color: #64748B;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -975,8 +1059,8 @@
         /* REVEAL ANIMATIONS */
         .reveal {
             opacity: 0;
-            transform: scale(0.97) translateY(32px);
-            transition: opacity 0.8s var(--ease-out-cubic), transform 0.8s var(--ease-out-cubic);
+            transform: scale(0.985) translateY(24px);
+            transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
         }
 
         .reveal.active {
@@ -986,18 +1070,6 @@
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            .hero-title {
-                font-size: 60px;
-            }
-
-            .hero-subtitle {
-                font-size: 20px;
-            }
-
-            .section-title {
-                font-size: 36px;
-            }
-
             .cards-grid,
             .deepdive-grid,
             .stats-chip-row,
@@ -1020,17 +1092,22 @@
             }
 
             .container {
-                padding: 70px 20px;
-            }
-
-            .device-frame {
-                border-width: 8px;
+                padding: 60px 20px;
             }
 
             .map-jump-cta {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 14px;
+            }
+            
+            .bereich-shield-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .jump-back-link {
+                align-self: flex-start;
             }
         }
 
@@ -1135,7 +1212,7 @@
                     <div class="card-image-wrap">
                         <img src="images/bereich_a.jpg" alt="Französischer Naturraum, Alpenlandschaft am Mont-Blanc-Massiv" class="card-image" loading="lazy">
                     </div>
-                    <h3 class="card-large-title" style="color: #248A3D;"><span class="card-color-dot dot-green"></span>Bereich A</h3>
+                    <h3 class="card-large-title">Bereich A <span class="card-area-badge tag-area-a">Naturraum</span></h3>
                     <p class="body-text">
                         Lage, Gebirge, Flüsse und zwei Küsten. Wie formt die Landschaft das Leben der Menschen, und welche Klischees entstehen daraus?
                     </p>
@@ -1150,7 +1227,7 @@
                     <div class="card-image-wrap">
                         <img src="images/bereich_b.jpg" alt="Bevölkerung und Städte, Boulevard Haussmann in Paris" class="card-image" loading="lazy">
                     </div>
-                    <h3 class="card-large-title" style="color: #0071E3;"><span class="card-color-dot dot-blue"></span>Bereich B</h3>
+                    <h3 class="card-large-title">Bereich B <span class="card-area-badge tag-area-b">Bevölkerung</span></h3>
                     <p class="body-text">
                         68 Millionen Menschen, Altersstruktur, Sprachen und Migration. Wie verteilt sich die Bevölkerung zwischen Paris und der „leeren Diagonale“?
                     </p>
@@ -1165,7 +1242,7 @@
                     <div class="card-image-wrap">
                         <img src="images/bereich_e.jpg" alt="Kultur und Alltag, Lebendiges Pariser Straßencafé" class="card-image" loading="lazy">
                     </div>
-                    <h3 class="card-large-title" style="color: #D70015;"><span class="card-color-dot dot-red"></span>Bereich E</h3>
+                    <h3 class="card-large-title">Bereich E <span class="card-area-badge tag-area-e">Kultur</span></h3>
                     <p class="body-text">
                         Kultur, Alltag, Baguette und Streik, dazu die Methode der Raumanalyse. Wann wird aus einer Besonderheit ein Stereotyp?
                     </p>
@@ -1180,19 +1257,21 @@
         <!-- ============================================================== -->
         <!-- VERTIEFUNG: BEREICH A (EMIL)                                   -->
         <!-- ============================================================== -->
-        <section id="bereich-a" class="deepdive-section container reveal section-accent-a">
+        <section id="bereich-a" class="deepdive-section container reveal ">
             <!-- Schild Bereich A · Emil -->
             <div class="bereich-shield-banner">
-                <div class="shield-letter-badge shield-badge-a">A</div>
-                <div class="shield-text-group">
-                    <div class="shield-name-title">Bereich A &middot; Emil</div>
-                    <div class="shield-subtitle">Naturraum, Lage &amp; Geografie</div>
+                <div class="shield-left-lockup">
+                    <div class="shield-letter-badge shield-badge-a">A</div>
+                    <div class="shield-text-group">
+                        <div class="shield-name-title">Bereich A &middot; Emil</div>
+                        <div class="shield-subtitle">Naturraum, Lage &amp; Geografie</div>
+                    </div>
                 </div>
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
             <div class="deepdive-header">
-                <h2 class="deepdive-title" style="color: #248A3D;">Bereich A: Wo liegt das Land?</h2>
+                <h2 class="deepdive-title color-area-a">Bereich A: Wo liegt das Land?</h2>
             </div>
 
             <div class="deepdive-grid">
@@ -1490,19 +1569,21 @@
         <!-- ============================================================== -->
         <!-- VERTIEFUNG: BEREICH B (OSKAR)                                  -->
         <!-- ============================================================== -->
-        <section id="bereich-b" class="deepdive-section container reveal section-accent-b">
+        <section id="bereich-b" class="deepdive-section container reveal ">
             <!-- Schild Bereich B · Oskar -->
             <div class="bereich-shield-banner">
-                <div class="shield-letter-badge shield-badge-b">B</div>
-                <div class="shield-text-group">
-                    <div class="shield-name-title">Bereich B &middot; Oskar</div>
-                    <div class="shield-subtitle">Bevölkerung &amp; Demografie</div>
+                <div class="shield-left-lockup">
+                    <div class="shield-letter-badge shield-badge-b">B</div>
+                    <div class="shield-text-group">
+                        <div class="shield-name-title">Bereich B &middot; Oskar</div>
+                        <div class="shield-subtitle">Bevölkerung &amp; Demografie</div>
+                    </div>
                 </div>
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
             <div class="deepdive-header">
-                <h2 class="deepdive-title" style="color: #0071E3;">Bereich B: Wie leben die Menschen?</h2>
+                <h2 class="deepdive-title color-area-b">Bereich B: Wie leben die Menschen?</h2>
             </div>
 
             <div class="deepdive-grid">
@@ -1601,19 +1682,21 @@
         <!-- ============================================================== -->
         <!-- VERTIEFUNG: BEREICH E (KARL)                                   -->
         <!-- ============================================================== -->
-        <section id="bereich-e" class="deepdive-section container reveal section-accent-e">
+        <section id="bereich-e" class="deepdive-section container reveal ">
             <!-- Schild Bereich E · Karl -->
             <div class="bereich-shield-banner">
-                <div class="shield-letter-badge shield-badge-e">E</div>
-                <div class="shield-text-group">
-                    <div class="shield-name-title">Bereich E &middot; Karl</div>
-                    <div class="shield-subtitle">Kultur, Alltag &amp; Raumanalyse</div>
+                <div class="shield-left-lockup">
+                    <div class="shield-letter-badge shield-badge-e">E</div>
+                    <div class="shield-text-group">
+                        <div class="shield-name-title">Bereich E &middot; Karl</div>
+                        <div class="shield-subtitle">Kultur, Alltag &amp; Raumanalyse</div>
+                    </div>
                 </div>
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
             <div class="deepdive-header">
-                <h2 class="deepdive-title" style="color: #D70015;">Bereich E: Wie lebt &amp; denkt man dort?</h2>
+                <h2 class="deepdive-title color-area-e">Bereich E: Wie lebt &amp; denkt man dort?</h2>
             </div>
 
             <div class="deepdive-grid">
@@ -1728,7 +1811,7 @@
                         <!-- Kette 1 – Weinbau -->
                         <div class="raumanalyse-card">
                             <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge" style="background: rgba(36, 138, 61, 0.12); color: #248A3D;">Kette 1 &middot; Naturraum</span>
+                                <span class="raumanalyse-badge tag-area-a">Kette 1 &middot; Naturraum</span>
                                 <h4>Kette 1 – Weinbau</h4>
                             </div>
                             <ul class="raumanalyse-steps">
@@ -1743,7 +1826,7 @@
                         <!-- Kette 2 – Verteilung der Bevölkerung -->
                         <div class="raumanalyse-card">
                             <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge" style="background: rgba(0, 113, 227, 0.12); color: #0071E3;">Kette 2 &middot; Bevölkerung</span>
+                                <span class="raumanalyse-badge tag-area-b">Kette 2 &middot; Bevölkerung</span>
                                 <h4>Kette 2 – Verteilung der Bevölkerung</h4>
                             </div>
                             <ul class="raumanalyse-steps">
@@ -1758,7 +1841,7 @@
                         <!-- Kette 3 – Das afrikanische Französisch -->
                         <div class="raumanalyse-card">
                             <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge" style="background: rgba(215, 0, 21, 0.12); color: #D70015;">Kette 3 &middot; Kultur</span>
+                                <span class="raumanalyse-badge tag-area-e">Kette 3 &middot; Kultur</span>
                                 <h4>Kette 3 – Das afrikanische Französisch</h4>
                             </div>
                             <ul class="raumanalyse-steps">
