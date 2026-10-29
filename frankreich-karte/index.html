@@ -474,10 +474,103 @@
             transform: translateY(2px);
         }
 
+        
+        /* EXPANDABLE TEXT COMPONENT (200ms smooth toggle, accessible) */
+        .expandable-text-block {
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .expandable-text-block .text-summary {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--ink-700);
+            margin-bottom: 8px;
+        }
+
+        .expandable-text-block .text-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
+            opacity: 0;
+        }
+
+        .expandable-text-block.is-expanded .text-details {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .expandable-text-block .text-details .text-extended {
+            overflow: hidden;
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--ink-700);
+            padding-top: 4px;
+            padding-bottom: 10px;
+        }
+
+        .btn-toggle-expand {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            padding: 4px 0;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--area-b);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: color 150ms ease, opacity 150ms ease;
+        }
+
+        .btn-toggle-expand:hover {
+            color: #1D4ED8;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .btn-toggle-expand:focus-visible {
+            outline: 2px solid var(--area-b);
+            outline-offset: 2px;
+        }
+
+        .btn-toggle-expand:active {
+            transform: scale(0.97);
+            transition: transform 100ms ease;
+        }
+
+        .btn-toggle-expand .chevron-icon {
+            transition: transform 200ms ease;
+        }
+
+        .expandable-text-block.is-expanded .btn-toggle-expand .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .stereotypen-group-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink-900);
+            margin-top: 24px;
+            margin-bottom: 14px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-hairline);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .expandable-text-block .text-details,
+            .btn-toggle-expand .chevron-icon {
+                transition: none !important;
+            }
+        }
+
         /* DEEPDIVE SECTIONS FOR BEREICH A, B, E */
         .deepdive-section {
-            padding-top: 80px;
-            padding-bottom: 90px;
+            padding-top: 60px;
+            padding-bottom: 60px;
             border-top: 1px solid var(--border-hairline);
         }
 
@@ -592,7 +685,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-bottom: 28px;
+            margin-bottom: 0;
         }
 
         .deepdive-card {
@@ -715,7 +808,7 @@
 
         .orientation-legend-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: 12px;
             margin-top: 18px;
         }
@@ -723,12 +816,32 @@
         .orientation-legend-item {
             background: var(--bg-surface);
             border: 1px solid var(--border-hairline);
-            padding: 14px 16px;
+            padding: 16px 18px;
             border-radius: var(--radius-sm);
             font-size: 13.5px;
             line-height: 1.55;
             color: var(--ink-700);
             box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+        }
+
+        .orientation-legend-item:nth-child(1),
+        .orientation-legend-item:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        .orientation-legend-item:nth-child(3),
+        .orientation-legend-item:nth-child(4),
+        .orientation-legend-item:nth-child(5) {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .orientation-legend-grid {
+                grid-template-columns: 1fr;
+            }
+            .orientation-legend-item:nth-child(n) {
+                grid-column: span 1;
+            }
         }
 
         .orientation-legend-item strong {
@@ -1270,9 +1383,7 @@
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
-            <div class="deepdive-header">
-                <h2 class="deepdive-title color-area-a">Bereich A: Wo liegt das Land?</h2>
-            </div>
+            
 
             <div class="deepdive-grid">
                 <!-- PFLICHT ①: ORIENTIERUNGSKARTE -->
@@ -1294,6 +1405,9 @@
                                 <filter id="shadow-dark" x="-20%" y="-20%" width="140%" height="140%">
                                     <feDropShadow dx="0" dy="1" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.9"/>
                                 </filter>
+                                <filter id="shadow-light-subtle" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#FFFFFF" flood-opacity="0.85"/>
+                                </filter>
                             </defs>
 
                             <!-- MEERE & GEWÄSSER -->
@@ -1304,65 +1418,31 @@
                                 <text x="640" y="870" font-size="19" letter-spacing="4" text-anchor="middle" filter="url(#shadow-dark)">MITTELMEER</text>
                             </g>
 
-                            <!-- NACHBARLÄNDER (8) -->
-                            <g class="map-group-countries" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12.5" font-weight="700" letter-spacing="0.5">
-                                <g transform="translate(240, 20)">
-                                    <rect x="0" y="0" width="130" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="65" y="15.5" fill="#FFFFFF" text-anchor="middle">GROSSBRITANNIEN</text>
-                                </g>
-                                <g transform="translate(605, 75)">
-                                    <rect x="0" y="0" width="76" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="38" y="15.5" fill="#FFFFFF" text-anchor="middle">BELGIEN</text>
-                                </g>
-                                <g transform="translate(715, 135)">
-                                    <rect x="0" y="0" width="94" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="47" y="15.5" fill="#FFFFFF" text-anchor="middle">LUXEMBURG</text>
-                                </g>
-                                <g transform="translate(830, 165)">
-                                    <rect x="0" y="0" width="112" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="56" y="15.5" fill="#FFFFFF" text-anchor="middle">DEUTSCHLAND</text>
-                                </g>
-                                <g transform="translate(845, 410)">
-                                    <rect x="0" y="0" width="80" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="40" y="15.5" fill="#FFFFFF" text-anchor="middle">SCHWEIZ</text>
-                                </g>
-                                <g transform="translate(870, 620)">
-                                    <rect x="0" y="0" width="74" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="37" y="15.5" fill="#FFFFFF" text-anchor="middle">ITALIEN</text>
-                                </g>
-                                <g transform="translate(835, 680)">
-                                    <rect x="0" y="0" width="74" height="21" rx="5" fill="#1C1C1E" fill-opacity="0.8" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="37" y="14.5" fill="#FFFFFF" font-size="11" text-anchor="middle">MONACO</text>
-                                </g>
-                                <g transform="translate(345, 875)">
-                                    <rect x="0" y="0" width="82" height="23" rx="6" fill="#1C1C1E" fill-opacity="0.75" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="41" y="15.5" fill="#FFFFFF" text-anchor="middle">SPANIEN</text>
-                                </g>
-                                <g transform="translate(445, 835)">
-                                    <rect x="0" y="0" width="78" height="21" rx="5" fill="#1C1C1E" fill-opacity="0.8" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
-                                    <text x="39" y="14.5" fill="#FFFFFF" font-size="11" text-anchor="middle">ANDORRA</text>
-                                </g>
+                            <!-- NACHBARLÄNDER (8) - Reine Beschriftung ohne Kästchen -->
+                            <g class="map-group-countries" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12.5" font-weight="700" letter-spacing="0.8" fill="#1E293B">
+                                <text x="305" y="36" text-anchor="middle" filter="url(#shadow-light-subtle)">GROSSBRITANNIEN</text>
+                                <text x="643" y="92" text-anchor="middle" filter="url(#shadow-light-subtle)">BELGIEN</text>
+                                <text x="762" y="150" font-size="11.5" text-anchor="middle" filter="url(#shadow-light-subtle)">LUXEMBURG</text>
+                                <text x="886" y="180" text-anchor="middle" filter="url(#shadow-light-subtle)">DEUTSCHLAND</text>
+                                <text x="885" y="426" text-anchor="middle" filter="url(#shadow-light-subtle)">SCHWEIZ</text>
+                                <text x="907" y="636" text-anchor="middle" filter="url(#shadow-light-subtle)">ITALIEN</text>
+                                <text x="872" y="694" font-size="11" text-anchor="middle" filter="url(#shadow-light-subtle)">MONACO</text>
+                                <text x="386" y="892" text-anchor="middle" filter="url(#shadow-light-subtle)">SPANIEN</text>
+                                <text x="460" y="845" font-size="11" text-anchor="middle" filter="url(#shadow-light-subtle)">ANDORRA</text>
                             </g>
 
-                            <!-- GEBIRGE & GIPFEL -->
+                            <!-- GEBIRGE & GIPFEL - Schlichter Text ohne Kästchen -->
                             <g class="map-group-mountains" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
-                                <g transform="translate(740, 580)">
-                                    <rect x="0" y="0" width="75" height="22" rx="5" fill="#78350F" fill-opacity="0.75" stroke="#FDE68A" stroke-width="1"/>
-                                    <text x="37" y="15" fill="#FEF3C7" font-size="12" font-weight="700" text-anchor="middle">▲ Alpen</text>
+                                <text x="777" y="595" fill="#78350F" font-size="13" font-weight="700" text-anchor="middle" filter="url(#shadow-light-subtle)">▲ Alpen</text>
+                                
+                                <!-- Mont Blanc: schlichte Beschriftung mit Bergsymbol -->
+                                <g transform="translate(768, 517)">
+                                    <circle cx="0" cy="0" r="3.5" fill="#B45309" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="10" y="4" fill="#78350F" font-size="12" font-weight="700" filter="url(#shadow-light-subtle)">Mont Blanc (4.808 m)</text>
                                 </g>
-                                <g transform="translate(760, 505)">
-                                    <rect x="0" y="0" width="168" height="24" rx="6" fill="#451A03" fill-opacity="0.85" stroke="#FBBF24" stroke-width="1.5"/>
-                                    <circle cx="12" cy="12" r="4" fill="#FBBF24"/>
-                                    <text x="90" y="16" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Mont Blanc (4.808 m)</text>
-                                </g>
-                                <g transform="translate(340, 795)">
-                                    <rect x="0" y="0" width="94" height="22" rx="5" fill="#78350F" fill-opacity="0.75" stroke="#FDE68A" stroke-width="1"/>
-                                    <text x="47" y="15" fill="#FEF3C7" font-size="12" font-weight="700" text-anchor="middle">▲ Pyrenäen</text>
-                                </g>
-                                <g transform="translate(515, 565)">
-                                    <rect x="0" y="0" width="116" height="22" rx="5" fill="#78350F" fill-opacity="0.75" stroke="#FDE68A" stroke-width="1"/>
-                                    <text x="58" y="15" fill="#FEF3C7" font-size="12" font-weight="700" text-anchor="middle">▲ Zentralmassiv</text>
-                                </g>
+
+                                <text x="387" y="810" fill="#78350F" font-size="13" font-weight="700" text-anchor="middle" filter="url(#shadow-light-subtle)">▲ Pyrenäen</text>
+                                <text x="573" y="580" fill="#78350F" font-size="13" font-weight="700" text-anchor="middle" filter="url(#shadow-light-subtle)">▲ Zentralmassiv</text>
                             </g>
 
                             <!-- FLÜSSE -->
@@ -1373,106 +1453,68 @@
                                 <text x="360" y="665" filter="url(#shadow-dark)">Garonne</text>
                             </g>
 
-                            <!-- STÄDTE (9) -->
-                            <g class="map-group-cities" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">
+                            <!-- STÄDTE (9) - Schlichter Text mit hellem Textschatten, ohne schwarze Kästchen -->
+                            <g class="map-group-cities" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12.5" font-weight="700">
                                 <!-- Paris (Hauptstadt) -->
                                 <g transform="translate(516, 242)">
-                                    <circle cx="0" cy="0" r="7" fill="#EF4444" stroke="#FFFFFF" stroke-width="2.5"/>
-                                    <circle cx="0" cy="0" r="2.5" fill="#FFFFFF"/>
-                                    <g transform="translate(12, -4)">
-                                        <rect x="-4" y="-12" width="130" height="22" rx="4" fill="#000000" fill-opacity="0.75"/>
-                                        <text x="0" y="3" fill="#FFFFFF" font-size="13.5" font-weight="800">Paris (Hauptstadt)</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="6" fill="#EF4444" stroke="#FFFFFF" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="2" fill="#FFFFFF"/>
+                                    <text x="11" y="4.5" fill="#0F172A" font-size="13.5" font-weight="800" filter="url(#shadow-light-subtle)">Paris (Hauptstadt)</text>
                                 </g>
 
                                 <!-- Lille -->
                                 <g transform="translate(561, 80)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="40" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Lille</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Lille</text>
                                 </g>
 
                                 <!-- Straßburg -->
                                 <g transform="translate(858, 268)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(-76, -4)">
-                                        <rect x="-3" y="-11" width="74" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Straßburg</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="-9" y="4" fill="#0F172A" text-anchor="end" filter="url(#shadow-light-subtle)">Straßburg</text>
                                 </g>
 
                                 <!-- Nantes -->
                                 <g transform="translate(269, 392)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="56" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Nantes</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Nantes</text>
                                 </g>
 
                                 <!-- Lyon -->
                                 <g transform="translate(673, 525)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="44" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Lyon</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Lyon</text>
                                 </g>
 
                                 <!-- Bordeaux -->
                                 <g transform="translate(330, 610)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="68" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Bordeaux</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Bordeaux</text>
                                 </g>
 
                                 <!-- Toulouse -->
                                 <g transform="translate(458, 723)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="66" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Toulouse</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Toulouse</text>
                                 </g>
 
                                 <!-- Marseille -->
                                 <g transform="translate(707, 751)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(10, -4)">
-                                        <rect x="-3" y="-11" width="66" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Marseille</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Marseille</text>
                                 </g>
 
                                 <!-- Nizza -->
                                 <g transform="translate(827, 713)">
-                                    <circle cx="0" cy="0" r="5" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="2" fill="#1D1D1F"/>
-                                    <g transform="translate(-48, -4)">
-                                        <rect x="-3" y="-11" width="46" height="18" rx="3" fill="#000000" fill-opacity="0.7"/>
-                                        <text x="0" y="2" fill="#FFFFFF">Nizza</text>
-                                    </g>
+                                    <circle cx="0" cy="0" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                    <text x="9" y="4" fill="#0F172A" filter="url(#shadow-light-subtle)">Nizza</text>
                                 </g>
                             </g>
 
                             <!-- INSEL KORSIKA -->
                             <g transform="translate(938, 866)" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
-                                <circle cx="0" cy="0" r="4" fill="#FFFFFF" stroke="#0071E3" stroke-width="2"/>
-                                <g transform="translate(-76, -4)">
-                                    <rect x="-4" y="-12" width="74" height="20" rx="4" fill="#000000" fill-opacity="0.75"/>
-                                    <text x="0" y="3" fill="#FFFFFF" font-size="12" font-weight="700">Korsika</text>
-                                </g>
+                                <circle cx="0" cy="0" r="4" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="1.5"/>
+                                <text x="-9" y="4" fill="#0F172A" font-size="12" font-weight="700" text-anchor="end" filter="url(#shadow-light-subtle)">Korsika</text>
                             </g>
                         </svg>
                     </div>
@@ -1507,15 +1549,22 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#248A3D" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                         Bedeutung von Klima &amp; Naturraum fürs Leben
                     </h3>
-                    <p>
-                        Frankreich liegt in Westeuropa, mit dem Atlantik im Westen, dem Mittelmeer im Süden und dem Ärmelkanal im Norden. Es grenzt an acht Länder. Durch diese Lage ist das Land sehr vielfältig.
-                    </p>
-                    <p>
-                        Im Osten und Süden liegen hohe Gebirge, die Alpen und die Pyrenäen. Sie sind natürliche Grenzen und liefern Wasserkraft. Der Mont Blanc in den Alpen ist mit rund 4.800 Metern der höchste Berg Westeuropas. Große Flüsse wie Loire, Seine, Rhône und Garonne verbinden die Regionen und werden seit langem für Handel und Verkehr genutzt.
-                    </p>
-                    <p>
-                        In den flachen, fruchtbaren Gegenden um Paris und im Südwesten wird viel Landwirtschaft betrieben. Das milde Klima am Atlantik und am Mittelmeer ist gut für Ackerbau und Weinbau. So hängt zusammen, wo die Menschen leben und wovon sie leben.
-                    </p>
+                    <div class="expandable-text-block">
+                        <p class="text-summary">
+                            Frankreich liegt in Westeuropa, zwischen Atlantik, Mittelmeer und Ärmelkanal, und grenzt an acht Länder. Durch diese Lage ist das Land sehr vielfältig: hohe Berge im Osten und Süden, große Flüsse in der Mitte und fruchtbare Ebenen. Wo und wovon die Menschen leben, hängt eng mit dieser Landschaft zusammen.
+                        </p>
+                        <div class="text-details" id="text-details-klima" aria-hidden="true">
+                            <p class="text-extended">
+                                Die Alpen und die Pyrenäen sind natürliche Grenzen und liefern Wasserkraft. Der Mont Blanc in den Alpen ist der höchste Berg Westeuropas. Flüsse wie Loire, Seine, Rhône und Garonne verbinden die Regionen und werden seit langem für Handel und Verkehr genutzt. In den flachen, fruchtbaren Gegenden um Paris und im Südwesten wird viel Landwirtschaft betrieben, und das milde Klima am Atlantik und am Mittelmeer ist gut für Ackerbau und Weinbau.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-klima">
+                            <span class="btn-text">Mehr anzeigen</span>
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Punkt A2: Stereotypen-Check Landschaft (4 Felder) -->
@@ -1553,16 +1602,7 @@
                     </div>
                 </div>
 
-                <!-- Verknüpfung zur Karte -->
-                <div class="deepdive-card deepdive-card-full">
-                    <div class="map-jump-cta">
-                        <div class="map-jump-cta-text">
-                            <h4>Naturraum-Stationen auf der interaktiven Karte erkunden</h4>
-                            <p>Auf der Karte kannst du in Bordeaux und in der Auvergne sehen, wie der Naturraum den Alltag prägt.</p>
-                        </div>
-                        <a href="1.html" class="map-jump-cta-btn">Zur Kulturkarte &rarr;</a>
-                    </div>
-                </div>
+                
             </div>
         </section>
 
@@ -1582,9 +1622,7 @@
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
-            <div class="deepdive-header">
-                <h2 class="deepdive-title color-area-b">Bereich B: Wie leben die Menschen?</h2>
-            </div>
+            
 
             <div class="deepdive-grid">
                 <!-- Punkt B1: Altersstruktur & Demografie -->
@@ -1593,10 +1631,6 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         Altersstruktur &amp; demografischer Aufbau
                     </h3>
-                    <p>
-                        In Frankreich leben rund 68 Millionen Menschen. Die Altersgruppen verteilen sich so:
-                    </p>
-
                     <div class="stats-chip-row">
                         <div class="stat-chip">
                             <div class="stat-chip-num">23 %</div>
@@ -1612,9 +1646,22 @@
                         </div>
                     </div>
 
-                    <p>
-                        Frankreich hatte lange eine der höheren Geburtenraten in Europa, auch weil es viele Betreuungsplätze für kleine Kinder gibt. Früher lag sie bei etwa 1,8 Kindern pro Frau, inzwischen ist sie niedriger. Wie in anderen Ländern wird die Bevölkerung älter.
-                    </p>
+                    <div class="expandable-text-block">
+                        <p class="text-summary">
+                            In Frankreich leben rund 68 Millionen Menschen. Das Land hatte lange eine der höheren Geburtenraten Europas, inzwischen ist sie niedriger. Wie überall wird die Bevölkerung älter.
+                        </p>
+                        <div class="text-details" id="text-details-alter" aria-hidden="true">
+                            <p class="text-extended">
+                                Ein Grund für die früher hohe Geburtenrate sind die vielen Betreuungsplätze für kleine Kinder. Trotzdem steigt das Durchschnittsalter, weil die Menschen länger leben und weniger Kinder geboren werden.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-alter">
+                            <span class="btn-text">Mehr anzeigen</span>
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Punkt B2: Sprachen & Bevölkerungsgruppen -->
@@ -1623,15 +1670,22 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
                         Sprachen, Vielfalt &amp; „Leere Diagonale“
                     </h3>
-                    <p>
-                        Die Menschen leben sehr ungleich verteilt. Allein im Großraum Paris wohnen über 12 Millionen, dazu kommen die Küsten. Von Nordosten bis zu den Pyrenäen zieht sich dagegen ein dünn besiedelter Streifen, den man die „leere Diagonale“ nennt.
-                    </p>
-                    <p>
-                        Frankreich ist seit langem ein Einwanderungsland. Viele Menschen haben familiäre Wurzeln in Nordafrika, Westafrika oder Südeuropa.
-                    </p>
-                    <p>
-                        Amtssprache ist Französisch. Daneben gibt es alte Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch, die heute nur noch wenige sprechen.
-                    </p>
+                    <div class="expandable-text-block">
+                        <p class="text-summary">
+                            Die Menschen leben sehr ungleich verteilt: dicht in Paris und an den Küsten, dünn in der ‚leeren Diagonale‘. Frankreich ist seit langem ein Einwanderungsland, und neben Französisch gibt es alte Regionalsprachen.
+                        </p>
+                        <div class="text-details" id="text-details-sprachen" aria-hidden="true">
+                            <p class="text-extended">
+                                Allein im Großraum Paris wohnen über 12 Millionen Menschen. Von Nordosten bis zu den Pyrenäen zieht sich dagegen ein dünn besiedelter Streifen. Viele Menschen haben familiäre Wurzeln in Nordafrika, Westafrika oder Südeuropa. Amtssprache ist Französisch; Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch sprechen heute nur noch wenige.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-sprachen">
+                            <span class="btn-text">Mehr anzeigen</span>
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Punkt B3: Stereotypen-Check Die Menschen (4 Felder) -->
@@ -1668,13 +1722,7 @@
                         </div>
                     </div>
 
-                    <div class="map-jump-cta" style="margin-top: 20px;">
-                        <div class="map-jump-cta-text">
-                            <h4>Bevölkerungs-Hotspots auf der Karte untersuchen</h4>
-                            <p>Auf der Karte kannst du den Unterschied zwischen Paris und der Hafenstadt Marseille untersuchen.</p>
-                        </div>
-                        <a href="1.html" class="map-jump-cta-btn">Zu den Stationen &rarr;</a>
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -1689,15 +1737,13 @@
                     <div class="shield-letter-badge shield-badge-e">E</div>
                     <div class="shield-text-group">
                         <div class="shield-name-title">Bereich E &middot; Karl</div>
-                        <div class="shield-subtitle">Kultur, Alltag &amp; Raumanalyse</div>
+                        <div class="shield-subtitle">Kultur &amp; Alltag</div>
                     </div>
                 </div>
                 <a href="#bereiche-uebersicht" class="jump-back-link">&uarr; Zur Übersicht</a>
             </div>
 
-            <div class="deepdive-header">
-                <h2 class="deepdive-title color-area-e">Bereich E: Wie lebt &amp; denkt man dort?</h2>
-            </div>
+            
 
             <div class="deepdive-grid">
                 <!-- Punkt E1: Landesweite Kulturthemen mit den 2 Stereotypen-Checks -->
@@ -1706,12 +1752,24 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D70015" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                         Landesweite Kulturthemen
                     </h3>
-                    <p>
-                        Beim Essen ist das Baguette das bekannteste Beispiel. Seit 2022 gehört es zum UNESCO-Kulturerbe, und es werden jedes Jahr etwa 10 Milliarden gebacken. Trotzdem essen die Franzosen heute viel weniger davon als früher, im Schnitt nur noch ungefähr eine halbe Baguette pro Tag. Die Baskenmütze, die man für typisch hält, kommt eigentlich aus dem Südwesten und wird fast nur noch für Touristen getragen.
-                    </p>
-                    <p>
-                        Auch das Streiken gehört dazu. Das Recht zu demonstrieren gilt seit der Revolution von 1789 als wichtig. Oft streiken aber nur einzelne Berufsgruppen wie die Bahn. Im Ausland wirkt es dann so, als stehe ganz Frankreich still. Wichtig ist außerdem die Trennung von Staat und Religion. Sie gilt seit 1905 und heißt Laïcité. Bis heute ist sie ein wichtiger Grundsatz in Frankreich.
-                    </p>
+                    <div class="expandable-text-block">
+                        <p class="text-summary">
+                            Manche Dinge gelten im ganzen Land, nicht nur an einem Ort. Dazu gehören das Baguette als Teil der Esskultur, die Streikkultur und die Trennung von Staat und Religion (Laïcité).
+                        </p>
+                        <div class="text-details" id="text-details-kultur" aria-hidden="true">
+                            <p class="text-extended">
+                                Das Baguette gehört seit 2022 zum UNESCO-Kulturerbe, wird aber heute viel seltener gegessen als früher. Das Recht zu demonstrieren gilt seit der Revolution von 1789 als wichtig; oft streiken aber nur einzelne Branchen. Die Laïcité, also die Trennung von Staat und Religion, gilt seit 1905 und ist bis heute ein wichtiger Grundsatz.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-kultur">
+                            <span class="btn-text">Mehr anzeigen</span>
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <h4 class="stereotypen-group-title">Klischees über die französische Kultur</h4>
 
                     <!-- Stereotypen-Check: Baguette und Baskenmütze (4 Felder) -->
                     <div style="margin-top: 20px;">
@@ -1776,85 +1834,6 @@
                     </div>
                 </div>
 
-                <!-- Punkt E2: Die Methode der Raumanalyse -->
-                <div class="deepdive-card deepdive-card-full">
-                    <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D70015" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                        Die Methode der Raumanalyse
-                    </h3>
-                    <p>
-                        Auf der Karte untersuchen wir jedes Thema mit fünf Fragen:
-                    </p>
-                    <ul style="padding-left: 20px; font-size: 14.5px; line-height: 1.6; color: #48484A; margin-bottom: 12px;">
-                        <li><strong>Wo?</strong> Wo genau kommt es vor.</li>
-                        <li><strong>Was?</strong> Was man dort beobachten kann.</li>
-                        <li><strong>Warum dort?</strong> Welche Gründe es dafür gibt, zum Beispiel aus der Geschichte oder der Natur.</li>
-                        <li><strong>Folgen?</strong> Was das für die Menschen und die Region bedeutet.</li>
-                        <li><strong>Wandel?</strong> Wie es sich mit der Zeit verändert.</li>
-                    </ul>
-                    <p>
-                        So wird aus einem Vorurteil eine richtige Untersuchung.
-                    </p>
-                </div>
-
-                <!-- PFLICHT ②: UNSERE DREI RAUMANALYSEN -->
-                <div class="deepdive-card deepdive-card-full">
-                    <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D70015" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        ② Unsere drei Raumanalysen
-                    </h3>
-                    <p>
-                        Hier wenden wir die fünf Fragen der Raumanalyse auf drei konkrete Themen aus unserem Projekt an:
-                    </p>
-
-                    <div class="raumanalyse-grid">
-                        <!-- Kette 1 – Weinbau -->
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge tag-area-a">Kette 1 &middot; Naturraum</span>
-                                <h4>Kette 1 – Weinbau</h4>
-                            </div>
-                            <ul class="raumanalyse-steps">
-                                <li><span class="raumanalyse-step-label">Wo?</span>In Regionen wie Bordeaux, Burgund und der Champagne.</li>
-                                <li><span class="raumanalyse-step-label">Was?</span>Dort wird seit langem Wein angebaut, und Wein gehört zum Alltag.</li>
-                                <li><span class="raumanalyse-step-label">Warum dort?</span>Das Klima ist mild, die Böden und Flusstäler passen, und schon die Römer und später die Klöster bauten dort Wein an.</li>
-                                <li><span class="raumanalyse-step-label">Folgen?</span>Der Wein prägt die Landschaft, die Wirtschaft mit dem Tourismus und das Bild von Frankreich.</li>
-                                <li><span class="raumanalyse-step-label">Wandel?</span>Durch den Klimawandel wandert der Anbau nach Norden, und junge Leute trinken weniger Wein.</li>
-                            </ul>
-                        </div>
-
-                        <!-- Kette 2 – Verteilung der Bevölkerung -->
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge tag-area-b">Kette 2 &middot; Bevölkerung</span>
-                                <h4>Kette 2 – Verteilung der Bevölkerung</h4>
-                            </div>
-                            <ul class="raumanalyse-steps">
-                                <li><span class="raumanalyse-step-label">Wo?</span>Viele Menschen leben in Paris und an den Küsten, wenige in der „leeren Diagonale“.</li>
-                                <li><span class="raumanalyse-step-label">Was?</span>Die Bevölkerung ist sehr ungleich verteilt.</li>
-                                <li><span class="raumanalyse-step-label">Warum dort?</span>In Paris und an den Küsten gibt es Arbeit, Verkehr und fruchtbares Land. In den Bergen und auf armen Böden zogen viele Menschen weg.</li>
-                                <li><span class="raumanalyse-step-label">Folgen?</span>In Paris sind Wohnungen teuer und voll, auf dem Land verschwinden Geschäfte und Ärzte.</li>
-                                <li><span class="raumanalyse-step-label">Wandel?</span>Einige ziehen wegen Homeoffice wieder aufs Land, trotzdem bleibt Paris das Zentrum.</li>
-                            </ul>
-                        </div>
-
-                        <!-- Kette 3 – Das afrikanische Französisch -->
-                        <div class="raumanalyse-card">
-                            <div class="raumanalyse-card-header">
-                                <span class="raumanalyse-badge tag-area-e">Kette 3 &middot; Kultur</span>
-                                <h4>Kette 3 – Das afrikanische Französisch</h4>
-                            </div>
-                            <ul class="raumanalyse-steps">
-                                <li><span class="raumanalyse-step-label">Wo?</span>Vor allem in West- und Zentralafrika, zum Beispiel in Kinshasa.</li>
-                                <li><span class="raumanalyse-step-label">Was?</span>Dort sprechen sehr viele Menschen Französisch, mehr als in Paris.</li>
-                                <li><span class="raumanalyse-step-label">Warum dort?</span>Frankreich war früher Kolonialmacht in Afrika, und heute wachsen diese Länder stark.</li>
-                                <li><span class="raumanalyse-step-label">Folgen?</span>Das Zentrum der französischen Sprache verschiebt sich nach Afrika.</li>
-                                <li><span class="raumanalyse-step-label">Wandel?</span>Bis 2050 werden die meisten Französischsprecher Afrikaner sein.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Punkt E3: Die Leitfrage vertieft & Überraschung ⑥ -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">
@@ -1868,13 +1847,7 @@
                         Unsere Überraschung: Man denkt, Französisch gehöre vor allem zu Paris. In Wirklichkeit liegt das Zentrum der französischen Sprache längst in Afrika. In Kinshasa in der Demokratischen Republik Kongo sprechen mehr Menschen Französisch als in Paris, und bis 2050 werden die meisten Französischsprecher in Afrika leben.
                     </p>
 
-                    <div class="map-jump-cta" style="margin-top: 18px;">
-                        <div class="map-jump-cta-text">
-                            <h4>Erkunde Station ⑥ „Das afrikanische Französisch“ auf der Karte</h4>
-                            <p>Mit einem Klick fliegt die Karte von Europa nach Kinshasa in Zentralafrika.</p>
-                        </div>
-                        <a href="1.html" class="map-jump-cta-btn">Zu Station ⑥ fliegen &rarr;</a>
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -1967,6 +1940,30 @@
             }, { threshold: 0.1 });
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            
+        // --- EXPANDABLE TEXT ACCORDIONS (Mehr anzeigen / Weniger anzeigen) ---
+        document.querySelectorAll('.btn-toggle-expand').forEach(button => {
+            button.addEventListener('click', () => {
+                const block = button.closest('.expandable-text-block');
+                const isExpanded = block.classList.contains('is-expanded');
+                const targetId = button.getAttribute('aria-controls');
+                const target = document.getElementById(targetId);
+                const labelSpan = button.querySelector('.btn-text');
+
+                if (isExpanded) {
+                    block.classList.remove('is-expanded');
+                    button.setAttribute('aria-expanded', 'false');
+                    if (target) target.setAttribute('aria-hidden', 'true');
+                    if (labelSpan) labelSpan.textContent = 'Mehr anzeigen';
+                } else {
+                    block.classList.add('is-expanded');
+                    button.setAttribute('aria-expanded', 'true');
+                    if (target) target.setAttribute('aria-hidden', 'false');
+                    if (labelSpan) labelSpan.textContent = 'Weniger anzeigen';
+                }
+            });
+        });
 
             // Frankreich SVG Silhouette Scroll-Zeichen-Animation
             const path = document.getElementById('franceDrawPath');
