@@ -919,6 +919,17 @@
             padding-bottom: 0;
         }
 
+        .raumanalyse-steps li {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-700);
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(15, 23, 42, 0.06);
+        }
+
         .raumanalyse-step-label {
             display: inline-block;
             font-weight: 700;
@@ -926,8 +937,132 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--ink-500);
-            width: 78px;
-            margin-right: 6px;
+            width: 92px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 580px) {
+            .raumanalyse-steps li {
+                flex-direction: column;
+                gap: 2px;
+            }
+            .raumanalyse-step-label {
+                width: auto;
+            }
+        }
+
+        /* QUIET BULLET LISTS (A1, B1 - Ruhiger Schüler-Stil ohne bunte Kästen) */
+        .quiet-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .quiet-bullet-list li {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-700);
+            padding-bottom: 7px;
+            border-bottom: 1px dashed rgba(15, 23, 42, 0.06);
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .quiet-bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--ink-400);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .quiet-bullet-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .quiet-bullet-list li strong {
+            font-weight: 600;
+            color: var(--ink-900);
+        }
+
+        /* DREI KULTURELLE BESONDERHEITEN IN BEREICH E (E1) */
+        .kultur-checks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 860px) {
+            .kultur-checks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kultur-feature-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kultur-feature-header {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+
+        .kultur-feature-title {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--ink-900);
+            margin: 0 0 4px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .kultur-feature-klischee {
+            font-size: 12.5px;
+            line-height: 1.45;
+            color: var(--area-e);
+            font-style: italic;
+        }
+
+        .kultur-steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            flex: 1;
+        }
+
+        .kultur-steps-list li {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--ink-700);
+            padding-bottom: 7px;
+            border-bottom: 1px dashed rgba(15, 23, 42, 0.06);
+        }
+
+        .kultur-steps-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .kultur-step-label {
+            font-weight: 600;
+            color: var(--ink-900);
+            display: inline;
+            margin-right: 4px;
         }
 
         /* STATS CHIPS / NUMBERS (Emil Kowalski tabular-nums) */
@@ -1565,10 +1700,39 @@
                             </svg>
                         </button>
                     </div>
+
+                    <!-- A1: So unterscheiden sich die Regionen -->
+                    <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-hairline);">
+                        <h4 style="font-size: 14px; font-weight: 700; color: var(--ink-900); margin: 0 0 10px 0; letter-spacing: -0.01em;">So unterscheiden sich die Regionen</h4>
+                        <ul class="quiet-bullet-list">
+                            <li><strong>Westen (Bretagne):</strong> rau, viel Regen, Atlantik.</li>
+                            <li><strong>Süden (Mittelmeer):</strong> warm, sonnig, trocken.</li>
+                            <li><strong>Norden:</strong> kühler, flach, viel Landwirtschaft.</li>
+                            <li><strong>Berge (Alpen, Pyrenäen):</strong> hoch, kalt, viel Schnee.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Punkt A2: Stereotypen-Check Landschaft (4 Felder) -->
+                <!-- A2: Raumanalyse: Die Mittelmeerküste -->
                 <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--area-a)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Raumanalyse: Die Mittelmeerküste
+                    </h3>
+                    <ul class="raumanalyse-steps" style="margin-top: 14px;">
+                        <li><span class="raumanalyse-step-label">Wo?</span><span>An der Mittelmeerküste im Süden, zum Beispiel an der Côte d’Azur um Nizza.</span></li>
+                        <li><span class="raumanalyse-step-label">Was?</span><span>Viele Badeorte, Ferienhäuser und Touristen.</span></li>
+                        <li><span class="raumanalyse-step-label">Warum dort?</span><span>Das Mittelmeerklima ist mild und sonnig, das Meer ist warm, und Küste und Berge liegen nah beieinander.</span></li>
+                        <li><span class="raumanalyse-step-label">Folgen?</span><span>Der Tourismus ist wichtig für die Wirtschaft. Im Sommer sind die Orte voll, und Wohnen am Meer ist teuer.</span></li>
+                        <li><span class="raumanalyse-step-label">Wandel?</span><span>Durch den Klimawandel wird es heißer und trockener, mit mehr Hitze und Waldbränden.</span></li>
+                    </ul>
+                    <p style="margin-top: 16px; margin-bottom: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-700); font-style: italic; padding-top: 12px; border-top: 1px solid var(--border-hairline);">
+                        „So entsteht das Bild von Frankreich als sonnigem Urlaubsland.“
+                    </p>
+                </div>
+
+                <!-- Punkt A3: Stereotypen-Check Landschaft (4 Felder) -->
+                <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#248A3D" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                         Stereotypen-Check: Landschaft
@@ -1601,8 +1765,6 @@
                         </div>
                     </div>
                 </div>
-
-                
             </div>
         </section>
 
@@ -1625,11 +1787,11 @@
             
 
             <div class="deepdive-grid">
-                <!-- Punkt B1: Altersstruktur & Demografie -->
+                <!-- Punkt B1: Bevölkerung & Altersstruktur -->
                 <div class="deepdive-card">
                     <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        Altersstruktur &amp; demografischer Aufbau
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--area-b)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Bevölkerung &amp; Altersstruktur
                     </h3>
                     <div class="stats-chip-row">
                         <div class="stat-chip">
@@ -1646,52 +1808,38 @@
                         </div>
                     </div>
 
-                    <div class="expandable-text-block">
-                        <p class="text-summary">
-                            In Frankreich leben rund 68 Millionen Menschen. Das Land hatte lange eine der höheren Geburtenraten Europas, inzwischen ist sie niedriger. Wie überall wird die Bevölkerung älter.
-                        </p>
-                        <div class="text-details" id="text-details-alter" aria-hidden="true">
-                            <p class="text-extended">
-                                Ein Grund für die früher hohe Geburtenrate sind die vielen Betreuungsplätze für kleine Kinder. Trotzdem steigt das Durchschnittsalter, weil die Menschen länger leben und weniger Kinder geboren werden.
-                            </p>
-                        </div>
-                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-alter">
-                            <span class="btn-text">Mehr anzeigen</span>
-                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                    </div>
+                    <!-- B1: Liste Bevölkerung -->
+                    <ul class="quiet-bullet-list" style="margin-top: 16px;">
+                        <li><strong>Einwohner:</strong> rund 68 Millionen.</li>
+                        <li><strong>Dicht besiedelt:</strong> Großraum Paris (über 12 Millionen) und die Küsten.</li>
+                        <li><strong>Dünn besiedelt:</strong> die „leere Diagonale“ von Nordosten bis zu den Pyrenäen.</li>
+                        <li><strong>Große Städte:</strong> Paris, Marseille, Lyon, Toulouse, Nizza, Bordeaux, Straßburg, Lille, Nantes.</li>
+                        <li><strong>Stadt und Land:</strong> rund 8 von 10 Menschen leben in Städten.</li>
+                        <li><strong>Geburtenrate:</strong> früher eine der höheren in Europa, heute niedriger. Die Bevölkerung wird älter.</li>
+                        <li><strong>Herkunft:</strong> viele Menschen mit Wurzeln in Nordafrika, Westafrika und Südeuropa.</li>
+                        <li><strong>Sprachen:</strong> Amtssprache Französisch, dazu Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch.</li>
+                    </ul>
                 </div>
 
-                <!-- Punkt B2: Sprachen & Bevölkerungsgruppen -->
+                <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung -->
                 <div class="deepdive-card">
                     <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
-                        Sprachen, Vielfalt &amp; „Leere Diagonale“
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--area-b)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Raumanalyse: Verteilung der Bevölkerung
                     </h3>
-                    <div class="expandable-text-block">
-                        <p class="text-summary">
-                            Die Menschen leben sehr ungleich verteilt: dicht in Paris und an den Küsten, dünn in der ‚leeren Diagonale‘. Frankreich ist seit langem ein Einwanderungsland, und neben Französisch gibt es alte Regionalsprachen.
-                        </p>
-                        <div class="text-details" id="text-details-sprachen" aria-hidden="true">
-                            <p class="text-extended">
-                                Allein im Großraum Paris wohnen über 12 Millionen Menschen. Von Nordosten bis zu den Pyrenäen zieht sich dagegen ein dünn besiedelter Streifen. Viele Menschen haben familiäre Wurzeln in Nordafrika, Westafrika oder Südeuropa. Amtssprache ist Französisch; Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch sprechen heute nur noch wenige.
-                            </p>
-                        </div>
-                        <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="text-details-sprachen">
-                            <span class="btn-text">Mehr anzeigen</span>
-                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                    </div>
+                    <ul class="raumanalyse-steps" style="margin-top: 14px;">
+                        <li><span class="raumanalyse-step-label">Wo?</span><span>Viele Menschen in Paris und an den Küsten, wenige in der „leeren Diagonale“.</span></li>
+                        <li><span class="raumanalyse-step-label">Was?</span><span>Die Bevölkerung ist sehr ungleich verteilt.</span></li>
+                        <li><span class="raumanalyse-step-label">Warum dort?</span><span>In Paris und an den Küsten gibt es Arbeit, Verkehr und fruchtbares Land. In den Bergen und auf armen Böden zogen viele Menschen weg.</span></li>
+                        <li><span class="raumanalyse-step-label">Folgen?</span><span>Die Verteilung prägt das Leben. In Paris sind Wohnungen teuer und voll, auf dem Land verschwinden Geschäfte, Schulen und Ärzte.</span></li>
+                        <li><span class="raumanalyse-step-label">Wandel?</span><span>Einige ziehen wegen Homeoffice wieder aufs Land, trotzdem bleibt Paris das Zentrum.</span></li>
+                    </ul>
                 </div>
 
-                <!-- Punkt B3: Stereotypen-Check Die Menschen (4 Felder) -->
+                <!-- Punkt B3: Stereotypen-Check Die Menschen (4 Felder mit Medien in Woher) -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--area-b)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                         Stereotypen-Check: Die Menschen
                     </h3>
 
@@ -1705,7 +1853,7 @@
                         <div class="check-box">
                             <span class="check-badge badge-woher">Woher?</span>
                             <div class="check-text">
-                                Aus Urlaubserlebnissen in Paris und aus dem Ruf der Hauptstadt.
+                                Aus Urlaubserlebnissen in Paris und aus Serien, Filmen und Reise-Videos wie „Emily in Paris“, die vor allem das hektische, schicke Paris zeigen.
                             </div>
                         </div>
                         <div class="check-box">
@@ -1721,8 +1869,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
         </section>
@@ -1769,85 +1915,78 @@
                         </button>
                     </div>
 
-                    <h4 class="stereotypen-group-title">Klischees über die französische Kultur</h4>
+                    <h4 class="stereotypen-group-title">Drei untersuchte kulturelle Besonderheiten</h4>
 
-                    <!-- Stereotypen-Check: Baguette und Baskenmütze (4 Felder) -->
-                    <div style="margin-top: 20px;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Stereotypen-Check: Baguette und Baskenmütze</h4>
-                        <div class="check-grid">
-                            <div class="check-box">
-                                <span class="check-badge badge-klischee">Klischee</span>
-                                <div class="check-text">
-                                    Alle Franzosen tragen eine Baskenmütze und haben die Baguette unterm Arm.
-                                </div>
+                    <div class="kultur-checks-grid">
+                        <!-- Block 1: Baguette & Esskultur -->
+                        <div class="kultur-feature-card">
+                            <div class="kultur-feature-header">
+                                <h4 class="kultur-feature-title">Baguette &amp; Esskultur</h4>
+                                <div class="kultur-feature-klischee">Klischee: „Die Franzosen essen ständig Baguette.“</div>
                             </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-woher">Woher?</span>
-                                <div class="check-text">
-                                    Aus Werbung und Filmen des 20. Jahrhunderts.
-                                </div>
-                            </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-belegbar">Belegbar?</span>
-                                <div class="check-text">
-                                    Das Baguette ist wirklich wichtig und seit 2022 UNESCO-Kulturerbe.
-                                </div>
-                            </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-ausgeblendet">Ausgeblendet?</span>
-                                <div class="check-text">
-                                    Man isst heute viel weniger Baguette, und die Baskenmütze trägt fast niemand mehr.
-                                </div>
-                            </div>
+                            <ul class="kultur-steps-list">
+                                <li><span class="kultur-step-label">Reale Erscheinung:</span>Das Baguette gehört wirklich zum Alltag und ist seit 2022 UNESCO-Kulturerbe.</li>
+                                <li><span class="kultur-step-label">Entstehung:</span>Es wurde im 19. Jahrhundert bekannt, vermutlich durch einen Wiener Bäcker, und galt bald als typisch französisch.</li>
+                                <li><span class="kultur-step-label">In Medien und Werbung:</span>Auf Fotos, Postkarten und in Filmen trägt „der Franzose“ Baguette und Baskenmütze.</li>
+                                <li><span class="kultur-step-label">Verallgemeinert:</span>Als würden alle Franzosen nur und ständig Baguette essen.</li>
+                                <li><span class="kultur-step-label">Passt nicht ins Bild:</span>Der Konsum ist stark gesunken, viele essen auch Fast Food, und die Baskenmütze trägt kaum noch jemand.</li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <!-- Stereotypen-Check: Streik (4 Felder) -->
-                    <div style="margin-top: 22px;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Stereotypen-Check: Streik</h4>
-                        <div class="check-grid">
-                            <div class="check-box">
-                                <span class="check-badge badge-klischee">Klischee</span>
-                                <div class="check-text">
-                                    In Frankreich wird ständig gestreikt.
-                                </div>
+                        <!-- Block 2: Streikkultur -->
+                        <div class="kultur-feature-card">
+                            <div class="kultur-feature-header">
+                                <h4 class="kultur-feature-title">Streikkultur</h4>
+                                <div class="kultur-feature-klischee">Klischee: „In Frankreich wird ständig gestreikt.“</div>
                             </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-woher">Woher?</span>
-                                <div class="check-text">
-                                    Aus Nachrichtenbildern von großen Protesten wie den Gelbwesten.
-                                </div>
+                            <ul class="kultur-steps-list">
+                                <li><span class="kultur-step-label">Reale Erscheinung:</span>Es gibt wirklich eine starke Protest- und Streiktradition.</li>
+                                <li><span class="kultur-step-label">Entstehung:</span>Seit der Revolution 1789 gilt „auf die Straße gehen“ als Recht, dazu frühe Arbeiterkämpfe wie die der Weber in Lyon.</li>
+                                <li><span class="kultur-step-label">In Medien:</span>Nachrichten zeigen vor allem große Proteste wie die Gelbwesten.</li>
+                                <li><span class="kultur-step-label">Verallgemeinert:</span>Als stünde ganz Frankreich ständig still.</li>
+                                <li><span class="kultur-step-label">Passt nicht ins Bild:</span>Meist streiken nur einzelne Branchen, und viele Menschen streiken nie.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Block 3: Wein & Genuss -->
+                        <div class="kultur-feature-card">
+                            <div class="kultur-feature-header">
+                                <h4 class="kultur-feature-title">Wein &amp; Genuss</h4>
+                                <div class="kultur-feature-klischee">Klischee: „Die Franzosen trinken ständig Wein.“</div>
                             </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-belegbar">Belegbar?</span>
-                                <div class="check-text">
-                                    Das Streikrecht ist wichtig, und es gibt immer wieder große Proteste.
-                                </div>
-                            </div>
-                            <div class="check-box">
-                                <span class="check-badge badge-ausgeblendet">Ausgeblendet?</span>
-                                <div class="check-text">
-                                    Meist streiken nur einzelne Branchen, und viele Menschen streiken nie.
-                                </div>
-                            </div>
+                            <ul class="kultur-steps-list">
+                                <li><span class="kultur-step-label">Reale Erscheinung:</span>Wein gehört zum Essen und zur Kultur, mit geschützten Herkunftsregionen.</li>
+                                <li><span class="kultur-step-label">Entstehung:</span>Schon die Römer und später die Klöster bauten Wein an, bestimmte Regionen wurden berühmt.</li>
+                                <li><span class="kultur-step-label">In Tourismus und Werbung:</span>Weinregionen und Genuss werden stark beworben (Weintourismus).</li>
+                                <li><span class="kultur-step-label">Verallgemeinert:</span>Als würden alle Franzosen ständig Wein trinken.</li>
+                                <li><span class="kultur-step-label">Passt nicht ins Bild:</span>Junge Leute trinken immer weniger, und viele trinken gar keinen Alkohol.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Punkt E3: Die Leitfrage vertieft & Überraschung ⑥ -->
+                <!-- Punkt E2 & E3: Die Leitfrage & Raumanalyse Kinshasa -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D70015" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        Stereotypen-Analyse &amp; die Überraschung ⑥ (Kinshasa)
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--area-e)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Wann wird aus einer Besonderheit ein Stereotyp?
                     </h3>
-                    <p>
-                        Wann wird aus einer Besonderheit ein Stereotyp? Das passiert, wenn etwas, das nur in einer Region oder zu einer bestimmten Zeit stimmt, auf das ganze Land mit seinen 68 Millionen Menschen übertragen wird und dann im Kopf hängen bleibt.
-                    </p>
-                    <p>
-                        Unsere Überraschung: Man denkt, Französisch gehöre vor allem zu Paris. In Wirklichkeit liegt das Zentrum der französischen Sprache längst in Afrika. In Kinshasa in der Demokratischen Republik Kongo sprechen mehr Menschen Französisch als in Paris, und bis 2050 werden die meisten Französischsprecher in Afrika leben.
+                    <p style="font-size: 15.5px; line-height: 1.6; color: var(--ink-800); margin-bottom: 22px;">
+                        Ein Stereotyp entsteht, wenn etwas, das nur in einer Region oder zu einer bestimmten Zeit stimmt, auf das ganze Land übertragen wird und im Kopf hängen bleibt.
                     </p>
 
-                    
+                    <div style="border-top: 1px solid var(--border-hairline); padding-top: 20px;">
+                        <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 14px 0; letter-spacing: -0.01em;">
+                            Raumanalyse und Überraschung: Das afrikanische Französisch
+                        </h4>
+                        <ul class="raumanalyse-steps">
+                            <li><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in West- und Zentralafrika, zum Beispiel in Kinshasa.</span></li>
+                            <li><span class="raumanalyse-step-label">Was?</span><span>Dort sprechen sehr viele Menschen Französisch, mehr als in Paris.</span></li>
+                            <li><span class="raumanalyse-step-label">Warum dort?</span><span>Frankreich war früher Kolonialmacht in Afrika, und diese Länder wachsen heute stark.</span></li>
+                            <li><span class="raumanalyse-step-label">Folgen?</span><span>Das Zentrum der französischen Sprache verschiebt sich nach Afrika.</span></li>
+                            <li><span class="raumanalyse-step-label">Wandel?</span><span>Bis 2050 werden die meisten Französischsprecher in Afrika leben.</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
