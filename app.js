@@ -449,7 +449,7 @@ function initLeafletMap() {
   L.control.zoom({ position: 'topright' }).addTo(state.map);
 
   // Hochwertige CartoDB Positron / Voyager Karte
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=[HIER DEINEN CARTO-KEY EINFÜGEN]', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19

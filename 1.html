@@ -31,7 +31,7 @@
             --accent-blue-subtle: rgba(31, 61, 122, 0.08);
 
             /* Dezentes Rot als winziger Akzent */
-            --accent-red: #D32F2F;
+            --accent-red: #C8102E;
 
             /* Subtile, weiche Schatten */
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -59,22 +59,22 @@
         /* DARK MODE (per prefers-color-scheme automatisch) */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --bg-page: #000000;
-                --bg-surface: #1C1C1E;
-                --bg-surface-elevated: #2C2C2E;
-                --bg-surface-hover: #3A3A3C;
+                --bg-page: #121418;
+                --bg-surface: #1B1E24;
+                --bg-surface-elevated: #242830;
+                --bg-surface-hover: #2E333D;
                 --text-primary: #F5F5F7;
                 --text-secondary: #98989D;
                 --text-tertiary: #636366;
-                --border-color: #38383A;
-                --separator: #38383A;
-                --separator-subtle: #2C2C2E;
+                --border-color: #2E333D;
+                --separator: #2E333D;
+                --separator-subtle: #242830;
 
-                --accent-blue: #4D7CFF;
-                --accent-blue-hover: #6B93FF;
-                --accent-blue-subtle: rgba(77, 124, 255, 0.15);
+                --accent-blue: #5C8AE6;
+                --accent-blue-hover: #7BA1F0;
+                --accent-blue-subtle: rgba(92, 138, 230, 0.15);
 
-                --accent-red: #FF453A;
+                --accent-red: #FF5A6E;
 
                 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
                 --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -84,22 +84,22 @@
 
         /* DARK MODE (per explizitem Toggle [data-theme="dark"]) */
         [data-theme="dark"] {
-            --bg-page: #000000;
-            --bg-surface: #1C1C1E;
-            --bg-surface-elevated: #2C2C2E;
-            --bg-surface-hover: #3A3A3C;
+            --bg-page: #121418;
+            --bg-surface: #1B1E24;
+            --bg-surface-elevated: #242830;
+            --bg-surface-hover: #2E333D;
             --text-primary: #F5F5F7;
             --text-secondary: #98989D;
             --text-tertiary: #636366;
-            --border-color: #38383A;
-            --separator: #38383A;
-            --separator-subtle: #2C2C2E;
+            --border-color: #2E333D;
+            --separator: #2E333D;
+            --separator-subtle: #242830;
 
-            --accent-blue: #4D7CFF;
-            --accent-blue-hover: #6B93FF;
-            --accent-blue-subtle: rgba(77, 124, 255, 0.15);
+            --accent-blue: #5C8AE6;
+            --accent-blue-hover: #7BA1F0;
+            --accent-blue-subtle: rgba(92, 138, 230, 0.15);
 
-            --accent-red: #FF453A;
+            --accent-red: #FF5A6E;
 
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -170,106 +170,6 @@
             height: 100%;
             z-index: 1;
             background: var(--bg-page);
-        }
-
-        /* BLOCK UNTER DER KARTE */
-        .landesweit-bar {
-            position: relative;
-            z-index: 400;
-            background: var(--bg-surface);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--shadow-sm);
-            flex-shrink: 0;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
-        }
-
-        .landesweit-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .landesweit-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-        }
-
-        .landesweit-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .landesweit-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 20px;
-            border-radius: var(--radius-full);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            font-family: var(--system-font);
-            cursor: pointer;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple), transform 150ms var(--ease-apple);
-            user-select: none;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .landesweit-btn:hover {
-            background: var(--bg-surface-elevated);
-            border-color: var(--text-secondary);
-            transform: translateY(-1px);
-        }
-
-        .landesweit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .landesweit-btn.active {
-            border-color: var(--accent-blue);
-            background: var(--accent-blue-subtle);
-        }
-
-        .landesweit-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            color: var(--accent-blue);
-            flex-shrink: 0;
-        }
-
-        .landesweit-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .landesweit-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .landesweit-badge {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-variant-numeric: tabular-nums;
         }
 
         /* SIDEBAR TOGGLE BUTTON (Mobile) */
@@ -1444,10 +1344,6 @@
                 min-width: 44px;
                 min-height: 44px;
             }
-
-            .landesweit-btn {
-                min-height: 44px;
-            }
         }
 
         @media (max-width: 860px) {
@@ -1470,25 +1366,6 @@
 
             .tour-progress {
                 bottom: 64px;
-            }
-
-            .landesweit-bar {
-                padding: 10px 14px;
-                padding-bottom: max(10px, env(safe-area-inset-bottom));
-                gap: 6px;
-            }
-
-            .landesweit-buttons {
-                gap: 8px;
-                width: 100%;
-            }
-
-            .landesweit-btn {
-                flex: 1 1 calc(50% - 8px);
-                min-width: 140px;
-                padding: 8px 12px;
-                font-size: 13px;
-                justify-content: center;
             }
 
             .info-panel {
@@ -1553,11 +1430,118 @@
             }
         }
 
-        @supports (padding: env(safe-area-inset-bottom)) {
-            .landesweit-bar {
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
-                padding-left: max(16px, env(safe-area-inset-left));
-                padding-right: max(16px, env(safe-area-inset-right));
+        
+
+        /* 5 PUNKTE STEREOTYPEN-ANALYSE (A3) */
+        .stereopoints-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .stereopoints-header-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--separator);
+        }
+
+        .stereopoint-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--separator-subtle);
+        }
+
+        .stereopoint-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .stereopoint-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+        }
+
+        .stereopoint-text {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* 5 PUNKTE IM DETAIL-MODAL */
+        .detail-stereopoints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-stereopoint-row {
+            border-top: 1px solid var(--separator-subtle);
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .detail-stereopoint-row:first-child {
+            border-top: 1px solid var(--separator);
+        }
+
+        .detail-stereopoint-header {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .detail-stereopoint-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-blue);
+        }
+
+        .detail-stereopoint-frage {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .detail-stereopoint-text {
+            font-size: 14px;
+            line-height: 1.55;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* ATTRIBUTION CONTROL (A1) */
+        .leaflet-control-attribution {
+            font-size: 10.5px !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            color: var(--text-secondary) !important;
+            padding: 3px 8px !important;
+            border-radius: 4px 0 0 0 !important;
+            backdrop-filter: blur(4px) !important;
+        }
+        .leaflet-control-attribution a {
+            color: var(--accent-blue) !important;
+            text-decoration: none !important;
+        }
+        [data-theme="dark"] .leaflet-control-attribution,
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .leaflet-control-attribution {
+                background: rgba(27, 30, 36, 0.85) !important;
+                color: var(--text-secondary) !important;
             }
         }
     </style>
@@ -1592,7 +1576,7 @@
                         <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Kultur & Raum</span>
                     </div>
                     <div class="sidebar-brand-title">Raumanalyse</div>
-                    <div class="sidebar-brand-subtitle">6 Stationen & landesweite Phänomene</div>
+                    <div class="sidebar-brand-subtitle">6 Stationen zur Raumanalyse</div>
                     <a href="index.html" class="nav-back-home-link" title="Zurück zur Website">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;">
                             <polyline points="15 18 9 12 15 6"></polyline>
@@ -1607,37 +1591,6 @@
                         <div class="sidebar-section-title">Stationen auf der Karte (6)</div>
                         <div id="stationNavList">
                             <!-- Wird dynamisch mit den 6 Karten-Stationen befüllt -->
-                        </div>
-                    </div>
-
-                    <!-- Landesweit -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-section-title">Gilt landesweit (nicht ortsgebunden)</div>
-                        <div class="nav-item" onclick="openLandesweit('boulangerie')">
-                            <div class="nav-item-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
-                                    <path d="M3 15C3 8.37 8.37 3 15 3c2.5 0 4.5 1 5.5 2.5 1 1.5 1 3.5.5 5.5-2.5 6.5-8 10-14 10-2.2 0-4-1.8-4-4v-2z"></path>
-                                    <path d="M7 11l3-3"></path>
-                                    <path d="M11 15l3-3"></path>
-                                    <path d="M15 19l3-3"></path>
-                                </svg>
-                            </div>
-                            <div class="nav-item-content">
-                                <div class="nav-item-title">Béret & Baguette</div>
-                                <div class="nav-item-description">Bereich ④⑤ • Alltags- & Esskultur</div>
-                            </div>
-                        </div>
-                        <div class="nav-item" onclick="openLandesweit('streik')">
-                            <div class="nav-item-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;">
-                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                                    <line x1="4" y1="22" x2="4" y2="15"></line>
-                                </svg>
-                            </div>
-                            <div class="nav-item-content">
-                                <div class="nav-item-title">Protest- & Streikkultur</div>
-                                <div class="nav-item-description">Bereich ④⑤ • Politische Identität</div>
-                            </div>
                         </div>
                     </div>
 
@@ -1758,6 +1711,9 @@
                         </button>
                     </div>
 
+                    <!-- 5 PUNKTE STEREOTYPEN-ANALYSE -->
+                    <div class="stereopoints-container" id="infoPanelStereopoints" style="display: none;"></div>
+
                     <!-- 1. KLISCHEE -->
                     <div class="info-block info-block-cliche collapsible-field" id="fieldCliche" tabindex="0" role="button" aria-expanded="false" onclick="toggleField(this)">
                         <div class="field-header-row">
@@ -1846,36 +1802,7 @@
             </div>
         </div>
 
-        <!-- EIGENER BLOCK UNTER DER KARTE (KEIN PIN, ALS BUTTONS) -->
-        <section class="landesweit-bar glass-thick">
-            <div class="landesweit-header">
-                <span class="landesweit-title">Gilt landesweit – nicht an einen Ort gebunden</span>
-            </div>
-            <div class="landesweit-buttons">
-                <button class="landesweit-btn" id="btn-landesweit-boulangerie" onclick="openLandesweit('boulangerie')">
-                    <span class="landesweit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 15C3 8.37 8.37 3 15 3c2.5 0 4.5 1 5.5 2.5 1 1.5 1 3.5.5 5.5-2.5 6.5-8 10-14 10-2.2 0-4-1.8-4-4v-2z"></path>
-                            <path d="M7 11l3-3"></path>
-                            <path d="M11 15l3-3"></path>
-                            <path d="M15 19l3-3"></path>
-                        </svg>
-                    </span>
-                    <span class="landesweit-label">Béret & Baguette</span>
-                    <span class="landesweit-badge">Bereich ④⑤</span>
-                </button>
-                <button class="landesweit-btn" id="btn-landesweit-streik" onclick="openLandesweit('streik')">
-                    <span class="landesweit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                            <line x1="4" y1="22" x2="4" y2="15"></line>
-                        </svg>
-                    </span>
-                    <span class="landesweit-label">Protest- & Streikkultur</span>
-                    <span class="landesweit-badge">Bereich ④⑤</span>
-                </button>
-            </div>
-        </section>
+        
     </div>
 
     <!-- Leaflet JS Library -->
@@ -2006,6 +1933,33 @@
                     { value: '#1', label: 'Reiseziel weltweit' },
                     { value: '1789', label: 'Zentralismus' }
                 ],
+                stereotypenPunkte: [
+                    {
+                        label: "Reale Erscheinung",
+                        frage: "Was sieht man wirklich vor Ort?",
+                        text: "Große Prachtstraßen wie die Champs-Élysées, Museen wie der Louvre, historische Bauten und berühmte Modehäuser. Millionen Besucher aus aller Welt besichtigen den Eiffelturm und spazieren an der Seine."
+                    },
+                    {
+                        label: "Entstehung",
+                        frage: "Woher kommt dieses Bild historisch?",
+                        text: "Seit den Königen und Kaiser Napoleon war Paris das unangefochtene Zentrum für Politik, Kunst und Luxusgüter. Schon im 19. Jahrhundert galt die Stadt weltweit als Hauptstadt der Eleganz, Mode und Kultur."
+                    },
+                    {
+                        label: "In Medien, Tourismus oder Werbung",
+                        frage: "Wie wird das Bild heute genutzt oder verstärkt?",
+                        text: "Filme, Serien wie „Emily in Paris“, Bildbände und Reisewerbung zeigen fast nur das sonnige Paris mit schicken Cafés, Designermode, Bistros und Liebespaaren vor Sehenswürdigkeiten."
+                    },
+                    {
+                        label: "Verallgemeinert",
+                        frage: "Was an dem Bild ist übertrieben oder gilt gar nicht für ganz Frankreich?",
+                        text: "Paris wird oft mit ganz Frankreich gleichgesetzt. Aber rund 80 Prozent der Bevölkerung leben außerhalb des Großraums Paris in anderen Regionen, Kleinstädten oder Dörfern mit ganz anderem Alltag."
+                    },
+                    {
+                        label: "Passt nicht ins Bild",
+                        frage: "Was existiert dort auch, wird aber fast nie gezeigt?",
+                        text: "Die dichten Vororte (Banlieues) mit vielen Hochhäusern, hohe Lebenshaltungskosten, Armut, Hektik, überfüllte Metrolinien und der normale Arbeitsalltag jenseits von Haute Couture und Romantik."
+                    }
+                ],
                 raumanalyse: {
                     wo: "Paris, im Norden-Zentrum.",
                     was: "Paris wird mit „ganz Frankreich” gleichgesetzt.",
@@ -2041,6 +1995,33 @@
                     { value: 'AOC', label: 'Herkunftsschutz' },
                     { value: '#2', label: 'Weinproduzent weltweit' },
                     { value: '-30%', label: 'Konsum seit 1960' }
+                ],
+                stereotypenPunkte: [
+                    {
+                        label: "Reale Erscheinung",
+                        frage: "Was sieht man wirklich vor Ort?",
+                        text: "Weite Rebflächen rund um die Stadt, historische Weingüter mit Schlössern (Châteaux), Weinhandlungen, Restaurants und die moderne Wein-Erlebniswelt Cité du Vin."
+                    },
+                    {
+                        label: "Entstehung",
+                        frage: "Woher kommt dieses Bild historisch?",
+                        text: "Schon die Römer brachten den Weinbau in die Region. Durch den Hafen an der Garonne wurde Bordeaux-Wein seit dem Mittelalter in großen Mengen nach England und Nordeuropa exportiert."
+                    },
+                    {
+                        label: "In Medien, Tourismus oder Werbung",
+                        frage: "Wie wird das Bild heute genutzt oder verstärkt?",
+                        text: "Weinetiketten, Kochsendungen und Tourismuswerbung zeigen sonnige Rebhänge, Schlossgüter, Weinfässer aus Eichenholz und Verkostungen im Weinkeller."
+                    },
+                    {
+                        label: "Verallgemeinert",
+                        frage: "Was an dem Bild ist übertrieben oder gilt gar nicht für ganz Frankreich?",
+                        text: "Es entsteht der Eindruck, alle Franzosen würden täglich edlen Rotwein trinken. Tatsächlich geht der Weinkonsum in Frankreich seit Jahren deutlich zurück, vor allem bei jüngeren Menschen."
+                    },
+                    {
+                        label: "Passt nicht ins Bild",
+                        frage: "Was existiert dort auch, wird aber fast nie gezeigt?",
+                        text: "Harte körperliche Saisonarbeit im Weinberg, der Einsatz von Pflanzenschutzmitteln, moderne Industrie wie die Luftfahrtbranche im Großraum Bordeaux und ganz gewöhnliche Wohngebiete ohne Weinbezug."
+                    }
                 ],
                 raumanalyse: {
                     wo: "Bordeaux, Burgund, Champagne, Rhône, Loire, Elsass; AOC schützt die Herkunft.",
@@ -2078,6 +2059,33 @@
                     { value: '46', label: 'AOC-Käsesorten' },
                     { value: '246', label: 'de-Gaulle-Zitat' }
                 ],
+                stereotypenPunkte: [
+                    {
+                        label: "Reale Erscheinung",
+                        frage: "Was sieht man wirklich vor Ort?",
+                        text: "Weite grüne Vulkanberge (Puy de Dôme), grasende Salers-Kühe auf Hochweiden, kleine Dörfer aus dunklem Vulkangestein und viele Käsereien mit Sorten wie Cantal oder Saint-Nectaire."
+                    },
+                    {
+                        label: "Entstehung",
+                        frage: "Woher kommt dieses Bild historisch?",
+                        text: "Die kargen Böden und das raue Bergklima machten Ackerbau schwierig. Deshalb spezialisierten sich die Bauern seit Jahrhunderten auf Rinderhaltung und die Kunst, Milch zu haltbarem Käse zu verarbeiten."
+                    },
+                    {
+                        label: "In Medien, Tourismus oder Werbung",
+                        frage: "Wie wird das Bild heute genutzt oder verstärkt?",
+                        text: "Werbung für Mineralwasser wie Volvic und französische Käsesorten nutzt das Bild unberührter Natur, sauberer Bergluft, glücklicher Kühe und ursprünglicher Dorfgemeinschaft."
+                    },
+                    {
+                        label: "Verallgemeinert",
+                        frage: "Was an dem Bild ist übertrieben oder gilt gar nicht für ganz Frankreich?",
+                        text: "Ganz Frankreich wird oft als idyllisches Bauernland dargestellt. In Wirklichkeit arbeitet nur noch ein sehr kleiner Teil der Erwerbstätigen in der Landwirtschaft."
+                    },
+                    {
+                        label: "Passt nicht ins Bild",
+                        frage: "Was existiert dort auch, wird aber fast nie gezeigt?",
+                        text: "Die Industriestadt Clermont-Ferrand als internationaler Hauptsitz des Reifenkonzerns Michelin, moderne Universitäten, Autobahnen und die Abwanderung junger Menschen aus entlegenen Bergdörfern."
+                    }
+                ],
                 raumanalyse: {
                     wo: "Besonders in Bergregionen wie der Auvergne.",
                     was: "Große regionale Käsevielfalt.",
@@ -2113,6 +2121,33 @@
                     { value: '75', label: 'Regionalsprachen' },
                     { value: '1635', label: 'Académie française' },
                     { value: '1990er', label: 'Sprachrenaissance' }
+                ],
+                stereotypenPunkte: [
+                    {
+                        label: "Reale Erscheinung",
+                        frage: "Was sieht man wirklich vor Ort?",
+                        text: "Raue Felsklippen am Atlantik, Gezeitenmeere, Leuchttürme, Fischerhäfen, uralte Hünengräber (Menhire) und zweisprachige Wegweiser auf Französisch und Bretonisch."
+                    },
+                    {
+                        label: "Entstehung",
+                        frage: "Woher kommt dieses Bild historisch?",
+                        text: "Die Lage als westlichste Halbinsel Frankreichs und die Einwanderung von Kelten aus Britannien im Frühmittelalter prägten eine eigene Sprache, Musik und maritime Tradition, die lange vom Pariser Hof getrennt war."
+                    },
+                    {
+                        label: "In Medien, Tourismus oder Werbung",
+                        frage: "Wie wird das Bild heute genutzt oder verstärkt?",
+                        text: "Touristenbroschüren und Comic-Klassiker wie „Astérix“ zeigen stürmische Wellen, Segler in blau-weißen Streifenpullovern, Fischerboote und gemütliche Crêperien."
+                    },
+                    {
+                        label: "Verallgemeinert",
+                        frage: "Was an dem Bild ist übertrieben oder gilt gar nicht für ganz Frankreich?",
+                        text: "Man stellt sich vor, alle Bretonen führen zur See, trügen traditionelle Trachten oder sprächen nur Bretonisch. Tatsächlich ist die Region modern und wirtschaftlich stark vernetzt."
+                    },
+                    {
+                        label: "Passt nicht ins Bild",
+                        frage: "Was existiert dort auch, wird aber fast nie gezeigt?",
+                        text: "Große Industriehäfen wie Brest, moderne Technologie- und IT-Standorte in Rennes, intensive Schweine- und Geflügelzucht im Binnenland sowie sonnige Badestrände im Sommer."
+                    }
                 ],
                 raumanalyse: {
                     wo: "Regionalsprachen am Rand des Landes.",
@@ -2198,80 +2233,7 @@
             }
         };
 
-        // ========================================
-        // LANDESWEITE STATIONEN (UNTER DER KARTE)
-        // ========================================
-        const landesweitLocations = {
-            boulangerie: {
-                id: 1,
-                name: "Béret & Baguette",
-                subtitle: "Landesweit – nicht an einen Ort gebunden",
-                bereich: "Bereich ④⑤",
-                title: "Béret & Baguette",
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'bread',
-                headerImage: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80',
-                description: "Baskenmütze, Baguette unterm Arm, ständig Baguette/Croissant/Käse – ein weltweites Klischee, das mit dem heutigen Konsumalltag wenig zu tun hat.",
-                klischee: "Baskenmütze, Baguette unterm Arm, ständig Baguette/Croissant/Käse.",
-                realitaet: "Baguette seit 2022 UNESCO-Kulturerbe, ~10 Mrd./Jahr; aber Konsum stark gesunken (~½ pro Person/Tag), wohl von einem Wiener Bäcker (1839) erfunden, Name erst 1920; Béret ist baskisch und kaum getragen.",
-                facts: [
-                    "Baguette seit 2022 UNESCO-Kulturerbe, ~10 Mrd./Jahr",
-                    "Konsum stark gesunken (~½ pro Person/Tag)",
-                    "Wohl von Wiener Bäcker (1839) erfunden, Name erst 1920",
-                    "Béret ist baskisch und wird heute kaum getragen"
-                ],
-                stats: [
-                    { value: '2022', label: 'UNESCO-Kulturerbe' },
-                    { value: '~10 Mrd.', label: 'Stück / Jahr' },
-                    { value: '½', label: 'pro Person / Tag' }
-                ],
-                raumanalyse: {
-                    wo: "Landesweit, in jeder Boulangerie.",
-                    was: "Ess- und Kleidungs-Klischee.",
-                    warumDort: "Tourismuswerbung und Filme des 20. Jh. haben es eingefroren.",
-                    warumTitle: "Warum (als Bild)?",
-                    folgen: "Ein Bild, das den heutigen Alltag nicht trifft.",
-                    wandel: "Jüngere essen anders; es lebt im Marketing."
-                },
-                erlaeuterung: erlaeuterungen.boulangerie
-            },
-            streik: {
-                id: 2,
-                name: "Protest- & Streikkultur",
-                subtitle: "Landesweit – nicht an einen Ort gebunden",
-                bereich: "Bereich ④⑤",
-                title: "Protest- & Streikkultur",
-                color: 'var(--accent-blue)',
-                colorHex: '#1F3D7A',
-                iconType: 'protest',
-                headerImage: 'https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?auto=format&fit=crop&w=1200&q=80',
-                description: "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher demokratischer Wert.",
-                klischee: "„Die Franzosen streiken ständig.”",
-                realitaet: "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher Wert. Aber nicht „alle” und nicht „ständig” – oft nur einzelne Branchen.",
-                facts: [
-                    "Echte, historisch gewachsene Protestkultur; Streikrecht als hoher Wert",
-                    "Nicht „alle” und nicht „ständig” – oft nur einzelne Branchen",
-                    "Historisches Vorbild: Seidenweber-Aufstände / Canuts 1831/34 in Lyon",
-                    "Medienbilder (Gelbwesten) verstärken das Bild im Ausland"
-                ],
-                stats: [
-                    { value: '1789', label: 'Revolutionserbe' },
-                    { value: '1831/34', label: 'Canuts Lyon' },
-                    { value: 'Grundrecht', label: 'Streikrecht' }
-                ],
-                raumanalyse: {
-                    wo: "Landesweit (Beispiel Lyon: Seidenweber-Aufstände/Canuts 1831/34).",
-                    was: "Streik und Demo als politisches Mittel.",
-                    warumDort: "Seit der Revolution 1789 anerkannt.",
-                    warumTitle: "Warum?",
-                    folgen: "Teil der politischen Identität.",
-                    wandel: "Medienbilder (Gelbwesten) verstärken das Bild im Ausland."
-                },
-                erlaeuterung: erlaeuterungen.streik
-            }
-        };
-
+        
         // Tour führt über die 6 Karten-Pins
         const tourOrder = ['paris', 'bordeaux', 'auvergne', 'bretagne', 'marseille', 'kinshasa'];
 
@@ -2280,21 +2242,23 @@
         // ========================================
         const map = L.map('map', {
             zoomControl: false,
-            attributionControl: false,
+            attributionControl: true,
             zoomSnap: 0.5,
             zoomDelta: 0.5,
             wheelPxPerZoomLevel: 100
         }).setView([46.6, 2.3], 6);
 
-        // Ruhige, schlichte CARTO-TileLayers ohne Gitter
-        const standardLightLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        // Ruhige, schlichte CARTO-TileLayers mit API-Key Parameter und sichtbarer Attribution (A1)
+        const standardLightLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=[HIER DEINEN CARTO-KEY EINFÜGEN]', {
             maxZoom: 19,
-            subdomains: 'abcd'
+            subdomains: 'abcd',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
         });
 
-        const standardDarkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        const standardDarkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=[HIER DEINEN CARTO-KEY EINFÜGEN]', {
             maxZoom: 19,
-            subdomains: 'abcd'
+            subdomains: 'abcd',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
         });
 
         const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -2490,28 +2454,7 @@
             });
         }
 
-        // ========================================
-        // LANDESWEIT-BUTTONS CLICK-HANDLER
-        // ========================================
-        window.openLandesweit = function(key) {
-            stopTour();
-            if (window.innerWidth <= 1180) {
-                sidebar.classList.remove('visible');
-                sidebar.classList.add('collapsed');
-                sidebarBackdrop?.classList.remove('visible');
-            }
-            map.flyTo([46.6, 2.3], 6, {
-                duration: 1.0,
-                easeLinearity: 0.35
-            });
-            showInfoPanel(key);
-
-            // Button Active State im Block
-            document.querySelectorAll('.landesweit-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.getElementById(`btn-landesweit-${key}`);
-            if (activeBtn) activeBtn.classList.add('active');
-        };
-
+        
         // ========================================
         // INFO PANEL
         // ========================================
@@ -2559,27 +2502,52 @@
 
         function showInfoPanel(key) {
             currentLocation = key;
-            const location = locations[key] || landesweitLocations[key];
+            const location = locations[key];
             if (!location) return;
 
-            const isLandesweit = !location.coordinates;
             const erl = location.erlaeuterung || {};
 
             document.getElementById('infoPanelIcon').innerHTML = icons[location.iconType] || icons.pin || icons.paris;
-            document.getElementById('infoPanelTitle').textContent = isLandesweit ? location.name : `${location.id}. ${location.name}`;
+            document.getElementById('infoPanelTitle').textContent = `${location.id}. ${location.name}`;
             document.getElementById('infoPanelLocation').textContent = `${location.title} • ${location.subtitle}`;
 
-            // 1. Klischee
-            const clicheEl = document.getElementById('infoPanelCliche');
-            if (clicheEl) clicheEl.textContent = location.klischee;
-            const clicheExp = document.getElementById('infoPanelClicheExplain');
-            if (clicheExp) clicheExp.textContent = erl.klischee || '';
+            // 5 Punkte Stereotypen-Analyse (A3) oder Klischee & Realität
+            const stereopointsEl = document.getElementById('infoPanelStereopoints');
+            const fieldCliche = document.getElementById('fieldCliche');
+            const fieldReality = document.getElementById('fieldReality');
 
-            // 2. Realität
-            const realityEl = document.getElementById('infoPanelReality');
-            if (realityEl) realityEl.textContent = location.realitaet;
-            const realityExp = document.getElementById('infoPanelRealityExplain');
-            if (realityExp) realityExp.textContent = erl.realitaet || '';
+            if (location.stereotypenPunkte && location.stereotypenPunkte.length > 0) {
+                if (fieldCliche) fieldCliche.style.display = 'none';
+                if (fieldReality) fieldReality.style.display = 'none';
+                if (stereopointsEl) {
+                    stereopointsEl.style.display = 'flex';
+                    stereopointsEl.innerHTML = `
+                        <div class="stereopoints-header-label">Stereotypen-Analyse</div>
+                        ${location.stereotypenPunkte.map(p => `
+                            <div class="stereopoint-item">
+                                <span class="stereopoint-label">${p.label}</span>
+                                <p class="stereopoint-text">${p.text}</p>
+                            </div>
+                        `).join('')}
+                    `;
+                }
+            } else {
+                if (stereopointsEl) stereopointsEl.style.display = 'none';
+                if (fieldCliche) fieldCliche.style.display = '';
+                if (fieldReality) fieldReality.style.display = '';
+
+                // 1. Klischee
+                const clicheEl = document.getElementById('infoPanelCliche');
+                if (clicheEl) clicheEl.textContent = location.klischee || '';
+                const clicheExp = document.getElementById('infoPanelClicheExplain');
+                if (clicheExp) clicheExp.textContent = erl.klischee || '';
+
+                // 2. Realität
+                const realityEl = document.getElementById('infoPanelReality');
+                if (realityEl) realityEl.textContent = location.realitaet || '';
+                const realityExp = document.getElementById('infoPanelRealityExplain');
+                if (realityExp) realityExp.textContent = erl.realitaet || '';
+            }
 
             // 3. Raumanalyse
             const analysisEl = document.getElementById('infoPanelAnalysis');
@@ -2642,10 +2610,8 @@
 
             // Marker Active State (nur wenn auf Karte)
             document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
-            if (!isLandesweit) {
-                const activeM = document.getElementById(`marker-${key}`);
-                if (activeM) activeM.classList.add('active');
-            }
+            const activeM = document.getElementById(`marker-${key}`);
+            if (activeM) activeM.classList.add('active');
 
             // Zoom-Button Label anpassen
             const zoomBtn = document.getElementById('zoomLocationButton');
@@ -2692,7 +2658,7 @@
             currentLocation = null;
             document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.landesweit-btn').forEach(btn => btn.classList.remove('active'));
+            
         }
 
         infoPanelClose.addEventListener('click', hideInfoPanel);
@@ -2702,7 +2668,7 @@
             if (currentLocation === 'kinshasa') {
                 showOverview();
             } else if (currentLocation) {
-                const location = locations[currentLocation] || landesweitLocations[currentLocation];
+                const location = locations[currentLocation];
                 if (location && location.coordinates) {
                     map.flyTo(location.coordinates, location.detailZoom, {
                         duration: 0.8,
@@ -2724,12 +2690,12 @@
         });
 
         function showDetailPanel(key) {
-            const loc = locations[key] || landesweitLocations[key];
+            const loc = locations[key];
             if (!loc) return;
 
             document.getElementById('detailHeaderBg').style.backgroundImage = `url(${loc.headerImage})`;
             document.getElementById('detailIcon').innerHTML = icons[loc.iconType] || icons.pin || icons.paris;
-            document.getElementById('detailTitle').textContent = loc.coordinates ? `${loc.id}. ${loc.name}` : loc.name;
+            document.getElementById('detailTitle').textContent = `${loc.id}. ${loc.name}`;
             document.getElementById('detailSubtitle').textContent = `${loc.title} • ${loc.bereich ? (loc.bereich.startsWith('Bereich') ? loc.bereich : 'Bereich ' + loc.bereich) : loc.subtitle}`;
 
             let africaBoxHtml = '';
@@ -2766,20 +2732,37 @@
                     </div>
                 </div>
 
-                <!-- Klischee vs. Realität -->
-                <div class="detail-section">
-                    <h3 class="detail-section-title">Gegenüberstellung: Vorurteil & Realität</h3>
-                    <div class="compare-grid">
-                        <div class="compare-card cliche">
-                            <span class="compare-badge cliche">Klischee</span>
-                            <p class="compare-text">${loc.klischee}</p>
-                        </div>
-                        <div class="compare-card reality">
-                            <span class="compare-badge reality">Realität</span>
-                            <p class="compare-text">${loc.realitaet}</p>
+                <!-- 5 Punkte Stereotypen-Analyse (A3) oder Klischee vs. Realität -->
+                ${loc.stereotypenPunkte && loc.stereotypenPunkte.length > 0 ? `
+                    <div class="detail-section">
+                        <h3 class="detail-section-title">Stereotypen-Analyse in 5 Punkten</h3>
+                        <div class="detail-stereopoints-list">
+                            ${loc.stereotypenPunkte.map(p => `
+                                <div class="detail-stereopoint-row">
+                                    <div class="detail-stereopoint-header">
+                                        <span class="detail-stereopoint-label">${p.label}</span>
+                                        <span class="detail-stereopoint-frage">${p.frage}</span>
+                                    </div>
+                                    <p class="detail-stereopoint-text">${p.text}</p>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
-                </div>
+                ` : `
+                    <div class="detail-section">
+                        <h3 class="detail-section-title">Gegenüberstellung: Vorurteil & Realität</h3>
+                        <div class="compare-grid">
+                            <div class="compare-card cliche">
+                                <span class="compare-badge cliche">Klischee</span>
+                                <p class="compare-text">${loc.klischee}</p>
+                            </div>
+                            <div class="compare-card reality">
+                                <span class="compare-badge reality">Realität</span>
+                                <p class="compare-text">${loc.realitaet}</p>
+                            </div>
+                        </div>
+                    </div>
+                `}
 
                 ${africaBoxHtml}
 
