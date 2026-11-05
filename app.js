@@ -266,12 +266,14 @@ function selectStation(id, panTo = true) {
 
   // Karte animieren
   if (panTo && state.map) {
+    const isKinshasa = id === 'kinshasa' || (station.name && station.name.toLowerCase().includes('kinshasa'));
+    const cityZoom = isKinshasa ? 5 : (station.zoom || 11);
     if (state.currentEngine === 'google') {
       state.map.panTo(station.coords);
-      state.map.setZoom(Math.max(state.map.getZoom(), 7));
+      state.map.setZoom(cityZoom);
     } else {
-      state.map.flyTo([station.coords.lat, station.coords.lng], Math.max(state.map.getZoom(), 7), {
-        duration: 1.2,
+      state.map.flyTo([station.coords.lat, station.coords.lng], cityZoom, {
+        duration: isKinshasa ? 1.5 : 1.2,
         easeLinearity: 0.25
       });
     }

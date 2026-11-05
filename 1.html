@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -57,30 +57,7 @@
         }
 
         /* DARK MODE (per prefers-color-scheme automatisch) */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg-page: #121418;
-                --bg-surface: #1B1E24;
-                --bg-surface-elevated: #242830;
-                --bg-surface-hover: #2E333D;
-                --text-primary: #F5F5F7;
-                --text-secondary: #98989D;
-                --text-tertiary: #636366;
-                --border-color: #2E333D;
-                --separator: #2E333D;
-                --separator-subtle: #242830;
-
-                --accent-blue: #5C8AE6;
-                --accent-blue-hover: #7BA1F0;
-                --accent-blue-subtle: rgba(92, 138, 230, 0.15);
-
-                --accent-red: #FF5A6E;
-
-                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-                --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
-            }
-        }
+        /* System Dark Mode deaktiviert - Seite startet immer hell */
 
         /* DARK MODE (per explizitem Toggle [data-theme="dark"]) */
         [data-theme="dark"] {
@@ -311,20 +288,35 @@
             padding: 8px 12px;
             border-radius: var(--radius-md);
             cursor: pointer;
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
+            transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
             user-select: none;
             margin-bottom: 3px;
+            border: 1px solid transparent;
             border-left: 3px solid transparent;
         }
 
         .nav-item:hover {
-            background: var(--bg-surface-elevated);
+            background: rgba(31, 61, 122, 0.04);
+            border-color: rgba(31, 61, 122, 0.15);
+            transform: translateX(2px);
         }
 
-        /* Aktiver Sidebar-Eintrag: dezente hellgraue Fläche + blauer Akzentstrich links */
+        /* Aktiver Sidebar-Eintrag in Akzentfarben Blau/Rot (PFLICHT 5) */
         .nav-item.active {
-            background: var(--bg-surface-elevated);
-            border-left-color: var(--accent-blue);
+            background: rgba(31, 61, 122, 0.08);
+            border-color: rgba(31, 61, 122, 0.25);
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .nav-item.active .nav-item-title {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .nav-item.active .nav-item-icon {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #FFFFFF;
         }
 
         .nav-item-icon {
@@ -1210,26 +1202,27 @@
 
         .map-marker {
             cursor: pointer;
-            transition: transform 150ms var(--ease-apple);
+            transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .map-marker:hover {
-            transform: scale(1.1);
+            transform: scale(1.14);
             z-index: 1000 !important;
         }
 
+        /* Ruhige, neutrale Marker für nicht ausgewählte Stationen (PFLICHT 5) */
         .marker-container {
             width: 36px;
             height: 36px;
             border-radius: 50%;
             background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
+            border: 1.5px solid #CBD5E1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: all 150ms var(--ease-apple);
+            transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .marker-bg {
@@ -1238,8 +1231,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-blue);
+            color: #475569;
             background: var(--bg-surface);
+            transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .marker-bg svg {
@@ -1248,15 +1242,21 @@
             fill: currentColor;
         }
 
-        /* Aktiver Marker in Akzentblau */
-        .map-marker.active .marker-container {
-            background: var(--accent-blue);
+        .map-marker:hover .marker-container {
             border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(31, 61, 122, 0.25), var(--shadow-md);
+            box-shadow: 0 4px 12px rgba(31, 61, 122, 0.2);
+        }
+
+        /* Ausgewählter Marker in Trikolore-Rot (#C8102E) (PFLICHT 5) */
+        .map-marker.active .marker-container {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.25), 0 6px 16px rgba(200, 16, 46, 0.35);
+            transform: scale(1.18);
         }
 
         .map-marker.active .marker-bg {
-            background: var(--accent-blue);
+            background: var(--accent-red);
             color: #FFFFFF;
         }
 
@@ -1538,10 +1538,76 @@
             text-decoration: none !important;
         }
         [data-theme="dark"] .leaflet-control-attribution,
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .leaflet-control-attribution {
-                background: rgba(27, 30, 36, 0.85) !important;
-                color: var(--text-secondary) !important;
+        
+
+        /* TRIKOLORE BALKEN & SEQUENTIELLE ANIMATION (PFLICHT 4, 5 & 6) */
+        .tricolore-bar {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tri-segment {
+            flex: 1;
+            height: 100%;
+            transform-origin: left center;
+            animation: tricolore-build 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .tri-blue {
+            background: #1F3D7A;
+            animation-delay: 50ms;
+        }
+
+        .tri-white {
+            background: #FFFFFF;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            animation-delay: 180ms;
+        }
+
+        .tri-red {
+            background: #C8102E;
+            animation-delay: 310ms;
+        }
+
+        @keyframes tricolore-build {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+        }
+
+        .tricolore-sidebar {
+            height: 4.5px;
+            border-radius: 2px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .tricolore-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 5;
+        }
+
+        .info-panel-header {
+            position: relative;
+            padding-top: calc(var(--space-5) + 4px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tri-segment {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
             }
         }
     </style>
@@ -1571,6 +1637,12 @@
             <!-- Schwebende Sidebar (Apple Style) -->
             <nav class="sidebar glass-thick" id="sidebar">
                 <div class="sidebar-header">
+                    <!-- Trikolore-Balken im Kopf der linken Seitenleiste (PFLICHT 4 & 6) -->
+                    <div class="tricolore-bar tricolore-sidebar" aria-hidden="true">
+                        <span class="tri-segment tri-blue"></span>
+                        <span class="tri-segment tri-white"></span>
+                        <span class="tri-segment tri-red"></span>
+                    </div>
                     <div class="sidebar-brand-top">
                         <span class="brand-badge">Frankreich</span>
                         <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Kultur & Raum</span>
@@ -1690,6 +1762,12 @@
             <!-- Info-Panel (Rechts einschwebend) -->
             <div class="info-panel glass-chrome" id="infoPanel">
                 <div class="info-panel-header">
+                    <!-- Trikolore-Balken im Panel-Kopf (PFLICHT 4 & 5) -->
+                    <div class="tricolore-bar tricolore-panel" aria-hidden="true">
+                        <span class="tri-segment tri-blue"></span>
+                        <span class="tri-segment tri-white"></span>
+                        <span class="tri-segment tri-red"></span>
+                    </div>
                     <div class="info-panel-icon" id="infoPanelIcon"></div>
                     <div class="info-panel-title-group">
                         <h2 class="info-panel-title" id="infoPanelTitle">Standort</h2>
@@ -1913,7 +1991,7 @@
                 bereich: "④⑤",
                 title: "„Paris ist Frankreich”",
                 coordinates: [48.8566, 2.3522],
-                zoom: 12,
+                zoom: 11,
                 detailZoom: 14,
                 color: 'var(--accent-blue)',
                 colorHex: '#1F3D7A',
@@ -2102,7 +2180,7 @@
                 bereich: "③ + ④⑤",
                 title: "„Eine Sprache, viele Sprachen”",
                 coordinates: [48.3904, -4.4861],
-                zoom: 9,
+                zoom: 10,
                 detailZoom: 12,
                 color: 'var(--accent-blue)',
                 colorHex: '#1F3D7A',
@@ -2272,10 +2350,7 @@
         let activeLayer = 'standard';
 
         function isDarkMode() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') return true;
-            if (currentTheme === 'light') return false;
-            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            return document.documentElement.getAttribute('data-theme') === 'dark';
         }
 
         function updateBaseLayer() {
@@ -2325,11 +2400,7 @@
             const marker = L.marker(location.coordinates, { icon }).addTo(map);
 
             marker.on('click', () => {
-                showInfoPanel(key);
-                map.flyTo(location.coordinates, location.zoom, {
-                    duration: key === 'kinshasa' ? 1.4 : 1.0,
-                    easeLinearity: 0.35
-                });
+                navigateToLocation(key);
             });
 
             markers[key] = marker;
@@ -2865,9 +2936,10 @@
 
             updateTourProgress();
 
-            map.flyTo(loc.coordinates, loc.zoom, {
-                duration: 1.2,
-                easeLinearity: 0.35
+            const targetZoom = key === 'kinshasa' ? 5 : (loc.zoom || 11);
+            map.flyTo(loc.coordinates, targetZoom, {
+                duration: key === 'kinshasa' ? 1.5 : 1.2,
+                easeLinearity: 0.25
             });
 
             setTimeout(() => {
@@ -2941,23 +3013,12 @@
             const currentlyDark = isDarkMode();
             const newTheme = currentlyDark ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('france_map_theme', newTheme);
             updateThemeUI();
         });
 
-        // Gespeichertes Theme laden
-        const savedTheme = localStorage.getItem('france_map_theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
+        // IMMER IM HELLMODUS STARTEN (PFLICHT 1: unabhängig von System-Einstellung)
+        document.documentElement.setAttribute('data-theme', 'light');
         updateThemeUI();
-
-        // System Theme Änderungen abhören
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (!localStorage.getItem('france_map_theme')) {
-                updateThemeUI();
-            }
-        });
 
         // ========================================
         // ZOOM BUTTONS
