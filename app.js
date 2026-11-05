@@ -331,23 +331,23 @@ function populateDrawer(station) {
 
   if (analysisGrid) {
     analysisGrid.innerHTML = `
-      <div class="analysis-item">
+      <div class="analysis-item glass-solid">
         <div class="analysis-question">Wo?</div>
         <div class="analysis-answer">${station.raumanalyse.wo}</div>
       </div>
-      <div class="analysis-item">
+      <div class="analysis-item glass-solid">
         <div class="analysis-question">Was?</div>
         <div class="analysis-answer">${station.raumanalyse.was}</div>
       </div>
-      <div class="analysis-item">
+      <div class="analysis-item glass-solid">
         <div class="analysis-question">Warum dort?</div>
         <div class="analysis-answer">${station.raumanalyse.warumDort}</div>
       </div>
-      <div class="analysis-item">
+      <div class="analysis-item glass-solid">
         <div class="analysis-question">Folgen?</div>
         <div class="analysis-answer">${station.raumanalyse.folgen}</div>
       </div>
-      <div class="analysis-item">
+      <div class="analysis-item glass-solid">
         <div class="analysis-question">Wandel?</div>
         <div class="analysis-answer">${station.raumanalyse.wandel}</div>
       </div>

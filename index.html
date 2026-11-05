@@ -46,7 +46,301 @@
             --area-e-subtle: #FAF2F2;
             --area-e-border: rgba(200, 16, 46, 0.18);
 
-            /* IMPECCABLE ELEVATIONS & RADII */
+            
+        /* ==========================================================================
+           APPLE iOS 26 LIQUID-GLASS DESIGN SYSTEM (REINE CSS-KLASSEN)
+           ========================================================================== */
+
+        /* ECHTES BLUR-GLAS (nur über texturierten Flächen verwenden, max. 2–3 pro sichtbarem Bereich) */
+        .glass {
+            background: rgba(255, 255, 255, 0.55);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 18px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.75),   /* Lichtkante oben = Specular Highlight */
+                inset 0 0 0 1px rgba(255, 255, 255, 0.18),  /* feiner innerer Glanzrand */
+                0 10px 30px rgba(20, 30, 60, 0.12);         /* Tiefe über Schatten (wichtig im Hellmodus) */
+            will-change: transform;                         /* eigene GPU-Ebene, flüssiger */
+            color: #1D1D1F;
+        }
+
+        @media (max-width: 768px) {
+            .glass {
+                -webkit-backdrop-filter: blur(12px) saturate(140%);
+                backdrop-filter: blur(12px) saturate(140%);
+            }
+        }
+
+        /* STATISCHES GLAS-LITE (für die vielen Inhaltskarten, kein backdrop-filter, null GPU-Kosten) */
+        .glass-solid {
+            background: rgba(255, 255, 255, 0.82) !important;
+            border: 1px solid rgba(20, 30, 60, 0.06) !important;
+            border-radius: 18px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(20, 30, 60, 0.08) !important;
+            transition: transform 220ms var(--ease-spring), box-shadow 220ms var(--ease-spring), border-color 220ms ease, background 220ms ease;
+        }
+
+        /* AKTIV / HOVER-AKZENT (TRIKOLORE) */
+        .glass-active-blue,
+        .glass-solid:hover,
+        .card-clickable:hover {
+            background: rgba(31, 61, 122, 0.06) !important;
+            border-color: rgba(31, 61, 122, 0.28) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 12px 32px rgba(31, 61, 122, 0.12) !important;
+        }
+
+        #bereich-e .glass-solid:hover,
+        #bereich-e .deepdive-card:hover,
+        #bereich-e .kultur-feature-card:hover {
+            background: rgba(200, 16, 46, 0.05) !important;
+            border-color: rgba(200, 16, 46, 0.30) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 12px 32px rgba(200, 16, 46, 0.10) !important;
+        }
+
+        /* STICKY LIQUID-GLASS NAVIGATION */
+        .site-header-nav {
+            position: sticky;
+            top: 14px;
+            z-index: 1000;
+            width: fit-content;
+            max-width: calc(100% - 32px);
+            margin: 12px auto;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 250ms ease, box-shadow 250ms ease, border-color 250ms ease, transform 250ms ease;
+        }
+
+        .site-header-nav.scrolled {
+            background: rgba(255, 255, 255, 0.78) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 14px 36px rgba(20, 30, 60, 0.16) !important;
+        }
+
+        .site-nav-inner {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-item-link {
+            text-decoration: none;
+            color: #1D1D1F;
+            font-size: 13.5px;
+            font-weight: 500;
+            padding: 6px 13px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-item-link:hover {
+            background: rgba(31, 61, 122, 0.12);
+            border-color: rgba(31, 61, 122, 0.28);
+            color: var(--accent-blue);
+        }
+
+        .nav-item-cta {
+            background: rgba(31, 61, 122, 0.08);
+            border-color: rgba(31, 61, 122, 0.22);
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .nav-item-cta:hover {
+            background: rgba(31, 61, 122, 0.16);
+            border-color: rgba(31, 61, 122, 0.35);
+            color: var(--accent-blue-hover);
+        }
+
+        .nav-tagline {
+            font-size: 11px;
+            color: #5A5A5A;
+            font-weight: 400;
+        }
+
+        .nav-sep {
+            color: #CBD5E1;
+            font-size: 12px;
+        }
+
+        @media (max-width: 680px) {
+            .nav-tagline, .nav-sep { display: none; }
+            .nav-item-link { font-size: 12px; padding: 5px 9px; }
+        }
+
+        /* HERO LIQUID-GLASS CONTAINER */
+        .hero-content.glass {
+            background: rgba(255, 255, 255, 0.60) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+            backdrop-filter: blur(20px) saturate(150%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.65) !important;
+            border-radius: 22px !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.85),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.20),
+                0 14px 40px rgba(20, 30, 60, 0.16) !important;
+            will-change: transform;
+            padding: 34px 50px;
+            color: #1D1D1F !important;
+            text-shadow: none !important;
+            max-width: 780px;
+            margin: 0 16px;
+        }
+
+        .hero-content.glass .hero-title {
+            color: #1D1D1F !important;
+            text-shadow: none !important;
+            margin-bottom: 10px;
+        }
+
+        .hero-content.glass .hero-subtitle {
+            color: #5A5A5A !important;
+            text-shadow: none !important;
+            font-weight: 500;
+        }
+
+        /* GLAS-BUTTONS & CTAs */
+        .click-cta,
+        .btn-toggle-expand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.72) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+            backdrop-filter: blur(16px) saturate(150%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.85) !important;
+            border-radius: 9999px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 4px 14px rgba(20, 30, 60, 0.08) !important;
+            color: #1D1D1F !important;
+            cursor: pointer;
+            will-change: transform;
+            transition: all 220ms var(--ease-spring);
+        }
+
+        .btn-toggle-expand {
+            padding: 7px 18px !important;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+        }
+
+        .click-cta {
+            padding: 14px 28px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+        }
+
+        .click-cta:hover,
+        .btn-toggle-expand:hover {
+            background: rgba(31, 61, 122, 0.12) !important;
+            border-color: rgba(31, 61, 122, 0.28) !important;
+            color: var(--accent-blue) !important;
+            transform: translateY(-2px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 24px rgba(31, 61, 122, 0.16) !important;
+        }
+
+        /* AMBIENT DRIFTING BLOBS */
+        .ambient-blobs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.14;
+            will-change: transform;
+        }
+
+        .ambient-blob.blob-blue {
+            width: min(55vw, 460px);
+            height: min(55vw, 460px);
+            background: #1F3D7A;
+            top: 15%;
+            left: 10%;
+            animation: driftBlobBlue 22s ease-in-out infinite alternate;
+        }
+
+        .ambient-blob.blob-red {
+            width: min(50vw, 420px);
+            height: min(50vw, 420px);
+            background: #C8102E;
+            bottom: 15%;
+            right: 10%;
+            animation: driftBlobRed 26s ease-in-out infinite alternate;
+        }
+
+        @keyframes driftBlobBlue {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 35px) scale(1.08); }
+            100% { transform: translate(-25px, 60px) scale(0.94); }
+        }
+
+        @keyframes driftBlobRed {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-45px, -30px) scale(1.06); }
+            100% { transform: translate(35px, -50px) scale(0.92); }
+        }
+
+        /* BARRIEREFREIHEIT (REDUCED TRANSPARENCY & MOTION) */
+        @media (prefers-reduced-transparency: reduce) {
+            .glass,
+            .glass-solid,
+            .click-cta,
+            .btn-toggle-expand,
+            .site-header-nav,
+            .hero-content.glass {
+                background: #FFFFFF !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+                border-color: rgba(15, 23, 42, 0.12) !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-blob {
+                animation: none !important;
+            }
+            .glass,
+            .glass-solid,
+            .site-header-nav,
+            .click-cta,
+            .btn-toggle-expand {
+                will-change: auto !important;
+                transition: none !important;
+            }
+        }
+
+        /* DARK MODE SUPPORT (Standard bleibt hell) */
+        [data-theme="dark"] .glass {
+            background: rgba(28, 30, 36, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+            color: #F8FAFC !important;
+        }
+
+        [data-theme="dark"] .glass-solid {
+            background: rgba(28, 30, 36, 0.9) !important;
+            border-color: rgba(255, 255, 255, 0.10) !important;
+            color: #F8FAFC !important;
+        }
+    
+/* IMPECCABLE ELEVATIONS & RADII */
             --radius-card: 14px;
             --radius-sm: 8px;
             --radius-full: 9999px;
@@ -1196,10 +1490,47 @@
 
         /* SITE FOOTER / IMPRESSUM */
         .site-footer {
+            background: #F8F9FA;
+            color: #1D1D1F;
+            padding: 80px 40px 90px;
+            border-top: 1px solid rgba(20, 30, 60, 0.08);
+        }
+
+        .footer-credits-list {
+            color: #5A5A5A;
+        }
+
+        .footer-credit-line strong {
+            color: #1D1D1F;
+        }
+
+        .sources-list li {
+            color: #5A5A5A;
+        }
+
+        .footer-school-note {
+            color: #5A5A5A;
+        }
+
+        .footer-block-title {
+            color: #1D1D1F;
+        }
+
+        [data-theme="dark"] .site-footer {
             background: #070A10;
             color: #F8FAFC;
-            padding: 80px 40px 90px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] .footer-credits-list,
+        [data-theme="dark"] .sources-list li,
+        [data-theme="dark"] .footer-school-note {
+            color: #CBD5E1;
+        }
+
+        [data-theme="dark"] .footer-credit-line strong,
+        [data-theme="dark"] .footer-block-title {
+            color: #F8FAFC;
         }
 
         .footer-content {
@@ -1610,11 +1941,35 @@
         <span class="tri-segment tri-red"></span>
     </div>
 
+    <!-- STICKY LIQUID-GLASS NAVIGATION (APPLE iOS 26) -->
+    <header class="site-header-nav glass" id="siteNav">
+        <nav class="site-nav-inner" aria-label="Hauptnavigation">
+            <a href="#bereiche-uebersicht" class="nav-item-link">Übersicht</a>
+            <span class="nav-sep" aria-hidden="true">·</span>
+            <a href="#bereich-a" class="nav-item-link">Bereich A <span class="nav-tagline">Naturraum</span></a>
+            <span class="nav-sep" aria-hidden="true">·</span>
+            <a href="#bereich-b" class="nav-item-link">Bereich B <span class="nav-tagline">Bevölkerung</span></a>
+            <span class="nav-sep" aria-hidden="true">·</span>
+            <a href="#bereich-e" class="nav-item-link">Bereich E <span class="nav-tagline">Kultur</span></a>
+            <span class="nav-sep" aria-hidden="true">·</span>
+            <a href="1.html" class="nav-item-link nav-item-cta" title="Interaktive Karte öffnen">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                <span>Karte öffnen</span>
+            </a>
+        </nav>
+    </header>
+
     <!-- HERO SECTION WITH ACCURATE FRANCE VECTOR SCROLL ANIMATION -->
     <section class="hero-scroll-container">
         <div class="hero-sticky">
             <div class="hero-fallback-bg" id="heroBg"></div>
             <div class="hero-overlay"></div>
+
+            <!-- DEZENTE DRIFTENDE TRIKOLORE-FARBFLECKEN (APPLE iOS 26) -->
+            <div class="ambient-blobs" aria-hidden="true">
+                <div class="ambient-blob blob-blue"></div>
+                <div class="ambient-blob blob-red"></div>
+            </div>
 
             <!-- DETAILED FRANCE SILHOUETTE VECTOR STAGE -->
             <div class="france-scroll-stage">
@@ -1636,7 +1991,7 @@
 
             <div class="hero-transition-mask"></div>
 
-            <div class="hero-content reveal active">
+            <div class="hero-content glass reveal active">
                 <h1 class="hero-title">Frankreich</h1>
                 <p class="hero-subtitle">von Oskar, Emil und Karl</p>
             </div>
@@ -1653,7 +2008,12 @@
     <main>
 
         <!-- ABSCHNITT „WORUM GEHT ES?“ -->
-        <section class="container reveal" id="bereiche-uebersicht">
+        <section class="container reveal" id="bereiche-uebersicht" style="position: relative;">
+            <!-- DEZENTE FARBFLECKEN FÜR GLAS-HINTERGRUND (APPLE iOS 26) -->
+            <div class="ambient-blobs" aria-hidden="true" style="opacity: 0.5;">
+                <div class="ambient-blob blob-blue" style="top: -20px; left: 5%;"></div>
+                <div class="ambient-blob blob-red" style="bottom: 20px; right: 5%;"></div>
+            </div>
             <h2 class="section-title">Worum geht es?</h2>
             <p class="body-text" style="text-align: center; max-width: 820px; margin: 0 auto 36px auto; font-size: 19px; line-height: 1.6;">
                 Frankreich ist eines der bekanntesten Länder der Welt und steckt trotzdem voller Überraschungen. In diesem
@@ -1663,7 +2023,7 @@
             </p>
 
             <!-- Hervorgehobene Leitfrage -->
-            <div class="leitfrage-box">
+            <div class="leitfrage-box glass-solid">
                 <span class="leitfrage-tag">Zentrale Leitfrage</span>
                 <p class="leitfrage-text">
                     „Wie lässt sich Frankreich geografisch erklären, und wann wird aus einer Besonderheit ein Stereotyp über ein ganzes Land?“
@@ -1673,7 +2033,7 @@
             <!-- DIE 3 ANKLICKBAREN BEREICHS-KARTEN -->
             <div class="cards-grid">
                 <!-- Karte 1 – Bereich A (Emil) -->
-                <a href="#bereich-a" class="card-clickable" title="Zu Bereich A springen">
+                <a href="#bereich-a" class="card-clickable glass-solid" title="Zu Bereich A springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_a.jpg" alt="Französischer Naturraum, Mont Saint-Michel in der Normandie" class="card-image" loading="lazy">
                     </div>
@@ -1688,7 +2048,7 @@
                 </a>
 
                 <!-- Karte 2 – Bereich B (Oskar) -->
-                <a href="#bereich-b" class="card-clickable" title="Zu Bereich B springen">
+                <a href="#bereich-b" class="card-clickable glass-solid" title="Zu Bereich B springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_b.jpg" alt="Bevölkerung und Städte, Pariser Straßenleben in der Rue Montorgueil" class="card-image" loading="lazy">
                     </div>
@@ -1703,7 +2063,7 @@
                 </a>
 
                 <!-- Karte 3 – Bereich E (Karl) -->
-                <a href="#bereich-e" class="card-clickable" title="Zu Bereich E springen">
+                <a href="#bereich-e" class="card-clickable glass-solid" title="Zu Bereich E springen">
                     <div class="card-image-wrap">
                         <img src="images/bereich_e.jpg" alt="Französische Kultur und Esskultur, Wein, Käseplatte und Baguette" class="card-image" loading="lazy">
                     </div>
@@ -1738,13 +2098,13 @@
 
             <div class="deepdive-grid">
                 <!-- PFLICHT ①: ORIENTIERUNGSKARTE -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Orientierung: Frankreich im Überblick</h3>
                     <p>
                         Hier siehst du Frankreich mit seinen Grenzen, Nachbarländern, wichtigen Städten und den großen Landschaften auf einen Blick:
                     </p>
 
-                    <div class="orientation-map-container">
+                    <div class="orientation-map-container glass-solid">
                         <svg class="orientation-svg-map" viewBox="0 0 1000 961" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Orientierungskarte Frankreich mit Nachbarländern, Städten, Flüssen und Gebirgen">
                             <!-- Reliefkarte von Frankreich (Sting, CC BY-SA 4.0 via Wikimedia Commons) -->
                             <image href="images/orientierungskarte_frankreich.jpg" x="0" y="0" width="1000" height="961" />
@@ -1868,23 +2228,23 @@
                     </div>
 
                     <div class="orientation-legend-grid">
-                        <div class="orientation-legend-item">
+                        <div class="orientation-legend-item glass-solid">
                             <strong>Lage</strong>
                             Westeuropa, mit Atlantik im Westen, Mittelmeer im Süden und Ärmelkanal im Norden.
                         </div>
-                        <div class="orientation-legend-item">
+                        <div class="orientation-legend-item glass-solid">
                             <strong>Die 8 Nachbarländer</strong>
                             Belgien, Luxemburg, Deutschland, Schweiz, Italien, Monaco, Spanien und Andorra.
                         </div>
-                        <div class="orientation-legend-item">
+                        <div class="orientation-legend-item glass-solid">
                             <strong>Wichtige Städte</strong>
                             Paris (Hauptstadt), Marseille, Lyon, Toulouse, Nizza, Bordeaux, Straßburg, Lille, Nantes.
                         </div>
-                        <div class="orientation-legend-item">
+                        <div class="orientation-legend-item glass-solid">
                             <strong>Gebirge</strong>
                             Alpen (mit Mont Blanc, rund 4.800&nbsp;m), Pyrenäen und Zentralmassiv.
                         </div>
-                        <div class="orientation-legend-item">
+                        <div class="orientation-legend-item glass-solid">
                             <strong>Flüsse &amp; Insel</strong>
                             Loire, Seine, Rhône und Garonne. Dazu die Insel Korsika.
                         </div>
@@ -1892,7 +2252,7 @@
                 </div>
 
                 <!-- Punkt A1: Bedeutung von Klima & Naturraum fürs Leben -->
-                <div class="deepdive-card">
+                <div class="deepdive-card glass-solid">
                     <h3 class="deepdive-card-title">Bedeutung von Klima &amp; Naturraum fürs Leben</h3>
                     <div class="expandable-text-block">
                         <p class="text-summary">
@@ -1924,9 +2284,9 @@
                 </div>
 
                 <!-- A2: Raumanalyse: Die Mittelmeerküste -->
-                <div class="deepdive-card">
+                <div class="deepdive-card glass-solid">
                     <h3 class="deepdive-card-title">Raumanalyse: Die Mittelmeerküste</h3>
-                    <ul class="raumanalyse-steps" style="margin-top: 14px;">
+                    <ul class="raumanalyse-steps glass-solid" style="margin-top: 14px;">
                         <li><span class="raumanalyse-step-label">Wo?</span><span>An der Mittelmeerküste im Süden, zum Beispiel an der Côte d’Azur um Nizza.</span></li>
                         <li><span class="raumanalyse-step-label">Was?</span><span>Viele Badeorte, Ferienhäuser und Touristen.</span></li>
                         <li><span class="raumanalyse-step-label">Warum dort?</span><span>Das Mittelmeerklima ist mild und sonnig, das Meer ist warm, und Küste und Berge liegen nah beieinander.</span></li>
@@ -1939,7 +2299,7 @@
                 </div>
 
                 <!-- Punkt A3: Stereotypen-Check Landschaft (4 Felder) -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Stereotypen-Check: Landschaft</h3>
 
                     <div class="check-grid">
@@ -1991,7 +2351,7 @@
 
             <div class="deepdive-grid">
                 <!-- Punkt B1: Bevölkerung & Altersstruktur -->
-                <div class="deepdive-card">
+                <div class="deepdive-card glass-solid">
                     <h3 class="deepdive-card-title">Bevölkerung &amp; Altersstruktur</h3>
                     <div class="stats-chip-row">
                         <div class="stat-chip">
@@ -2022,9 +2382,9 @@
                 </div>
 
                 <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung (B1) -->
-                <div class="deepdive-card">
+                <div class="deepdive-card glass-solid">
                     <h3 class="deepdive-card-title">Raumanalyse: Verteilung der Bevölkerung</h3>
-                    <ul class="raumanalyse-steps" style="margin-top: 14px;">
+                    <ul class="raumanalyse-steps glass-solid" style="margin-top: 14px;">
                         <li><span class="raumanalyse-step-label">Wo?</span><span>In ganz Frankreich, vor allem im Großraum Paris und an den Küsten.</span></li>
                         <li><span class="raumanalyse-step-label">Was?</span><span>Paris ist riesig und das Zentrum für Arbeit und Kultur. Dagegen gibt es die „Diagonale der Leere“, einen breiten Streifen von den Ardennen bis in die Pyrenäen mit sehr wenigen Menschen.</span></li>
                         <li><span class="raumanalyse-step-label">Warum dort?</span><span>Paris war historisch immer das politische und wirtschaftliche Zentrum. Fabriken, Ministerien und Universitäten sind dort gewachsen. In den Bergen und im ländlichen Raum gab es weniger Arbeit.</span></li>
@@ -2034,7 +2394,7 @@
                 </div>
 
                 <!-- Punkt B3: Stereotypen-Check Die Menschen (4 Felder mit Medien in Woher) -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Stereotypen-Check: Die Menschen</h3>
 
                     <div class="check-grid">
@@ -2086,7 +2446,7 @@
 
             <div class="deepdive-grid">
                 <!-- Punkt E1: Landesweite Kulturthemen mit den 2 Stereotypen-Checks -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Landesweite Kulturthemen</h3>
                     <div class="expandable-text-block">
                         <p class="text-summary">
@@ -2109,7 +2469,7 @@
 
                     <div class="kultur-checks-grid">
                         <!-- Block 1: Baguette & Esskultur -->
-                        <div class="kultur-feature-card">
+                        <div class="kultur-feature-card glass-solid">
                             <div class="kultur-feature-header">
                                 <h4 class="kultur-feature-title">Baguette &amp; Esskultur</h4>
                                 <div class="kultur-feature-klischee">Klischee: „Die Franzosen essen ständig Baguette.“</div>
@@ -2124,7 +2484,7 @@
                         </div>
 
                         <!-- Block 2: Streikkultur -->
-                        <div class="kultur-feature-card">
+                        <div class="kultur-feature-card glass-solid">
                             <div class="kultur-feature-header">
                                 <h4 class="kultur-feature-title">Streikkultur</h4>
                                 <div class="kultur-feature-klischee">Klischee: „In Frankreich wird ständig gestreikt.“</div>
@@ -2139,7 +2499,7 @@
                         </div>
 
                         <!-- Block 3: Wein & Genuss -->
-                        <div class="kultur-feature-card">
+                        <div class="kultur-feature-card glass-solid">
                             <div class="kultur-feature-header">
                                 <h4 class="kultur-feature-title">Wein &amp; Genuss</h4>
                                 <div class="kultur-feature-klischee">Klischee: „Die Franzosen trinken ständig Wein.“</div>
@@ -2157,12 +2517,12 @@
 
                 
                 <!-- Punkt E2: Kulturelle Besonderheiten (B2) -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Kulturelle Besonderheiten</h3>
 
                     <div class="kultur-besonderheiten-grid">
                         <!-- 1. Sprache und Mehrsprachigkeit -->
-                        <div class="kultur-besonderheit-item">
+                        <div class="kultur-besonderheit-item glass-solid">
                             <h4 class="kultur-besonderheit-title">Sprache und Mehrsprachigkeit</h4>
                             <p class="kultur-besonderheit-intro">
                                 Französisch ist Amtssprache und wird staatlich stark geschützt. Daneben gibt es Regionalsprachen wie Bretonisch, Baskisch, Elsässisch und Korsisch, die an Schulen wieder mehr gelehrt werden. Dazu kommen viele Sprachen von Einwanderern, besonders Arabisch.
@@ -2177,7 +2537,7 @@
                         </div>
 
                         <!-- 2. Feste und Feiertage -->
-                        <div class="kultur-besonderheit-item">
+                        <div class="kultur-besonderheit-item glass-solid">
                             <h4 class="kultur-besonderheit-title">Feste und Feiertage</h4>
                             <p class="kultur-besonderheit-intro">
                                 Der Nationalfeiertag am 14. Juli erinnert an den Sturm auf die Bastille mit Militärparade und Feuerwerk. Dazu kommen christliche Feiertage wie Allerheiligen und regionale Feste wie das Zitronenfest in Menton oder Musikfestivals wie die Fête de la Musique am 21. Juni.
@@ -2192,7 +2552,7 @@
                         </div>
 
                         <!-- 3. Traditionen und Bräuche -->
-                        <div class="kultur-besonderheit-item">
+                        <div class="kultur-besonderheit-item glass-solid">
                             <h4 class="kultur-besonderheit-title">Traditionen und Bräuche</h4>
                             <p class="kultur-besonderheit-intro">
                                 Das gemeinsame Essen hat einen sehr hohen Stellenwert und gehört sogar zum UNESCO-Kulturerbe. Brot (Baguette) holt man oft täglich frisch beim Bäcker. Boule (Pétanque) wird auf Dorfplätzen gespielt.
@@ -2207,7 +2567,7 @@
                         </div>
 
                         <!-- 4. Jugendkultur -->
-                        <div class="kultur-besonderheit-item">
+                        <div class="kultur-besonderheit-item glass-solid">
                             <h4 class="kultur-besonderheit-title">Jugendkultur</h4>
                             <p class="kultur-besonderheit-intro">
                                 Französischer Hip-Hop (Rap français) ist nach den USA der zweitgrößte Markt der Welt. Gaming und E-Sport sind sehr beliebt. Kleidung und Stil sind Jugendlichen wichtig, oft eine Mischung aus Streetwear und klassischen Modemarken.
@@ -2224,7 +2584,7 @@
                 </div>
 
                 <!-- Punkt E2 & E3: Die Leitfrage & Raumanalyse Kinshasa -->
-                <div class="deepdive-card deepdive-card-full">
+                <div class="deepdive-card deepdive-card-full glass-solid">
                     <h3 class="deepdive-card-title">Wann wird aus einer Besonderheit ein Stereotyp?</h3>
                     <p style="font-size: 15.5px; line-height: 1.6; color: var(--ink-800); margin-bottom: 22px;">
                         Ein Stereotyp entsteht, wenn etwas, das nur in einer Region oder zu einer bestimmten Zeit stimmt, auf das ganze Land übertragen wird und im Kopf hängen bleibt.
@@ -2234,7 +2594,7 @@
                         <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 14px 0; letter-spacing: -0.01em;">
                             Raumanalyse und Überraschung: Das afrikanische Französisch
                         </h4>
-                        <ul class="raumanalyse-steps">
+                        <ul class="raumanalyse-steps glass-solid">
                             <li><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in West- und Zentralafrika, zum Beispiel in Kinshasa.</span></li>
                             <li><span class="raumanalyse-step-label">Was?</span><span>Dort sprechen sehr viele Menschen Französisch, mehr als in Paris.</span></li>
                             <li><span class="raumanalyse-step-label">Warum dort?</span><span>Frankreich war früher Kolonialmacht in Afrika, und diese Länder wachsen heute stark.</span></li>
@@ -2254,7 +2614,7 @@
                     Jetzt wird es konkret. Entdecke Frankreich Ort für Ort, mit Klischee, Realität und Raumanalyse an jedem Punkt.
                 </p>
 
-                <div class="map-preview-container" onclick="openMap()">
+                <div class="map-preview-container glass-solid" onclick="openMap()">
                     <div class="device-frame">
                         <iframe src="1.html" scrolling="no" style="pointer-events: none;" title="Vorschau der interaktiven Frankreich-Kulturkarte"></iframe>
                         <div class="click-overlay">
@@ -2271,7 +2631,7 @@
     <footer class="site-footer">
         <div class="footer-content">
             <!-- Block 1: Wer hat was gemacht (PFLICHT 2: Jede Person eigene Zeile, Name zuerst) -->
-            <div class="footer-block">
+            <div class="footer-block glass-solid">
                 <h4 class="footer-block-title">Wer hat was gemacht</h4>
                 <div class="footer-credits-list">
                     <div class="footer-credit-line"><strong>Emil:</strong> Bereich A (Naturraum)</div>
@@ -2282,7 +2642,7 @@
             </div>
 
             <!-- Block 2: Bildnachweise -->
-            <div class="footer-block">
+            <div class="footer-block glass-solid">
                 <h4 class="footer-block-title">Bildnachweise</h4>
                 <ul class="sources-list">
                     <li><strong>Hero-Hintergrund:</strong> <em>Paris Night (Skyline, Seine &amp; Eiffelturm bei Nacht)</em> von Benh LIEU SONG &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
@@ -2295,7 +2655,7 @@
             </div>
 
             <!-- Block 3: Quellen (Inhalt und Fakten) -->
-            <div class="footer-block">
+            <div class="footer-block glass-solid">
                 <h4 class="footer-block-title">Quellen (Inhalt und Fakten)</h4>
                 <ul class="sources-list">
                     <li><strong>Bevölkerungsdaten und Demografie:</strong> Insee (Institut national de la statistique et des études économiques), „Bilan démographique“, <a href="https://www.insee.fr" target="_blank" rel="noopener">insee.fr</a></li>
@@ -2419,6 +2779,17 @@
             };
 
             window.addEventListener('scroll', onScroll, { passive: true });
+
+            // Sticky Navigation iOS 26 Liquid-Glass Scroll Trigger
+            const siteNav = document.getElementById('siteNav');
+            const handleNavScroll = () => {
+                if (siteNav) {
+                    siteNav.classList.toggle('scrolled', window.scrollY > 20);
+                }
+            };
+            window.addEventListener('scroll', handleNavScroll, { passive: true });
+            handleNavScroll();
+    
             onScroll();
         });
     </script>

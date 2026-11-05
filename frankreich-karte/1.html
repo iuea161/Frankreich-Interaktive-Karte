@@ -126,16 +126,133 @@
             background: var(--bg-page);
         }
 
-        /* REINER APPLE-LOOK: DECKENDE WEISSE FLÄCHEN, KEIN LIQUID GLASS, KEINE TRANSPARENZ */
+        /* ==========================================================================
+           APPLE iOS 26 LIQUID-GLASS DESIGN SYSTEM (REINE CSS-KLASSEN)
+           ========================================================================== */
+
+        /* ECHTES BLUR-GLAS (Über Kartenkacheln für Sidebar, Panels, Controls & Buttons) */
         .glass,
         .glass-thick,
         .glass-chrome {
-            background: var(--bg-surface);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: background-color 150ms var(--ease-apple), border-color 150ms var(--ease-apple);
+            background: rgba(255, 255, 255, 0.55) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+            backdrop-filter: blur(20px) saturate(150%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.55) !important;
+            border-radius: 18px !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.75),   /* Lichtkante oben = Specular Highlight */
+                inset 0 0 0 1px rgba(255, 255, 255, 0.18),  /* feiner innerer Glanzrand */
+                0 10px 30px rgba(20, 30, 60, 0.12) !important; /* Tiefe über Schatten (wichtig im Hellmodus) */
+            will-change: transform;                         /* eigene GPU-Ebene, flüssiger */
+            color: #1D1D1F !important;
+        }
+
+        @media (max-width: 768px) {
+            .glass,
+            .glass-thick,
+            .glass-chrome {
+                -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+                backdrop-filter: blur(12px) saturate(140%) !important;
+            }
+        }
+
+        /* STATISCHES GLAS-LITE (Für Inhaltskarten innerhalb scrollender Listen & Panels) */
+        .glass-solid {
+            background: rgba(255, 255, 255, 0.82) !important;
+            border: 1px solid rgba(20, 30, 60, 0.06) !important;
+            border-radius: 18px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(20, 30, 60, 0.08) !important;
+            transition: transform 220ms var(--ease-apple), box-shadow 220ms var(--ease-apple), border-color 220ms ease, background 220ms ease;
+        }
+
+        /* AKTIV / HOVER-AKZENT (TRIKOLORE) */
+        .glass-active-blue,
+        .nav-item:hover,
+        .control-button:hover,
+        .tour-button:hover,
+        .nav-back-home-link:hover,
+        .sidebar-toggle:hover {
+            background: rgba(31, 61, 122, 0.08) !important;
+            border-color: rgba(31, 61, 122, 0.28) !important;
+        }
+
+        .nav-item.active {
+            background: rgba(31, 61, 122, 0.12) !important;
+            border: 1px solid rgba(31, 61, 122, 0.28) !important;
+            color: var(--accent-blue) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 12px rgba(31, 61, 122, 0.08) !important;
+            border-left: 3px solid var(--accent-blue) !important;
+        }
+
+        .nav-item.active-red,
+        .nav-item.station-cliche.active {
+            background: rgba(200, 16, 46, 0.12) !important;
+            border: 1px solid rgba(200, 16, 46, 0.30) !important;
+            color: var(--accent-red) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 12px rgba(200, 16, 46, 0.08) !important;
+            border-left: 3px solid var(--accent-red) !important;
+        }
+
+        /* BARRIEREFREIHEIT (REDUCED TRANSPARENCY & MOTION) */
+        @media (prefers-reduced-transparency: reduce) {
+            .glass,
+            .glass-thick,
+            .glass-chrome,
+            .glass-solid,
+            .sidebar,
+            .info-panel,
+            .detail-panel,
+            .control-group,
+            .zoom-controls,
+            .tour-button,
+            .sidebar-toggle,
+            .nav-back-home-link {
+                background: #FFFFFF !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+                border-color: rgba(15, 23, 42, 0.12) !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .glass,
+            .glass-thick,
+            .glass-chrome,
+            .glass-solid,
+            .sidebar,
+            .info-panel,
+            .detail-panel,
+            .tour-button {
+                will-change: auto !important;
+                transition: none !important;
+            }
+        }
+
+        /* DARK MODE SUPPORT (Standard bleibt hell) */
+        [data-theme="dark"] .glass,
+        [data-theme="dark"] .glass-thick,
+        [data-theme="dark"] .glass-chrome,
+        [data-theme="dark"] .sidebar,
+        [data-theme="dark"] .info-panel,
+        [data-theme="dark"] .detail-panel,
+        [data-theme="dark"] .control-group,
+        [data-theme="dark"] .zoom-controls,
+        [data-theme="dark"] .tour-button,
+        [data-theme="dark"] .sidebar-toggle,
+        [data-theme="dark"] .nav-back-home-link {
+            background: rgba(28, 30, 36, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+            color: #F8FAFC !important;
+        }
+
+        [data-theme="dark"] .glass-solid,
+        [data-theme="dark"] .compare-card,
+        [data-theme="dark"] .detail-section {
+            background: rgba(28, 30, 36, 0.9) !important;
+            border-color: rgba(255, 255, 255, 0.10) !important;
+            color: #F8FAFC !important;
         }
 
         /* MAP */
@@ -185,15 +302,12 @@
             left: var(--space-5);
             bottom: var(--space-5);
             width: 320px;
-            border-radius: var(--radius-lg);
+            border-radius: 18px;
             z-index: 500;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: transform 300ms var(--ease-apple), background-color 150ms var(--ease-apple);
+            transition: transform 300ms var(--ease-apple);
         }
 
         .sidebar.collapsed {
@@ -202,7 +316,8 @@
 
         .sidebar-header {
             padding: var(--space-5) var(--space-5) var(--space-3);
-            border-bottom: 1px solid var(--separator);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
         .sidebar-brand-top {
@@ -241,20 +356,25 @@
             align-items: center;
             gap: 6px;
             margin-top: 10px;
-            padding: 6px 12px;
+            padding: 7px 14px;
             font-size: 12px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-full);
+            font-weight: 600;
+            color: #1D1D1F;
             text-decoration: none;
-            transition: all 150ms var(--ease-apple);
+            background: rgba(255, 255, 255, 0.65) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+            backdrop-filter: blur(12px) saturate(140%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.75) !important;
+            border-radius: 9999px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 12px rgba(20, 30, 60, 0.08) !important;
+            transition: all 180ms var(--ease-apple);
         }
 
         .nav-back-home-link:hover {
-            color: var(--accent-blue);
-            background: var(--bg-surface-hover);
+            background: rgba(31, 61, 122, 0.12) !important;
+            border-color: rgba(31, 61, 122, 0.28) !important;
+            color: var(--accent-blue) !important;
+            transform: translateY(-1px);
         }
 
         .is-iframe .nav-back-home-link {
@@ -445,22 +565,27 @@
             display: flex;
             align-items: center;
             gap: var(--space-2);
-            padding: 10px 18px;
-            border-radius: var(--radius-full);
+            padding: 11px 22px;
+            border-radius: 9999px !important;
             cursor: pointer;
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--text-primary);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: background-color 150ms var(--ease-apple), transform 150ms var(--ease-apple);
+            color: #1D1D1F !important;
+            background: rgba(255, 255, 255, 0.70) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+            backdrop-filter: blur(16px) saturate(150%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.85) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 8px 24px rgba(20, 30, 60, 0.12) !important;
+            transition: background-color 180ms var(--ease-apple), transform 180ms var(--ease-apple), box-shadow 180ms var(--ease-apple);
             user-select: none;
         }
 
         .tour-button:hover {
-            background: var(--bg-surface-elevated);
-            transform: translateX(-50%) translateY(-1px);
+            background: rgba(31, 61, 122, 0.12) !important;
+            border-color: rgba(31, 61, 122, 0.28) !important;
+            color: var(--accent-blue) !important;
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 12px 30px rgba(31, 61, 122, 0.16) !important;
         }
 
         .tour-button:active {
@@ -514,16 +639,14 @@
             width: 390px;
             max-width: calc(100% - 32px);
             max-height: calc(100% - 40px);
-            border-radius: var(--radius-lg);
+            border-radius: 18px;
             z-index: 600;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
             transform: translateX(calc(100% + var(--space-6)));
             transition: transform 300ms var(--ease-apple);
+            color: #1D1D1F;
         }
 
         .info-panel.visible {
@@ -911,16 +1034,14 @@
             width: 740px;
             max-width: 92vw;
             max-height: 88vh;
-            border-radius: var(--radius-lg);
+            border-radius: 20px !important;
             z-index: 1010;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             opacity: 0;
             pointer-events: none;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
+            color: #1D1D1F;
             transition: all 250ms var(--ease-apple);
         }
 
@@ -1082,14 +1203,14 @@
         }
 
         .compare-card {
-            border: none;
-            border-top: 1px solid var(--separator);
-            padding: 10px 0 0 0;
+            border: 1px solid rgba(20, 30, 60, 0.06) !important;
+            padding: 14px 18px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border-radius: 0;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.82) !important;
+            border-radius: 14px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 16px rgba(20, 30, 60, 0.06) !important;
         }
 
         .compare-badge {
@@ -1669,7 +1790,7 @@
                     <!-- Ansichten -->
                     <div class="sidebar-section">
                         <div class="sidebar-section-title">Ansichten</div>
-                        <div class="nav-item" data-action="overview">
+                        <div class="nav-item glass-solid" data-action="overview">
                             <div class="nav-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="3" y="3" width="7" height="7" rx="1"></rect>
