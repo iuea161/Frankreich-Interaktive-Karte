@@ -1647,8 +1647,8 @@
                         <span class="brand-badge">Frankreich</span>
                         <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Kultur & Raum</span>
                     </div>
-                    <div class="sidebar-brand-title">Raumanalyse</div>
-                    <div class="sidebar-brand-subtitle">6 Stationen zur Raumanalyse</div>
+                    <div class="sidebar-brand-title">Interaktive Karte</div>
+                    <div class="sidebar-brand-subtitle">6 Stationen</div>
                     <a href="index.html" class="nav-back-home-link" title="Zurück zur Website">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;">
                             <polyline points="15 18 9 12 15 6"></polyline>
@@ -2521,6 +2521,14 @@
             const location = locations[key];
             if (!location) return;
 
+            // Sofortige visuelle Rückmeldung für Nav-Items und Marker
+            document.querySelectorAll('#stationNavList .nav-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.location === key);
+            });
+            document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
+            const activeM = document.getElementById(`marker-${key}`);
+            if (activeM) activeM.classList.add('active');
+
             if (window.innerWidth <= 1180) {
                 sidebar.classList.remove('visible');
                 sidebar.classList.add('collapsed');
@@ -2760,16 +2768,6 @@
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                         <span>Zurück nach Frankreich</span>
-                    `;
-                } else if (isLandesweit) {
-                    zoomBtn.innerHTML = `
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-                        </svg>
-                        <span>Gesamtübersicht Frankreich</span>
                     `;
                 } else {
                     zoomBtn.innerHTML = `
