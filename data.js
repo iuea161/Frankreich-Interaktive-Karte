@@ -162,13 +162,13 @@ const FRANCE_STATIONS = [
       wandel: "Das demografische und sprachliche Gravitationszentrum des Französischen verlagert sich rasant auf den afrikanischen Kontinent; die Zukunft der Sprache entscheidet sich in Abidjan, Kinshasa und Dakar – nicht mehr in Paris."
     },
     territories: [
-      { name: "Guadeloupe", ocean: "Karibik / Atlantik", coords: { lat: 16.2650, lng: -61.5510 }, zoom: 9 },
-      { name: "Martinique", ocean: "Karibik / Atlantik", coords: { lat: 14.6415, lng: -61.0242 }, zoom: 9 },
-      { name: "Französisch-Guayana", ocean: "Südamerika", coords: { lat: 3.9339, lng: -53.1258 }, zoom: 7 },
-      { name: "La Réunion", ocean: "Indischer Ozean", coords: { lat: -21.1151, lng: 55.5364 }, zoom: 9 },
-      { name: "Mayotte", ocean: "Indischer Ozean", coords: { lat: -12.8275, lng: 45.1662 }, zoom: 10 },
-      { name: "Französisch-Polynesien", ocean: "Südpazifik", coords: { lat: -17.6797, lng: -149.4068 }, zoom: 8 },
-      { name: "Neukaledonien", ocean: "Südpazifik", coords: { lat: -21.3069, lng: 165.4853 }, zoom: 7 }
+      { name: "Guadeloupe", ocean: "Karibik / Atlantik", coords: { lat: 16.2650, lng: -61.5510 }, zoom: 12 },
+      { name: "Martinique", ocean: "Karibik / Atlantik", coords: { lat: 14.6415, lng: -61.0242 }, zoom: 12 },
+      { name: "Französisch-Guayana", ocean: "Südamerika", coords: { lat: 3.9339, lng: -53.1258 }, zoom: 12 },
+      { name: "La Réunion", ocean: "Indischer Ozean", coords: { lat: -21.1151, lng: 55.5364 }, zoom: 12 },
+      { name: "Mayotte", ocean: "Indischer Ozean", coords: { lat: -12.8275, lng: 45.1662 }, zoom: 12 },
+      { name: "Französisch-Polynesien", ocean: "Südpazifik", coords: { lat: -17.6797, lng: -149.4068 }, zoom: 12 },
+      { name: "Neukaledonien", ocean: "Südpazifik", coords: { lat: -21.3069, lng: 165.4853 }, zoom: 12 }
     ]
   }
 ];

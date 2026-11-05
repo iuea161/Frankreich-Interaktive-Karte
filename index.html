@@ -711,28 +711,33 @@
             margin-bottom: 0;
         }
 
-        /* STEREOTYPEN-CHECK BOX (Editorial analytical matrix) */
+        /* STEREOTYPEN-CHECK BOX (Symmetrisches 4-Spalten-Raster mit Trennlinien dazwischen) */
         .check-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 28px;
             margin-top: 18px;
-        }
-
-        .check-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 14px;
+            position: relative;
         }
 
         .check-box {
-            padding: 0 0 0 14px;
+            padding: 0;
             background: transparent;
             border: none;
-            border-left: 2px solid var(--border-hairline);
             display: flex;
             flex-direction: column;
+            position: relative;
+        }
+
+        /* Trennlinien nur gleichmäßig ZWISCHEN den Spalten (nicht vor der ersten und nicht nach der letzten) */
+        .check-box:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-hairline);
         }
 
         .check-badge {
@@ -1303,13 +1308,24 @@
             }
 
             .check-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .check-box:not(:first-child)::before {
+                display: none;
+            }
+
+            .check-box:not(:first-child) {
+                border-top: 1px solid var(--border-hairline);
+                padding-top: 16px;
             }
         }
 
         @media (max-width: 600px) {
             .check-grid {
                 grid-template-columns: 1fr;
+                gap: 18px;
             }
 
             .deepdive-card-full {
@@ -1407,30 +1423,51 @@
         }
 
         .kultur-besonderheit-item {
-            border-top: 1px solid var(--border-hairline);
-            padding-top: 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            padding: 22px 24px;
+            box-shadow: var(--shadow-subtle);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            align-self: start;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .kultur-besonderheit-item:hover {
+            border-color: rgba(200, 16, 46, 0.28);
+            box-shadow: var(--shadow-hover);
         }
 
         .kultur-besonderheit-title {
-            font-size: 16px;
+            font-size: 16.5px;
             font-weight: 700;
             color: var(--ink-900);
             letter-spacing: -0.01em;
+            margin: 0;
         }
 
-        .kultur-besonderheit-intro {
+        .kultur-besonderheit-summary {
             font-size: 14.5px;
-            line-height: 1.6;
+            line-height: 1.55;
             color: var(--ink-700);
             margin: 0;
         }
 
+        .kultur-besonderheit-intro {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink-700);
+            margin: 0 0 10px 0;
+        }
+
         .kultur-besonderheit-raumanalyse {
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 12px;
+            background: #F8F9FA;
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            border: 1px solid var(--border-subtle);
+            margin-top: 4px;
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -2021,8 +2058,8 @@
                     </ul>
                 </div>
 
-                <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung (B1) -->
-                <div class="deepdive-card">
+                <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung (B1 - passt sich genau an Inhalt an) -->
+                <div class="deepdive-card" style="align-self: start; height: fit-content;">
                     <h3 class="deepdive-card-title">Raumanalyse: Verteilung der Bevölkerung</h3>
                     <ul class="raumanalyse-steps" style="margin-top: 14px;">
                         <li><span class="raumanalyse-step-label">Wo?</span><span>In ganz Frankreich, vor allem im Großraum Paris und an den Küsten.</span></li>
@@ -2161,63 +2198,119 @@
                     <h3 class="deepdive-card-title">Kulturelle Besonderheiten</h3>
 
                     <div class="kultur-besonderheiten-grid">
-                        <!-- 1. Sprache und Mehrsprachigkeit -->
+                        <!-- 1. Sprache und Mehrsprachigkeit (Kompakte Karte mit Aufklapp-Funktion) -->
                         <div class="kultur-besonderheit-item">
                             <h4 class="kultur-besonderheit-title">Sprache und Mehrsprachigkeit</h4>
-                            <p class="kultur-besonderheit-intro">
-                                Französisch ist Amtssprache und wird staatlich stark geschützt. Daneben gibt es Regionalsprachen wie Bretonisch, Baskisch, Elsässisch und Korsisch, die an Schulen wieder mehr gelehrt werden. Dazu kommen viele Sprachen von Einwanderern, besonders Arabisch.
-                            </p>
-                            <div class="kultur-besonderheit-raumanalyse">
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Landesweit Hochfranzösisch, Regionalsprachen an den Rändern des Landes und Einwanderersprachen in Großstädten.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Nebeneinander von geschützter Amtssprache, historischen Regionalsprachen und modernen Einwanderersprachen.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Der frühere Pariser Zentralismus setzte Hochfranzösisch durch. Regionalsprachen überlebten vor allem in Randlagen.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Regionalsprachen waren fast verdrängt. Heute wächst wieder das Interesse und es gibt zweisprachige Schulen.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Jüngere lernen Regionalsprachen freiwillig wieder neu, und Einwanderersprachen fließen in die Alltagssprache ein.</span></div>
+                            <p class="kultur-besonderheit-summary">Neben Französisch gibt es viele Regional- und Einwanderersprachen.</p>
+                            
+                            <div class="expandable-text-block">
+                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-sprache">
+                                    <span class="btn-text">Mehr anzeigen</span>
+                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="text-details" id="kultur-details-sprache" aria-hidden="true">
+                                    <div class="text-extended">
+                                        <p class="kultur-besonderheit-intro">
+                                            Französisch ist Amtssprache und wird staatlich stark geschützt. Daneben gibt es Regionalsprachen wie Bretonisch, Baskisch, Elsässisch und Korsisch, die an Schulen wieder mehr gelehrt werden. Dazu kommen viele Sprachen von Einwanderern, besonders Arabisch.
+                                        </p>
+                                        <div class="kultur-besonderheit-raumanalyse">
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Landesweit Hochfranzösisch, Regionalsprachen an den Rändern des Landes und Einwanderersprachen in Großstädten.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Nebeneinander von geschützter Amtssprache, historischen Regionalsprachen und modernen Einwanderersprachen.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Der frühere Pariser Zentralismus setzte Hochfranzösisch durch. Regionalsprachen überlebten vor allem in Randlagen.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Regionalsprachen waren fast verdrängt. Heute wächst wieder das Interesse und es gibt zweisprachige Schulen.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Jüngere lernen Regionalsprachen freiwillig wieder neu, und Einwanderersprachen fließen in die Alltagssprache ein.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 2. Feste und Feiertage -->
+                        <!-- 2. Feste und Feiertage (Kompakte Karte mit Aufklapp-Funktion) -->
                         <div class="kultur-besonderheit-item">
                             <h4 class="kultur-besonderheit-title">Feste und Feiertage</h4>
-                            <p class="kultur-besonderheit-intro">
-                                Der Nationalfeiertag am 14. Juli erinnert an den Sturm auf die Bastille mit Militärparade und Feuerwerk. Dazu kommen christliche Feiertage wie Allerheiligen und regionale Feste wie das Zitronenfest in Menton oder Musikfestivals wie die Fête de la Musique am 21. Juni.
-                            </p>
-                            <div class="kultur-besonderheit-raumanalyse">
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Der 14. Juli landesweit in fast allen Gemeinden, regionale Feste an speziellen Orten wie Menton am Mittelmeer.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gemeinsames Feiern verbindet nationale Geschichte, christliche Kalendertage und lokale Bräuche.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Nationale Feiertage stärken den Zusammenhalt der Republik. Regionale Feste spiegeln das lokale Klima und die Natur wider.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Feste beleben den öffentlichen Raum, fördern Gemeinschaft und ziehen zahlreiche Besucher an.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Moderne Musikfeste wie die Fête de la Musique sind neu entstanden und wurden weltweit übernommen.</span></div>
+                            <p class="kultur-besonderheit-summary">Nationale Feiertage wie der 14. Juli, dazu regionale und religiöse Feste.</p>
+                            
+                            <div class="expandable-text-block">
+                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-feste">
+                                    <span class="btn-text">Mehr anzeigen</span>
+                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="text-details" id="kultur-details-feste" aria-hidden="true">
+                                    <div class="text-extended">
+                                        <p class="kultur-besonderheit-intro">
+                                            Der Nationalfeiertag am 14. Juli erinnert an den Sturm auf die Bastille mit Militärparade und Feuerwerk. Dazu kommen christliche Feiertage wie Allerheiligen und regionale Feste wie das Zitronenfest in Menton oder Musikfestivals wie die Fête de la Musique am 21. Juni.
+                                        </p>
+                                        <div class="kultur-besonderheit-raumanalyse">
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Der 14. Juli landesweit in fast allen Gemeinden, regionale Feste an speziellen Orten wie Menton am Mittelmeer.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gemeinsames Feiern verbindet nationale Geschichte, christliche Kalendertage und lokale Bräuche.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Nationale Feiertage stärken den Zusammenhalt der Republik. Regionale Feste spiegeln das lokale Klima und die Natur wider.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Feste beleben den öffentlichen Raum, fördern Gemeinschaft und ziehen zahlreiche Besucher an.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Moderne Musikfeste wie die Fête de la Musique sind neu entstanden und wurden weltweit übernommen.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 3. Traditionen und Bräuche -->
+                        <!-- 3. Traditionen und Bräuche (Kompakte Karte mit Aufklapp-Funktion) -->
                         <div class="kultur-besonderheit-item">
                             <h4 class="kultur-besonderheit-title">Traditionen und Bräuche</h4>
-                            <p class="kultur-besonderheit-intro">
-                                Das gemeinsame Essen hat einen sehr hohen Stellenwert und gehört sogar zum UNESCO-Kulturerbe. Brot (Baguette) holt man oft täglich frisch beim Bäcker. Boule (Pétanque) wird auf Dorfplätzen gespielt.
-                            </p>
-                            <div class="kultur-besonderheit-raumanalyse">
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>In Dörfern, Kleinstädten und Großstädten in ganz Frankreich, oft auf öffentlichen Plätzen und in Bäckereien.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gelebte Esskultur, frisches Brot und geselliges Beisammensein im öffentlichen Raum.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Mahlzeiten und Boule-Spiele sind seit Generationen feste soziale Treffpunkte für Familien und Nachbarn.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Bäckereien und Dorfplätze sind zentrale Orte der Begegnung für Nachbarn und Generationen.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Supermärkte machen Konkurrenz, doch das frische Baguette und Boule bleiben feste Rituale.</span></div>
+                            <p class="kultur-besonderheit-summary">Vom langen gemeinsamen Essen bis zu regionalen Festen und Tänzen.</p>
+                            
+                            <div class="expandable-text-block">
+                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-traditionen">
+                                    <span class="btn-text">Mehr anzeigen</span>
+                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="text-details" id="kultur-details-traditionen" aria-hidden="true">
+                                    <div class="text-extended">
+                                        <p class="kultur-besonderheit-intro">
+                                            Das gemeinsame Essen hat einen sehr hohen Stellenwert und gehört sogar zum UNESCO-Kulturerbe. Brot (Baguette) holt man oft täglich frisch beim Bäcker. Boule (Pétanque) wird auf Dorfplätzen gespielt.
+                                        </p>
+                                        <div class="kultur-besonderheit-raumanalyse">
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>In Dörfern, Kleinstädten und Großstädten in ganz Frankreich, oft auf öffentlichen Plätzen und in Bäckereien.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gelebte Esskultur, frisches Brot und geselliges Beisammensein im öffentlichen Raum.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Mahlzeiten und Boule-Spiele sind seit Generationen feste soziale Treffpunkte für Familien und Nachbarn.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Bäckereien und Dorfplätze sind zentrale Orte der Begegnung für Nachbarn und Generationen.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Supermärkte machen Konkurrenz, doch das frische Baguette und Boule bleiben feste Rituale.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 4. Jugendkultur -->
+                        <!-- 4. Jugendkultur (Kompakte Karte mit Aufklapp-Funktion) -->
                         <div class="kultur-besonderheit-item">
                             <h4 class="kultur-besonderheit-title">Jugendkultur</h4>
-                            <p class="kultur-besonderheit-intro">
-                                Französischer Hip-Hop (Rap français) ist nach den USA der zweitgrößte Markt der Welt. Gaming und E-Sport sind sehr beliebt. Kleidung und Stil sind Jugendlichen wichtig, oft eine Mischung aus Streetwear und klassischen Modemarken.
-                            </p>
-                            <div class="kultur-besonderheit-raumanalyse">
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in den Großstädten und Vororten (Banlieues) von Paris, Marseille und Lyon, heute digital im ganzen Land.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Eine eigenständige Jugendkultur aus Rap-Musik, Gaming, eigener Jugendsprache (Verlan) und Modestilen.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>In den multikulturellen Vorstädten trafen verschiedene Einflüsse aufeinander und brachten neue Trends hervor.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Französischer Rap dominiert die Charts und prägt die Sprache von Jugendlichen im ganzen Land.</span></div>
-                                <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Ehemals ausgegrenzte Vorstadtkultur ist heute die führende Popkultur in ganz Frankreich.</span></div>
+                            <p class="kultur-besonderheit-summary">Rap, die Jugendsprache Verlan und Social Media prägen die Jugend.</p>
+                            
+                            <div class="expandable-text-block">
+                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-jugend">
+                                    <span class="btn-text">Mehr anzeigen</span>
+                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="text-details" id="kultur-details-jugend" aria-hidden="true">
+                                    <div class="text-extended">
+                                        <p class="kultur-besonderheit-intro">
+                                            Französischer Hip-Hop (Rap français) ist nach den USA der zweitgrößte Markt der Welt. Gaming und E-Sport sind sehr beliebt. Kleidung und Stil sind Jugendlichen wichtig, oft eine Mischung aus Streetwear und klassischen Modemarken.
+                                        </p>
+                                        <div class="kultur-besonderheit-raumanalyse">
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in den Großstädten und Vororten (Banlieues) von Paris, Marseille und Lyon, heute digital im ganzen Land.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Eine eigenständige Jugendkultur aus Rap-Musik, Gaming, eigener Jugendsprache (Verlan) und Modestilen.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>In den multikulturellen Vorstädten trafen verschiedene Einflüsse aufeinander und brachten neue Trends hervor.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Französischer Rap dominiert die Charts und prägt die Sprache von Jugendlichen im ganzen Land.</span></div>
+                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Ehemals ausgegrenzte Vorstadtkultur ist heute die führende Popkultur in ganz Frankreich.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2241,6 +2334,16 @@
                             <li><span class="raumanalyse-step-label">Folgen?</span><span>Das Zentrum der französischen Sprache verschiebt sich nach Afrika.</span></li>
                             <li><span class="raumanalyse-step-label">Wandel?</span><span>Bis 2050 werden die meisten Französischsprecher in Afrika leben.</span></li>
                         </ul>
+
+                        <!-- EIGENES ÜBERRASCHUNGS-FELD (PFLICHT-PUNKT EXTRA) -->
+                        <div class="surprise-extra-card" style="margin-top: 24px; padding: 20px 24px; background: #F8F9FA; border: 1px solid var(--border-hairline); border-left: 4px solid var(--accent-blue); border-radius: var(--radius-card);">
+                            <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 8px 0; letter-spacing: -0.01em;">
+                                Überraschung
+                            </h4>
+                            <p class="body-text" style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-700);">
+                                „Das hätten wir vorher nicht gedacht: In Kinshasa in der Demokratischen Republik Kongo sprechen mehr Menschen Französisch als in Paris. Bis 2050 wird die große Mehrheit aller Französischsprecher in Afrika leben – die Zukunft der Sprache liegt also nicht in Frankreich.“
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

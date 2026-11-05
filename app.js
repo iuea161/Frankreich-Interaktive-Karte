@@ -267,7 +267,7 @@ function selectStation(id, panTo = true) {
   // Karte animieren
   if (panTo && state.map) {
     const isKinshasa = id === 'kinshasa' || (station.name && station.name.toLowerCase().includes('kinshasa'));
-    const cityZoom = isKinshasa ? 5 : (station.zoom || 11);
+    const cityZoom = 12;
     if (state.currentEngine === 'google') {
       state.map.panTo(station.coords);
       state.map.setZoom(cityZoom);
