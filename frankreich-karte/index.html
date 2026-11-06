@@ -1636,6 +1636,294 @@
         .footer-credit-line strong {
             color: #F8FAFC;
         }
+    
+        /* BEREICH A: FOTO-GALERIE LANDSCHAFT */
+        .landscape-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .landscape-photo-card {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #FFFFFF;
+            border: 1px solid var(--border-hairline);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+        .landscape-photo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .landscape-photo-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+        .landscape-photo-caption {
+            padding: 10px 12px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--ink-800);
+            text-align: center;
+            background: #FAFAFA;
+            border-top: 1px solid var(--border-hairline);
+        }
+        @media (max-width: 768px) {
+            .landscape-photo-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .landscape-photo-img {
+                height: 220px;
+            }
+        }
+
+        /* BEREICH B: STEREOTYPEN-CHECK 5-FELDER */
+        .check-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
+            margin-top: 18px;
+            position: relative;
+        }
+        .check-grid-5 .check-box:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-hairline);
+        }
+        .badge-medien,
+        .badge-unsichtbar {
+            background: transparent !important;
+            border: none !important;
+            color: var(--ink-500) !important;
+        }
+        @media (max-width: 1100px) {
+            .check-grid-5 {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+            .check-grid-5 .check-box:not(:first-child)::before {
+                display: none;
+            }
+            .check-grid-5 .check-box {
+                border-top: 1px solid var(--border-hairline);
+                padding-top: 14px;
+            }
+            .check-grid-5 .check-box:nth-child(-n+3) {
+                border-top: none;
+                padding-top: 0;
+            }
+        }
+        @media (max-width: 700px) {
+            .check-grid-5 {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .check-grid-5 .check-box {
+                border-top: 1px solid var(--border-hairline) !important;
+                padding-top: 14px !important;
+            }
+            .check-grid-5 .check-box:first-child {
+                border-top: none !important;
+                padding-top: 0 !important;
+            }
+        }
+
+        /* BEREICH E: KULTURELLE BESONDERHEITEN KETTEN-DESIGN */
+        .chain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            margin-top: 16px;
+        }
+        @media (max-width: 900px) {
+            .chain-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .chain-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            padding: 20px 22px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: box-shadow 200ms ease;
+        }
+        .chain-card:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        }
+        .chain-card-header {
+            margin-bottom: 12px;
+        }
+        .chain-card-title {
+            font-size: 16.5px;
+            font-weight: 700;
+            color: var(--ink-900);
+            margin: 0 0 5px 0;
+            letter-spacing: -0.01em;
+        }
+        .chain-card-teaser {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--ink-600);
+            margin: 0;
+        }
+        .chain-track {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: relative;
+            margin: 14px 0 6px;
+            padding: 0 4px;
+        }
+        .chain-track::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 28px;
+            right: 28px;
+            height: 2px;
+            background: #E2E8F0;
+            z-index: 1;
+        }
+        .chain-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0 2px;
+            flex: 1;
+            text-align: center;
+            transition: all 200ms ease;
+            font-family: inherit;
+        }
+        .chain-step:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+        .chain-node {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 2px solid #CBD5E1;
+            color: var(--ink-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12.5px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            transition: all 200ms ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .chain-step:hover .chain-node {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+        .chain-step.active .chain-node {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(31, 61, 122, 0.16);
+        }
+        .chain-label {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--ink-600);
+            letter-spacing: 0.01em;
+            transition: color 200ms ease;
+        }
+        .chain-step.active .chain-label {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+        .chain-panels {
+            margin-top: 10px;
+            min-height: 0;
+        }
+        .chain-panel {
+            background: #F8FAFC;
+            border: 1px solid var(--border-hairline);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            animation: chainFadeIn 220ms ease;
+        }
+        @keyframes chainFadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .chain-panel {
+                animation: none;
+            }
+        }
+        .chain-panel-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+        .chain-panel-text {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--ink-800);
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            .chain-track {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .chain-track::before {
+                display: none;
+            }
+            .chain-step {
+                flex-direction: row;
+                gap: 10px;
+                text-align: left;
+                padding: 6px 10px;
+                border-radius: var(--radius-sm);
+                border: 1px solid var(--border-hairline);
+                background: rgba(255, 255, 255, 0.7);
+            }
+            .chain-node {
+                margin-bottom: 0;
+                flex-shrink: 0;
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+            .chain-step.active {
+                background: rgba(31, 61, 122, 0.06);
+                border-color: var(--accent-blue);
+            }
+        }
+
     </style>
 </head>
 
@@ -1928,7 +2216,32 @@
                     </div>
                 </div>
 
-                <!-- Punkt A1: Bedeutung von Klima & Naturraum fürs Leben -->
+                <!-- A1: Wie sieht die Landschaft aus? (Stichpunkte + 3 Bilder) -->
+                <div class="deepdive-card deepdive-card-full">
+                    <h3 class="deepdive-card-title">Wie sieht die Landschaft aus?</h3>
+                    <ul class="quiet-bullet-list" style="margin-top: 14px;">
+                        <li>Hohe Gebirge im Osten und Süden: die Alpen und die Pyrenäen.</li>
+                        <li>In der Mitte das Zentralmassiv, ein altes Bergland.</li>
+                        <li>Im Norden und Westen große, flache und fruchtbare Ebenen.</li>
+                        <li>Große Flüsse: Loire, Seine, Rhône und Garonne. Dazu die Insel Korsika.</li>
+                    </ul>
+                    <div class="landscape-photo-grid">
+                        <figure class="landscape-photo-card">
+                            <img src="images/alpen_mont_blanc.jpg" alt="Alpen: Blick auf das Mont-Blanc-Massiv" class="landscape-photo-img" loading="lazy">
+                            <figcaption class="landscape-photo-caption">Alpen</figcaption>
+                        </figure>
+                        <figure class="landscape-photo-card">
+                            <img src="images/mittelmeer_calanques.jpg" alt="Mittelmeerküste: Calanque d’En-Vau bei Cassis" class="landscape-photo-img" loading="lazy">
+                            <figcaption class="landscape-photo-caption">Mittelmeerküste</figcaption>
+                        </figure>
+                        <figure class="landscape-photo-card">
+                            <img src="images/atlantik_point_du_raz.jpg" alt="Atlantikküste: Pointe du Raz in der Bretagne" class="landscape-photo-img" loading="lazy">
+                            <figcaption class="landscape-photo-caption">Atlantikküste (Bretagne)</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Bedeutung von Klima & Naturraum fürs Leben -->
                 <div class="deepdive-card">
                     <h3 class="deepdive-card-title">Bedeutung von Klima &amp; Naturraum fürs Leben</h3>
                     <div class="expandable-text-block">
@@ -1947,21 +2260,20 @@
                             </svg>
                         </button>
                     </div>
-
-                    <!-- A1: So unterscheiden sich die Regionen -->
-                    <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-hairline);">
-                        <h4 style="font-size: 14px; font-weight: 700; color: var(--ink-900); margin: 0 0 10px 0; letter-spacing: -0.01em;">So unterscheiden sich die Regionen</h4>
-                        <ul class="quiet-bullet-list">
-                            <li><strong>Westen (Bretagne):</strong> rau, viel Regen, Atlantik.</li>
-                            <li><strong>Süden (Mittelmeer):</strong> warm, sonnig, trocken.</li>
-                            <li><strong>Norden:</strong> kühler, flach, viel Landwirtschaft.</li>
-                            <li><strong>Berge (Alpen, Pyrenäen):</strong> hoch, kalt, viel Schnee.</li>
-                        </ul>
-                    </div>
                 </div>
 
-                <!-- A2: Raumanalyse: Die Mittelmeerküste -->
+                <!-- A2: Neuer Block „Küsten“ -->
                 <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">Küsten</h3>
+                    <ul class="quiet-bullet-list" style="margin-top: 14px;">
+                        <li><strong>Atlantikküste im Westen:</strong> rau, mit starken Gezeiten und breiten Stränden.</li>
+                        <li><strong>Ärmelkanalküste im Norden:</strong> Steilküsten und wichtige Häfen.</li>
+                        <li><strong>Mittelmeerküste im Süden:</strong> mild und sonnig, mit Badeorten wie an der Côte d’Azur.</li>
+                    </ul>
+                </div>
+
+                <!-- Raumanalyse: Die Mittelmeerküste -->
+                <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Raumanalyse: Die Mittelmeerküste</h3>
                     <ul class="raumanalyse-steps" style="margin-top: 14px;">
                         <li><span class="raumanalyse-step-label">Wo?</span><span>An der Mittelmeerküste im Süden, zum Beispiel an der Côte d’Azur um Nizza.</span></li>
@@ -2045,20 +2357,17 @@
                         </div>
                     </div>
 
-                    <!-- B1: Liste Bevölkerung -->
                     <ul class="quiet-bullet-list" style="margin-top: 16px;">
                         <li><strong>Einwohner:</strong> rund 68 Millionen.</li>
                         <li><strong>Dicht besiedelt:</strong> Großraum Paris (über 12 Millionen) und die Küsten.</li>
                         <li><strong>Dünn besiedelt:</strong> die „leere Diagonale“ von Nordosten bis zu den Pyrenäen.</li>
                         <li><strong>Große Städte:</strong> Paris, Marseille, Lyon, Toulouse, Nizza, Bordeaux, Straßburg, Lille, Nantes.</li>
-                        <li><strong>Stadt und Land:</strong> rund 8 von 10 Menschen leben in Städten.</li>
                         <li><strong>Geburtenrate:</strong> früher eine der höheren in Europa, heute niedriger. Die Bevölkerung wird älter.</li>
-                        <li><strong>Herkunft:</strong> viele Menschen mit Wurzeln in Nordafrika, Westafrika und Südeuropa.</li>
                         <li><strong>Sprachen:</strong> Amtssprache Französisch, dazu Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch.</li>
                     </ul>
                 </div>
 
-                <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung (B1 - passt sich genau an Inhalt an) -->
+                <!-- Punkt B2: Raumanalyse: Verteilung der Bevölkerung -->
                 <div class="deepdive-card" style="align-self: start; height: fit-content;">
                     <h3 class="deepdive-card-title">Raumanalyse: Verteilung der Bevölkerung</h3>
                     <ul class="raumanalyse-steps" style="margin-top: 14px;">
@@ -2070,11 +2379,35 @@
                     </ul>
                 </div>
 
-                <!-- Punkt B3: Stereotypen-Check Die Menschen (4 Felder mit Medien in Woher) -->
+                <!-- B1: Neuer Block „Stadt und Land“ -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">Stadt und Land</h3>
+                    <p class="body-text" style="margin-top: 14px; font-size: 14.5px; line-height: 1.6; color: var(--ink-700);">
+                        Rund 8 von 10 Menschen leben in Städten. Dort gibt es Arbeit, Schulen, Ärzte und guten Verkehr. Auf dem Land sind mehr Platz und Natur, aber Geschäfte, Schulen und Arztpraxen werden immer weniger.
+                    </p>
+                </div>
+
+                <!-- B2: Block „Bevölkerungsgruppen“ -->
+                <div class="deepdive-card">
+                    <h3 class="deepdive-card-title">Bevölkerungsgruppen</h3>
+                    <p class="body-text" style="margin-top: 14px; font-size: 14.5px; line-height: 1.6; color: var(--ink-700);">
+                        Frankreich ist seit langem ein Einwanderungsland. Viele Menschen haben Wurzeln in Nordafrika (zum Beispiel Algerien und Marokko), in Westafrika und in Südeuropa (zum Beispiel Portugal und Italien). Offizielle Statistiken nach Herkunft oder Religion gibt es nicht, weil Frankreich das bewusst nicht erfasst.
+                    </p>
+                </div>
+
+                <!-- B3: Neuer Block „Regionale Unterschiede“ -->
+                <div class="deepdive-card deepdive-card-full">
+                    <h3 class="deepdive-card-title">Regionale Unterschiede</h3>
+                    <p class="body-text" style="margin-top: 14px; font-size: 14.5px; line-height: 1.6; color: var(--ink-700);">
+                        Der reiche Großraum Paris unterscheidet sich stark vom ländlichen Zentrum. Der Norden ist eher von Industrie geprägt, der Süden vom Tourismus. Die Überseegebiete liegen klimatisch und kulturell ganz anders.
+                    </p>
+                </div>
+
+                <!-- B4: Stereotypen-Check: Die Menschen (5 Felder) -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Stereotypen-Check: Die Menschen</h3>
 
-                    <div class="check-grid">
+                    <div class="check-grid-5">
                         <div class="check-box">
                             <span class="check-badge badge-klischee">Klischee</span>
                             <div class="check-text">
@@ -2084,7 +2417,13 @@
                         <div class="check-box">
                             <span class="check-badge badge-woher">Woher?</span>
                             <div class="check-text">
-                                Aus Urlaubserlebnissen in Paris und aus Serien, Filmen und Reise-Videos wie „Emily in Paris“, die vor allem das hektische, schicke Paris zeigen.
+                                Aus Urlaubserlebnissen in Paris und dem Ruf der Hauptstadt.
+                            </div>
+                        </div>
+                        <div class="check-box">
+                            <span class="check-badge badge-medien">Medien &amp; Social Media</span>
+                            <div class="check-text">
+                                Serien, Filme und Reise-Videos wie „Emily in Paris“ zeigen vor allem das hektische, schicke Paris; dazu das Filmklischee vom „arroganten Pariser Kellner“.
                             </div>
                         </div>
                         <div class="check-box">
@@ -2094,9 +2433,9 @@
                             </div>
                         </div>
                         <div class="check-box">
-                            <span class="check-badge badge-ausgeblendet">Ausgeblendet?</span>
+                            <span class="check-badge badge-unsichtbar">Unsichtbare Unterschiede</span>
                             <div class="check-text">
-                                Außerhalb von Paris sind viele Leute gastfreundlich, und Jüngere sprechen oft gut Englisch.
+                                Außerhalb von Paris sind viele gastfreundlich, Jüngere sprechen oft gut Englisch, und die Vielfalt der Regionen und Herkünfte verschwindet hinter dem einen Paris-Bild.
                             </div>
                         </div>
                     </div>
@@ -2122,7 +2461,7 @@
             
 
             <div class="deepdive-grid">
-                <!-- Punkt E1: Landesweite Kulturthemen mit den 2 Stereotypen-Checks -->
+                <!-- Punkt E1: Landesweite Kulturthemen mit den 3 Stereotypen-Checks -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Landesweite Kulturthemen</h3>
                     <div class="expandable-text-block">
@@ -2142,7 +2481,8 @@
                         </button>
                     </div>
 
-                    <h4 class="stereotypen-group-title">Drei untersuchte kulturelle Besonderheiten</h4>
+                    <!-- E1: Umbenannt in „Drei weitere Klischees im Check“ -->
+                    <h4 class="stereotypen-group-title">Drei weitere Klischees im Check</h4>
 
                     <div class="kultur-checks-grid">
                         <!-- Block 1: Baguette & Esskultur -->
@@ -2175,175 +2515,221 @@
                             </ul>
                         </div>
 
-                        <!-- Block 3: Wein & Genuss -->
+                        <!-- Block 3: Stadt der Liebe / Romantik (ersetzt Wein & Genuss) -->
                         <div class="kultur-feature-card">
                             <div class="kultur-feature-header">
-                                <h4 class="kultur-feature-title">Wein &amp; Genuss</h4>
-                                <div class="kultur-feature-klischee">Klischee: „Die Franzosen trinken ständig Wein.“</div>
+                                <h4 class="kultur-feature-title">Stadt der Liebe / Romantik</h4>
+                                <div class="kultur-feature-klischee">Klischee: „Frankreich ist das romantischste Land, und Paris ist die Stadt der Liebe.“</div>
                             </div>
                             <ul class="kultur-steps-list">
-                                <li><span class="kultur-step-label">Reale Erscheinung:</span>Wein gehört zum Essen und zur Kultur, mit geschützten Herkunftsregionen.</li>
-                                <li><span class="kultur-step-label">Entstehung:</span>Schon die Römer und später die Klöster bauten Wein an, bestimmte Regionen wurden berühmt.</li>
-                                <li><span class="kultur-step-label">In Tourismus und Werbung:</span>Weinregionen und Genuss werden stark beworben (Weintourismus).</li>
-                                <li><span class="kultur-step-label">Verallgemeinert:</span>Als würden alle Franzosen ständig Wein trinken.</li>
-                                <li><span class="kultur-step-label">Passt nicht ins Bild:</span>Junge Leute trinken immer weniger, und viele trinken gar keinen Alkohol.</li>
+                                <li><span class="kultur-step-label">Reale Erscheinung:</span>Paris hat viele schöne Orte, und Frankreich wird oft mit Romantik verbunden.</li>
+                                <li><span class="kultur-step-label">Entstehung:</span>Dichter, Maler und später Hollywood-Filme machten Paris zur „Stadt der Liebe“; Mode und Parfüm verstärkten das Bild.</li>
+                                <li><span class="kultur-step-label">In Medien, Tourismus oder Werbung:</span>Filme, Serien und Reisewerbung zeigen Paris fast nur mit Eiffelturm, Verliebten und Sonnenuntergang.</li>
+                                <li><span class="kultur-step-label">Verallgemeinert:</span>Als wäre ganz Frankreich ein romantischer Postkartenort.</li>
+                                <li><span class="kultur-step-label">Passt nicht ins Bild:</span>Der normale Alltag mit Arbeit, vollen Metros und Vororten; es gibt sogar das „Paris-Syndrom“, wenn Touristen enttäuscht sind.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                
-                <!-- Punkt E2: Kulturelle Besonderheiten (B2) -->
+                <!-- E2: Block 2 „Kulturelle Besonderheiten“ als aufklappbares Ketten-Design -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Kulturelle Besonderheiten</h3>
 
-                    <div class="kultur-besonderheiten-grid">
-                        <!-- 1. Sprache und Mehrsprachigkeit (Kompakte Karte mit Aufklapp-Funktion) -->
-                        <div class="kultur-besonderheit-item">
-                            <h4 class="kultur-besonderheit-title">Sprache und Mehrsprachigkeit</h4>
-                            <p class="kultur-besonderheit-summary">Neben Französisch gibt es viele Regional- und Einwanderersprachen.</p>
-                            
-                            <div class="expandable-text-block">
-                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-sprache">
-                                    <span class="btn-text">Mehr anzeigen</span>
-                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
+                    <div class="chain-grid">
+                        <!-- 1. Sprache und Mehrsprachigkeit -->
+                        <div class="chain-card">
+                            <div class="chain-card-header">
+                                <h4 class="chain-card-title">Sprache und Mehrsprachigkeit</h4>
+                                <p class="chain-card-teaser">Neben Französisch gibt es viele Regional- und Einwanderersprachen.</p>
+                            </div>
+                            <div class="chain-track" role="tablist" aria-label="Schritte zu Sprache und Mehrsprachigkeit">
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-sprache-1" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">1</span>
+                                    <span class="chain-label">Geschichte</span>
                                 </button>
-                                <div class="text-details" id="kultur-details-sprache" aria-hidden="true">
-                                    <div class="text-extended">
-                                        <p class="kultur-besonderheit-intro">
-                                            Französisch ist Amtssprache und wird staatlich stark geschützt. Daneben gibt es Regionalsprachen wie Bretonisch, Baskisch, Elsässisch und Korsisch, die an Schulen wieder mehr gelehrt werden. Dazu kommen viele Sprachen von Einwanderern, besonders Arabisch.
-                                        </p>
-                                        <div class="kultur-besonderheit-raumanalyse">
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Landesweit Hochfranzösisch, Regionalsprachen an den Rändern des Landes und Einwanderersprachen in Großstädten.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Nebeneinander von geschützter Amtssprache, historischen Regionalsprachen und modernen Einwanderersprachen.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Der frühere Pariser Zentralismus setzte Hochfranzösisch durch. Regionalsprachen überlebten vor allem in Randlagen.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Regionalsprachen waren fast verdrängt. Heute wächst wieder das Interesse und es gibt zweisprachige Schulen.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Jüngere lernen Regionalsprachen freiwillig wieder neu, und Einwanderersprachen fließen in die Alltagssprache ein.</span></div>
-                                        </div>
-                                    </div>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-sprache-2" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">2</span>
+                                    <span class="chain-label">Praxis</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-sprache-3" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">3</span>
+                                    <span class="chain-label">Verbreitung</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-sprache-4" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">4</span>
+                                    <span class="chain-label">Heute</span>
+                                </button>
+                            </div>
+                            <div class="chain-panels">
+                                <div class="chain-panel" id="chain-content-sprache-1" hidden>
+                                    <span class="chain-panel-tag">1 · Geschichte</span>
+                                    <p class="chain-panel-text">Ab dem 17. Jahrhundert setzte der Zentralstaat Hochfranzösisch durch; die Académie française (1635) wachte über die Sprache.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-sprache-2" hidden>
+                                    <span class="chain-panel-tag">2 · Praxis</span>
+                                    <p class="chain-panel-text">Regionalsprachen wie Bretonisch, Okzitanisch, Elsässisch, Baskisch und Korsisch wurden nur noch zu Hause gesprochen, später kamen Einwanderersprachen dazu.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-sprache-3" hidden>
+                                    <span class="chain-panel-tag">3 · Verbreitung</span>
+                                    <p class="chain-panel-text">Hochfranzösisch überall, Regionalsprachen an den Rändern des Landes, Einwanderersprachen vor allem in den Großstädten.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-sprache-4" hidden>
+                                    <span class="chain-panel-tag">4 · Heute</span>
+                                    <p class="chain-panel-text">Regionalsprachen werden in zweisprachigen Schulen wiederbelebt, und Einwanderersprachen fließen in die Alltagssprache ein.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. Feste und Feiertage (Kompakte Karte mit Aufklapp-Funktion) -->
-                        <div class="kultur-besonderheit-item">
-                            <h4 class="kultur-besonderheit-title">Feste und Feiertage</h4>
-                            <p class="kultur-besonderheit-summary">Nationale Feiertage wie der 14. Juli, dazu regionale und religiöse Feste.</p>
-                            
-                            <div class="expandable-text-block">
-                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-feste">
-                                    <span class="btn-text">Mehr anzeigen</span>
-                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
+                        <!-- 2. Feste und Feiertage -->
+                        <div class="chain-card">
+                            <div class="chain-card-header">
+                                <h4 class="chain-card-title">Feste und Feiertage</h4>
+                                <p class="chain-card-teaser">Nationale Feiertage wie der 14. Juli, dazu regionale und religiöse Feste.</p>
+                            </div>
+                            <div class="chain-track" role="tablist" aria-label="Schritte zu Feste und Feiertage">
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-feste-1" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">1</span>
+                                    <span class="chain-label">Geschichte</span>
                                 </button>
-                                <div class="text-details" id="kultur-details-feste" aria-hidden="true">
-                                    <div class="text-extended">
-                                        <p class="kultur-besonderheit-intro">
-                                            Der Nationalfeiertag am 14. Juli erinnert an den Sturm auf die Bastille mit Militärparade und Feuerwerk. Dazu kommen christliche Feiertage wie Allerheiligen und regionale Feste wie das Zitronenfest in Menton oder Musikfestivals wie die Fête de la Musique am 21. Juni.
-                                        </p>
-                                        <div class="kultur-besonderheit-raumanalyse">
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Der 14. Juli landesweit in fast allen Gemeinden, regionale Feste an speziellen Orten wie Menton am Mittelmeer.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gemeinsames Feiern verbindet nationale Geschichte, christliche Kalendertage und lokale Bräuche.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Nationale Feiertage stärken den Zusammenhalt der Republik. Regionale Feste spiegeln das lokale Klima und die Natur wider.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Feste beleben den öffentlichen Raum, fördern Gemeinschaft und ziehen zahlreiche Besucher an.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Moderne Musikfeste wie die Fête de la Musique sind neu entstanden und wurden weltweit übernommen.</span></div>
-                                        </div>
-                                    </div>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-feste-2" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">2</span>
+                                    <span class="chain-label">Praxis</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-feste-3" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">3</span>
+                                    <span class="chain-label">Verbreitung</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-feste-4" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">4</span>
+                                    <span class="chain-label">Heute</span>
+                                </button>
+                            </div>
+                            <div class="chain-panels">
+                                <div class="chain-panel" id="chain-content-feste-1" hidden>
+                                    <span class="chain-panel-tag">1 · Geschichte</span>
+                                    <p class="chain-panel-text">Der 14. Juli erinnert an die Revolution 1789; christliche Feiertage stammen aus der katholischen Tradition.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-feste-2" hidden>
+                                    <span class="chain-panel-tag">2 · Praxis</span>
+                                    <p class="chain-panel-text">Militärparade und Feuerwerk am Nationalfeiertag, dazu regionale Feste und die Fête de la Musique.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-feste-3" hidden>
+                                    <span class="chain-panel-tag">3 · Verbreitung</span>
+                                    <p class="chain-panel-text">Der 14. Juli landesweit, regionale Feste nur an bestimmten Orten wie das Zitronenfest in Menton.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-feste-4" hidden>
+                                    <span class="chain-panel-tag">4 · Heute</span>
+                                    <p class="chain-panel-text">Feste stärken den Zusammenhalt und ziehen viele Touristen an; moderne Feste wie die Fête de la Musique wurden weltweit übernommen.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 3. Traditionen und Bräuche (Kompakte Karte mit Aufklapp-Funktion) -->
-                        <div class="kultur-besonderheit-item">
-                            <h4 class="kultur-besonderheit-title">Traditionen und Bräuche</h4>
-                            <p class="kultur-besonderheit-summary">Vom langen gemeinsamen Essen bis zu regionalen Festen und Tänzen.</p>
-                            
-                            <div class="expandable-text-block">
-                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-traditionen">
-                                    <span class="btn-text">Mehr anzeigen</span>
-                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
+                        <!-- 3. Traditionen und Bräuche -->
+                        <div class="chain-card">
+                            <div class="chain-card-header">
+                                <h4 class="chain-card-title">Traditionen und Bräuche</h4>
+                                <p class="chain-card-teaser">Vom langen gemeinsamen Essen bis zu regionalen Festen und Tänzen.</p>
+                            </div>
+                            <div class="chain-track" role="tablist" aria-label="Schritte zu Traditionen und Bräuche">
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-traditionen-1" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">1</span>
+                                    <span class="chain-label">Geschichte</span>
                                 </button>
-                                <div class="text-details" id="kultur-details-traditionen" aria-hidden="true">
-                                    <div class="text-extended">
-                                        <p class="kultur-besonderheit-intro">
-                                            Das gemeinsame Essen hat einen sehr hohen Stellenwert und gehört sogar zum UNESCO-Kulturerbe. Brot (Baguette) holt man oft täglich frisch beim Bäcker. Boule (Pétanque) wird auf Dorfplätzen gespielt.
-                                        </p>
-                                        <div class="kultur-besonderheit-raumanalyse">
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>In Dörfern, Kleinstädten und Großstädten in ganz Frankreich, oft auf öffentlichen Plätzen und in Bäckereien.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Gelebte Esskultur, frisches Brot und geselliges Beisammensein im öffentlichen Raum.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>Mahlzeiten und Boule-Spiele sind seit Generationen feste soziale Treffpunkte für Familien und Nachbarn.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Bäckereien und Dorfplätze sind zentrale Orte der Begegnung für Nachbarn und Generationen.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Supermärkte machen Konkurrenz, doch das frische Baguette und Boule bleiben feste Rituale.</span></div>
-                                        </div>
-                                    </div>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-traditionen-2" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">2</span>
+                                    <span class="chain-label">Praxis</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-traditionen-3" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">3</span>
+                                    <span class="chain-label">Verbreitung</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-traditionen-4" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">4</span>
+                                    <span class="chain-label">Heute</span>
+                                </button>
+                            </div>
+                            <div class="chain-panels">
+                                <div class="chain-panel" id="chain-content-traditionen-1" hidden>
+                                    <span class="chain-panel-tag">1 · Geschichte</span>
+                                    <p class="chain-panel-text">Die Esskultur ist über Generationen gewachsen und seit 2010 UNESCO-Kulturerbe.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-traditionen-2" hidden>
+                                    <span class="chain-panel-tag">2 · Praxis</span>
+                                    <p class="chain-panel-text">Täglich frisches Baguette vom Bäcker, lange gemeinsame Mahlzeiten und Boule (Pétanque) auf Dorfplätzen.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-traditionen-3" hidden>
+                                    <span class="chain-panel-tag">3 · Verbreitung</span>
+                                    <p class="chain-panel-text">In Dörfern, Kleinstädten und Großstädten, oft auf öffentlichen Plätzen und in Bäckereien.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-traditionen-4" hidden>
+                                    <span class="chain-panel-tag">4 · Heute</span>
+                                    <p class="chain-panel-text">Supermärkte machen Konkurrenz, doch frisches Baguette und Boule bleiben feste Rituale.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. Jugendkultur (Kompakte Karte mit Aufklapp-Funktion) -->
-                        <div class="kultur-besonderheit-item">
-                            <h4 class="kultur-besonderheit-title">Jugendkultur</h4>
-                            <p class="kultur-besonderheit-summary">Rap, die Jugendsprache Verlan und Social Media prägen die Jugend.</p>
-                            
-                            <div class="expandable-text-block">
-                                <button type="button" class="btn-toggle-expand" aria-expanded="false" aria-controls="kultur-details-jugend">
-                                    <span class="btn-text">Mehr anzeigen</span>
-                                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg>
+                        <!-- 4. Jugendkultur -->
+                        <div class="chain-card">
+                            <div class="chain-card-header">
+                                <h4 class="chain-card-title">Jugendkultur</h4>
+                                <p class="chain-card-teaser">Rap, die Jugendsprache Verlan und Social Media prägen die Jugend.</p>
+                            </div>
+                            <div class="chain-track" role="tablist" aria-label="Schritte zu Jugendkultur">
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-jugend-1" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">1</span>
+                                    <span class="chain-label">Geschichte</span>
                                 </button>
-                                <div class="text-details" id="kultur-details-jugend" aria-hidden="true">
-                                    <div class="text-extended">
-                                        <p class="kultur-besonderheit-intro">
-                                            Französischer Hip-Hop (Rap français) ist nach den USA der zweitgrößte Markt der Welt. Gaming und E-Sport sind sehr beliebt. Kleidung und Stil sind Jugendlichen wichtig, oft eine Mischung aus Streetwear und klassischen Modemarken.
-                                        </p>
-                                        <div class="kultur-besonderheit-raumanalyse">
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in den Großstädten und Vororten (Banlieues) von Paris, Marseille und Lyon, heute digital im ganzen Land.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Was?</span><span>Eine eigenständige Jugendkultur aus Rap-Musik, Gaming, eigener Jugendsprache (Verlan) und Modestilen.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Warum dort?</span><span>In den multikulturellen Vorstädten trafen verschiedene Einflüsse aufeinander und brachten neue Trends hervor.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Folgen?</span><span>Französischer Rap dominiert die Charts und prägt die Sprache von Jugendlichen im ganzen Land.</span></div>
-                                            <div class="raumanalyse-row"><span class="raumanalyse-step-label">Wandel?</span><span>Ehemals ausgegrenzte Vorstadtkultur ist heute die führende Popkultur in ganz Frankreich.</span></div>
-                                        </div>
-                                    </div>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-jugend-2" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">2</span>
+                                    <span class="chain-label">Praxis</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-jugend-3" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">3</span>
+                                    <span class="chain-label">Verbreitung</span>
+                                </button>
+                                <button type="button" class="chain-step" aria-expanded="false" aria-controls="chain-content-jugend-4" onclick="toggleChainStep(this)">
+                                    <span class="chain-node">4</span>
+                                    <span class="chain-label">Heute</span>
+                                </button>
+                            </div>
+                            <div class="chain-panels">
+                                <div class="chain-panel" id="chain-content-jugend-1" hidden>
+                                    <span class="chain-panel-tag">1 · Geschichte</span>
+                                    <p class="chain-panel-text">Ab den 1980er Jahren entstand in den multikulturellen Vororten (banlieues) eine neue Jugendkultur.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-jugend-2" hidden>
+                                    <span class="chain-panel-tag">2 · Praxis</span>
+                                    <p class="chain-panel-text">Französischer Rap, die Jugendsprache Verlan, Gaming und Streetwear.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-jugend-3" hidden>
+                                    <span class="chain-panel-tag">3 · Verbreitung</span>
+                                    <p class="chain-panel-text">Vor allem in den Vororten von Paris, Marseille und Lyon, heute digital im ganzen Land.</p>
+                                </div>
+                                <div class="chain-panel" id="chain-content-jugend-4" hidden>
+                                    <span class="chain-panel-tag">4 · Heute</span>
+                                    <p class="chain-panel-text">Aus der früheren Randkultur ist die führende Popkultur geworden; französischer Rap dominiert die Charts.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Punkt E2 & E3: Die Leitfrage & Raumanalyse Kinshasa -->
+                <!-- E3: Leitfrage mit Überraschungs-Feld (doppelte 5-Zeilen-Raumanalyse entfernt) -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Wann wird aus einer Besonderheit ein Stereotyp?</h3>
-                    <p style="font-size: 15.5px; line-height: 1.6; color: var(--ink-800); margin-bottom: 22px;">
+                    <p style="font-size: 15.5px; line-height: 1.6; color: var(--ink-800); margin-bottom: 20px;">
                         Ein Stereotyp entsteht, wenn etwas, das nur in einer Region oder zu einer bestimmten Zeit stimmt, auf das ganze Land übertragen wird und im Kopf hängen bleibt.
                     </p>
 
-                    <div style="border-top: 1px solid var(--border-hairline); padding-top: 20px;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 14px 0; letter-spacing: -0.01em;">
-                            Raumanalyse und Überraschung: Das afrikanische Französisch
+                    <!-- EIGENES ÜBERRASCHUNGS-FELD (PFLICHT-PUNKT EXTRA) -->
+                    <div class="surprise-extra-card" style="margin-top: 14px; padding: 20px 24px; background: #F8F9FA; border: 1px solid var(--border-hairline); border-left: 4px solid var(--accent-blue); border-radius: var(--radius-card);">
+                        <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 8px 0; letter-spacing: -0.01em;">
+                            Überraschung
                         </h4>
-                        <ul class="raumanalyse-steps">
-                            <li><span class="raumanalyse-step-label">Wo?</span><span>Vor allem in West- und Zentralafrika, zum Beispiel in Kinshasa.</span></li>
-                            <li><span class="raumanalyse-step-label">Was?</span><span>Dort sprechen sehr viele Menschen Französisch, mehr als in Paris.</span></li>
-                            <li><span class="raumanalyse-step-label">Warum dort?</span><span>Frankreich war früher Kolonialmacht in Afrika, und diese Länder wachsen heute stark.</span></li>
-                            <li><span class="raumanalyse-step-label">Folgen?</span><span>Das Zentrum der französischen Sprache verschiebt sich nach Afrika.</span></li>
-                            <li><span class="raumanalyse-step-label">Wandel?</span><span>Bis 2050 werden die meisten Französischsprecher in Afrika leben.</span></li>
-                        </ul>
-
-                        <!-- EIGENES ÜBERRASCHUNGS-FELD (PFLICHT-PUNKT EXTRA) -->
-                        <div class="surprise-extra-card" style="margin-top: 24px; padding: 20px 24px; background: #F8F9FA; border: 1px solid var(--border-hairline); border-left: 4px solid var(--accent-blue); border-radius: var(--radius-card);">
-                            <h4 style="font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0 0 8px 0; letter-spacing: -0.01em;">
-                                Überraschung
-                            </h4>
-                            <p class="body-text" style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-700);">
-                                „Das hätten wir vorher nicht gedacht: In Kinshasa in der Demokratischen Republik Kongo sprechen mehr Menschen Französisch als in Paris. Bis 2050 wird die große Mehrheit aller Französischsprecher in Afrika leben – die Zukunft der Sprache liegt also nicht in Frankreich.“
-                            </p>
-                        </div>
+                        <p class="body-text" style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-700);">
+                            „Das hätten wir vorher nicht gedacht: In Kinshasa in der Demokratischen Republik Kongo sprechen mehr Menschen Französisch als in Paris. Bis 2050 wird die große Mehrheit aller Französischsprecher in Afrika leben – die Zukunft der Sprache liegt also nicht in Frankreich.“
+                        </p>
                     </div>
                 </div>
             </div>
@@ -2391,6 +2777,9 @@
                     <li><strong>Hero-Hintergrund:</strong> <em>Paris Night (Skyline, Seine &amp; Eiffelturm bei Nacht)</em> von Benh LIEU SONG &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
                     <li><strong>Orientierungskarte Frankreich (Topografie &amp; Relief):</strong> <em>France relief location map</em> von Eric Gaba (Sting) &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
                     <li><strong>Bereich A (Naturraum):</strong> <em>Mont Saint-Michel in der Normandie</em> von David Iliff (Diliff) &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Landschaft (Alpen):</strong> <em>Mont Blanc from Les Arcs 1950</em> von Dmitry A. Mottl &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Landschaft (Mittelmeerküste):</strong> <em>Calanque d’En-Vau bei Cassis</em> von Unukorno &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> via Wikimedia Commons.</li>
+                    <li><strong>Landschaft (Atlantikküste):</strong> <em>Pointe du Raz in der Bretagne</em> von PtrQs &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
                     <li><strong>Bereich B (Bevölkerung):</strong> <em>Rue Montorgueil mit Pariser Straßenleben und Fußgängern</em> von Guilhem Vellut &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
                     <li><strong>Bereich E (Kultur &amp; Alltag):</strong> <em>Französischer Genuss: Wein, Käseplatte und Baguette</em> von Mustang Joe &middot; Lizenz: <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0 (Public Domain)</a> via Wikimedia Commons.</li>
                     <li><strong>Kartendaten:</strong> OpenStreetMap-Mitwirkende &middot; Map-Engine: Leaflet.js &middot; Konturen: IGN / data.gouv.fr (Open Data).</li>
@@ -2409,14 +2798,45 @@
                     <li><strong>Baguette als UNESCO-Kulturerbe (2022):</strong> UNESCO Intangible Cultural Heritage, <a href="https://ich.unesco.org" target="_blank" rel="noopener">ich.unesco.org</a></li>
                     <li><strong>Französisch weltweit und Francophonie:</strong> Organisation internationale de la Francophonie (OIF), <a href="https://www.francophonie.org" target="_blank" rel="noopener">francophonie.org</a></li>
                     <li><strong>Verfassung und Laïcité:</strong> Französische Verfassung (Artikel 2) und Gesetz von 1905 zur Trennung von Religion und Staat.</li>
+                    <li><strong>Côte d’Azur / Mittelmeertourismus und Küsten:</strong> Comité régional de tourisme Côte d’Azur France, <a href="https://cotedazurfrance.fr" target="_blank" rel="noopener">cotedazurfrance.fr</a></li>
+                    <li><strong>Académie française und Schutz der französischen Sprache:</strong> Académie française, <a href="https://www.academie-francaise.fr" target="_blank" rel="noopener">academie-francaise.fr</a></li>
+                    <li><strong>Französischer Rap und Jugendkultur:</strong> SNEP (Syndicat national de l’édition phonographique), <a href="https://snepmusique.com" target="_blank" rel="noopener">snepmusique.com</a></li>
                 </ul>
-
+                <p class="footer-note" style="margin-top: 14px; font-size: 13px; color: #94A3B8; font-style: italic;">
+                    Ergänzt hier noch euer Erdkunde-Schulbuch (Seite …) und den Atlas.
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
         // --- MAP NAVIGATION ---
+        
+        // --- 4-SCHRITT-KETTE ACCORDION (Bereich E2) ---
+        function toggleChainStep(stepBtn) {
+            const card = stepBtn.closest('.chain-card');
+            if (!card) return;
+            const targetId = stepBtn.getAttribute('aria-controls');
+            const panel = card.querySelector('#' + targetId);
+            const wasActive = stepBtn.classList.contains('active');
+
+            // Alle Schritte in dieser Karte schließen (immer nur einer offen)
+            card.querySelectorAll('.chain-step').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+            card.querySelectorAll('.chain-panel').forEach(p => {
+                p.hidden = true;
+            });
+
+            // Wenn der Schritt noch nicht aktiv war, jetzt öffnen
+            if (!wasActive && panel) {
+                stepBtn.classList.add('active');
+                stepBtn.setAttribute('aria-expanded', 'true');
+                panel.hidden = false;
+            }
+        }
+
         function openMap() {
             window.location.href = "1.html";
         }
