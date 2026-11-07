@@ -1637,50 +1637,151 @@
             color: #F8FAFC;
         }
     
-        /* BEREICH A: FOTO-GALERIE LANDSCHAFT */
-        .landscape-photo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 18px;
+        /* BEREICH A: LANDSCHAFTSBILDER KARUSSELL */
+        .landscape-carousel {
+            position: relative;
+            max-width: 860px;
+            margin: 22px auto 0;
+            outline: none;
+        }
+        .carousel-viewport {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #FFFFFF;
+            border: 1px solid var(--border-hairline);
+            box-shadow: 0 4px 18px rgba(20, 30, 60, 0.08);
+        }
+        .carousel-slide {
+            display: none;
+            animation: carouselFadeIn 260ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        @keyframes carouselFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.99);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-slide {
+                animation: none;
+            }
         }
         .landscape-photo-card {
             margin: 0;
             display: flex;
             flex-direction: column;
-            border-radius: var(--radius-sm);
             overflow: hidden;
             background: #FFFFFF;
-            border: 1px solid var(--border-hairline);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-            transition: transform 200ms ease, box-shadow 200ms ease;
-        }
-        .landscape-photo-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         .landscape-photo-img {
             width: 100%;
-            height: 190px;
+            height: 400px;
             object-fit: cover;
             display: block;
         }
         .landscape-photo-caption {
-            padding: 10px 12px;
-            font-size: 13.5px;
+            padding: 14px 18px;
+            font-size: 15px;
             font-weight: 600;
-            color: var(--ink-800);
+            color: var(--ink-900);
             text-align: center;
             background: #FAFAFA;
             border-top: 1px solid var(--border-hairline);
+            letter-spacing: -0.01em;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 200px;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 16px rgba(20, 30, 60, 0.16);
+            color: var(--ink-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 200ms ease;
+            font-family: inherit;
+        }
+        .carousel-btn:hover {
+            background: #FFFFFF;
+            color: var(--accent-blue);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 6px 20px rgba(20, 30, 60, 0.22);
+        }
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.96);
+        }
+        .carousel-btn:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 3px;
+        }
+        .carousel-btn-prev {
+            left: 16px;
+        }
+        .carousel-btn-next {
+            right: 16px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #CBD5E1;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 220ms ease;
+        }
+        .carousel-dot:hover {
+            background: #94A3B8;
+            transform: scale(1.2);
+        }
+        .carousel-dot.active {
+            background: var(--accent-blue);
+            width: 26px;
+            border-radius: 10px;
+            box-shadow: 0 0 0 3px rgba(31, 61, 122, 0.16);
+        }
+        .carousel-dot:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 3px;
         }
         @media (max-width: 768px) {
-            .landscape-photo-grid {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
             .landscape-photo-img {
-                height: 220px;
+                height: 250px;
+            }
+            .carousel-btn {
+                top: 125px;
+                width: 38px;
+                height: 38px;
+            }
+            .carousel-btn-prev {
+                left: 10px;
+            }
+            .carousel-btn-next {
+                right: 10px;
             }
         }
 
@@ -2216,28 +2317,58 @@
                     </div>
                 </div>
 
-                <!-- A1: Wie sieht die Landschaft aus? (Stichpunkte + 3 Bilder) -->
+                <!-- A1: Wie sieht die Landschaft aus? (Ausführliche Stichpunkte + Karussell) -->
                 <div class="deepdive-card deepdive-card-full">
                     <h3 class="deepdive-card-title">Wie sieht die Landschaft aus?</h3>
                     <ul class="quiet-bullet-list" style="margin-top: 14px;">
-                        <li>Hohe Gebirge im Osten und Süden: die Alpen und die Pyrenäen.</li>
-                        <li>In der Mitte das Zentralmassiv, ein altes Bergland.</li>
-                        <li>Im Norden und Westen große, flache und fruchtbare Ebenen.</li>
-                        <li>Große Flüsse: Loire, Seine, Rhône und Garonne. Dazu die Insel Korsika.</li>
+                        <li>Hohe Gebirge im Osten und Süden: die Alpen mit dem Mont Blanc, dem höchsten Berg Westeuropas, und die Pyrenäen an der Grenze zu Spanien.</li>
+                        <li>In der Mitte das Zentralmassiv, ein altes, teils vulkanisches Bergland mit erloschenen Vulkanen und Hochebenen.</li>
+                        <li>Im Norden und Westen große, flache und fruchtbare Ebenen, zum Beispiel das Pariser Becken, wo viel Landwirtschaft betrieben wird.</li>
+                        <li>Lange Flüsse durchziehen das Land: die Loire als längster Fluss, die Seine durch Paris, die Rhône zum Mittelmeer und die Garonne im Südwesten.</li>
+                        <li>Im Südosten liegt die Mittelmeerinsel Korsika, deren Berge direkt aus dem Meer aufsteigen.</li>
                     </ul>
-                    <div class="landscape-photo-grid">
-                        <figure class="landscape-photo-card">
-                            <img src="images/alpen_mont_blanc.jpg" alt="Alpen: Blick auf das Mont-Blanc-Massiv" class="landscape-photo-img" loading="lazy">
-                            <figcaption class="landscape-photo-caption">Alpen</figcaption>
-                        </figure>
-                        <figure class="landscape-photo-card">
-                            <img src="images/mittelmeer_calanques.jpg" alt="Mittelmeerküste: Calanque d’En-Vau bei Cassis" class="landscape-photo-img" loading="lazy">
-                            <figcaption class="landscape-photo-caption">Mittelmeerküste</figcaption>
-                        </figure>
-                        <figure class="landscape-photo-card">
-                            <img src="images/atlantik_point_du_raz.jpg" alt="Atlantikküste: Pointe du Raz in der Bretagne" class="landscape-photo-img" loading="lazy">
-                            <figcaption class="landscape-photo-caption">Atlantikküste (Bretagne)</figcaption>
-                        </figure>
+
+                    <!-- Karussell der 3 Landschaftsbilder -->
+                    <div class="landscape-carousel" id="landscapeCarousel" role="region" aria-roledescription="carousel" aria-label="Landschaftsbilder Frankreichs" tabindex="0">
+                        <div class="carousel-viewport">
+                            <div class="carousel-slide active" id="landscapeSlide-0" role="group" aria-roledescription="slide" aria-label="1 von 3: Alpen">
+                                <figure class="landscape-photo-card">
+                                    <img src="images/alpen_mont_blanc.jpg" alt="Alpen: Blick auf das Mont-Blanc-Massiv" class="landscape-photo-img" loading="lazy">
+                                    <figcaption class="landscape-photo-caption">Alpen</figcaption>
+                                </figure>
+                            </div>
+                            <div class="carousel-slide" id="landscapeSlide-1" role="group" aria-roledescription="slide" aria-label="2 von 3: Mittelmeerküste" hidden>
+                                <figure class="landscape-photo-card">
+                                    <img src="images/mittelmeer_calanques.jpg" alt="Mittelmeerküste: Calanque d’En-Vau bei Cassis" class="landscape-photo-img" loading="lazy">
+                                    <figcaption class="landscape-photo-caption">Mittelmeerküste</figcaption>
+                                </figure>
+                            </div>
+                            <div class="carousel-slide" id="landscapeSlide-2" role="group" aria-roledescription="slide" aria-label="3 von 3: Atlantikküste (Bretagne)" hidden>
+                                <figure class="landscape-photo-card">
+                                    <img src="images/atlantik_point_du_raz.jpg" alt="Atlantikküste: Pointe du Raz in der Bretagne" class="landscape-photo-img" loading="lazy">
+                                    <figcaption class="landscape-photo-caption">Atlantikküste (Bretagne)</figcaption>
+                                </figure>
+                            </div>
+
+                            <!-- Karussell-Steuerung (Vor / Zurück im Kreis) -->
+                            <button type="button" class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Vorheriges Bild" title="Vorheriges Bild">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button type="button" class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Nächstes Bild" title="Nächstes Bild">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Punktreihe unten (anklickbare Indikatoren) -->
+                        <div class="carousel-dots" role="tablist" aria-label="Bildauswahl">
+                            <button type="button" class="carousel-dot active" role="tab" aria-selected="true" aria-controls="landscapeSlide-0" aria-label="Bild 1: Alpen" data-index="0"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-controls="landscapeSlide-1" aria-label="Bild 2: Mittelmeerküste" data-index="1"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-controls="landscapeSlide-2" aria-label="Bild 3: Atlantikküste (Bretagne)" data-index="2"></button>
+                        </div>
                     </div>
                 </div>
 
@@ -2738,10 +2869,7 @@
         <!-- ABSCHNITT „INTERAKTIVE KULTURKARTE“ -->
         <section class="map-section reveal">
             <div class="container" style="text-align: center; padding-top: 0;">
-                <h2 class="section-title" style="color: white; margin-bottom: 20px;">Interaktive Kulturkarte</h2>
-                <p class="body-text" style="color: #8E8E93; margin-bottom: 60px; font-size: 24px; font-weight: 500; max-width: 820px; margin-left: auto; margin-right: auto;">
-                    Jetzt wird es konkret. Entdecke Frankreich Ort für Ort, mit Klischee, Realität und Raumanalyse an jedem Punkt.
-                </p>
+                <h2 class="section-title" style="color: white; margin-bottom: 36px;">Interaktive Kulturkarte</h2>
 
                 <div class="map-preview-container" onclick="openMap()">
                     <div class="device-frame">
@@ -2837,6 +2965,45 @@
             }
         }
 
+        
+        // --- LANDSCHAFTSBILDER KARUSSELL (Bereich A) ---
+        let currentLandscapeSlide = 0;
+        const totalLandscapeSlides = 3;
+
+        function showLandscapeSlide(index) {
+            // Im Kreis laufen: nach letztem kommt erstes, vor erstem das letzte
+            if (index >= totalLandscapeSlides) index = 0;
+            if (index < 0) index = totalLandscapeSlides - 1;
+            currentLandscapeSlide = index;
+
+            for (let i = 0; i < totalLandscapeSlides; i++) {
+                const slide = document.getElementById(`landscapeSlide-${i}`);
+                if (slide) {
+                    if (i === currentLandscapeSlide) {
+                        slide.classList.add('active');
+                        slide.hidden = false;
+                    } else {
+                        slide.classList.remove('active');
+                        slide.hidden = true;
+                    }
+                }
+            }
+
+            document.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
+                const isActive = idx === currentLandscapeSlide;
+                dot.classList.toggle('active', isActive);
+                dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
+
+        function nextLandscapeSlide() {
+            showLandscapeSlide(currentLandscapeSlide + 1);
+        }
+
+        function prevLandscapeSlide() {
+            showLandscapeSlide(currentLandscapeSlide - 1);
+        }
+
         function openMap() {
             window.location.href = "1.html";
         }
@@ -2857,6 +3024,28 @@
             }, { threshold: 0.1 });
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Karussell-Events (Pfeil-Buttons, Klick auf Punkte, Tastaturbedienung mit Pfeiltasten)
+            document.getElementById('carouselPrev')?.addEventListener('click', prevLandscapeSlide);
+            document.getElementById('carouselNext')?.addEventListener('click', nextLandscapeSlide);
+            document.querySelectorAll('.carousel-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.index, 10);
+                    if (!isNaN(idx)) showLandscapeSlide(idx);
+                });
+            });
+
+            const carouselEl = document.getElementById('landscapeCarousel');
+            carouselEl?.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevLandscapeSlide();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextLandscapeSlide();
+                }
+            });
+
 
             
         // --- EXPANDABLE TEXT ACCORDIONS (Mehr anzeigen / Weniger anzeigen) ---
