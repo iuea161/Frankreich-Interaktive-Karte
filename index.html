@@ -1244,10 +1244,26 @@
             font-weight: 600;
         }
 
+        .sources-subgroup-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #F1F5F9;
+            margin: 22px 0 10px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .sources-subgroup-title:first-of-type {
+            margin-top: 6px;
+        }
+
         .sources-list {
             list-style: none;
             padding: 0;
-            margin: 0 0 32px 0;
+            margin: 0 0 20px 0;
+        }
+
+        .sources-list:last-child {
+            margin-bottom: 0;
         }
 
         .sources-list li {
@@ -1682,6 +1698,12 @@
             background: #FFFFFF;
             border-radius: 18px;
         }
+        .landscape-photo-media {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 18px 18px 0 0;
+        }
         .landscape-photo-img {
             width: 100%;
             aspect-ratio: 16 / 10;
@@ -1689,6 +1711,21 @@
             object-fit: cover;
             display: block;
             border-radius: 18px 18px 0 0;
+        }
+        .landscape-slide-number {
+            position: absolute;
+            right: 14px;
+            bottom: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            color: #FFFFFF;
+            opacity: 0.55;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.9);
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+            z-index: 2;
         }
         .landscape-photo-caption {
             padding: 13px 18px;
@@ -2338,56 +2375,80 @@
                             <!-- 1. Alpen -->
                             <div class="carousel-slide active" id="landscapeSlide-0" role="group" aria-roledescription="slide" aria-label="1 von 8: Alpen">
                                 <figure class="landscape-photo-card">
-                                    <img src="images/alpen_mont_blanc.jpg" alt="Alpen: Blick auf das Mont-Blanc-Massiv" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/alpen_mont_blanc.jpg" alt="Alpen: Blick auf das Mont-Blanc-Massiv" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">1</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Alpen</figcaption>
                                 </figure>
                             </div>
                             <!-- 2. Pyrenäen -->
                             <div class="carousel-slide" id="landscapeSlide-1" role="group" aria-roledescription="slide" aria-label="2 von 8: Pyrenäen" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/pyrenaeen_gebirge.jpg" alt="Pyrenäen: Lac de Gentau und Pic du Midi d’Ossau" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/pyrenaeen_gebirge.jpg" alt="Pyrenäen: Lac de Gentau und Pic du Midi d’Ossau" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">2</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Pyrenäen</figcaption>
                                 </figure>
                             </div>
                             <!-- 3. Vulkane der Auvergne -->
                             <div class="carousel-slide" id="landscapeSlide-2" role="group" aria-roledescription="slide" aria-label="3 von 8: Vulkane der Auvergne" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/auvergne_vulkane.jpg" alt="Vulkane der Auvergne: Chaîne des Puys im Zentralmassiv" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/auvergne_vulkane.jpg" alt="Vulkane der Auvergne: Chaîne des Puys im Zentralmassiv" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">3</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Vulkane der Auvergne</figcaption>
                                 </figure>
                             </div>
                             <!-- 4. Mittelmeerküste -->
                             <div class="carousel-slide" id="landscapeSlide-3" role="group" aria-roledescription="slide" aria-label="4 von 8: Mittelmeerküste" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/mittelmeer_calanques.jpg" alt="Mittelmeerküste: Calanque d’En-Vau bei Cassis" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/mittelmeer_calanques.jpg" alt="Mittelmeerküste: Calanque d’En-Vau bei Cassis" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">4</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Mittelmeerküste</figcaption>
                                 </figure>
                             </div>
                             <!-- 5. Lavendelfelder (Provence) -->
                             <div class="carousel-slide" id="landscapeSlide-4" role="group" aria-roledescription="slide" aria-label="5 von 8: Lavendelfelder (Provence)" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/lavendel_valensole.jpg" alt="Lavendelfelder (Provence): Blühende Lavendelreihen auf dem Plateau von Valensole" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/lavendel_valensole.jpg" alt="Lavendelfelder (Provence): Blühende Lavendelreihen auf dem Plateau von Valensole" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">5</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Lavendelfelder (Provence)</figcaption>
                                 </figure>
                             </div>
                             <!-- 6. Schlucht Gorges du Verdon -->
                             <div class="carousel-slide" id="landscapeSlide-5" role="group" aria-roledescription="slide" aria-label="6 von 8: Schlucht Gorges du Verdon" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/gorges_du_verdon.jpg" alt="Schlucht Gorges du Verdon: Türkises Wasser und Felswände an der Galetas-Brücke" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/gorges_du_verdon.jpg" alt="Schlucht Gorges du Verdon: Türkises Wasser und Felswände an der Galetas-Brücke" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">6</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Schlucht Gorges du Verdon</figcaption>
                                 </figure>
                             </div>
                             <!-- 7. Atlantikküste (Bretagne) -->
                             <div class="carousel-slide" id="landscapeSlide-6" role="group" aria-roledescription="slide" aria-label="7 von 8: Atlantikküste (Bretagne)" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/atlantik_point_du_raz.jpg" alt="Atlantikküste: Pointe du Raz in der Bretagne" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/atlantik_point_du_raz.jpg" alt="Atlantikküste: Pointe du Raz in der Bretagne" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">7</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Atlantikküste (Bretagne)</figcaption>
                                 </figure>
                             </div>
                             <!-- 8. Dune du Pilat (Atlantik) -->
                             <div class="carousel-slide" id="landscapeSlide-7" role="group" aria-roledescription="slide" aria-label="8 von 8: Dune du Pilat (Atlantik)" hidden>
                                 <figure class="landscape-photo-card">
-                                    <img src="images/dune_du_pilat.jpg" alt="Dune du Pilat (Atlantik): Große Sanddüne an der Küste mit Blick auf das Meer" class="landscape-photo-img" loading="lazy">
+                                    <div class="landscape-photo-media">
+                                        <img src="images/dune_du_pilat.jpg" alt="Dune du Pilat (Atlantik): Große Sanddüne an der Küste mit Blick auf das Meer" class="landscape-photo-img" loading="lazy">
+                                        <span class="landscape-slide-number" aria-hidden="true">8</span>
+                                    </div>
                                     <figcaption class="landscape-photo-caption">Dune du Pilat (Atlantik)</figcaption>
                                 </figure>
                             </div>
@@ -2949,39 +3010,49 @@
             <div class="footer-block">
                 <h4 class="footer-block-title">Bildnachweise</h4>
                 <ul class="sources-list">
-                    <li><strong>Hero-Hintergrund:</strong> <em>Paris Night (Skyline, Seine &amp; Eiffelturm bei Nacht)</em> von Benh LIEU SONG &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Orientierungskarte Frankreich (Topografie &amp; Relief):</strong> <em>France relief location map</em> von Eric Gaba (Sting) &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Bereich A (Naturraum):</strong> <em>Mont Saint-Michel in der Normandie</em> von David Iliff (Diliff) &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Alpen):</strong> <em>Mont Blanc from Les Arcs 1950</em> von Dmitry A. Mottl &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Pyrenäen):</strong> <em>Gentau Pic du Midi Ossau</em> von Myrabella &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Vulkane der Auvergne):</strong> <em>Chaîne des Puys</em> von William Crochot (Medium69) &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Mittelmeerküste):</strong> <em>Calanque d’En-Vau bei Cassis</em> von Unukorno &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Lavendelfelder in der Provence):</strong> <em>Lavender fields of Valensole, 2019</em> von Grafixart-Photo &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Schlucht Gorges du Verdon):</strong> <em>Verdon Gorge seen from Pont du Galetas</em> von kallerna &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Atlantikküste):</strong> <em>Pointe du Raz in der Bretagne</em> von PtrQs &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Landschaft (Dune du Pilat):</strong> <em>Dune du Pilat - Atlantique</em> von Jörg Braukmann &middot; Lizenz: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Bereich B (Bevölkerung):</strong> <em>Rue Montorgueil mit Pariser Straßenleben und Fußgängern</em> von Guilhem Vellut &middot; Lizenz: <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a> via Wikimedia Commons.</li>
-                    <li><strong>Bereich E (Kultur &amp; Alltag):</strong> <em>Französischer Genuss: Wein, Käseplatte und Baguette</em> von Mustang Joe &middot; Lizenz: <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0 (Public Domain)</a> via Wikimedia Commons.</li>
-                    <li><strong>Kartendaten:</strong> OpenStreetMap-Mitwirkende &middot; Map-Engine: Leaflet.js &middot; Konturen: IGN / data.gouv.fr (Open Data).</li>
+                    <li>Bild 1 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Mont_Blanc_from_Les_Arcs_1950.jpg" target="_blank" rel="noopener">„Mont Blanc from Les Arcs 1950“</a> von Dmitry A. Mottl</li>
+                    <li>Bild 2 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Gentau_Pic_du_Midi_Ossau.jpg" target="_blank" rel="noopener">„Gentau Pic du Midi Ossau“</a> von Myrabella</li>
+                    <li>Bild 3 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Cha%C3%AEne_des_Puys_-_139.jpg" target="_blank" rel="noopener">„Chaîne des Puys“</a> von William Crochot (Medium69)</li>
+                    <li>Bild 4 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Calanque_d%27En_Vau_2016_01.jpg" target="_blank" rel="noopener">„Calanque d’En-Vau“</a> von Unukorno</li>
+                    <li>Bild 5 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Lavender_fields_of_Valensole,_2019.jpg" target="_blank" rel="noopener">„Lavender fields of Valensole, 2019“</a> von Grafixart-Photo</li>
+                    <li>Bild 6 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Verdon_Gorge_8.jpg" target="_blank" rel="noopener">„Verdon Gorge seen from Pont du Galetas“</a> von kallerna</li>
+                    <li>Bild 7 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/PointDuRaz_DSC00375_PtrQs.jpg" target="_blank" rel="noopener">„Pointe du Raz“</a> von PtrQs</li>
+                    <li>Bild 8 &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Dune_du_Pilat_-_Atlantique.jpg" target="_blank" rel="noopener">„Dune du Pilat - Atlantique“</a> von Jörg Braukmann</li>
+                    <li>Hintergrund (Hero) &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Paris_Night.jpg" target="_blank" rel="noopener">„Paris Night“</a> von Benh Lieu Song</li>
+                    <li>Orientierungskarte &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/France_relief_location_map.jpg" target="_blank" rel="noopener">„France relief location map“</a> von Eric Gaba (Sting)</li>
+                    <li>Vorschaubild Bereich A &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Mont_St_Michel_3,_Brittany,_France_-_July_2011.jpg" target="_blank" rel="noopener">„Mont Saint-Michel“</a> von David Iliff (Diliff)</li>
+                    <li>Vorschaubild Bereich B &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Rue_Montorgueil_@_Paris_(27818062991).jpg" target="_blank" rel="noopener">„Rue Montorgueil“</a> von Guilhem Vellut</li>
+                    <li>Vorschaubild Bereich E &ndash; <a href="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese,_wine_and_bread_in_a_sidewalk_cafe_in_Paris,_June_2015.jpg" target="_blank" rel="noopener">„Wein, Käse und Baguette“</a> von Mustang Joe</li>
+                    <li>Kartendaten &ndash; OpenStreetMap-Mitwirkende, Leaflet.js, Konturen IGN / data.gouv.fr</li>
                 </ul>
             </div>
 
             <!-- Block 3: Quellen (Inhalt und Fakten) -->
             <div class="footer-block">
                 <h4 class="footer-block-title">Quellen (Inhalt und Fakten)</h4>
+
+                <h5 class="sources-subgroup-title">Gruppe „Naturraum, Geografie &amp; Küsten“ (Bereich A)</h5>
                 <ul class="sources-list">
-                    <li><strong>Bevölkerungsdaten und Demografie:</strong> Insee (Institut national de la statistique et des études économiques), „Bilan démographique“, <a href="https://www.insee.fr" target="_blank" rel="noopener">insee.fr</a></li>
-                    <li><strong>Klimadaten und Naturraum:</strong> Météo-France, Klimareport und Wetterstationen, <a href="https://meteofrance.com" target="_blank" rel="noopener">meteofrance.com</a></li>
-                    <li><strong>Geodaten, Höhen und Topografie:</strong> IGN (Institut national de l'information géographique et forestière), <a href="https://www.ign.fr" target="_blank" rel="noopener">ign.fr</a></li>
-                    <li><strong>Kultur und Kulturerbe:</strong> Französisches Ministerium für Kultur (Ministère de la Culture), <a href="https://www.culture.gouv.fr" target="_blank" rel="noopener">culture.gouv.fr</a></li>
-                    <li><strong>Bevölkerungsverteilung und „Diagonale der Leere“:</strong> Géoconfluences (ENS de Lyon), <a href="https://geoconfluences.ens-lyon.fr" target="_blank" rel="noopener">geoconfluences.ens-lyon.fr</a></li>
-                    <li><strong>Baguette als UNESCO-Kulturerbe (2022):</strong> UNESCO Intangible Cultural Heritage, <a href="https://ich.unesco.org" target="_blank" rel="noopener">ich.unesco.org</a></li>
-                    <li><strong>Französisch weltweit und Francophonie:</strong> Organisation internationale de la Francophonie (OIF), <a href="https://www.francophonie.org" target="_blank" rel="noopener">francophonie.org</a></li>
-                    <li><strong>Verfassung und Laïcité:</strong> Französische Verfassung (Artikel 2) und Gesetz von 1905 zur Trennung von Religion und Staat.</li>
-                    <li><strong>Côte d’Azur / Mittelmeertourismus und Küsten:</strong> Comité régional de tourisme Côte d’Azur France, <a href="https://cotedazurfrance.fr" target="_blank" rel="noopener">cotedazurfrance.fr</a></li>
-                    <li><strong>Académie française und Schutz der französischen Sprache:</strong> Académie française, <a href="https://www.academie-francaise.fr" target="_blank" rel="noopener">academie-francaise.fr</a></li>
-                    <li><strong>Französischer Rap und Jugendkultur:</strong> SNEP (Syndicat national de l’édition phonographique), <a href="https://snepmusique.com" target="_blank" rel="noopener">snepmusique.com</a></li>
-                    <li><strong>Streik- und Protestkultur (Revolution 1789, Canuts-Aufstände in Lyon, Gelbwesten):</strong> Bundeszentrale für politische Bildung (bpb), <a href="https://www.bpb.de" target="_blank" rel="noopener">bpb.de</a></li>
+                    <li><a href="https://cartes.gouv.fr/explorer-les-cartes/" target="_blank" rel="noopener">Geodaten, Höhen und Topografie (u. a. Mont-Blanc-Höhe)</a>, IGN</li>
+                    <li><a href="https://meteofrance.com/climat/france" target="_blank" rel="noopener">Klimadaten und Wetter</a>, Météo-France</li>
+                    <li><a href="https://cotedazurfrance.fr/decouvrir/" target="_blank" rel="noopener">Côte d’Azur, Mittelmeerküste und Tourismus</a>, Comité régional de tourisme Côte d’Azur France</li>
+                </ul>
+
+                <h5 class="sources-subgroup-title">Gruppe „Bevölkerung &amp; Gesellschaft“ (Bereich B)</h5>
+                <ul class="sources-list">
+                    <li><a href="https://www.insee.fr/fr/statistiques/7750004" target="_blank" rel="noopener">Bevölkerung, Altersstruktur und Geburtenrate („Bilan démographique“)</a>, Insee</li>
+                    <li><a href="https://geoconfluences.ens-lyon.fr/glossaire/diagonale-du-vide" target="_blank" rel="noopener">Bevölkerungsverteilung und „Diagonale der Leere“</a>, Géoconfluences (ENS de Lyon)</li>
+                </ul>
+
+                <h5 class="sources-subgroup-title">Gruppe „Kultur, Sprache &amp; Alltag“ (Bereich E)</h5>
+                <ul class="sources-list">
+                    <li><a href="https://ich.unesco.org/en/RL/artisanal-know-how-and-culture-of-baguette-bread-01883" target="_blank" rel="noopener">Baguette als immaterielles UNESCO-Kulturerbe (2022)</a>, UNESCO</li>
+                    <li><a href="https://www.academie-francaise.fr/linstitution/les-missions" target="_blank" rel="noopener">Schutz der französischen Sprache</a>, Académie française</li>
+                    <li><a href="https://snepmusique.com/les-tops/le-top-de-la-semaine/top-albums/" target="_blank" rel="noopener">Französischer Rap und Musikcharts</a>, SNEP</li>
+                    <li><a href="https://www.culture.gouv.fr/thematiques/patrimoine-culturel-immateriel" target="_blank" rel="noopener">Kultur und Kulturerbe</a>, Ministère de la Culture</li>
+                    <li><a href="https://www.francophonie.org/la-francophonie-en-bref-754" target="_blank" rel="noopener">Französisch weltweit und Frankophonie</a>, Organisation internationale de la Francophonie (OIF)</li>
+                    <li><a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000508749" target="_blank" rel="noopener">Laïcité: Verfassung (Artikel 2) und Trennungsgesetz von 1905</a>, Légifrance</li>
+                    <li><a href="https://www.bpb.de/themen/europa/frankreich/" target="_blank" rel="noopener">Streik- und Protestkultur (Revolution 1789, Canuts in Lyon, Gelbwesten)</a>, Bundeszentrale für politische Bildung (bpb)</li>
                 </ul>
             </div>
         </div>
