@@ -165,7 +165,7 @@ function updateEngineStatus() {
  */
 function getFilteredStations() {
   return FRANCE_STATIONS.filter(s => {
-    // Bereich-Filter
+    // Pflichtteil-Filter
     let matchesFilter = true;
     if (state.currentFilter === '2') {
       matchesFilter = s.bereich.includes('②');
